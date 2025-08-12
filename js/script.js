@@ -1,11 +1,19 @@
 // Form handling and analytics
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
+    const leadMagnetForm = document.getElementById('lead-magnet-form');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleFormSubmission(this);
+        });
+    }
+    
+    if (leadMagnetForm) {
+        leadMagnetForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLeadMagnetSubmission(this);
         });
     }
     
@@ -108,4 +116,45 @@ Submitted: ${new Date().toLocaleString()}
     
     const mailtoLink = `mailto:help@myforeclosuresolution.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
+}
+
+function handleLeadMagnetSubmission(form) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    // Show loading state
+    const submitButton = form.querySelector('.lead-magnet-button');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending Checklist...';
+    submitButton.disabled = true;
+    
+    // Facebook Pixel event
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+    }
+    
+    // Google Analytics event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', {
+            'event_category': 'lead_magnet',
+            'event_label': 'foreclosure_checklist'
+        });
+    }
+    
+    // Submit to Google Sheets (same endpoint as contact form)
+    submitToGoogleSheets({
+        ...data,
+        type: 'lead_magnet',
+        lead_magnet: 'California Foreclosure Timeline Checklist'
+    })
+        .then(() => {
+            // Redirect to download page
+            window.location.href = 'checklist-download.html';
+        })
+        .catch(error => {
+            console.error('Lead magnet submission error:', error);
+            alert('There was an error sending your checklist. Please text us at (949) 328-4811 for immediate assistance.');
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
 }
