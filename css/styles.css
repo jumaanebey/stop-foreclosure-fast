@@ -311,14 +311,14 @@ p {
 
 .trust-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-2xl);
+    grid-template-columns: repeat(4, 1fr); /* Force 4 columns on one line */
+    gap: var(--space-lg); /* Smaller gap to fit better */
     margin-top: var(--space-2xl);
 }
 
 .trust-item {
     background: white;
-    padding: var(--space-2xl);
+    padding: var(--space-xl); /* Reduced padding for better fit */
     border-radius: var(--radius-xl);
     text-align: center;
     box-shadow: var(--shadow-md);
@@ -803,7 +803,11 @@ p {
         justify-content: center;
     }
     
-    .trust-grid,
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        gap: var(--space-md);
+    }
+    
     .steps {
         grid-template-columns: 1fr;
     }
@@ -816,6 +820,11 @@ p {
 @media (max-width: 480px) {
     .container {
         padding: 0 var(--space-md);
+    }
+    
+    .trust-grid {
+        grid-template-columns: 1fr; /* Single column on small mobile */
+        gap: var(--space-sm);
     }
     
     .hero-title {
