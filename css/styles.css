@@ -493,12 +493,11 @@ p {
 
 .credentials {
     margin-top: var(--space-2xl); /* Less space from text */
-    display: flex; /* Use flexbox for 3 items in a row */
-    justify-content: space-between; /* Even spacing */
-    gap: var(--space-md); /* Smaller gap for tighter layout */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center single item */
+    gap: var(--space-md); 
     padding-top: var(--space-2xl); /* Add padding above */
     border-top: 1px solid var(--gray-200); /* Subtle separator line */
-    flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
 .credential {
@@ -509,10 +508,9 @@ p {
     font-weight: 600; /* Bolder text */
     transition: all 0.3s ease;
     text-align: center; /* Center align the checkmarks */
-    font-size: 0.9rem; /* Slightly smaller for better fit */
+    font-size: 1rem; /* Standard size for single credential */
     box-shadow: var(--shadow-sm); /* Subtle shadow */
-    flex: 1; /* Equal width for all 3 items */
-    min-width: 200px; /* Minimum width */
+    max-width: 300px; /* Reasonable width for single item */
 }
 
 .credential:hover {
