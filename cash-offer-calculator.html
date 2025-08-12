@@ -40,16 +40,16 @@
     <section class="calculator-hero">
         <div class="container">
             <div class="calculator-hero-content">
-                <h1>💰 Free Cash Offer Calculator</h1>
+                <h1>🏠 Cash Offer Request Form</h1>
                 <p class="calculator-hero-description">
-                    Get an instant estimate of what we can offer for your California home. 
-                    Takes 60 seconds. No obligation. Completely confidential.
+                    Tell us about your property and what you'd like to sell for. 
+                    We'll respond within 2 hours with our best cash offer. Completely confidential.
                 </p>
                 <div class="calculator-benefits">
-                    <div class="calc-benefit">✅ Instant estimate in 60 seconds</div>
-                    <div class="calc-benefit">✅ No obligation or pressure</div>
-                    <div class="calc-benefit">✅ 100% confidential</div>
-                    <div class="calc-benefit">✅ Based on current market data</div>
+                    <div class="calc-benefit">✅ Quick property details form</div>
+                    <div class="calc-benefit">✅ Tell us your desired price</div>
+                    <div class="calc-benefit">✅ Get our response in 2 hours</div>
+                    <div class="calc-benefit">✅ 100% confidential and no obligation</div>
                 </div>
             </div>
         </div>
@@ -163,27 +163,35 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Timeline & Situation -->
+                <!-- Step 3: Desired Price & Situation -->
                 <div class="calculator-step" id="step-3">
-                    <h2>Step 3: What's your timeline?</h2>
-                    <div class="timeline-options">
-                        <div class="timeline-card" data-value="immediate">
-                            <div class="timeline-icon">🚨</div>
-                            <h3>Immediate (1-2 weeks)</h3>
-                            <p>Foreclosure scheduled, need to sell ASAP</p>
-                            <div class="timeline-bonus">+5% urgency premium</div>
+                    <h2>Step 3: What would you like to sell for?</h2>
+                    <div class="price-input-section">
+                        <div class="price-form-group">
+                            <label for="desired-price">What would you like to sell your home for?</label>
+                            <input type="number" id="desired-price" placeholder="Enter your desired selling price" min="50000" max="5000000" step="1000" required>
+                            <small>Enter the amount you'd like to receive for your property</small>
                         </div>
-                        <div class="timeline-card" data-value="fast">
-                            <div class="timeline-icon">⚡</div>
-                            <h3>Fast (1-2 months)</h3>
-                            <p>Facing foreclosure, need quick sale</p>
-                            <div class="timeline-bonus">Standard offer</div>
-                        </div>
-                        <div class="timeline-card" data-value="flexible">
-                            <div class="timeline-icon">📅</div>
-                            <h3>Flexible (2-6 months)</h3>
-                            <p>Exploring options, no immediate pressure</p>
-                            <div class="timeline-bonus">Market value offer</div>
+                        
+                        <div class="timeline-question">
+                            <h3>How quickly do you need to sell?</h3>
+                            <div class="timeline-radios">
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="immediate">
+                                    <span class="radio-custom"></span>
+                                    Immediate (1-2 weeks) - Foreclosure scheduled
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="fast">
+                                    <span class="radio-custom"></span>
+                                    Fast (1-2 months) - Facing foreclosure
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="flexible">
+                                    <span class="radio-custom"></span>
+                                    Flexible (2-6 months) - Exploring options
+                                </label>
+                            </div>
                         </div>
                     </div>
                     
@@ -210,62 +218,57 @@
                     
                     <div class="calc-nav-buttons">
                         <button type="button" onclick="prevStep(2)" class="calc-prev-button">← Previous</button>
-                        <button type="button" onclick="nextStep(4)" class="calc-next-button" id="timeline-next" disabled>Calculate My Offer →</button>
+                        <button type="button" onclick="nextStep(4)" class="calc-next-button" id="timeline-next" disabled>Submit My Request →</button>
                     </div>
                 </div>
 
-                <!-- Step 4: Results & Lead Capture -->
+                <!-- Step 4: Contact Info & Submission -->
                 <div class="calculator-step" id="step-4">
-                    <div class="calculator-loading" id="calculating" style="display: none;">
-                        <div class="loading-spinner"></div>
-                        <h3>Calculating your cash offer...</h3>
-                        <p>Analyzing market data and property information</p>
-                    </div>
-                    
-                    <div class="calculator-results" id="results" style="display: none;">
-                        <div class="results-header">
-                            <h2>🎉 Your Estimated Cash Offer</h2>
-                            <div class="offer-amount" id="offer-amount">$485,000</div>
-                            <div class="offer-range">Range: $<span id="offer-min">465,000</span> - $<span id="offer-max">505,000</span></div>
-                        </div>
-                        
-                        <div class="results-breakdown">
-                            <h3>Offer Breakdown:</h3>
-                            <div class="breakdown-item">
-                                <span>Estimated Market Value</span>
-                                <span id="market-value">$550,000</span>
+                    <div class="request-summary" id="request-summary">
+                        <h2>📋 Your Cash Offer Request</h2>
+                        <div class="summary-details">
+                            <div class="summary-item">
+                                <span>Property Address:</span>
+                                <span id="summary-address">-</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Condition Adjustments</span>
-                                <span id="condition-adjustment">-$45,000</span>
+                            <div class="summary-item">
+                                <span>Property Type:</span>
+                                <span id="summary-type">-</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Repair Estimates</span>
-                                <span id="repair-estimates">-$25,000</span>
+                            <div class="summary-item">
+                                <span>Size:</span>
+                                <span id="summary-size">-</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Closing Costs (We Pay)</span>
-                                <span id="closing-costs">+$15,000</span>
+                            <div class="summary-item">
+                                <span>Condition:</span>
+                                <span id="summary-condition">-</span>
                             </div>
-                            <div class="breakdown-item total">
-                                <span>Your Cash Offer</span>
-                                <span id="final-offer">$485,000</span>
+                            <div class="summary-item highlight">
+                                <span>Desired Selling Price:</span>
+                                <span id="summary-price">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Timeline:</span>
+                                <span id="summary-timeline">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Foreclosure Status:</span>
+                                <span id="summary-foreclosure">-</span>
                             </div>
                         </div>
                         
-                        <div class="results-benefits">
-                            <h3>What This Means For You:</h3>
-                            <div class="result-benefit">💰 Cash in your pocket: <strong id="cash-proceeds">$485,000</strong></div>
-                            <div class="result-benefit">📅 Close in 7-14 days</div>
-                            <div class="result-benefit">🏠 No repairs or cleaning required</div>
-                            <div class="result-benefit">💸 No real estate commissions</div>
-                            <div class="result-benefit">📋 We handle all paperwork</div>
+                        <div class="what-happens-next">
+                            <h3>What Happens Next:</h3>
+                            <div class="next-step">✓ We'll review your property details</div>
+                            <div class="next-step">✓ We'll research comparable sales in your area</div>
+                            <div class="next-step">✓ We'll contact you within 2 hours with our best cash offer</div>
+                            <div class="next-step">✓ No obligation - you decide if our offer works for you</div>
                         </div>
                     </div>
                     
                     <div class="lead-capture-section">
-                        <h3>Get Your Official Written Offer</h3>
-                        <p>This estimate is based on general market data. For an official written offer, we need to verify some details:</p>
+                        <h3>Submit Your Request</h3>
+                        <p>Provide your contact information so we can get back to you with our best cash offer:</p>
                         
                         <form id="calculator-lead-form" class="calculator-lead-form">
                             <div class="calc-form-grid">
@@ -293,10 +296,10 @@
                                 </div>
                             </div>
                             <button type="submit" class="calc-submit-button" onclick="gtag('event', 'calculator_lead_submit', {'event_category': 'lead'});">
-                                📋 Get My Official Written Offer
+                                🏠 Submit My Cash Offer Request
                             </button>
                             <p class="calc-privacy-text">
-                                Your information is 100% secure. We'll contact you within 2 hours during business hours with your official offer.
+                                Your information is 100% secure. We'll contact you within 2 hours during business hours with our best cash offer based on your desired price.
                             </p>
                         </form>
                     </div>

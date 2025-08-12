@@ -3,9 +3,9 @@ let currentStep = 1;
 let calculatorData = {
     property: {},
     condition: '',
+    desiredPrice: 0,
     timeline: '',
-    foreclosureStatus: '',
-    offer: {}
+    foreclosureStatus: ''
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,11 +21,21 @@ function initializeCalculator() {
         });
     });
     
-    // Set up timeline card selection
-    const timelineCards = document.querySelectorAll('.timeline-card');
-    timelineCards.forEach(card => {
-        card.addEventListener('click', function() {
-            selectTimeline(this.dataset.value);
+    // Set up price input validation
+    const priceInput = document.getElementById('desired-price');
+    if (priceInput) {
+        priceInput.addEventListener('input', function() {
+            calculatorData.desiredPrice = parseInt(this.value) || 0;
+            enableTimelineNext();
+        });
+    }
+    
+    // Set up timeline radio selection
+    const timelineRadios = document.querySelectorAll('input[name="timeline"]');
+    timelineRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            calculatorData.timeline = this.value;
+            enableTimelineNext();
         });
     });
     
@@ -67,9 +77,9 @@ function nextStep(step) {
     document.getElementById(`step-${currentStep}`).classList.add('active');
     document.getElementById(`step-${currentStep}-indicator`).classList.add('active');
     
-    // Special handling for step 4 (results)
+    // Special handling for step 4 (summary)
     if (step === 4) {
-        calculateOffer();
+        displaySummary();
     }
     
     // Track step progression
@@ -105,7 +115,7 @@ function validateCurrentStep() {
         case 2:
             return calculatorData.condition !== '';
         case 3:
-            return calculatorData.timeline !== '' && calculatorData.foreclosureStatus !== '';
+            return calculatorData.desiredPrice > 0 && calculatorData.timeline !== '' && calculatorData.foreclosureStatus !== '';
         default:
             return true;
     }
@@ -146,150 +156,88 @@ function selectCondition(condition) {
     document.getElementById('condition-next').disabled = false;
 }
 
-function selectTimeline(timeline) {
-    // Remove previous selection
-    document.querySelectorAll('.timeline-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-    
-    // Add selection to clicked card
-    document.querySelector(`.timeline-card[data-value="${timeline}"]`).classList.add('selected');
-    
-    calculatorData.timeline = timeline;
-    enableTimelineNext();
-}
 
 function enableTimelineNext() {
     const timelineNext = document.getElementById('timeline-next');
-    if (calculatorData.timeline !== '' && calculatorData.foreclosureStatus !== '') {
+    if (calculatorData.desiredPrice > 0 && calculatorData.timeline !== '' && calculatorData.foreclosureStatus !== '') {
         timelineNext.disabled = false;
     }
 }
 
-function calculateOffer() {
-    // Show loading state
-    document.getElementById('calculating').style.display = 'block';
-    document.getElementById('results').style.display = 'none';
+function displaySummary() {
+    // Show the summary section
+    document.getElementById('request-summary').style.display = 'block';
     
-    // Simulate calculation delay
-    setTimeout(() => {
-        const offer = generateOffer();
-        displayResults(offer);
-        
-        // Hide loading and show results
-        document.getElementById('calculating').style.display = 'none';
-        document.getElementById('results').style.display = 'block';
-        
-        // Track offer calculation
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'offer_calculated', {
-                'event_category': 'calculator',
-                'event_label': 'offer_generated',
-                'value': offer.amount
-            });
-        }
-    }, 3000);
-}
-
-function generateOffer() {
-    // Base market value estimation (simplified)
-    let baseValue = getBaseValue();
+    // Populate summary fields
+    document.getElementById('summary-address').textContent = calculatorData.property.address || '-';
+    document.getElementById('summary-type').textContent = formatPropertyType(calculatorData.property.type);
+    document.getElementById('summary-size').textContent = formatSquareFootage(calculatorData.property.sqft);
+    document.getElementById('summary-condition').textContent = formatCondition(calculatorData.condition);
+    document.getElementById('summary-price').textContent = formatCurrency(calculatorData.desiredPrice);
+    document.getElementById('summary-timeline').textContent = formatTimeline(calculatorData.timeline);
+    document.getElementById('summary-foreclosure').textContent = formatForeclosureStatus(calculatorData.foreclosureStatus);
     
-    // Apply condition adjustments
-    let conditionMultiplier = getConditionMultiplier();
-    let adjustedValue = baseValue * conditionMultiplier;
-    
-    // Apply timeline adjustments
-    let timelineMultiplier = getTimelineMultiplier();
-    let finalValue = adjustedValue * timelineMultiplier;
-    
-    // Apply foreclosure urgency
-    if (calculatorData.foreclosureStatus === 'yes') {
-        finalValue *= 1.02; // 2% urgency premium
+    // Track summary view
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'summary_viewed', {
+            'event_category': 'calculator',
+            'event_label': 'request_summary',
+            'value': calculatorData.desiredPrice
+        });
     }
-    
-    // Calculate range (±5%)
-    let minOffer = Math.round(finalValue * 0.95);
-    let maxOffer = Math.round(finalValue * 1.05);
-    let avgOffer = Math.round(finalValue);
-    
-    return {
-        amount: avgOffer,
-        min: minOffer,
-        max: maxOffer,
-        marketValue: Math.round(baseValue),
-        conditionAdjustment: Math.round(baseValue - adjustedValue),
-        repairEstimate: Math.round(baseValue * 0.05), // 5% repair allowance
-        closingCosts: Math.round(baseValue * 0.03) // 3% closing costs we pay
-    };
 }
 
-function getBaseValue() {
-    // Simplified market value calculation
-    let baseValue = 500000; // Default CA home value
-    
-    // Adjust by size
-    switch(calculatorData.property.sqft) {
-        case 'under-1000': baseValue = 400000; break;
-        case '1000-1500': baseValue = 500000; break;
-        case '1500-2000': baseValue = 600000; break;
-        case '2000-2500': baseValue = 750000; break;
-        case '2500-3000': baseValue = 900000; break;
-        case 'over-3000': baseValue = 1200000; break;
-    }
-    
-    // Adjust by bedrooms
-    const bedroomMultiplier = {
-        '1': 0.8,
-        '2': 0.9,
-        '3': 1.0,
-        '4': 1.15,
-        '5+': 1.3
+// Formatting functions for the summary display
+function formatPropertyType(type) {
+    const types = {
+        'single-family': 'Single Family Home',
+        'townhouse': 'Townhouse',
+        'condo': 'Condominium',
+        'multi-family': 'Multi-Family',
+        'mobile-home': 'Mobile Home',
+        'other': 'Other'
     };
-    
-    baseValue *= (bedroomMultiplier[calculatorData.property.bedrooms] || 1);
-    
-    // Add randomness to make it feel more realistic
-    const variance = 0.9 + (Math.random() * 0.2); // ±10% variance
-    return Math.round(baseValue * variance);
+    return types[type] || type;
 }
 
-function getConditionMultiplier() {
-    const conditionMultipliers = {
-        'excellent': 1.12, // +12%
-        'good': 1.02,      // +2%
-        'fair': 0.88,      // -12%
-        'poor': 0.75       // -25%
+function formatSquareFootage(sqft) {
+    const sizes = {
+        'under-1000': 'Under 1,000 sq ft',
+        '1000-1500': '1,000 - 1,500 sq ft',
+        '1500-2000': '1,500 - 2,000 sq ft',
+        '2000-2500': '2,000 - 2,500 sq ft',
+        '2500-3000': '2,500 - 3,000 sq ft',
+        'over-3000': 'Over 3,000 sq ft'
     };
-    
-    return conditionMultipliers[calculatorData.condition] || 0.9;
+    return sizes[sqft] || sqft;
 }
 
-function getTimelineMultiplier() {
-    const timelineMultipliers = {
-        'immediate': 1.05, // +5% urgency premium
-        'fast': 1.0,       // Standard
-        'flexible': 1.02   // +2% for flexibility
+function formatCondition(condition) {
+    const conditions = {
+        'excellent': 'Excellent',
+        'good': 'Good', 
+        'fair': 'Fair',
+        'poor': 'Needs Work'
     };
-    
-    return timelineMultipliers[calculatorData.timeline] || 1.0;
+    return conditions[condition] || condition;
 }
 
-function displayResults(offer) {
-    calculatorData.offer = offer;
-    
-    // Update offer amounts
-    document.getElementById('offer-amount').textContent = formatCurrency(offer.amount);
-    document.getElementById('offer-min').textContent = offer.min.toLocaleString();
-    document.getElementById('offer-max').textContent = offer.max.toLocaleString();
-    document.getElementById('final-offer').textContent = formatCurrency(offer.amount);
-    document.getElementById('cash-proceeds').textContent = formatCurrency(offer.amount);
-    
-    // Update breakdown
-    document.getElementById('market-value').textContent = formatCurrency(offer.marketValue);
-    document.getElementById('condition-adjustment').textContent = formatCurrency(-Math.abs(offer.conditionAdjustment));
-    document.getElementById('repair-estimates').textContent = formatCurrency(-offer.repairEstimate);
-    document.getElementById('closing-costs').textContent = '+' + formatCurrency(offer.closingCosts);
+function formatTimeline(timeline) {
+    const timelines = {
+        'immediate': 'Immediate (1-2 weeks)',
+        'fast': 'Fast (1-2 months)',
+        'flexible': 'Flexible (2-6 months)'
+    };
+    return timelines[timeline] || timeline;
+}
+
+function formatForeclosureStatus(status) {
+    const statuses = {
+        'yes': 'Currently in foreclosure',
+        'behind': 'Behind on payments',
+        'no': 'Current on payments'
+    };
+    return statuses[status] || status;
 }
 
 function formatCurrency(amount) {
@@ -309,8 +257,8 @@ function handleLeadFormSubmission(form) {
     // Combine calculator data with lead data
     const leadData = {
         ...data,
-        type: 'calculator_lead',
-        offer_amount: calculatorData.offer.amount,
+        type: 'cash_offer_request',
+        desired_price: calculatorData.desiredPrice,
         property_address: calculatorData.property.address,
         property_type: calculatorData.property.type,
         property_condition: calculatorData.condition,
@@ -329,8 +277,8 @@ function handleLeadFormSubmission(form) {
     if (typeof gtag !== 'undefined') {
         gtag('event', 'generate_lead', {
             'event_category': 'calculator',
-            'event_label': 'official_offer_request',
-            'value': calculatorData.offer.amount
+            'event_label': 'cash_offer_request',
+            'value': calculatorData.desiredPrice
         });
     }
     
@@ -367,11 +315,11 @@ function showSuccessMessage() {
     form.innerHTML = `
         <div class="success-message">
             <div class="success-icon">✅</div>
-            <h3>Request Submitted Successfully!</h3>
-            <p>We'll contact you within 2 hours during business hours with your official written offer.</p>
+            <h3>Cash Offer Request Submitted!</h3>
+            <p>We'll review your property details and contact you within 2 hours during business hours with our best cash offer based on your desired price of ${formatCurrency(calculatorData.desiredPrice)}.</p>
             <p><strong>Need immediate help?</strong></p>
             <div class="success-actions">
-                <a href="sms:+1-949-328-4811?body=I just used your calculator and got an estimate of ${formatCurrency(calculatorData.offer.amount)} for my property. I'd like to discuss this further." class="success-button">
+                <a href="sms:+1-949-328-4811?body=I just submitted a cash offer request for ${formatCurrency(calculatorData.desiredPrice)} for my property. I'd like to discuss this further." class="success-button">
                     💬 Text Now: (949) 328-4811
                 </a>
                 <a href="index.html#schedule" class="success-button secondary">
@@ -395,9 +343,9 @@ function startOver() {
     calculatorData = {
         property: {},
         condition: '',
+        desiredPrice: 0,
         timeline: '',
-        foreclosureStatus: '',
-        offer: {}
+        foreclosureStatus: ''
     };
     
     // Reset form
@@ -407,12 +355,16 @@ function startOver() {
     document.getElementById('bedrooms').value = '';
     document.getElementById('bathrooms').value = '';
     
+    // Reset price input
+    const priceInput = document.getElementById('desired-price');
+    if (priceInput) priceInput.value = '';
+    
     // Clear selections
-    document.querySelectorAll('.condition-card, .timeline-card').forEach(card => {
+    document.querySelectorAll('.condition-card').forEach(card => {
         card.classList.remove('selected');
     });
     
-    document.querySelectorAll('input[name="foreclosure-status"]').forEach(radio => {
+    document.querySelectorAll('input[name="foreclosure-status"], input[name="timeline"]').forEach(radio => {
         radio.checked = false;
     });
     
