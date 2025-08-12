@@ -821,3 +821,43 @@ p {
         font-size: 1rem;
     }
 }
+
+/* Force smaller fonts for any remaining large text - Blog Content Overrides */
+.blog-article h1,
+.blog-article .blog-header h1 {
+    font-size: 1.5rem !important; /* Force blog title size */
+}
+
+.blog-article h2 {
+    font-size: 1.25rem !important; /* Force section header size */
+}
+
+.blog-article h3 {
+    font-size: 1.125rem !important; /* Force subsection size */
+}
+
+.blog-article h4 {
+    font-size: 1rem !important; /* Force small header size */
+}
+
+.blog-article p {
+    font-size: 1rem !important; /* Force paragraph size */
+}
+
+/* Override any inline styles in CTA sections */
+.blog-article [style*="font-size"] p {
+    font-size: 1rem !important;
+}
+
+.blog-article [style*="font-size"] h2 {
+    font-size: 1.25rem !important;
+}
+
+/* Specific overrides for California Laws page CTA section */
+div[style*="background: #e74c3c"] h2 {
+    font-size: 1.25rem !important;
+}
+
+div[style*="background: #e74c3c"] p {
+    font-size: 1rem !important;
+}
