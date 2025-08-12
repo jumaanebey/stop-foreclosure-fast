@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://myforeclosuresolution.com/sitemap.xml
+
+# Block admin areas if they exist
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
