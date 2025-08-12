@@ -82,13 +82,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-md);
 }
 
-/* Responsive Typography Scale */
-h1 { font-size: 2.5rem; }     /* 40px - much more reasonable for page titles */
-h2 { font-size: 2rem; }       /* 32px - good for section headers */
-h3 { font-size: 1.5rem; }     /* 24px - perfect for subsections */
-h4 { font-size: 1.25rem; }    /* 20px - good for smaller headings */
-h5 { font-size: 1.125rem; }   /* 18px */
-h6 { font-size: 1rem; }       /* 16px */
+/* Responsive Typography Scale - Web Standard Sizes */
+h1 { font-size: 1.875rem; }   /* 30px - standard web page title */
+h2 { font-size: 1.5rem; }     /* 24px - section headers */
+h3 { font-size: 1.25rem; }    /* 20px - subsections */
+h4 { font-size: 1.125rem; }   /* 18px - smaller headings */
+h5 { font-size: 1rem; }       /* 16px - same as body text */
+h6 { font-size: 0.875rem; }   /* 14px - small headings */
 
 p {
     margin-bottom: var(--space-lg);
@@ -253,7 +253,7 @@ p {
 }
 
 .hero-title {
-    font-size: 2.25rem; /* Reduced from 3.5rem to more reasonable size */
+    font-size: 1.75rem; /* Standard hero size - 28px */
     font-weight: 800;
     color: var(--primary-color);
     margin-bottom: var(--space-lg);
@@ -262,7 +262,7 @@ p {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.125rem; /* 18px - much more reasonable */
     font-weight: 600;
     color: var(--accent-color);
     margin-bottom: var(--space-xl);
@@ -270,7 +270,7 @@ p {
 }
 
 .hero-description {
-    font-size: 1.25rem;
+    font-size: 1rem; /* Standard 16px for readability */
     color: var(--gray-600);
     margin-bottom: var(--space-2xl);
     line-height: 1.6;
@@ -304,7 +304,7 @@ p {
 
 .trust-indicators h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: var(--space-2xl);
     color: var(--primary-color);
 }
@@ -358,7 +358,7 @@ p {
 
 .how-it-works h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: var(--space-2xl);
     color: var(--primary-color);
 }
@@ -422,7 +422,7 @@ p {
 
 .urgency h2 {
     color: white;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: var(--space-lg);
 }
 
@@ -454,7 +454,7 @@ p {
 
 .about h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: var(--space-2xl);
     color: var(--primary-color);
 }
@@ -505,7 +505,7 @@ p {
 
 .contact h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: var(--space-lg);
     color: var(--primary-color);
 }
@@ -781,11 +781,11 @@ p {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 1.5rem; /* Even smaller on mobile */
     }
     
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1rem; /* Smaller mobile subtitle */
     }
     
     .nav {
@@ -802,9 +802,9 @@ p {
         grid-template-columns: 1fr;
     }
     
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
+    h1 { font-size: 1.5rem; }  /* Smaller mobile sizes */
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.125rem; }
 }
 
 @media (max-width: 480px) {
