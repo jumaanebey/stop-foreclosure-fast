@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     const leadMagnetForm = document.getElementById('lead-magnet-form');
+    const exitPopupForm = document.getElementById('exit-popup-form');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -16,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
             handleLeadMagnetSubmission(this);
         });
     }
+    
+    if (exitPopupForm) {
+        exitPopupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleExitPopupSubmission(this);
+        });
+    }
+    
+    // Initialize exit intent detection
+    initExitIntent();
     
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -158,3 +169,146 @@ function handleLeadMagnetSubmission(form) {
             submitButton.disabled = false;
         });
 }
+
+// Exit Intent Popup Functions
+let exitIntentShown = false;
+let mouseLeftWindow = false;
+
+function initExitIntent() {
+    // Only show on desktop (not mobile)
+    if (window.innerWidth < 768) return;
+    
+    // Don't show if user already converted
+    if (localStorage.getItem('exitIntentShown') === 'true') return;
+    
+    // Track mouse movement
+    document.addEventListener('mouseleave', function(e) {
+        // Check if mouse left through the top of the window
+        if (e.clientY <= 0 && !exitIntentShown) {
+            showExitPopup();
+        }
+    });
+    
+    // Also trigger on scroll up near top (mobile behavior)
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', function() {
+        if (window.scrollY < lastScrollY && window.scrollY < 100 && !exitIntentShown) {
+            // User scrolled up near top of page
+            setTimeout(() => {
+                if (!exitIntentShown) showExitPopup();
+            }, 1000);
+        }
+        lastScrollY = window.scrollY;
+    });
+    
+    // Fallback: Show after 30 seconds if no other trigger
+    setTimeout(() => {
+        if (!exitIntentShown && !hasUserEngaged()) {
+            showExitPopup();
+        }
+    }, 30000);
+}
+
+function hasUserEngaged() {
+    // Check if user has scrolled significantly, filled form, or clicked CTA
+    return window.scrollY > (window.innerHeight * 0.5) || 
+           document.querySelector('input:focus') !== null ||
+           localStorage.getItem('userEngaged') === 'true';
+}
+
+function showExitPopup() {
+    if (exitIntentShown) return;
+    
+    exitIntentShown = true;
+    const popup = document.getElementById('exit-intent-popup');
+    if (popup) {
+        popup.style.display = 'flex';
+        
+        // Track popup shown event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exit_intent_shown', {
+                'event_category': 'popup',
+                'event_label': 'foreclosure_checklist'
+            });
+        }
+        
+        // Focus first input
+        setTimeout(() => {
+            const firstInput = popup.querySelector('input[type="text"]');
+            if (firstInput) firstInput.focus();
+        }, 500);
+    }
+}
+
+function closeExitPopup() {
+    const popup = document.getElementById('exit-intent-popup');
+    if (popup) {
+        popup.style.display = 'none';
+        localStorage.setItem('exitIntentShown', 'true');
+        
+        // Track popup closed event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exit_intent_closed', {
+                'event_category': 'popup',
+                'event_label': 'foreclosure_checklist'
+            });
+        }
+    }
+}
+
+function handleExitPopupSubmission(form) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    // Show loading state
+    const submitButton = form.querySelector('.exit-popup-button');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending Checklist...';
+    submitButton.disabled = true;
+    
+    // Facebook Pixel event
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+    }
+    
+    // Google Analytics event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', {
+            'event_category': 'exit_intent_popup',
+            'event_label': 'foreclosure_checklist'
+        });
+    }
+    
+    // Submit to Google Sheets
+    submitToGoogleSheets({
+        ...data,
+        type: 'exit_intent_popup',
+        lead_magnet: 'California Foreclosure Timeline Checklist'
+    })
+        .then(() => {
+            // Close popup and redirect to download page
+            closeExitPopup();
+            window.location.href = 'checklist-download.html';
+        })
+        .catch(error => {
+            console.error('Exit popup submission error:', error);
+            alert('There was an error sending your checklist. Please text us at (949) 328-4811 for immediate assistance.');
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('exit-intent-popup');
+    if (popup && e.target === popup) {
+        closeExitPopup();
+    }
+});
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeExitPopup();
+    }
+});

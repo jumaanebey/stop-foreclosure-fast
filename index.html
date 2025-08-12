@@ -117,10 +117,10 @@
                     Get a fair cash offer today and stop the foreclosure process immediately.
                 </p>
                 <div class="hero-cta">
-                    <a href="sms:+1-949-328-4811?body=Hi, I'm facing foreclosure and need help. Can you provide me with information about selling my home quickly?" class="cta-button-large" onclick="gtag('event', 'text_message', {'event_category': 'engagement'});">
-                        💬 Text Now: (949) 328-4811
+                    <a href="cash-offer-calculator.html" class="cta-button-large" onclick="gtag('event', 'calculator_click', {'event_category': 'engagement'});">
+                        💰 Get Instant Cash Offer
                     </a>
-                    <a href="#contact" class="cta-button-secondary">Get Free Cash Offer</a>
+                    <a href="sms:+1-949-328-4811?body=Hi, I'm facing foreclosure and need help. Can you provide me with information about selling my home quickly?" class="cta-button-secondary">💬 Text Now: (949) 328-4811</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -391,6 +391,51 @@
             </div>
         </div>
     </footer>
+
+    <!-- Exit Intent Popup -->
+    <div id="exit-intent-popup" class="exit-popup-overlay" style="display: none;">
+        <div class="exit-popup-content">
+            <div class="exit-popup-close" onclick="closeExitPopup()">&times;</div>
+            
+            <div class="exit-popup-header">
+                <h2>⚠️ Wait! Don't Let the Bank Take Your Home</h2>
+                <p class="exit-popup-subtitle">
+                    Get our <strong>free California Foreclosure Timeline Checklist</strong> before you go. 
+                    Know your rights and deadlines.
+                </p>
+            </div>
+            
+            <div class="exit-popup-body">
+                <div class="exit-popup-benefits">
+                    <div class="exit-benefit">✅ Step-by-step foreclosure timeline</div>
+                    <div class="exit-benefit">✅ Critical deadlines you need to know</div>
+                    <div class="exit-benefit">✅ Your legal rights at each phase</div>
+                    <div class="exit-benefit">✅ Emergency contacts and resources</div>
+                </div>
+                
+                <form id="exit-popup-form" class="exit-popup-form">
+                    <div class="exit-form-group">
+                        <input type="text" id="exit-name" name="name" placeholder="Your First Name" required>
+                    </div>
+                    <div class="exit-form-group">
+                        <input type="email" id="exit-email" name="email" placeholder="Your Email Address" required>
+                    </div>
+                    <button type="submit" class="exit-popup-button" onclick="gtag('event', 'exit_intent_lead', {'event_category': 'lead'});">
+                        📥 Get My Free Checklist Now
+                    </button>
+                    <p class="exit-privacy-text">
+                        100% free. We'll never spam you. Unsubscribe anytime.
+                    </p>
+                </form>
+            </div>
+            
+            <div class="exit-popup-footer">
+                <p class="exit-social-proof">
+                    <strong>Join 200+ homeowners</strong> who used this checklist to understand their options and avoid foreclosure.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
