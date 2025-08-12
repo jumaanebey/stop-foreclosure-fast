@@ -78,8 +78,8 @@ function handleFormSubmission(form) {
 }
 
 function submitToGoogleSheets(data) {
-    // Replace with your Google Apps Script Web App URL from step above
-    const GOOGLE_SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+    // Google Apps Script Web App URL for contact form
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby8VHy6p65YC17hxjdAX5Hk7d5l4d7uyDHMZy9I7vMJY_RHwa5lw2DzstoXtyJvTdT9/exec';
     
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
