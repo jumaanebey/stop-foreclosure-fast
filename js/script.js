@@ -106,6 +106,6 @@ Situation: ${data.situation}
 Submitted: ${new Date().toLocaleString()}
     `;
     
-    const mailtoLink = `mailto:help@stopforeclosurefast.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:help@myforeclosuresolution.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
 }
