@@ -356,7 +356,7 @@ p {
 /* How It Works */
 .how-it-works {
     padding: var(--space-4xl) 0;
-    background: var(--gray-50);
+    background: linear-gradient(135deg, var(--gray-50) 0%, #f8fafc 100%);
 }
 
 .how-it-works h2 {
@@ -370,20 +370,27 @@ p {
 
 .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-2xl);
-    margin-top: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-3xl);
+    margin-top: var(--space-3xl);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .step {
     background: white;
-    padding: var(--space-3xl);
-    border-radius: var(--radius-xl);
+    padding: var(--space-4xl);
+    border-radius: var(--radius-2xl);
     text-align: center;
     position: relative;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    border: 2px solid var(--gray-100);
+    border: 3px solid var(--gray-200);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .step:hover {
