@@ -919,6 +919,99 @@ div[style*="background: #e74c3c"] p {
     line-height: 1.6 !important; /* Better line spacing */
 }
 
+/* Calendar Scheduling Section */
+.calendar-section {
+    padding: var(--space-4xl) 0;
+    background: var(--gray-50);
+}
+
+.calendar-section h2 {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+    color: var(--primary-color);
+}
+
+.calendar-section > .container > p {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--gray-600);
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.calendar-info {
+    background: white;
+    padding: var(--space-2xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.calendar-info h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+    font-size: 1.125rem;
+}
+
+.calendar-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.calendar-info li {
+    margin-bottom: var(--space-md);
+    font-size: 0.95rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.calendar-embed {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.calendar-embed iframe {
+    display: block;
+    width: 100%;
+}
+
+.calendar-fallback {
+    display: none; /* Hide by default, show when calendar not configured */
+}
+
+/* Show fallback if iframe fails to load */
+.calendar-embed iframe:not([src*="calendar.google.com"]) + .calendar-fallback {
+    display: block;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .calendar-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .calendar-info,
+    .calendar-embed {
+        margin: 0 var(--space-md);
+    }
+    
+    .calendar-embed iframe {
+        height: 500px; /* Smaller height on mobile */
+    }
+}
+
 /* Also target any red background CTA sections */
 .blog-cta,
 div[style*="background: #e74c3c"],
