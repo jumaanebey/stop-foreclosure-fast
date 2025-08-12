@@ -96,34 +96,38 @@
     </header>
 
     <!-- Hero Section - LA Specific -->
-    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1444927714506-8492d94b5ba0?w=1200') center/cover;">
+    <section class="hero">
         <div class="container">
-            <div class="hero-content" style="color: white; text-align: center; padding: 4rem 0;">
-                <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 1rem;">Stop Foreclosure in Los Angeles</h1>
-                <h2 class="hero-subtitle" style="font-size: 1.8rem; margin-bottom: 2rem;">We Buy Houses for Cash Throughout LA County - Close in 7 Days</h2>
-                <p class="hero-description" style="font-size: 1.3rem; max-width: 600px; margin: 0 auto 3rem;">
+            <div class="hero-content">
+                <h1 class="hero-title">Stop Foreclosure in Los Angeles</h1>
+                <h2 class="hero-subtitle">We Buy Houses for Cash Throughout LA County - Close in 7 Days</h2>
+                <p class="hero-description">
                     Facing foreclosure in Los Angeles? Don't lose your home to rising costs and property taxes. 
                     Get a fair cash offer today and stop foreclosure immediately.
                 </p>
                 <div class="hero-cta">
-                    <a href="tel:+1-555-STOP-NOW" class="cta-button-large" style="margin-right: 1rem;" onclick="gtag('event', 'phone_call', {'event_category': 'engagement', 'event_label': 'la_hero'});">
+                    <a href="tel:+1-555-STOP-NOW" class="cta-button-large" onclick="gtag('event', 'phone_call', {'event_category': 'engagement', 'event_label': 'la_hero'});">
                         📞 Call Now: (555) STOP-NOW
                     </a>
                     <a href="#contact-la" class="cta-button-secondary">Get Free LA Cash Offer</a>
                 </div>
             </div>
+            <div class="hero-image">
+                <img src="images/hero-image.svg" alt="Los Angeles foreclosure help - happy family" width="500" height="400">
+            </div>
         </div>
     </section>
 
     <!-- LA Service Areas -->
-    <section style="padding: 4rem 0; background: #f8f9fa;">
+    <section class="trust-indicators">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem; color: #2c3e50;">We Buy Houses Throughout Los Angeles County</h2>
+            <h2>We Buy Houses Throughout Los Angeles County</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 3rem 0;">
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #e74c3c; margin-bottom: 1rem;">🌟 Westside</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">🌟</div>
+                    <h3>Westside</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Beverly Hills</li>
                         <li>Santa Monica</li>
                         <li>Manhattan Beach</li>
@@ -133,9 +137,10 @@
                     </ul>
                 </div>
                 
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #3498db; margin-bottom: 1rem;">🏙️ Central LA</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                <div class="trust-item">
+                    <div class="trust-icon">🏙️</div>
+                    <h3>Central LA</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Hollywood</li>
                         <li>West Hollywood</li>
                         <li>Downtown LA</li>
@@ -145,9 +150,10 @@
                     </ul>
                 </div>
                 
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #27ae60; margin-bottom: 1rem;">🏘️ San Fernando Valley</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                <div class="trust-item">
+                    <div class="trust-icon">🏘️</div>
+                    <h3>San Fernando Valley</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Burbank</li>
                         <li>Glendale</li>
                         <li>Pasadena</li>
@@ -157,9 +163,10 @@
                     </ul>
                 </div>
                 
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #f39c12; margin-bottom: 1rem;">🏖️ South Bay</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                <div class="trust-item">
+                    <div class="trust-icon">🏖️</div>
+                    <h3>South Bay</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Torrance</li>
                         <li>El Segundo</li>
                         <li>Redondo Beach</li>
@@ -169,9 +176,10 @@
                     </ul>
                 </div>
                 
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #9b59b6; margin-bottom: 1rem;">🌆 Eastside</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                <div class="trust-item">
+                    <div class="trust-icon">🌆</div>
+                    <h3>Eastside</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Highland Park</li>
                         <li>Boyle Heights</li>
                         <li>East LA</li>
@@ -181,9 +189,10 @@
                     </ul>
                 </div>
                 
-                <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h3 style="color: #e67e22; margin-bottom: 1rem;">🏠 And More!</h3>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                <div class="trust-item">
+                    <div class="trust-icon">🏠</div>
+                    <h3>And More!</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8; text-align: left;">
                         <li>Long Beach</li>
                         <li>Pomona</li>
                         <li>Lancaster</li>
@@ -194,32 +203,32 @@
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">
-                <p style="font-size: 1.2rem; color: #666;">Don't see your LA neighborhood? We buy houses everywhere in Los Angeles County!</p>
-                <a href="#contact-la" style="background: #e74c3c; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 1rem; display: inline-block;">Get Your Area's Cash Offer</a>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Don't see your LA neighborhood? We buy houses everywhere in Los Angeles County!</p>
+                <a href="#contact-la" class="cta-button-large">Get Your Area's Cash Offer</a>
             </div>
         </div>
     </section>
 
     <!-- LA-Specific Benefits -->
-    <section style="padding: 4rem 0;">
+    <section class="how-it-works">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Why LA Homeowners Choose Us</h2>
+            <h2>Why LA Homeowners Choose Us</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏠</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">🏠</div>
                     <h3>LA Market Expertise</h3>
                     <p>We know LA real estate inside and out. From Beverly Hills mansions to Highland Park bungalows - we understand your neighborhood's value.</p>
                 </div>
                 
-                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                <div class="step">
+                    <div class="step-number">⚡</div>
                     <h3>Beat LA Foreclosure Timeline</h3>
                     <p>LA County processes thousands of foreclosures. We can close faster than the foreclosure process - protecting your credit and future.</p>
                 </div>
                 
-                <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                <div class="step">
+                    <div class="step-number">💰</div>
                     <h3>Fair Offers for Any Condition</h3>
                     <p>Whether your LA home needs earthquake repairs, has termite damage, or code violations - we buy as-is and handle everything.</p>
                 </div>
@@ -228,87 +237,86 @@
     </section>
 
     <!-- LA Success Stories -->
-    <section style="padding: 4rem 0; background: #f8f9fa;">
+    <section class="about">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Los Angeles Success Stories</h2>
+            <h2>Los Angeles Success Stories</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <blockquote style="font-style: italic; margin-bottom: 1rem;">
-                        "We were 3 months behind on our Glendale home after my husband's job loss. My Foreclosure Solution bought our house in 8 days and we avoided foreclosure completely."
+            <div class="about-content">
+                <div class="about-text">
+                    <blockquote style="font-style: italic; margin-bottom: 2rem; padding: 2rem; background: #f8f9fa; border-left: 4px solid #27ae60; border-radius: 5px;">
+                        <p>"We were 3 months behind on our Glendale home after my husband's job loss. My Foreclosure Solution bought our house in 8 days and we avoided foreclosure completely."</p>
+                        <footer><strong>- Maria S., Glendale</strong><br><small>Saved $45,000 in equity</small></footer>
                     </blockquote>
-                    <div style="font-weight: bold; color: #27ae60;">- Maria S., Glendale</div>
-                    <div style="color: #666; font-size: 0.9rem;">Saved $45,000 in equity</div>
-                </div>
-                
-                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <blockquote style="font-style: italic; margin-bottom: 1rem;">
-                        "Our Santa Monica condo had foundation issues and we couldn't afford repairs. They bought it as-is and we got enough to put down on a new place."
+                    
+                    <blockquote style="font-style: italic; margin-bottom: 2rem; padding: 2rem; background: #f8f9fa; border-left: 4px solid #3498db; border-radius: 5px;">
+                        <p>"Our Santa Monica condo had foundation issues and we couldn't afford repairs. They bought it as-is and we got enough to put down on a new place."</p>
+                        <footer><strong>- David L., Santa Monica</strong><br><small>Closed in 6 days</small></footer>
                     </blockquote>
-                    <div style="font-weight: bold; color: #27ae60;">- David L., Santa Monica</div>
-                    <div style="color: #666; font-size: 0.9rem;">Closed in 6 days</div>
-                </div>
-                
-                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <blockquote style="font-style: italic; margin-bottom: 1rem;">
-                        "The foreclosure process in LA is scary. These guys explained everything, bought our Highland Park house fast, and helped us move on with our lives."
+                    
+                    <blockquote style="font-style: italic; margin-bottom: 2rem; padding: 2rem; background: #f8f9fa; border-left: 4px solid #e74c3c; border-radius: 5px;">
+                        <p>"The foreclosure process in LA is scary. These guys explained everything, bought our Highland Park house fast, and helped us move on with our lives."</p>
+                        <footer><strong>- Jennifer R., Highland Park</strong><br><small>Fresh start in 10 days</small></footer>
                     </blockquote>
-                    <div style="font-weight: bold; color: #27ae60;">- Jennifer R., Highland Park</div>
-                    <div style="color: #666; font-size: 0.9rem;">Fresh start in 10 days</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- LA Contact Section -->
-    <section id="contact-la" style="padding: 4rem 0;">
+    <section id="contact-la" class="contact">
         <div class="container">
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h2 style="margin-bottom: 2rem;">Get Your Los Angeles Cash Offer Today</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 3rem;">
-                    Fill out the form below and we'll contact you within 2 hours with a cash offer for your LA area home.
-                </p>
-                
-                <form id="la-contact-form" class="contact-form" style="background: #f8f9fa; padding: 3rem; border-radius: 15px;">
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="la-name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Full Name *</label>
-                        <input type="text" id="la-name" name="name" required style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="la-email" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email Address *</label>
-                        <input type="email" id="la-email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="la-phone" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone Number *</label>
-                        <input type="tel" id="la-phone" name="phone" required style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="la-address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">LA Property Address *</label>
-                        <input type="text" id="la-address" name="address" required placeholder="123 Main St, Los Angeles, CA 90210" style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 2rem;">
-                        <label for="la-situation" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Describe Your Situation</label>
-                        <textarea id="la-situation" name="situation" rows="4" placeholder="Tell us about your foreclosure timeline, property condition, or any other details..." style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;"></textarea>
-                    </div>
-                    
-                    <button type="submit" style="width: 100%; background: #e74c3c; color: white; padding: 1.5rem; border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold; cursor: pointer;" onclick="gtag('event', 'form_submit', {'event_category': 'lead', 'event_label': 'la_contact'});">
-                        Get My Free Los Angeles Cash Offer
-                    </button>
-                    
-                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                        Your information is 100% secure and will never be shared with third parties.
-                    </p>
-                </form>
-                
-                <div style="margin-top: 3rem; padding: 2rem; background: #e74c3c; color: white; border-radius: 10px;">
-                    <h3>Or Call Now for Immediate Help</h3>
-                    <p style="font-size: 1.1rem; margin: 1rem 0;">Don't wait - every day matters when facing foreclosure in LA</p>
-                    <a href="tel:+1-555-STOP-NOW" style="background: white; color: #e74c3c; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.2rem;">📞 (555) STOP-NOW</a>
+            <h2>Get Your Los Angeles Cash Offer Today</h2>
+            <p>Fill out the form below and we'll contact you within 2 hours with a cash offer for your LA area home.</p>
+            
+            <form id="la-contact-form" class="contact-form" action="contact-form.html" method="POST">
+                <div class="form-group">
+                    <label for="la-name">Full Name *</label>
+                    <input type="text" id="la-name" name="name" required>
                 </div>
+                    
+                <div class="form-group">
+                    <label for="la-email">Email Address *</label>
+                    <input type="email" id="la-email" name="email" required>
+                </div>
+                    
+                <div class="form-group">
+                    <label for="la-phone">Phone Number *</label>
+                    <input type="tel" id="la-phone" name="phone" required>
+                </div>
+                    
+                <div class="form-group">
+                    <label for="la-address">LA Property Address *</label>
+                    <input type="text" id="la-address" name="address" required placeholder="123 Main St, Los Angeles, CA 90210">
+                </div>
+                    
+                <div class="form-group">
+                    <label for="la-situation">Describe Your Situation</label>
+                    <textarea id="la-situation" name="situation" rows="4" placeholder="Tell us about your foreclosure timeline, property condition, or any other details..."></textarea>
+                </div>
+                    
+                <button type="submit" class="submit-button" onclick="gtag('event', 'form_submit', {'event_category': 'lead', 'event_label': 'la_contact'});">
+                    Get My Free Los Angeles Cash Offer
+                </button>
+                    
+                <p class="privacy-text">
+                    Your information is 100% secure and will never be shared with third parties.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Urgency Section -->
+    <section class="urgency">
+        <div class="container">
+            <h2>Don't Wait - Every Day Matters in LA</h2>
+            <p class="urgency-text">
+                Los Angeles foreclosure market moves fast. The sooner you act, the more options you have. 
+                Get your cash offer today and stop foreclosure immediately.
+            </p>
+            <div class="urgency-cta">
+                <a href="tel:+1-555-STOP-NOW" class="cta-button-large" onclick="gtag('event', 'urgent_call', {'event_category': 'engagement', 'event_label': 'la_urgent'});">
+                    🚨 Call Los Angeles Office Now - (555) STOP-NOW
+                </a>
             </div>
         </div>
     </section>
