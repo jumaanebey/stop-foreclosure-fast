@@ -21,11 +21,23 @@ function initializeCalculator() {
         });
     });
     
-    // Set up price input validation
+    // Set up price input validation with formatting
     const priceInput = document.getElementById('desired-price');
     if (priceInput) {
         priceInput.addEventListener('input', function() {
-            calculatorData.desiredPrice = parseInt(this.value) || 0;
+            // Remove non-numeric characters except for the initial value
+            let value = this.value.replace(/[^\d]/g, '');
+            
+            if (value) {
+                // Store the numeric value
+                calculatorData.desiredPrice = parseInt(value) || 0;
+                
+                // Format and display with dollar sign and commas
+                this.value = '$' + parseInt(value).toLocaleString();
+            } else {
+                calculatorData.desiredPrice = 0;
+                this.value = '';
+            }
             
             // Clear any selected quick price buttons when typing
             document.querySelectorAll('.price-range-btn').forEach(btn => {
@@ -33,6 +45,21 @@ function initializeCalculator() {
             });
             
             enableTimelineNext();
+        });
+        
+        // Handle focus to allow editing
+        priceInput.addEventListener('focus', function() {
+            // Remove formatting when focused for easier editing
+            if (calculatorData.desiredPrice > 0) {
+                this.value = calculatorData.desiredPrice.toString();
+            }
+        });
+        
+        // Handle blur to restore formatting
+        priceInput.addEventListener('blur', function() {
+            if (calculatorData.desiredPrice > 0) {
+                this.value = '$' + calculatorData.desiredPrice.toLocaleString();
+            }
         });
     }
     
@@ -189,7 +216,7 @@ function selectQuickPrice(price, buttonElement) {
     
     // Update the price input and data
     const priceInput = document.getElementById('desired-price');
-    priceInput.value = price;
+    priceInput.value = '$' + price.toLocaleString();
     calculatorData.desiredPrice = price;
     
     // Enable next step if other conditions are met
