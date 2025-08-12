@@ -61,6 +61,10 @@
     
     <link rel="stylesheet" href="css/styles.css">
     
+    <!-- Google Calendar Appointment Scheduling -->
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
@@ -279,26 +283,28 @@
                 </div>
                 
                 <div class="calendar-embed">
-                    <!-- Google Calendar Appointment Slots -->
-                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6c1JKJY5lZ2p1NHBmVnJhbWU6Rm9yZWNsb3N1cmVTb2x1dGlvbkBnbWFpbC5jb20?gv=true" 
-                            style="border: 0; border-radius: 10px;" 
-                            width="100%" 
-                            height="600" 
-                            frameborder="0" 
-                            scrolling="no">
-                    </iframe>
-                    
-                    <!-- Fallback for when calendar not set up -->
-                    <div class="calendar-fallback" style="background: var(--gray-50); padding: var(--space-2xl); border-radius: var(--radius-lg); text-align: center;">
-                        <h3>Calendar Setup Required</h3>
-                        <p>To enable online scheduling, please:</p>
-                        <ol style="text-align: left; margin: var(--space-lg) 0;">
-                            <li>Go to <a href="https://calendar.google.com" target="_blank">Google Calendar</a></li>
-                            <li>Create appointment slots for your availability</li>
-                            <li>Get the embed code and replace the iframe src above</li>
-                        </ol>
-                        <p><strong>Until then, call us directly:</strong></p>
-                        <a href="tel:+1-555-STOP-NOW" class="cta-button-large">📞 Call (555) STOP-NOW</a>
+                    <div class="calendar-button-container">
+                        <div id="google-calendar-button">
+                            <!-- Google Calendar Button will load here -->
+                            <script>
+                            (function() {
+                              var target = document.getElementById('google-calendar-button');
+                              window.addEventListener('load', function() {
+                                calendar.schedulingButton.load({
+                                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ11saPKXhTtJ5jLw6q9XASJXT6whF2LSN7MgXGzcT9PIlyRhXWXVVIDKqsIojgwkJo76HPcFLSz?gv=true',
+                                  color: '#1a365d',
+                                  label: 'Schedule Your Free Consultation',
+                                  target: target,
+                                });
+                              });
+                            })();
+                            </script>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: var(--space-lg); padding: var(--space-lg); background: var(--gray-50); border-radius: var(--radius-lg);">
+                            <p style="color: var(--gray-600); margin-bottom: var(--space-md);"><strong>Or call us directly:</strong></p>
+                            <a href="tel:+1-555-STOP-NOW" class="cta-button-large">📞 Call (555) STOP-NOW</a>
+                        </div>
                     </div>
                 </div>
             </div>

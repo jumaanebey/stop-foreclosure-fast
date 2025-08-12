@@ -981,18 +981,33 @@ div[style*="background: #e74c3c"] p {
     box-shadow: var(--shadow-lg);
 }
 
-.calendar-embed iframe {
-    display: block;
-    width: 100%;
+.calendar-button-container {
+    padding: var(--space-2xl);
+    text-align: center;
 }
 
-.calendar-fallback {
-    display: none; /* Hide by default, show when calendar not configured */
+.calendar-button-container #google-calendar-button {
+    margin-bottom: var(--space-lg);
 }
 
-/* Show fallback if iframe fails to load */
-.calendar-embed iframe:not([src*="calendar.google.com"]) + .calendar-fallback {
-    display: block;
+/* Style the Google Calendar button when it loads */
+.calendar-button-container button {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    padding: var(--space-lg) var(--space-2xl) !important;
+    border: none !important;
+    border-radius: var(--radius-lg) !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.calendar-button-container button:hover {
+    background-color: var(--primary-light) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-lg) !important;
 }
 
 /* Mobile responsive */
