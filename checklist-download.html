@@ -49,10 +49,11 @@
                 
                 <!-- Download Button -->
                 <div class="download-section">
-                    <a href="#" onclick="downloadPDF()" class="download-button">
-                        📥 Download Checklist Now
+                    <a href="downloads/checklist-preview.html" target="_blank" class="download-button">
+                        📥 View Your Checklist Now
                     </a>
                     <p class="download-note">
+                        <strong>Bookmark this page!</strong> Print it out or save it to your phone for easy reference.<br>
                         Don't see the email? <a href="mailto:help@myforeclosuresolution.com">Contact us</a> and we'll send it directly.
                     </p>
                 </div>
@@ -147,23 +148,6 @@
     </footer>
 
     <script>
-        function downloadPDF() {
-            // Track download event
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'download', {
-                    'event_category': 'lead_magnet',
-                    'event_label': 'foreclosure_checklist_pdf'
-                });
-            }
-            
-            // For now, create a temporary PDF link
-            // In production, you'd link to your actual PDF file
-            alert('PDF download will be available once you upload the checklist PDF to your website.');
-            
-            // Example of how it would work with a real PDF:
-            // window.open('downloads/california-foreclosure-timeline-checklist.pdf', '_blank');
-        }
-        
         // Track page view
         if (typeof gtag !== 'undefined') {
             gtag('event', 'page_view', {
@@ -171,6 +155,21 @@
                 'event_label': 'download_success_page'
             });
         }
+        
+        // Track checklist view clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadButton = document.querySelector('.download-button');
+            if (downloadButton) {
+                downloadButton.addEventListener('click', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'checklist_view', {
+                            'event_category': 'lead_magnet',
+                            'event_label': 'foreclosure_checklist_html'
+                        });
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

@@ -1083,6 +1083,30 @@ div[style*="background: #e74c3c"] p {
     line-height: 1.6;
 }
 
+.booking-requirements {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--gray-200);
+}
+
+.booking-requirements p {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+}
+
+.booking-requirements ul {
+    list-style: none;
+    padding: 0;
+}
+
+.booking-requirements li {
+    margin-bottom: var(--space-sm);
+    font-size: 0.85rem;
+    color: var(--gray-600);
+}
+
 .calendar-embed {
     background: white;
     border-radius: var(--radius-xl);
