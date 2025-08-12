@@ -71,7 +71,7 @@ function handleFormSubmission(form) {
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            alert('There was an error submitting your form. Please call us directly at (555) STOP-NOW');
+            alert('There was an error submitting your form. Please call us directly at (949) 328-4811');
             submitButton.textContent = originalText;
             submitButton.disabled = false;
         });
