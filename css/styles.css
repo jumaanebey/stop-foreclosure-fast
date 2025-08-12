@@ -490,11 +490,12 @@ p {
 
 .credentials {
     margin-top: var(--space-2xl); /* Less space from text */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for better layout */
+    display: flex; /* Use flexbox for 3 items in a row */
+    justify-content: space-between; /* Even spacing */
     gap: var(--space-md); /* Smaller gap for tighter layout */
     padding-top: var(--space-2xl); /* Add padding above */
     border-top: 1px solid var(--gray-200); /* Subtle separator line */
+    flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
 .credential {
@@ -507,6 +508,8 @@ p {
     text-align: center; /* Center align the checkmarks */
     font-size: 0.9rem; /* Slightly smaller for better fit */
     box-shadow: var(--shadow-sm); /* Subtle shadow */
+    flex: 1; /* Equal width for all 3 items */
+    min-width: 200px; /* Minimum width */
 }
 
 .credential:hover {
@@ -840,8 +843,12 @@ p {
     }
     
     .credentials {
-        grid-template-columns: 1fr; /* Single column credentials on mobile */
+        flex-direction: column; /* Stack credentials on mobile */
         gap: var(--space-md);
+    }
+    
+    .credential {
+        min-width: auto; /* Remove min-width on mobile */
     }
     
     .about-content {
