@@ -421,18 +421,24 @@ p {
 }
 
 .urgency h2 {
-    color: white;
+    color: #ffffff; /* Pure white for better contrast */
     font-size: 1.25rem;
     margin-bottom: var(--space-lg);
+    font-weight: 700; /* Bold for better visibility */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for readability */
+    letter-spacing: 0.5px; /* Slightly spaced for clarity */
 }
 
 .urgency-text {
-    font-size: 1.25rem;
+    font-size: 1.125rem; /* Slightly smaller for better readability */
     margin-bottom: var(--space-2xl);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    color: rgba(255, 255, 255, 0.95);
+    color: #ffffff; /* Pure white for better contrast */
+    font-weight: 500; /* Medium weight for better legibility */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for readability */
+    line-height: 1.6; /* Better line spacing */
 }
 
 .urgency-cta .cta-button-large {
@@ -853,11 +859,32 @@ p {
     font-size: 1.25rem !important;
 }
 
-/* Specific overrides for California Laws page CTA section */
+/* Specific overrides for red CTA sections - Better readability */
 div[style*="background: #e74c3c"] h2 {
     font-size: 1.25rem !important;
+    color: #ffffff !important; /* Pure white for contrast */
+    font-weight: 700 !important; /* Bold for visibility */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important; /* Subtle shadow */
+    letter-spacing: 0.5px !important; /* Better spacing */
 }
 
 div[style*="background: #e74c3c"] p {
     font-size: 1rem !important;
+    color: #ffffff !important; /* Pure white for contrast */
+    font-weight: 500 !important; /* Medium weight for legibility */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important; /* Subtle shadow */
+    line-height: 1.6 !important; /* Better line spacing */
+}
+
+/* Also target any red background CTA sections */
+.blog-cta,
+div[style*="background: #e74c3c"],
+section[style*="background: #e74c3c"] {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Add text shadow for all red backgrounds */
+}
+
+.blog-cta h2,
+.blog-cta p {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Better text readability */
+    font-weight: 500; /* Medium weight for legibility */
 }
