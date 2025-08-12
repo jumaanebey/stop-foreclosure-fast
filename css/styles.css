@@ -455,7 +455,7 @@ p {
 /* About Section */
 .about {
     padding: var(--space-4xl) 0;
-    background: white;
+    background: var(--gray-50); /* Subtle background for better separation */
 }
 
 .about h2 {
@@ -466,50 +466,53 @@ p {
 }
 
 .about-content {
-    max-width: 900px;
+    max-width: 800px; /* Slightly narrower for better readability */
     margin: 0 auto;
+    background: white; /* White background for content */
+    padding: var(--space-3xl); /* Add padding inside content area */
+    border-radius: var(--radius-xl); /* Rounded corners */
+    box-shadow: var(--shadow-lg); /* Subtle shadow for depth */
 }
 
 .about-text {
-    font-size: 1rem; /* Consistent with our blog font sizes */
-    line-height: 1.7; /* Better line spacing */
-    text-align: center; /* Center align the text */
-    max-width: 700px; /* Constrain width for better readability */
-    margin: 0 auto; /* Center the text block */
+    font-size: 1.1rem; /* Slightly larger for better readability */
+    line-height: 1.8; /* More generous line spacing */
+    text-align: left; /* Left align for better reading flow */
+    margin-bottom: var(--space-2xl); /* Space before credentials */
 }
 
 .about-text p {
     margin-bottom: var(--space-xl); /* More space between paragraphs */
-    color: var(--gray-600);
-    font-size: 1rem !important; /* Force consistent size */
+    color: var(--gray-700); /* Slightly darker for better contrast */
+    font-size: 1.1rem !important; /* Match parent font size */
+    line-height: 1.8; /* Consistent line height */
 }
 
 .credentials {
-    margin-top: var(--space-3xl);
+    margin-top: var(--space-2xl); /* Less space from text */
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columns for better layout */
-    gap: var(--space-lg);
-    max-width: 600px; /* Constrain width */
-    margin-left: auto; /* Center the credentials */
-    margin-right: auto;
+    gap: var(--space-md); /* Smaller gap for tighter layout */
+    padding-top: var(--space-2xl); /* Add padding above */
+    border-top: 1px solid var(--gray-200); /* Subtle separator line */
 }
 
 .credential {
-    background: var(--gray-50);
+    background: var(--success-color); /* Green background */
+    color: white; /* White text */
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
-    font-weight: 500;
-    color: var(--success-color);
-    border-left: 4px solid var(--success-color);
+    font-weight: 600; /* Bolder text */
     transition: all 0.3s ease;
     text-align: center; /* Center align the checkmarks */
-    font-size: 0.95rem; /* Slightly smaller for better fit */
+    font-size: 0.9rem; /* Slightly smaller for better fit */
+    box-shadow: var(--shadow-sm); /* Subtle shadow */
 }
 
 .credential:hover {
-    background: var(--success-color);
-    color: white;
-    transform: translateX(4px);
+    background: var(--primary-color); /* Change to blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: var(--shadow-md); /* Enhanced shadow on hover */
 }
 
 /* Contact Section */
@@ -839,6 +842,15 @@ p {
     .credentials {
         grid-template-columns: 1fr; /* Single column credentials on mobile */
         gap: var(--space-md);
+    }
+    
+    .about-content {
+        padding: var(--space-xl); /* Less padding on mobile */
+        margin: 0 var(--space-md); /* Add side margins */
+    }
+    
+    .about-text {
+        font-size: 1rem; /* Smaller font on mobile */
     }
     
     .hero-title {
