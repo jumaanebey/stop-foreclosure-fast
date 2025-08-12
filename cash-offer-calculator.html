@@ -169,8 +169,28 @@
                     <div class="price-input-section">
                         <div class="price-form-group">
                             <label for="desired-price">What would you like to sell your home for?</label>
-                            <input type="number" id="desired-price" placeholder="Enter your desired selling price" min="50000" max="5000000" step="1000" required>
-                            <small>Enter the amount you'd like to receive for your property</small>
+                            
+                            <!-- Quick Price Selection Buttons -->
+                            <div class="price-quick-select">
+                                <div class="price-ranges">
+                                    <button type="button" class="price-range-btn" data-price="200000">$200K</button>
+                                    <button type="button" class="price-range-btn" data-price="300000">$300K</button>
+                                    <button type="button" class="price-range-btn" data-price="400000">$400K</button>
+                                    <button type="button" class="price-range-btn" data-price="500000">$500K</button>
+                                    <button type="button" class="price-range-btn" data-price="600000">$600K</button>
+                                    <button type="button" class="price-range-btn" data-price="700000">$700K</button>
+                                    <button type="button" class="price-range-btn" data-price="800000">$800K</button>
+                                    <button type="button" class="price-range-btn" data-price="900000">$900K</button>
+                                    <button type="button" class="price-range-btn" data-price="1000000">$1M</button>
+                                    <button type="button" class="price-range-btn" data-price="1250000">$1.25M</button>
+                                    <button type="button" class="price-range-btn" data-price="1500000">$1.5M</button>
+                                    <button type="button" class="price-range-btn custom-btn">Custom</button>
+                                </div>
+                                <p class="quick-select-text">👆 Click a price range or enter your own below</p>
+                            </div>
+                            
+                            <input type="number" id="desired-price" placeholder="Or enter your exact amount" min="50000" max="5000000" step="1000" required>
+                            <small>This helps us prepare the most accurate offer for you</small>
                         </div>
                         
                         <div class="timeline-question">

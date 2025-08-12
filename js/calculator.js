@@ -26,9 +26,30 @@ function initializeCalculator() {
     if (priceInput) {
         priceInput.addEventListener('input', function() {
             calculatorData.desiredPrice = parseInt(this.value) || 0;
+            
+            // Clear any selected quick price buttons when typing
+            document.querySelectorAll('.price-range-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
             enableTimelineNext();
         });
     }
+    
+    // Set up quick price selection buttons
+    const priceButtons = document.querySelectorAll('.price-range-btn');
+    priceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.classList.contains('custom-btn')) {
+                // Custom button - focus on input field
+                selectCustomPrice();
+            } else {
+                // Quick price selection
+                const price = parseInt(this.dataset.price);
+                selectQuickPrice(price, this);
+            }
+        });
+    });
     
     // Set up timeline radio selection
     const timelineRadios = document.querySelectorAll('input[name="timeline"]');
@@ -156,6 +177,56 @@ function selectCondition(condition) {
     document.getElementById('condition-next').disabled = false;
 }
 
+
+function selectQuickPrice(price, buttonElement) {
+    // Clear all previous selections
+    document.querySelectorAll('.price-range-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Select the clicked button
+    buttonElement.classList.add('selected');
+    
+    // Update the price input and data
+    const priceInput = document.getElementById('desired-price');
+    priceInput.value = price;
+    calculatorData.desiredPrice = price;
+    
+    // Enable next step if other conditions are met
+    enableTimelineNext();
+    
+    // Track quick price selection
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'quick_price_select', {
+            'event_category': 'calculator',
+            'event_label': 'price_button_clicked',
+            'value': price
+        });
+    }
+}
+
+function selectCustomPrice() {
+    // Clear all quick price selections
+    document.querySelectorAll('.price-range-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Highlight custom button and focus input
+    const customBtn = document.querySelector('.price-range-btn.custom-btn');
+    customBtn.classList.add('selected');
+    
+    const priceInput = document.getElementById('desired-price');
+    priceInput.focus();
+    priceInput.select();
+    
+    // Track custom price selection
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'custom_price_select', {
+            'event_category': 'calculator',
+            'event_label': 'custom_button_clicked'
+        });
+    }
+}
 
 function enableTimelineNext() {
     const timelineNext = document.getElementById('timeline-next');
@@ -362,6 +433,10 @@ function startOver() {
     // Clear selections
     document.querySelectorAll('.condition-card').forEach(card => {
         card.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.price-range-btn').forEach(btn => {
+        btn.classList.remove('selected');
     });
     
     document.querySelectorAll('input[name="foreclosure-status"], input[name="timeline"]').forEach(radio => {
