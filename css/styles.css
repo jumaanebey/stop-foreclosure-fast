@@ -440,3 +440,128 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Blog Article Styles */
+.blog-article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.blog-header {
+    margin-bottom: 2rem;
+}
+
+.blog-header .hero-description {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.blog-section {
+    margin: 2rem 0;
+}
+
+.blog-section h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+/* Alert Boxes */
+.alert {
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.alert-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-info {
+    background: #e3f2fd;
+    color: #0c5460;
+    border: 1px solid #bbdefb;
+}
+
+/* Content Boxes */
+.content-box {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.content-box h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.content-box ul {
+    line-height: 1.8;
+    margin: 1rem 0;
+}
+
+/* Highlighted Options */
+.option-box {
+    border-left: 4px solid #27ae60;
+    padding-left: 2rem;
+    margin: 2rem 0;
+}
+
+.option-box-warning {
+    border-left: 4px solid #f39c12;
+    padding-left: 2rem;
+    margin: 2rem 0;
+}
+
+.option-box-danger {
+    border-left: 4px solid #e74c3c;
+    padding-left: 2rem;
+    margin: 2rem 0;
+}
+
+/* Call-to-action sections */
+.blog-cta {
+    background: #27ae60;
+    color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.blog-cta h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.blog-cta p {
+    margin-bottom: 2rem;
+}
+
+/* FAQ Sections */
+.faq-section {
+    margin: 3rem 0;
+}
+
+.faq-item {
+    margin: 2rem 0;
+}
+
+.faq-item h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
