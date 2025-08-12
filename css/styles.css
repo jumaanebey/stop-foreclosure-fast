@@ -64,6 +64,7 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: 80px; /* Account for fixed header */
 }
 
 .container {
@@ -81,17 +82,18 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-md);
 }
 
-h1 { font-size: 3.75rem; }
-h2 { font-size: 3rem; }
-h3 { font-size: 2.25rem; }
-h4 { font-size: 1.875rem; }
-h5 { font-size: 1.5rem; }
-h6 { font-size: 1.25rem; }
+/* Responsive Typography Scale */
+h1 { font-size: 2.5rem; }     /* 40px - much more reasonable for page titles */
+h2 { font-size: 2rem; }       /* 32px - good for section headers */
+h3 { font-size: 1.5rem; }     /* 24px - perfect for subsections */
+h4 { font-size: 1.25rem; }    /* 20px - good for smaller headings */
+h5 { font-size: 1.125rem; }   /* 18px */
+h6 { font-size: 1rem; }       /* 16px */
 
 p {
     margin-bottom: var(--space-lg);
     color: var(--gray-600);
-    font-size: 1.125rem;
+    font-size: 1rem;             /* 16px - standard readable size */
     line-height: 1.7;
 }
 
@@ -251,7 +253,7 @@ p {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 2.25rem; /* Reduced from 3.5rem to more reasonable size */
     font-weight: 800;
     color: var(--primary-color);
     margin-bottom: var(--space-lg);
