@@ -120,12 +120,15 @@ p {
     font-family: var(--font-headings);
     font-size: 1.75rem;
     font-weight: 800;
+}
+
+.logo a {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.logo:hover {
+.logo a:hover {
     color: var(--accent-color);
 }
 
