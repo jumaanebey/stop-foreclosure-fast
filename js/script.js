@@ -71,7 +71,7 @@ function handleFormSubmission(form) {
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            alert('There was an error submitting your form. Please call us directly at (949) 328-4811');
+            alert('There was an error submitting your form. Please text us at (949) 328-4811 for immediate assistance.');
             submitButton.textContent = originalText;
             submitButton.disabled = false;
         });
