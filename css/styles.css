@@ -361,9 +361,11 @@ p {
 
 .how-it-works h2 {
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: var(--space-2xl);
     color: var(--primary-color);
+    font-family: var(--font-headings);
 }
 
 .steps {
@@ -375,44 +377,52 @@ p {
 
 .step {
     background: white;
-    padding: var(--space-2xl);
+    padding: var(--space-3xl);
     border-radius: var(--radius-xl);
     text-align: center;
     position: relative;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
+    border: 2px solid var(--gray-100);
 }
 
 .step:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15);
+    border-color: var(--accent-color);
 }
 
 .step-number {
-    width: 60px;
-    height: 60px;
-    background: var(--accent-color);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #e53e3e 100%);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 auto var(--space-lg);
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 auto var(--space-xl);
     font-family: var(--font-headings);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+    border: 3px solid white;
 }
 
 .step h3 {
-    font-size: 1.25rem;
-    margin-bottom: var(--space-md);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
     color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .step p {
-    color: var(--gray-600);
-    font-size: 1rem;
+    color: var(--gray-700);
+    font-size: 1.1rem;
     margin-bottom: 0;
+    line-height: 1.6;
+    font-weight: 500;
 }
 
 /* Urgency Section */
