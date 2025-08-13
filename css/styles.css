@@ -378,15 +378,15 @@ p {
     margin-right: auto;
 }
 
-.step {
+#how-it-works .steps .step {
     background: white !important;
-    padding: var(--space-4xl) !important;
-    border-radius: var(--radius-2xl) !important;
+    padding: 3rem !important;
+    border-radius: 20px !important;
     text-align: center !important;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
     transition: all 0.3s ease;
-    border: 3px solid var(--gray-200) !important;
+    border: 3px solid #e5e7eb !important;
     min-height: 280px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -400,10 +400,10 @@ p {
     border-color: var(--accent-color);
 }
 
-.step-number {
+#how-it-works .steps .step .step-number {
     width: 80px !important;
     height: 80px !important;
-    background: linear-gradient(135deg, var(--accent-color) 0%, #e53e3e 100%) !important;
+    background: linear-gradient(135deg, #dc2626 0%, #e53e3e 100%) !important;
     color: white !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -411,22 +411,22 @@ p {
     justify-content: center !important;
     font-size: 2rem !important;
     font-weight: 800 !important;
-    margin: 0 auto var(--space-xl) !important;
-    font-family: var(--font-headings) !important;
+    margin: 0 auto 2rem !important;
+    font-family: 'Poppins', sans-serif !important;
     box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3) !important;
     border: 3px solid white !important;
 }
 
-.step h3 {
+#how-it-works .steps .step h3 {
     font-size: 1.5rem !important;
-    margin-bottom: var(--space-lg) !important;
-    color: var(--primary-color) !important;
+    margin-bottom: 1.5rem !important;
+    color: #1a365d !important;
     font-weight: 700 !important;
     letter-spacing: 0.5px !important;
 }
 
-.step p {
-    color: var(--gray-700) !important;
+#how-it-works .steps .step p {
+    color: #4b5563 !important;
     font-size: 1.1rem !important;
     margin-bottom: 0 !important;
     line-height: 1.6 !important;
