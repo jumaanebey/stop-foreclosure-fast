@@ -396,7 +396,7 @@ function handleLeadFormSubmission(form) {
 
 function submitToGoogleSheets(data) {
     // Use the same Google Apps Script URL from the main script
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxygdxm-zvPcjPD21WAjP7PdT7xSF1ukrfmSM64WpbWL2raTgAOmeauzOLo7rq6SerA/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4BQzXXmbVEn9Gt80EKf_bWKIPu_2Vxv_L6cCbA-vTEhsnvHea9xYjCeym9B3DWIvJ/exec';
     
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',

@@ -98,7 +98,7 @@ function handleFormSubmission(form) {
 
 function submitToGoogleSheets(data) {
     // Google Apps Script Web App URL for contact form (Simplified ConvertKit integration)
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxygdxm-zvPcjPD21WAjP7PdT7xSF1ukrfmSM64WpbWL2raTgAOmeauzOLo7rq6SerA/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4BQzXXmbVEn9Gt80EKf_bWKIPu_2Vxv_L6cCbA-vTEhsnvHea9xYjCeym9B3DWIvJ/exec';
     
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
