@@ -379,18 +379,19 @@ p {
 }
 
 .step {
-    background: white;
-    padding: var(--space-4xl);
-    border-radius: var(--radius-2xl);
-    text-align: center;
+    background: white !important;
+    padding: var(--space-4xl) !important;
+    border-radius: var(--radius-2xl) !important;
+    text-align: center !important;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
     transition: all 0.3s ease;
-    border: 3px solid var(--gray-200);
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: 3px solid var(--gray-200) !important;
+    min-height: 280px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    margin-bottom: 2rem !important;
 }
 
 .step:hover {
@@ -400,36 +401,36 @@ p {
 }
 
 .step-number {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--accent-color) 0%, #e53e3e 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 0 auto var(--space-xl);
-    font-family: var(--font-headings);
-    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
-    border: 3px solid white;
+    width: 80px !important;
+    height: 80px !important;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #e53e3e 100%) !important;
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    margin: 0 auto var(--space-xl) !important;
+    font-family: var(--font-headings) !important;
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3) !important;
+    border: 3px solid white !important;
 }
 
 .step h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-lg);
-    color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-size: 1.5rem !important;
+    margin-bottom: var(--space-lg) !important;
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
 }
 
 .step p {
-    color: var(--gray-700);
-    font-size: 1.1rem;
-    margin-bottom: 0;
-    line-height: 1.6;
-    font-weight: 500;
+    color: var(--gray-700) !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.6 !important;
+    font-weight: 500 !important;
 }
 
 /* Urgency Section */
