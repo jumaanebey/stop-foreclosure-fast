@@ -97,8 +97,8 @@ function handleFormSubmission(form) {
 }
 
 function submitToGoogleSheets(data) {
-    // Google Apps Script Web App URL for contact form (Updated with ConvertKit integration)
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwiaTZKcl3dgGbZ399lBokTOkkZXnQvQJqWqen_Nc7Io-dGscxC0wLKly1spMXDwB4G/exec';
+    // Google Apps Script Web App URL for contact form (Simplified ConvertKit integration)
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxygdxm-zvPcjPD21WAjP7PdT7xSF1ukrfmSM64WpbWL2raTgAOmeauzOLo7rq6SerA/exec';
     
     return fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
