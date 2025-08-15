@@ -490,6 +490,35 @@
                     <div class="exit-form-group">
                         <input type="email" id="exit-email" name="email" placeholder="Your Email Address" required>
                     </div>
+                    <div class="exit-form-group">
+                        <label style="color: #1f2937; font-weight: 600; margin-bottom: 0.5rem; display: block;">Select all that apply to your situation:</label>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 0.4rem; text-align: left;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="received_notice_of_default" style="margin: 0;">
+                                📄 I received a Notice of Default
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="auction_scheduled" style="margin: 0;">
+                                🏛️ My home is scheduled for auction
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="missed_payments" style="margin: 0;">
+                                💰 I'm behind on mortgage payments
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="less_than_30_days" style="margin: 0;">
+                                ⏰ I have less than 30 days before auction
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="need_to_sell_quickly" style="margin: 0;">
+                                🏠 I need to sell my house quickly
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" name="situation" value="other_financial_hardship" style="margin: 0;">
+                                💸 Other financial hardship situation
+                            </label>
+                        </div>
+                    </div>
                     <button type="submit" class="exit-popup-button" onclick="gtag('event', 'exit_intent_lead', {'event_category': 'lead'});">
                         📥 Get My Free Checklist Now
                     </button>

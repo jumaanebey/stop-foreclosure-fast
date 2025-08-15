@@ -272,6 +272,11 @@ function handleExitPopupSubmission(form) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
+    // Handle multiple checkbox values for situation
+    const situationCheckboxes = form.querySelectorAll('input[name="situation"]:checked');
+    const selectedSituations = Array.from(situationCheckboxes).map(cb => cb.value);
+    data.situation = selectedSituations.join(', ');
+    
     // Show loading state
     const submitButton = form.querySelector('.exit-popup-button');
     const originalText = submitButton.textContent;
