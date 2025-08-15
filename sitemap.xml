@@ -1,45 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
     <loc>https://myforeclosuresolution.com/</loc>
-    <lastmod>2025-01-13</lastmod>
+    <lastmod>2024-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Main Service Pages -->
   <url>
-    <loc>https://myforeclosuresolution.com/thank-you.html</loc>
-    <lastmod>2025-01-13</lastmod>
+    <loc>https://myforeclosuresolution.com/cash-offer-calculator.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://myforeclosuresolution.com/foreclosure-faq.html</loc>
+    <lastmod>2024-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-<url>
-<loc>https://myforeclosuresolution.com/blog/index.html</loc>
-<lastmod>2025-01-13</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://myforeclosuresolution.com/blog/california-foreclosure-timeline.html</loc>
-<lastmod>2025-01-13</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
-<loc>https://myforeclosuresolution.com/blog/stop-foreclosure-los-angeles.html</loc>
-<lastmod>2025-01-13</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
-<loc>https://myforeclosuresolution.com/blog/california-foreclosure-laws.html</loc>
-<lastmod>2025-01-13</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://myforeclosuresolution.com/los-angeles.html</loc>
-<lastmod>2025-01-13</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
+  
+  <!-- Location-Specific Pages -->
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-los-angeles.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-san-diego.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/5-ways-to-stop-foreclosure-california.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/california-homeowner-bill-of-rights.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/sell-house-fast-foreclosure-california.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://myforeclosuresolution.com/privacy-policy.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://myforeclosuresolution.com/terms-of-service.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Downloads -->
+  <url>
+    <loc>https://myforeclosuresolution.com/checklist-download.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Thank You Page -->
+  <url>
+    <loc>https://myforeclosuresolution.com/thank-you.html</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
