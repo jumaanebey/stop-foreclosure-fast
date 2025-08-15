@@ -695,6 +695,112 @@ p {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Testimonials Section */
+.testimonials {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    color: var(--primary-color);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+}
+
+.testimonial {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-content {
+    padding: var(--space-xl);
+}
+
+.testimonial .stars {
+    color: #fbbf24;
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+}
+
+.testimonial p {
+    font-style: italic;
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.testimonial-author strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.testimonial-author span {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+.testimonial-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    background: var(--primary-color);
+    border-radius: var(--radius-lg);
+    color: white;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-headings);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .testimonial-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
 /* Legal Page Styles */
 .legal-page {
     padding: var(--space-4xl) 0;
@@ -780,6 +886,227 @@ p {
     color: var(--accent-color);
     font-weight: 500;
     margin-bottom: 0;
+}
+
+/* Los Angeles Specific Styles */
+.local-trust {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.local-stat {
+    text-align: center;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    min-width: 120px;
+}
+
+.local-stat strong {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-bottom: var(--space-xs);
+}
+
+.local-stat span {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+.la-neighborhoods {
+    padding: var(--space-4xl) 0;
+    background: var(--gray-50);
+}
+
+.la-neighborhoods h2 {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    color: var(--primary-color);
+}
+
+.neighborhoods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.neighborhood {
+    background: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.neighborhood:hover {
+    transform: translateY(-2px);
+}
+
+.neighborhood h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+}
+
+.neighborhood p {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+}
+
+.neighborhoods-footer {
+    text-align: center;
+    color: var(--gray-700);
+    font-size: 1.1rem;
+}
+
+.neighborhoods-footer a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.why-choose-us-la {
+    padding: var(--space-4xl) 0;
+}
+
+.why-choose-us-la h2 {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    color: var(--primary-color);
+}
+
+.la-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+}
+
+.la-benefit {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+    display: block;
+}
+
+.la-benefit h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+}
+
+.la-benefit p {
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.la-urgency {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+}
+
+.la-urgency h2 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: white;
+}
+
+.urgency-text {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: var(--space-3xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.la-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+}
+
+.timeline-item {
+    text-align: center;
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.timeline-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+    display: block;
+}
+
+.timeline-content h3 {
+    color: white;
+    margin-bottom: var(--space-md);
+}
+
+.timeline-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.la-contact {
+    padding: var(--space-4xl) 0;
+    background: var(--gray-50);
+}
+
+.la-contact h2 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--primary-color);
+}
+
+.la-contact p {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    font-size: 1.1rem;
+    color: var(--gray-700);
+}
+
+.la-testimonials {
+    padding: var(--space-4xl) 0;
+    background: var(--gray-50);
+}
+
+.la-testimonials h2 {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .local-trust {
+        gap: var(--space-md);
+    }
+    
+    .neighborhoods-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .la-benefits {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .la-timeline {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
 }
 
 /* Blog Styles */
