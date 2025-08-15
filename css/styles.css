@@ -695,6 +695,93 @@ p {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Legal Page Styles */
+.legal-page {
+    padding: var(--space-4xl) 0;
+    background: var(--gray-50);
+}
+
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: var(--space-3xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.legal-content h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: var(--space-lg);
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: var(--space-md);
+}
+
+.legal-content h2 {
+    color: var(--primary-light);
+    font-size: 1.5rem;
+    margin: var(--space-2xl) 0 var(--space-md) 0;
+    border-left: 4px solid var(--accent-color);
+    padding-left: var(--space-md);
+}
+
+.legal-content h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin: var(--space-xl) 0 var(--space-sm) 0;
+}
+
+.legal-content p {
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+
+.legal-content ul, .legal-content ol {
+    margin: var(--space-md) 0 var(--space-lg) var(--space-lg);
+    color: var(--gray-700);
+}
+
+.legal-content li {
+    margin-bottom: var(--space-sm);
+    line-height: 1.6;
+}
+
+.legal-content .contact-info {
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+.legal-content .contact-info p {
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+}
+
+.legal-content .important-notice {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 2px solid #fca5a5;
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    margin: var(--space-2xl) 0;
+}
+
+.legal-content .important-notice h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+    border-left: none;
+    padding-left: 0;
+}
+
+.legal-content .important-notice p {
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
 /* Blog Styles */
 .blog-article {
     max-width: 900px;
