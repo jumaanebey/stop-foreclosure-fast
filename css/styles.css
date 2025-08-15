@@ -1278,15 +1278,19 @@ section[style*="background: #e74c3c"] {
     margin-bottom: var(--space-xl);
 }
 
-/* Download page steps grid - higher specificity */
+/* Download page steps grid - override ALL other step styles */
+.download-success .next-steps .steps-grid,
 .next-steps .steps-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
-    gap: var(--space-2xl) !important;
-    margin-top: var(--space-2xl) !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 2rem !important;
+    margin-top: 2rem !important;
     max-width: 900px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    /* Override any flex properties */
+    flex-direction: unset !important;
+    justify-content: unset !important;
 }
 
 /* Fallback for mobile */
@@ -1297,17 +1301,22 @@ section[style*="background: #e74c3c"] {
     }
 }
 
-/* Download page step cards - higher specificity */
+/* Download page step cards - override ALL step styles */
+.download-success .next-steps .steps-grid .step,
 .next-steps .steps-grid .step {
     text-align: center !important;
-    padding: var(--space-2xl) !important;
-    background: white !important;
-    border-radius: var(--radius-xl) !important;
-    box-shadow: var(--shadow-md) !important;
-    border: 2px solid var(--gray-200) !important;
+    padding: 2rem !important;
+    background: #ffffff !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+    border: 2px solid #e5e7eb !important;
     transition: all 0.3s ease !important;
     display: block !important;
-    margin-bottom: var(--space-md) !important;
+    margin-bottom: 1rem !important;
+    /* Override any flex properties from main steps */
+    flex: unset !important;
+    width: auto !important;
+    min-height: auto !important;
 }
 
 .next-steps .steps-grid .step:hover {
@@ -1342,6 +1351,19 @@ section[style*="background: #e74c3c"] {
     font-size: 0.9rem !important;
     color: var(--gray-600) !important;
     margin: 0 !important;
+}
+
+/* Nuclear option - completely override any conflicting styles */
+.checklist-download .next-steps .steps-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+}
+
+@media (max-width: 768px) {
+    .checklist-download .next-steps .steps-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 .emergency-contact {
