@@ -117,10 +117,12 @@
                     Get a fair cash offer today and stop the foreclosure process immediately.
                 </p>
                 <div class="hero-cta">
-                    <a href="cash-offer-calculator.html" class="cta-button-large" onclick="gtag('event', 'calculator_click', {'event_category': 'engagement'});">
-                        🏠 Request Cash Offer
+                    <a href="sms:+1-949-328-4811?body=EMERGENCY: I need immediate help to stop foreclosure. Please call me ASAP!" class="cta-button-large" onclick="handleEmergencyButtonClick(); gtag('event', 'emergency_foreclosure_help', {'event_category': 'urgent_lead'});" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);">
+                        🚨 Stop Foreclosure NOW - Get Emergency Help
                     </a>
-                    <a href="sms:+1-949-328-4811?body=Hi, I'm facing foreclosure and need help. Can you provide me with information about selling my home quickly?" class="cta-button-secondary">💬 Text Now: (949) 328-4811</a>
+                    <a href="cash-offer-calculator.html" class="cta-button-secondary" onclick="gtag('event', 'calculator_click', {'event_category': 'engagement'});">
+                        🏠 Get Regular Cash Offer
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
@@ -392,6 +394,47 @@
             </div>
         </div>
     </footer>
+
+    <!-- Emergency Contact Popup -->
+    <div id="emergency-contact-popup" class="exit-popup-overlay" style="display: none;">
+        <div class="exit-popup-content">
+            <div class="exit-popup-close" onclick="closeEmergencyPopup()">&times;</div>
+            
+            <div class="exit-popup-header">
+                <h2>🚨 Emergency Foreclosure Help</h2>
+                <p class="exit-popup-subtitle">
+                    We respond to <strong>urgent foreclosure situations within 2 hours</strong>. 
+                    Fill out this form and we'll call you immediately.
+                </p>
+            </div>
+            
+            <div class="exit-popup-body">
+                <form id="emergency-contact-form" class="exit-popup-form">
+                    <div class="exit-form-group">
+                        <input type="text" id="emergency-name" name="name" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="exit-form-group">
+                        <input type="email" id="emergency-email" name="email" placeholder="Your Email Address" required>
+                    </div>
+                    <div class="exit-form-group">
+                        <input type="tel" id="emergency-phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="exit-form-group">
+                        <input type="text" id="emergency-address" name="property_address" placeholder="Property Address (Optional)">
+                    </div>
+                    <div class="exit-form-group">
+                        <textarea id="emergency-situation" name="situation" rows="3" placeholder="Briefly describe your foreclosure timeline..."></textarea>
+                    </div>
+                    <button type="submit" class="exit-popup-button" style="background: #dc2626;">
+                        📞 Get Emergency Help Now
+                    </button>
+                    <p class="exit-privacy-text">
+                        <strong>We'll call you within 2 hours during business hours.</strong> Your information is 100% secure.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Exit Intent Popup -->
     <div id="exit-intent-popup" class="exit-popup-overlay" style="display: none;">

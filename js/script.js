@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     const leadMagnetForm = document.getElementById('lead-magnet-form');
     const exitPopupForm = document.getElementById('exit-popup-form');
+    const emergencyContactForm = document.getElementById('emergency-contact-form');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -22,6 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
         exitPopupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleExitPopupSubmission(this);
+        });
+    }
+    
+    if (emergencyContactForm) {
+        emergencyContactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleEmergencyContactSubmission(this);
         });
     }
     
@@ -314,5 +322,102 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeExitPopup();
+        closeEmergencyPopup();
+    }
+});
+
+// Emergency Button Click Handler
+function handleEmergencyButtonClick() {
+    // Show emergency popup after a delay to provide fallback option
+    setTimeout(() => {
+        showEmergencyPopup();
+    }, 3000); // Show popup after 3 seconds as fallback
+}
+
+// Emergency Contact Functions
+function showEmergencyPopup() {
+    const popup = document.getElementById('emergency-contact-popup');
+    if (popup) {
+        popup.style.display = 'flex';
+        
+        // Track popup shown event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'emergency_popup_shown', {
+                'event_category': 'urgent_lead',
+                'event_label': 'emergency_contact'
+            });
+        }
+        
+        // Focus first input
+        setTimeout(() => {
+            const firstInput = popup.querySelector('input[type="text"]');
+            if (firstInput) firstInput.focus();
+        }, 500);
+    }
+}
+
+function closeEmergencyPopup() {
+    const popup = document.getElementById('emergency-contact-popup');
+    if (popup) {
+        popup.style.display = 'none';
+        
+        // Track popup closed event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'emergency_popup_closed', {
+                'event_category': 'urgent_lead',
+                'event_label': 'emergency_contact'
+            });
+        }
+    }
+}
+
+function handleEmergencyContactSubmission(form) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    // Show loading state
+    const submitButton = form.querySelector('.exit-popup-button');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Submitting Emergency Request...';
+    submitButton.disabled = true;
+    
+    // Facebook Pixel event
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+    }
+    
+    // Google Analytics event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', {
+            'event_category': 'urgent_lead',
+            'event_label': 'emergency_contact_form'
+        });
+    }
+    
+    // Submit to Google Sheets with emergency flag
+    submitToGoogleSheets({
+        ...data,
+        type: 'emergency_help',
+        timeline: 'immediate',
+        foreclosure_status: 'yes'
+    })
+        .then(() => {
+            // Close popup and show success message
+            closeEmergencyPopup();
+            alert('Emergency request submitted! We will call you within 2 hours during business hours. For immediate assistance, call or text (949) 328-4811.');
+        })
+        .catch(error => {
+            console.error('Emergency form submission error:', error);
+            alert('There was an error submitting your emergency request. Please call us immediately at (949) 328-4811.');
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+}
+
+// Close emergency popup when clicking outside
+document.addEventListener('click', function(e) {
+    const emergencyPopup = document.getElementById('emergency-contact-popup');
+    if (emergencyPopup && e.target === emergencyPopup) {
+        closeEmergencyPopup();
     }
 });
