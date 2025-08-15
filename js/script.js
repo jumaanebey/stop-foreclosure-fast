@@ -175,8 +175,7 @@ let exitIntentShown = false;
 let mouseLeftWindow = false;
 
 function initExitIntent() {
-    // Only show on desktop (not mobile)
-    if (window.innerWidth < 768) return;
+    // Show on all devices
     
     // Don't show if user already converted
     if (localStorage.getItem('exitIntentShown') === 'true') return;
@@ -201,12 +200,17 @@ function initExitIntent() {
         lastScrollY = window.scrollY;
     });
     
-    // Fallback: Show after 30 seconds if no other trigger
+    // Fallback: Show after 15 seconds if no other trigger (for easier testing)
     setTimeout(() => {
         if (!exitIntentShown && !hasUserEngaged()) {
             showExitPopup();
         }
-    }, 30000);
+    }, 15000);
+    
+    // Debug trigger for testing - remove in production
+    window.testExitPopup = function() {
+        showExitPopup();
+    };
 }
 
 function hasUserEngaged() {
