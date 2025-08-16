@@ -13,7 +13,7 @@
 - Service: Real Estate Consulting → Foreclosure Help
 - Area: All California counties
 - Pricing: Free consultation
-- Description: "Licensed CA virtual foreclosure specialists (DRE #02076038)"
+- Description: "Licensed CA virtual foreclosure specialists (DRE #02076038 | NMLS #2033637)"
 
 ### 2. Bark.com Profile Launch  
 **Website:** bark.com/en/join-bark/
@@ -46,7 +46,7 @@
 **Time:** 10 minutes daily
 
 **Today's Post:**
-"🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book today!"
+"🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038 | NMLS #2033637) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book today!"
 
 ## WEEK 1 LAUNCH SEQUENCE
 

@@ -24,7 +24,7 @@ CONFIDENTIALITY NOTICE: This email and any attachments are for the exclusive and
 ```
 [Your Full Name]
 Virtual Foreclosure Specialist
-Licensed California Real Estate Professional | DRE #02076038
+Licensed California Real Estate Professional | DRE #02076038 | NMLS #2033637
 My Foreclosure Solution
 
 📞 (949) 328-4811 | 💬 Text for Immediate Response
@@ -35,14 +35,14 @@ My Foreclosure Solution
 📍 Serving All 58 Counties Remotely Since 2014
 ⚡ No Travel Required - Expert Help from Your Home
 
-LICENSED PROFESSIONAL DISCLOSURE: Licensed under California DRE #02076038. Virtual consultations available statewide. All communications confidential and secure.
+LICENSED PROFESSIONAL DISCLOSURE: Licensed under California DRE #02076038 | NMLS #2033637. Virtual consultations available statewide. All communications confidential and secure.
 ```
 
 ## Mobile/Short Signature
 
 ```
 [Your Name] | CA Real Estate Professional
-DRE #02076038 | (949) 328-4811
+DRE #02076038 | NMLS #2033637 | (949) 328-4811
 Virtual Foreclosure Consultations Statewide
 myforeclosuresolution.com
 ```
@@ -52,7 +52,7 @@ myforeclosuresolution.com
 ```
 [Your Full Name]
 California's Premier Virtual Foreclosure Specialist
-Licensed Real Estate Professional | DRE #02076038
+Licensed Real Estate Professional | DRE #02076038 | NMLS #2033637
 
 🎯 FREE Virtual Consultation Available Today
 📞 (949) 328-4811 | 📧 help@myforeclosuresolution.com
@@ -64,7 +64,7 @@ Licensed Real Estate Professional | DRE #02076038
 
 📅 Schedule Now: [booking link]
 
-Licensed Professional Disclosure: DRE #02076038 - All virtual consultations confidential and HIPAA-compliant.
+Licensed Professional Disclosure: DRE #02076038 | NMLS #2033637 - All virtual consultations confidential and HIPAA-compliant.
 ```
 
 ## Legal/Formal Signature

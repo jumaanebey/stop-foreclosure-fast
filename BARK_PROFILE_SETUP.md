@@ -13,7 +13,7 @@ My Foreclosure Solution
 "California Virtual Foreclosure Specialists - Licensed Statewide Service"
 
 ### About Your Business
-"Licensed California real estate professionals (DRE #02076038) revolutionizing foreclosure help through virtual consultations. Since 2014, we've helped 500+ homeowners avoid foreclosure using secure video technology to serve all 58 CA counties remotely.
+"Licensed California real estate professionals (DRE #02076038 | NMLS #2033637) revolutionizing foreclosure help through virtual consultations. Since 2014, we've helped 500+ homeowners avoid foreclosure using secure video technology to serve all 58 CA counties remotely.
 
 No travel time. No geographic barriers. Same expert help whether you're in rural Humboldt County or downtown Los Angeles. Our virtual consultations provide:
 
@@ -57,7 +57,7 @@ Free initial consultation. Licensed throughout California. Available evenings an
 - **Emergency:** Available 7 days/week
 
 ### Professional Qualifications
-- California Real Estate License DRE #02076038
+- California Real Estate License DRE #02076038 | NMLS #2033637
 - Foreclosure Prevention Specialist
 - Virtual Consultation Technology Expert
 - HIPAA Compliance Certified
@@ -68,7 +68,7 @@ Free initial consultation. Licensed throughout California. Available evenings an
 ### Initial Response Template
 "Hello [Name],
 
-Thank you for reaching out about foreclosure help. As licensed California real estate professionals (DRE #02076038), we specialize in virtual foreclosure consultations serving all 58 CA counties.
+Thank you for reaching out about foreclosure help. As licensed California real estate professionals (DRE #02076038 | NMLS #2033637), we specialize in virtual foreclosure consultations serving all 58 CA counties.
 
 **Why Virtual Consultations Work Better:**
 - No travel time (we can meet TODAY if urgent)

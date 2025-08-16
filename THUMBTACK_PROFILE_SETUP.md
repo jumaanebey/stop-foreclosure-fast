@@ -13,7 +13,7 @@ My Foreclosure Solution
 "Licensed CA Virtual Foreclosure Specialists - Statewide Online Help"
 
 ### Business Description
-"Licensed California real estate professionals (DRE #02076038) providing virtual foreclosure consultations throughout all 58 CA counties since 2014. We help homeowners avoid foreclosure through secure video consultations, remote property evaluations, and online cash offers. No travel required - expert help from your home."
+"Licensed California real estate professionals (DRE #02076038 | NMLS #2033637) providing virtual foreclosure consultations throughout all 58 CA counties since 2014. We help homeowners avoid foreclosure through secure video consultations, remote property evaluations, and online cash offers. No travel required - expert help from your home."
 
 ### Services to List
 1. **Virtual Foreclosure Consultation**
@@ -56,7 +56,7 @@ My Foreclosure Solution
 4. **Credentials:** DRE license certificate
 
 ### Credentials & Licenses
-- California Real Estate License: DRE #02076038
+- California Real Estate License: DRE #02076038 | NMLS #2033637
 - Years of Experience: 10+
 - Specialization: Foreclosure Prevention
 - Technology: Virtual Consultation Expert
@@ -66,7 +66,7 @@ My Foreclosure Solution
 A: "We conduct secure video calls using HIPAA-compliant technology. You'll receive a private meeting link and can share documents safely. Most clients find virtual consultations more convenient and just as effective as in-person meetings."
 
 **Q: Do you really serve all of California?**
-A: "Yes! We're licensed throughout California (DRE #02076038) and provide virtual services to all 58 counties. From rural Northern California to busy Los Angeles - distance is no barrier to expert help."
+A: "Yes! We're licensed throughout California (DRE #02076038 | NMLS #2033637) and provide virtual services to all 58 counties. From rural Northern California to busy Los Angeles - distance is no barrier to expert help."
 
 **Q: What's included in the free consultation?**
 A: "Complete analysis of your foreclosure situation, review of all available options, property valuation estimate, and a written action plan with next steps. No hidden fees or obligations."
@@ -74,7 +74,7 @@ A: "Complete analysis of your foreclosure situation, review of all available opt
 ## Quote Response Strategy
 
 ### Immediate Response Template
-"Hi [Name], thank you for your interest in virtual foreclosure help. As licensed CA professionals (DRE #02076038), we can provide a free virtual consultation [TODAY/TOMORROW] to review your situation and options. 
+"Hi [Name], thank you for your interest in virtual foreclosure help. As licensed CA professionals (DRE #02076038 | NMLS #2033637), we can provide a free virtual consultation [TODAY/TOMORROW] to review your situation and options. 
 
 We serve all of California remotely - no travel required. Our virtual consultations are secure, convenient, and often more effective than in-person meetings.
 

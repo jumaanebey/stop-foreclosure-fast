@@ -35,7 +35,7 @@ Website: myforeclosuresolution.com
   - Fresno County, CA
 
 **4. Business Description:**
-"Licensed California real estate professionals (DRE #02076038) providing virtual foreclosure consultations throughout all 58 CA counties since 2014. We help homeowners avoid foreclosure through secure video calls, remote property evaluations, and online cash offers. No travel required - expert help from your home."
+"Licensed California real estate professionals (DRE #02076038 | NMLS #2033637) providing virtual foreclosure consultations throughout all 58 CA counties since 2014. We help homeowners avoid foreclosure through secure video calls, remote property evaluations, and online cash offers. No travel required - expert help from your home."
 
 **5. Upload Photos:**
 - Logo as profile photo
@@ -43,7 +43,7 @@ Website: myforeclosuresolution.com
 - Virtual consultation setup photo
 
 **6. First Post:**
-"🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book your FREE consultation today!"
+"🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038 | NMLS #2033637) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book your FREE consultation today!"
 
 ---
 
@@ -57,7 +57,7 @@ Website: myforeclosuresolution.com
 ```
 Page Name: My Foreclosure Solution
 Category: Real Estate Service
-Bio: Virtual foreclosure specialists serving all California. Licensed professionals (DRE #02076038) providing statewide help since 2014.
+Bio: Virtual foreclosure specialists serving all California. Licensed professionals (DRE #02076038 | NMLS #2033637) providing statewide help since 2014.
 ```
 
 **3. Add Contact Info:**
@@ -80,7 +80,7 @@ Copy your GMB post content and add:
 **Go to:** linkedin.com (use your personal profile)
 
 **1. Update Headline:**
-"Licensed CA Virtual Foreclosure Specialist | DRE #02076038 | Serving All 58 Counties | 500+ Homeowners Helped"
+"Licensed CA Virtual Foreclosure Specialist | DRE #02076038 | NMLS #2033637 | Serving All 58 Counties | 500+ Homeowners Helped"
 
 **2. Professional Summary:**
 "Licensed California real estate professional revolutionizing foreclosure help through virtual consultations. Since 2014, I've helped 500+ homeowners avoid foreclosure by eliminating geographic barriers - serving all 58 CA counties remotely.
@@ -98,7 +98,7 @@ Passionate about geographic equity - every California homeowner deserves expert 
 Position: Virtual Foreclosure Specialist
 Company: My Foreclosure Solution
 Duration: 2014 - Present
-Description: Licensed California real estate professional (DRE #02076038) providing virtual foreclosure consultations statewide. Pioneered remote foreclosure prevention services, helping homeowners access expert help regardless of geographic location.
+Description: Licensed California real estate professional (DRE #02076038 | NMLS #2033637) providing virtual foreclosure consultations statewide. Pioneered remote foreclosure prevention services, helping homeowners access expert help regardless of geographic location.
 ```
 
 **4. Add Skills:**
@@ -131,7 +131,7 @@ Website: myforeclosuresolution.com
 - Add major California cities/counties
 
 **4. Business Description:**
-"Virtual foreclosure consultation specialists serving all California. Licensed real estate professionals (DRE #02076038) providing secure video consultations, remote property evaluations, and foreclosure prevention services since 2014."
+"Virtual foreclosure consultation specialists serving all California. Licensed real estate professionals (DRE #02076038 | NMLS #2033637) providing secure video consultations, remote property evaluations, and foreclosure prevention services since 2014."
 
 ---
 
@@ -154,7 +154,7 @@ Subcategory: Real Estate Services
 "Licensed California real estate professionals offering virtual foreclosure consultations. We help homeowners avoid foreclosure through secure video calls - no travel required. Serving all California counties with same-day appointments available."
 
 **4. Introduction Post:**
-"Hi neighbors! I'm a licensed California real estate professional (DRE #02076038) now offering virtual foreclosure consultations throughout our community. If you or someone you know is facing foreclosure, I provide free consultations via secure video call. No travel required - expert help from your home."
+"Hi neighbors! I'm a licensed California real estate professional (DRE #02076038 | NMLS #2033637) now offering virtual foreclosure consultations throughout our community. If you or someone you know is facing foreclosure, I provide free consultations via secure video call. No travel required - expert help from your home."
 
 ---
 
@@ -164,7 +164,7 @@ Subcategory: Real Estate Services
 ```
 [Your Name]
 Licensed California Real Estate Professional
-Virtual Foreclosure Specialist | DRE #02076038
+Virtual Foreclosure Specialist | DRE #02076038 | NMLS #2033637
 
 📞 (949) 328-4811
 📧 help@myforeclosuresolution.com

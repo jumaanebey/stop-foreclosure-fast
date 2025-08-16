@@ -13,7 +13,7 @@
 ## Gig Description
 
 ### Main Description
-"Licensed California real estate professional (DRE #02076038) providing expert virtual foreclosure consultations to homeowners throughout all 58 CA counties.
+"Licensed California real estate professional (DRE #02076038 | NMLS #2033637) providing expert virtual foreclosure consultations to homeowners throughout all 58 CA counties.
 
 **What You Get:**
 ✅ 60-90 minute secure video consultation
@@ -34,7 +34,7 @@
 **My Expertise:**
 • 10+ years California real estate experience
 • 500+ homeowners helped avoid foreclosure
-• Licensed throughout California (DRE #02076038)
+• Licensed throughout California (DRE #02076038 | NMLS #2033637)
 • Pioneer in virtual foreclosure services
 • Technology and security specialist
 

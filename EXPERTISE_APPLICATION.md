@@ -10,7 +10,7 @@
 ### Professional Information
 **Name:** [Your Full Name]
 **Business:** My Foreclosure Solution
-**License:** California Real Estate DRE #02076038
+**License:** California Real Estate DRE #02076038 | NMLS #2033637
 **Specialization:** Virtual Foreclosure Consultation
 **Years Experience:** 10+
 
@@ -74,7 +74,7 @@ Technology innovation combined with deep California market knowledge provides un
 **Innovation:** On-site availability while accessing expert help
 
 ### Professional Credentials & Education
-- California Real Estate License DRE #02076038
+- California Real Estate License DRE #02076038 | NMLS #2033637
 - [Add any relevant certifications]
 - [Add continuing education]
 - Virtual consultation technology training

@@ -73,7 +73,7 @@
 - Industry: Real Estate/Foreclosure Services
 - Service area: California (all 58 counties)
 - Service type: Virtual consultations
-- License: DRE #02076038
+- License: DRE #02076038 | NMLS #2033637
 - Colors: Blue, green, gold
 - Style: Professional, trustworthy, modern
 
@@ -133,7 +133,7 @@ Light Gray: #F3F4F6 (Backgrounds)
 4. **Customize Text:**
    - Main: "My Foreclosure Solution"
    - Tagline: "Licensed California Virtual Specialists"
-   - Small text: "DRE #02076038"
+   - Small text: "DRE #02076038 | NMLS #2033637"
 5. **Add Elements:**
    - California state outline (search "California")
    - Virtual/tech icon (search "video call" or "computer")
@@ -151,21 +151,21 @@ Light Gray: #F3F4F6 (Backgrounds)
 ```
 MY FORECLOSURE SOLUTION
 Licensed California Virtual Specialists
-DRE #02076038
+DRE #02076038 | NMLS #2033637
 ```
 
 **Option B:**
 ```
 My Foreclosure Solution
 VIRTUAL CONSULTATIONS STATEWIDE
-Licensed Professionals • DRE #02076038
+Licensed Professionals • DRE #02076038 | NMLS #2033637
 ```
 
 **Option C:**
 ```
 MY FORECLOSURE SOLUTION
 California's Virtual Foreclosure Experts
-Licensed • DRE #02076038 • Statewide
+Licensed • DRE #02076038 | NMLS #2033637 • Statewide
 ```
 
 ## Implementation Checklist

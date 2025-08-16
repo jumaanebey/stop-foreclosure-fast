@@ -119,7 +119,7 @@ ABOUT OUR VIRTUAL CONSULTATIONS:
 ✅ Secure document sharing - safer than physical papers  
 ✅ Session recording available - better than handwritten notes
 ✅ Available evenings/weekends - fits your schedule
-✅ Licensed CA professionals (DRE #02076038)
+✅ Licensed CA professionals (DRE #02076038 | NMLS #2033637)
 
 We understand foreclosure is stressful. Our virtual consultation process is designed to be convenient, secure, and comprehensive - helping you understand all your options without adding the burden of travel.
 

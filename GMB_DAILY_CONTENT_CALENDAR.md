@@ -3,7 +3,7 @@
 ## Week 1: Virtual Service Introduction
 
 ### Monday - Service Announcement
-**Post:** "🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book today!"
+**Post:** "🖥️ Virtual foreclosure consultations now available statewide! Licensed CA professionals (DRE #02076038 | NMLS #2033637) serving all 58 counties from your home. No travel required - same expert help via secure video call. Book today!"
 **CTA:** "Schedule Virtual Consultation"
 **Image:** Virtual consultation setup with California map
 
@@ -33,7 +33,7 @@
 **Image:** Weekend calendar with available times
 
 ### Sunday - License & Credentials
-**Post:** "🏛️ Licensed California Real Estate Professionals (DRE #02076038) with 10+ years foreclosure expertise. Virtual technology meets professional credentials for the best of both worlds."
+**Post:** "🏛️ Licensed California Real Estate Professionals (DRE #02076038 | NMLS #2033637) with 10+ years foreclosure expertise. Virtual technology meets professional credentials for the best of both worlds."
 **CTA:** "Verify Our Credentials"
 **Image:** DRE license certificate
 
@@ -52,7 +52,7 @@
 **Post:** "♿ Virtual consultations provide foreclosure help for seniors and disabled homeowners who struggle with travel. Professional expertise delivered safely to your home with family support welcome."
 
 ### Friday - Urgent Timeline Help
-**Post:** "⏰ Auction scheduled in 30 days? Virtual consultations provide immediate access to licensed CA professionals (DRE #02076038). No waiting for office appointments - get help TODAY."
+**Post:** "⏰ Auction scheduled in 30 days? Virtual consultations provide immediate access to licensed CA professionals (DRE #02076038 | NMLS #2033637). No waiting for office appointments - get help TODAY."
 
 ### Saturday - Multiple Family Members
 **Post:** "👥 Virtual consultations let multiple family members participate from different locations. Adult children in other cities can join the call to help aging parents with foreclosure decisions."
@@ -80,7 +80,7 @@
 ## Week 4: Social Proof & Call-to-Action
 
 ### Monday - Client Volume
-**Post:** "🎯 500+ California homeowners helped avoid foreclosure through our services. Now available statewide via virtual consultations. Licensed expertise (DRE #02076038) with proven results."
+**Post:** "🎯 500+ California homeowners helped avoid foreclosure through our services. Now available statewide via virtual consultations. Licensed expertise (DRE #02076038 | NMLS #2033637) with proven results."
 
 ### Tuesday - Response Time
 **Post:** "⚡ Virtual consultation requests answered within 2 hours during business hours. Emergency foreclosure situations get priority response. When time matters, we're here."
@@ -92,7 +92,7 @@
 **Post:** "💯 FREE virtual foreclosure consultation includes: situation analysis, option review, property valuation, action plan, and ongoing support. No hidden fees, no obligations."
 
 ### Friday - Call to Action
-**Post:** "📞 Ready to save your home? Book your FREE virtual foreclosure consultation today. Licensed CA professionals (DRE #02076038) available statewide. Same-day appointments for urgent situations."
+**Post:** "📞 Ready to save your home? Book your FREE virtual foreclosure consultation today. Licensed CA professionals (DRE #02076038 | NMLS #2033637) available statewide. Same-day appointments for urgent situations."
 
 ## Posting Strategy
 - **Time:** 9 AM Pacific (optimal CA engagement)

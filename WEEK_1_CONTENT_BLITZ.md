@@ -4,7 +4,7 @@
 
 ### Google My Business Post
 **Title:** "🚨 MAJOR ANNOUNCEMENT: Virtual Foreclosure Help Now Available Statewide!"
-**Content:** "Licensed California real estate professionals (DRE #02076038) now serving all 58 counties through secure virtual consultations. No travel required - get expert foreclosure help from your home. Same-day appointments available for urgent situations. Revolutionary technology meets professional expertise."
+**Content:** "Licensed California real estate professionals (DRE #02076038 | NMLS #2033637) now serving all 58 counties through secure virtual consultations. No travel required - get expert foreclosure help from your home. Same-day appointments available for urgent situations. Revolutionary technology meets professional expertise."
 **CTA:** "Book Free Virtual Consultation"
 **Image:** California map with virtual consultation icons
 
@@ -12,7 +12,7 @@
 **LinkedIn Post:**
 "🎯 GAME CHANGER for California homeowners facing foreclosure!
 
-I'm excited to announce that our licensed real estate practice (DRE #02076038) now offers virtual foreclosure consultations throughout ALL 58 California counties.
+I'm excited to announce that our licensed real estate practice (DRE #02076038 | NMLS #2033637) now offers virtual foreclosure consultations throughout ALL 58 California counties.
 
 This means:
 ✅ No travel time to offices

@@ -78,7 +78,7 @@
 **Thursday:** "HIPAA-compliant virtual consultations"
 **Friday:** "No travel required - expert help from your home"
 **Saturday:** "Weekend virtual consultations available"
-**Sunday:** "Licensed CA professionals DRE #02076038"
+**Sunday:** "Licensed CA professionals DRE #02076038 | NMLS #2033637"
 
 ### Review Generation Strategy:
 **Request Template:**

@@ -8,7 +8,7 @@
 ## Profile Information
 
 ### Professional Headline
-"Licensed CA Virtual Foreclosure Specialist - Statewide Service (DRE #02076038)"
+"Licensed CA Virtual Foreclosure Specialist - Statewide Service (DRE #02076038 | NMLS #2033637)"
 
 ### Professional Summary
 "Licensed California real estate professional pioneering virtual foreclosure consultations throughout all 58 CA counties. Since 2014, I've helped 500+ homeowners avoid foreclosure by combining deep California market knowledge with cutting-edge virtual consultation technology.
@@ -24,7 +24,7 @@
 I specialize in eliminating geographic barriers to expert real estate help. Through secure virtual consultations, a homeowner in rural Humboldt County receives the same quality service as someone in downtown Los Angeles. This technology-first approach has revolutionized how foreclosure help is delivered across California's diverse geography.
 
 **Professional Credentials:**
-• California Real Estate License DRE #02076038
+• California Real Estate License DRE #02076038 | NMLS #2033637
 • 10+ years California foreclosure expertise
 • HIPAA-compliant virtual consultation technology
 • Statewide practice authorization
@@ -70,7 +70,7 @@ I specialize in eliminating geographic barriers to expert real estate help. Thro
 - Serves 65% rural/underserved California communities
 
 ### Education & Certifications
-- California Real Estate License (DRE #02076038)
+- California Real Estate License (DRE #02076038 | NMLS #2033637)
 - Virtual Consultation Technology Certification
 - HIPAA Compliance Training
 - California Foreclosure Law Continuing Education

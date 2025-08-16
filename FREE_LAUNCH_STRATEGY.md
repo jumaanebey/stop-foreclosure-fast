@@ -16,7 +16,7 @@
 2. **Business Information:**
    - Name: My Foreclosure Solution
    - Category: Real Estate Agency
-   - Description: "Licensed California real estate professionals (DRE #02076038) providing virtual foreclosure consultations throughout all 58 CA counties since 2014."
+   - Description: "Licensed California real estate professionals (DRE #02076038 | NMLS #2033637) providing virtual foreclosure consultations throughout all 58 CA counties since 2014."
    - Phone: (949) 328-4811
    - Website: myforeclosuresolution.com
 
@@ -48,7 +48,7 @@
 **Lead Potential:** HIGH for referrals
 
 **Profile Optimization:**
-- Headline: "Licensed CA Virtual Foreclosure Specialist | DRE #02076038 | Serving All 58 Counties"
+- Headline: "Licensed CA Virtual Foreclosure Specialist | DRE #02076038 | NMLS #2033637 | Serving All 58 Counties"
 - Summary: Use Option 1 from business introduction
 - Experience: Detail your foreclosure expertise
 - Services: Virtual consultation, statewide coverage
@@ -143,7 +143,7 @@
 Every email becomes marketing with your new signature:
 ```
 [Your Name]
-Licensed California Real Estate Professional | DRE #02076038
+Licensed California Real Estate Professional | DRE #02076038 | NMLS #2033637
 Virtual Foreclosure Consultations Statewide
 
 📞 (949) 328-4811 | 📧 help@myforeclosuresolution.com

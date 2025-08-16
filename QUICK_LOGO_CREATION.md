@@ -17,7 +17,7 @@
 #### Text Changes:
 - **Main text:** "My Foreclosure Solution"
 - **Tagline:** "Virtual California Specialists"
-- **License:** "DRE #02076038"
+- **License:** "DRE #02076038 | NMLS #2033637"
 
 #### Add California Element:
 1. **Click "Elements" → Search "California"**
@@ -49,7 +49,7 @@ If you want something ultra-simple right now:
 ```
 MY FORECLOSURE SOLUTION
 LICENSED CALIFORNIA VIRTUAL SPECIALISTS
-DRE #02076038 • STATEWIDE SERVICE
+DRE #02076038 | NMLS #2033637 • STATEWIDE SERVICE
 ```
 
 **Font:** Arial Bold or Times New Roman
@@ -105,7 +105,7 @@ DRE #02076038 • STATEWIDE SERVICE
 ```
 [CA outline] MY FORECLOSURE SOLUTION [computer icon]
            Licensed Virtual Specialists
-                DRE #02076038
+                DRE #02076038 | NMLS #2033637
 ```
 
 ### Logo Layout Option 2:
@@ -113,14 +113,14 @@ DRE #02076038 • STATEWIDE SERVICE
 MY FORECLOSURE SOLUTION
     [house icon with CA inside]
 Virtual Consultations Statewide
-     DRE #02076038
+     DRE #02076038 | NMLS #2033637
 ```
 
 ### Logo Layout Option 3:
 ```
 [shield icon] MY FORECLOSURE SOLUTION
               California Virtual Specialists
-              Licensed • DRE #02076038
+              Licensed • DRE #02076038 | NMLS #2033637
 ```
 
 **Recommendation:** Use Canva to create a professional logo in 15 minutes today. You can always upgrade later, but you need something professional for your platform profiles right now.
