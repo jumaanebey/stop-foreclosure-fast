@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: foreclosure-ai-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT api_server:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: EMAIL_USER
+        value: help@myforeclosuresolution.com
+      - key: ALLOWED_ORIGINS
+        value: https://myforeclosuresolution.com,https://www.myforeclosuresolution.com

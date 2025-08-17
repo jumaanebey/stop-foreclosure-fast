@@ -4,7 +4,7 @@ Python AI API Server for Virtual Foreclosure Business
 Provides web endpoints for AI-enhanced lead scoring and automation
 """
 
-from flask import Flask, request, jsonify, cors
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 import logging
