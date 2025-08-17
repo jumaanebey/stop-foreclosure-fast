@@ -55,8 +55,11 @@
     </script>
     
     <!-- Google Fonts -->
+    <!-- Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
@@ -578,6 +581,371 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script defer src="js/script.js"></script>
+    
+    <!-- Advanced Analytics & Lead Scoring System -->
+    <script>
+    // Global tracking variables
+    let sessionData = {
+        startTime: Date.now(),
+        pageViews: 1,
+        engagement: {
+            scrollDepth: 0,
+            timeOnPage: 0,
+            interactionEvents: [],
+            formInteractions: 0,
+            phoneClicks: 0,
+            consultationInterest: false
+        }
+    };
+
+    // Enhanced Virtual Consultation Tracking
+    function trackVirtualConsultationFunnel(stage, data = {}) {
+        gtag('event', 'virtual_consultation_funnel', {
+            'event_category': 'Virtual Consultation',
+            'event_label': stage,
+            'consultation_type': data.type || 'standard',
+            'urgency_level': data.urgency || 'normal',
+            'county': data.county || 'unknown',
+            'device_type': data.device || getDeviceType(),
+            'traffic_source': data.source || getTrafficSource(),
+            'value': data.value || 0,
+            'session_id': getSessionId()
+        });
+        
+        // Update lead score in real-time
+        updateLeadScore(stage, data);
+    }
+
+    // Lead Scoring System
+    function calculateLeadScore() {
+        let score = 0;
+        
+        // Engagement scoring
+        if (sessionData.engagement.timeOnPage > 300) score += 15; // 5+ minutes
+        if (sessionData.engagement.scrollDepth > 75) score += 10;
+        if (sessionData.engagement.formInteractions > 0) score += 25;
+        if (sessionData.engagement.phoneClicks > 0) score += 30;
+        if (sessionData.engagement.consultationInterest) score += 40;
+        
+        // Page view scoring
+        if (sessionData.pageViews > 3) score += 15;
+        if (sessionData.pageViews > 5) score += 20;
+        
+        // Source quality scoring
+        const source = getTrafficSource();
+        const sourceScores = {
+            'google_organic': 25,
+            'google_my_business': 30,
+            'referral': 35,
+            'social_media': 15,
+            'direct': 20
+        };
+        score += sourceScores[source] || 10;
+        
+        return Math.min(score, 200); // Cap base engagement score at 200
+    }
+
+    function updateLeadScore(event, data) {
+        const eventScores = {
+            'page_view': 5,
+            'form_interaction': 15,
+            'form_completion': 50,
+            'phone_click': 25,
+            'consultation_page_view': 20,
+            'emergency_button_click': 40,
+            'download_resource': 20
+        };
+        
+        const eventScore = eventScores[event] || 0;
+        const totalScore = calculateLeadScore() + eventScore;
+        
+        // Store score locally for session
+        sessionStorage.setItem('leadScore', totalScore);
+        
+        // Send to CRM if available
+        if (typeof sendToCRM === 'function') {
+            sendToCRM({
+                event: event,
+                score: totalScore,
+                timestamp: new Date().toISOString(),
+                data: data
+            });
+        }
+        
+        // Trigger automated actions based on score thresholds
+        triggerScoreBasedActions(totalScore);
+    }
+
+    function triggerScoreBasedActions(score) {
+        // Hot lead threshold (100+ points)
+        if (score >= 100 && !sessionStorage.getItem('hotLeadTriggered')) {
+            sessionStorage.setItem('hotLeadTriggered', 'true');
+            
+            // Show priority consultation offer
+            setTimeout(() => {
+                if (!document.getElementById('priority-consultation-popup')) {
+                    showPriorityConsultationPopup();
+                }
+            }, 5000);
+        }
+        
+        // Warm lead threshold (75+ points)
+        else if (score >= 75 && !sessionStorage.getItem('warmLeadTriggered')) {
+            sessionStorage.setItem('warmLeadTriggered', 'true');
+            
+            // Show resource download offer
+            setTimeout(() => {
+                if (!sessionStorage.getItem('resourceOffered')) {
+                    showResourceDownloadOffer();
+                }
+            }, 10000);
+        }
+    }
+
+    // Core Web Vitals Tracking
+    function trackWebVitals() {
+        // Largest Contentful Paint
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                gtag('event', 'web_vitals', {
+                    event_category: 'Web Vitals',
+                    event_label: 'LCP',
+                    value: Math.round(entry.startTime),
+                    non_interaction: true,
+                });
+            }
+        }).observe({entryTypes: ['largest-contentful-paint']});
+
+        // First Input Delay
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                gtag('event', 'web_vitals', {
+                    event_category: 'Web Vitals',
+                    event_label: 'FID',
+                    value: Math.round(entry.processingStart - entry.startTime),
+                    non_interaction: true,
+                });
+            }
+        }).observe({entryTypes: ['first-input']});
+
+        // Cumulative Layout Shift
+        new PerformanceObserver((entryList) => {
+            let clsValue = 0;
+            for (const entry of entryList.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    clsValue += entry.value;
+                }
+            }
+            gtag('event', 'web_vitals', {
+                event_category: 'Web Vitals',
+                event_label: 'CLS',
+                value: Math.round(clsValue * 1000),
+                non_interaction: true,
+            });
+        }).observe({entryTypes: ['layout-shift']});
+    }
+
+    // Enhanced user behavior tracking
+    function initializeBehaviorTracking() {
+        // Scroll depth tracking
+        let maxScrollDepth = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > maxScrollDepth) {
+                maxScrollDepth = Math.round(scrollPercent);
+                sessionData.engagement.scrollDepth = maxScrollDepth;
+                
+                // Track scroll milestones
+                if (maxScrollDepth >= 25 && !sessionStorage.getItem('scroll25')) {
+                    sessionStorage.setItem('scroll25', 'true');
+                    gtag('event', 'scroll_milestone', {
+                        event_category: 'Engagement',
+                        event_label: '25_percent',
+                        value: 25
+                    });
+                }
+                if (maxScrollDepth >= 50 && !sessionStorage.getItem('scroll50')) {
+                    sessionStorage.setItem('scroll50', 'true');
+                    gtag('event', 'scroll_milestone', {
+                        event_category: 'Engagement',
+                        event_label: '50_percent',
+                        value: 50
+                    });
+                }
+                if (maxScrollDepth >= 75 && !sessionStorage.getItem('scroll75')) {
+                    sessionStorage.setItem('scroll75', 'true');
+                    gtag('event', 'scroll_milestone', {
+                        event_category: 'Engagement',
+                        event_label: '75_percent',
+                        value: 75
+                    });
+                    updateLeadScore('scroll_75', {scrollDepth: 75});
+                }
+            }
+        });
+
+        // Time on page tracking
+        setInterval(() => {
+            sessionData.engagement.timeOnPage = Date.now() - sessionData.startTime;
+            
+            // Track time milestones
+            const minutes = Math.floor(sessionData.engagement.timeOnPage / 60000);
+            if (minutes >= 2 && !sessionStorage.getItem('time2min')) {
+                sessionStorage.setItem('time2min', 'true');
+                gtag('event', 'time_milestone', {
+                    event_category: 'Engagement',
+                    event_label: '2_minutes',
+                    value: 2
+                });
+                updateLeadScore('time_2min', {timeOnPage: minutes});
+            }
+            if (minutes >= 5 && !sessionStorage.getItem('time5min')) {
+                sessionStorage.setItem('time5min', 'true');
+                gtag('event', 'time_milestone', {
+                    event_category: 'Engagement',
+                    event_label: '5_minutes',
+                    value: 5
+                });
+                updateLeadScore('time_5min', {timeOnPage: minutes});
+            }
+        }, 30000); // Check every 30 seconds
+
+        // Form interaction tracking
+        document.addEventListener('focusin', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                sessionData.engagement.formInteractions++;
+                
+                if (sessionData.engagement.formInteractions === 1) {
+                    gtag('event', 'form_start', {
+                        event_category: 'Form Interaction',
+                        event_label: e.target.closest('form').id || 'unknown_form'
+                    });
+                    updateLeadScore('form_interaction', {formId: e.target.closest('form').id});
+                }
+            }
+        });
+
+        // Phone click tracking
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                sessionData.engagement.phoneClicks++;
+                gtag('event', 'phone_click', {
+                    event_category: 'Contact Attempt',
+                    event_label: 'phone_number',
+                    value: 25
+                });
+                updateLeadScore('phone_click', {phoneNumber: this.href});
+            });
+        });
+
+        // Consultation interest tracking
+        document.querySelectorAll('a[href*="consultation"], button[onclick*="consultation"], a[href*="schedule"]').forEach(element => {
+            element.addEventListener('click', function() {
+                sessionData.engagement.consultationInterest = true;
+                gtag('event', 'consultation_interest', {
+                    event_category: 'Virtual Consultation',
+                    event_label: 'interest_shown',
+                    value: 40
+                });
+                updateLeadScore('consultation_interest', {element: this.textContent});
+            });
+        });
+    }
+
+    // Utility functions
+    function getDeviceType() {
+        const width = window.innerWidth;
+        if (width <= 768) return 'mobile';
+        if (width <= 1024) return 'tablet';
+        return 'desktop';
+    }
+
+    function getTrafficSource() {
+        const referrer = document.referrer;
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('utm_source')) {
+            return urlParams.get('utm_source');
+        }
+        
+        if (referrer.includes('google.com')) return 'google_organic';
+        if (referrer.includes('facebook.com')) return 'facebook';
+        if (referrer.includes('linkedin.com')) return 'linkedin';
+        if (referrer.includes('google.com/maps') || referrer.includes('business.google.com')) return 'google_my_business';
+        if (referrer && !referrer.includes(window.location.hostname)) return 'referral';
+        if (!referrer) return 'direct';
+        
+        return 'unknown';
+    }
+
+    function getSessionId() {
+        let sessionId = sessionStorage.getItem('sessionId');
+        if (!sessionId) {
+            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('sessionId', sessionId);
+        }
+        return sessionId;
+    }
+
+    // Priority consultation popup for hot leads
+    function showPriorityConsultationPopup() {
+        const popup = document.createElement('div');
+        popup.id = 'priority-consultation-popup';
+        popup.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+            align-items: center; justify-content: center;
+        `;
+        
+        popup.innerHTML = `
+            <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 500px; margin: 1rem;">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h3 style="color: #dc2626; margin-bottom: 0.5rem;">🎯 Priority Consultation Available</h3>
+                    <p>Based on your interest, you qualify for a priority virtual consultation within 4 hours.</p>
+                </div>
+                <div style="text-align: center;">
+                    <a href="virtual-consultation.html" onclick="gtag('event', 'priority_consultation_click', {'event_category': 'hot_lead'});" 
+                       style="background: #dc2626; color: white; padding: 1rem 2rem; border-radius: 0.5rem; 
+                              text-decoration: none; font-weight: 600; margin-right: 1rem;">
+                        📅 Book Priority Consultation
+                    </a>
+                    <button onclick="this.closest('#priority-consultation-popup').remove()" 
+                            style="background: #6b7280; color: white; padding: 1rem 2rem; border: none; 
+                                   border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                        Maybe Later
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(popup);
+        
+        // Auto-remove after 30 seconds
+        setTimeout(() => {
+            if (document.getElementById('priority-consultation-popup')) {
+                popup.remove();
+            }
+        }, 30000);
+    }
+
+    // Initialize all tracking systems
+    document.addEventListener('DOMContentLoaded', function() {
+        trackWebVitals();
+        initializeBehaviorTracking();
+        
+        // Track page view for virtual consultation funnel
+        trackVirtualConsultationFunnel('page_view', {
+            type: 'homepage',
+            value: 1
+        });
+        
+        // Initialize lead scoring
+        updateLeadScore('page_view', {
+            page: 'homepage',
+            timestamp: new Date().toISOString()
+        });
+    });
+    </script>
 </body>
 </html>

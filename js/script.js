@@ -72,35 +72,73 @@ function handleFormSubmission(form) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
+    // Add form type and tracking data
+    data.form_type = 'contact';
+    data.urgency_level = determineUrgencyLevel(data);
+    data.session_data = getSessionTrackingData();
+    data.lead_source = getTrafficSource();
+    data.device_type = getDeviceType();
+    
     // Show loading state
     const submitButton = form.querySelector('.submit-button');
     const originalText = submitButton.textContent;
     submitButton.textContent = 'Submitting...';
     submitButton.disabled = true;
     
-    // Facebook Pixel event
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead');
-    }
-    
-    // Google Analytics event
+    // Track form completion in analytics
     if (typeof gtag !== 'undefined') {
-        gtag('event', 'generate_lead', {
-            'event_category': 'engagement',
-            'event_label': 'contact_form'
+        gtag('event', 'form_completion', {
+            'event_category': 'Virtual Consultation',
+            'event_label': 'contact_form',
+            'value': 50
         });
     }
     
-    // Submit to Google Sheets (you'll need to replace with your Web App URL)
-    submitToGoogleSheets(data)
-        .then(() => {
-            window.location.href = 'thank-you.html';
+    // Update lead score
+    if (typeof updateLeadScore === 'function') {
+        updateLeadScore('form_completion', {
+            formType: 'contact',
+            data: data
+        });
+    }
+    
+    // Submit to advanced lead capture system
+    submitToAdvancedSystem(data)
+        .then(response => {
+            // Store lead ID for tracking
+            if (response.lead_id) {
+                sessionStorage.setItem('leadId', response.lead_id);
+            }
+            
+            // Track conversion events
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Foreclosure Consultation Request',
+                    content_category: 'Lead Generation',
+                    value: response.score || 50
+                });
+            }
+            
+            // Redirect to appropriate thank you page based on priority
+            const thankYouPage = response.priority === 'P1' || response.priority === 'P2' 
+                ? 'thank-you-priority.html' 
+                : 'thank-you.html';
+            
+            window.location.href = `${thankYouPage}?score=${response.score}&priority=${response.priority}`;
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            alert('There was an error submitting your form. Please text us at (949) 328-4811 for immediate assistance.');
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
+            
+            // Fallback to basic submission
+            submitToGoogleSheets(data)
+                .then(() => {
+                    window.location.href = 'thank-you.html';
+                })
+                .catch(() => {
+                    alert('There was an error submitting your form. Please text us at (949) 328-4811 for immediate assistance.');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
         });
 }
 
@@ -431,3 +469,253 @@ document.addEventListener('click', function(e) {
         closeEmergencyPopup();
     }
 });
+
+// Advanced System Integration Functions
+function submitToAdvancedSystem(data) {
+    // Submit to advanced lead capture API
+    return fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    });
+}
+
+function determineUrgencyLevel(data) {
+    // Analyze form data to determine urgency
+    const urgentIndicators = [
+        'auction',
+        'notice of sale',
+        'foreclosure',
+        'emergency',
+        'urgent',
+        'immediate',
+        'less than 30 days',
+        'notice of default'
+    ];
+    
+    const situation = (data.situation || '').toLowerCase();
+    const address = (data.address || '').toLowerCase();
+    const name = (data.name || '').toLowerCase();
+    
+    const allText = [situation, address, name].join(' ');
+    
+    // Check for emergency indicators
+    if (urgentIndicators.some(indicator => allText.includes(indicator))) {
+        if (allText.includes('auction') || allText.includes('sale')) {
+            return 'emergency';
+        }
+        return 'urgent';
+    }
+    
+    // Default urgency levels
+    if (data.form_type === 'emergency') return 'emergency';
+    if (data.form_type === 'consultation') return 'concerned';
+    
+    return 'exploring';
+}
+
+function getSessionTrackingData() {
+    // Gather session data for lead scoring
+    return {
+        sessionId: getSessionId(),
+        timeOnSite: Date.now() - (sessionData?.startTime || Date.now()),
+        pageViews: sessionData?.pageViews || 1,
+        scrollDepth: sessionData?.engagement?.scrollDepth || 0,
+        formInteractions: sessionData?.engagement?.formInteractions || 0,
+        phoneClicks: sessionData?.engagement?.phoneClicks || 0,
+        consultationInterest: sessionData?.engagement?.consultationInterest || false,
+        leadScore: sessionStorage.getItem('leadScore') || 0
+    };
+}
+
+function getTrafficSource() {
+    const referrer = document.referrer;
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (urlParams.get('utm_source')) {
+        return urlParams.get('utm_source');
+    }
+    
+    if (referrer.includes('google.com/maps') || referrer.includes('business.google.com')) {
+        return 'google_my_business';
+    }
+    if (referrer.includes('google.com')) return 'google_organic';
+    if (referrer.includes('facebook.com')) return 'facebook';
+    if (referrer.includes('linkedin.com')) return 'linkedin';
+    if (referrer && !referrer.includes(window.location.hostname)) return 'referral';
+    if (!referrer) return 'direct';
+    
+    return 'unknown';
+}
+
+function getDeviceType() {
+    const width = window.innerWidth;
+    if (width <= 768) return 'mobile';
+    if (width <= 1024) return 'tablet';
+    return 'desktop';
+}
+
+function getSessionId() {
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        sessionStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+}
+
+// Real-time lead qualification popup
+function showLeadQualificationPopup(score) {
+    if (score < 75) return; // Only show for warm/hot leads
+    
+    const popup = document.createElement('div');
+    popup.id = 'lead-qualification-popup';
+    popup.style.cssText = `
+        position: fixed; bottom: 20px; right: 20px; background: #059669; 
+        color: white; padding: 20px; border-radius: 10px; max-width: 350px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999;
+        animation: slideInRight 0.5s ease-out;
+    `;
+    
+    popup.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+            <div>
+                <h4 style="margin: 0 0 5px 0; font-size: 16px;">🎯 Priority Status Unlocked</h4>
+                <p style="margin: 0; font-size: 14px; opacity: 0.9;">Your engagement qualifies you for priority assistance</p>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; line-height: 1;">×</button>
+        </div>
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="virtual-consultation.html?priority=true" 
+               onclick="gtag('event', 'priority_qualification_click', {'event_category': 'hot_lead'});"
+               style="background: white; color: #059669; padding: 10px 20px; border-radius: 5px; 
+                      text-decoration: none; font-weight: 600; font-size: 14px; display: inline-block;">
+                📅 Book Priority Consultation
+            </a>
+        </div>
+    `;
+    
+    // Add animation CSS
+    if (!document.getElementById('popup-animations')) {
+        const style = document.createElement('style');
+        style.id = 'popup-animations';
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(popup);
+    
+    // Auto-remove after 15 seconds
+    setTimeout(() => {
+        if (document.getElementById('lead-qualification-popup')) {
+            popup.remove();
+        }
+    }, 15000);
+}
+
+// Enhanced form handling for emergency forms
+function handleEmergencyContactSubmission(form) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    // Handle multiple checkbox values for situation
+    const situationCheckboxes = form.querySelectorAll('input[name="situation"]:checked');
+    const selectedSituations = Array.from(situationCheckboxes).map(cb => cb.value);
+    data.situation = selectedSituations.join(', ');
+    
+    // Mark as emergency
+    data.form_type = 'emergency';
+    data.urgency_level = 'emergency';
+    data.session_data = getSessionTrackingData();
+    data.lead_source = getTrafficSource();
+    data.device_type = getDeviceType();
+    
+    // Show loading state
+    const submitButton = form.querySelector('.exit-popup-button');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Submitting Emergency Request...';
+    submitButton.disabled = true;
+    
+    // Track emergency form completion
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'emergency_form_completion', {
+            'event_category': 'Emergency Lead',
+            'event_label': 'emergency_contact_form',
+            'value': 100
+        });
+    }
+    
+    // Update lead score
+    if (typeof updateLeadScore === 'function') {
+        updateLeadScore('emergency_form', {
+            formType: 'emergency',
+            urgency: 'emergency',
+            value: 100
+        });
+    }
+    
+    // Submit to advanced system with high priority
+    submitToAdvancedSystem(data)
+        .then(response => {
+            closeEmergencyPopup();
+            
+            // Show priority response message
+            alert(`Emergency request submitted! Score: ${response.score}. We will call you within 1 hour during business hours. For immediate assistance, call or text (949) 328-4811.`);
+            
+            // Track conversion
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Emergency Foreclosure Help',
+                    content_category: 'Emergency Lead',
+                    value: response.score || 100
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Emergency form submission error:', error);
+            
+            // Fallback to basic submission
+            submitToGoogleSheets({
+                ...data,
+                type: 'emergency_help',
+                timeline: 'immediate',
+                foreclosure_status: 'yes'
+            })
+            .then(() => {
+                closeEmergencyPopup();
+                alert('Emergency request submitted! We will call you within 2 hours during business hours. For immediate assistance, call or text (949) 328-4811.');
+            })
+            .catch(() => {
+                alert('There was an error submitting your emergency request. Please call us immediately at (949) 328-4811.');
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+        });
+}
+
+// Monitor and trigger popups based on lead score
+if (typeof sessionStorage !== 'undefined') {
+    setInterval(() => {
+        const currentScore = parseInt(sessionStorage.getItem('leadScore') || '0');
+        
+        // Show qualification popup for scores 75+
+        if (currentScore >= 75 && !sessionStorage.getItem('qualificationPopupShown')) {
+            sessionStorage.setItem('qualificationPopupShown', 'true');
+            setTimeout(() => showLeadQualificationPopup(currentScore), 2000);
+        }
+    }, 10000); // Check every 10 seconds
+}
