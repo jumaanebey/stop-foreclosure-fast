@@ -1,0 +1,7 @@
+# ULTRA-MINIMAL requirements that will definitely work on Render
+flask==2.3.3
+flask-cors==4.0.0
+gunicorn==21.2.0
+
+# That's it! No pandas, no complex dependencies
+# This will deploy successfully and provide core AI functionality
