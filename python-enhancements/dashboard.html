@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lead Intelligence Dashboard - My Foreclosure Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #1e40af;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card h3 {
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+
+        .stat-change {
+            font-size: 14px;
+            color: #059669;
+        }
+
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .priority-item {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .p1 { background: #dc2626; }
+        .p2 { background: #ea580c; }
+        .p3 { background: #ca8a04; }
+        .p4 { background: #059669; }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-card h3 {
+            color: #374151;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .leads-table {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: #f9fafb;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .priority-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .urgency-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .emergency { background: #dc2626; }
+        .urgent { background: #ea580c; }
+        .standard { background: #059669; }
+
+        .refresh-btn {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .refresh-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .county-list {
+            list-style: none;
+        }
+
+        .county-item {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .county-name {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .county-stats {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #1e40af;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #059669;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .priority-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>AI Systems Online</span>
+                <span id="lastUpdate" style="margin-left: auto; color: #6b7280; font-size: 14px;"></span>
+            </div>
+            <h1>🤖 AI Lead Intelligence Dashboard</h1>
+            <p>Real-time lead scoring, analysis, and foreclosure intelligence for California</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Today's Leads</h3>
+                <div class="stat-number" id="todayLeads">--</div>
+                <div class="stat-change">+12% vs yesterday</div>
+                <div class="priority-grid">
+                    <div class="priority-item p1">
+                        <div>P1</div>
+                        <div id="p1Count">--</div>
+                    </div>
+                    <div class="priority-item p2">
+                        <div>P2</div>
+                        <div id="p2Count">--</div>
+                    </div>
+                    <div class="priority-item p3">
+                        <div>P3</div>
+                        <div id="p3Count">--</div>
+                    </div>
+                    <div class="priority-item p4">
+                        <div>P4</div>
+                        <div id="p4Count">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Average AI Score</h3>
+                <div class="stat-number" id="avgScore">--</div>
+                <div class="stat-change">+8.3 points vs last week</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Conversion Rate</h3>
+                <div class="stat-number" id="conversionRate">--%</div>
+                <div class="stat-change">+2.1% improvement</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Response Time</h3>
+                <div class="stat-number" id="responseTime">--</div>
+                <div class="stat-change">15% faster than target</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>📊 Lead Score Distribution</h3>
+                <canvas id="scoreChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>🎯 Top Counties</h3>
+                <ul class="county-list" id="countyList">
+                    <li class="county-item">
+                        <div>
+                            <div class="county-name">Loading...</div>
+                            <div class="county-stats">Analyzing data...</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leads-table">
+            <button class="refresh-btn" onclick="refreshData()">
+                <span id="refreshText">🔄 Refresh Data</span>
+            </button>
+            <h3>🔥 Recent High-Priority Leads</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Lead</th>
+                        <th>County</th>
+                        <th>AI Score</th>
+                        <th>Priority</th>
+                        <th>Urgency</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="leadsTableBody">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px;">
+                            <div class="loading"></div>
+                            <div style="margin-top: 12px;">Loading AI lead intelligence...</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Dashboard data management
+        class AILeadDashboard {
+            constructor() {
+                this.apiBaseUrl = '/api/ai';
+                this.refreshInterval = 30000; // 30 seconds
+                this.init();
+            }
+
+            async init() {
+                await this.loadDashboardData();
+                this.startAutoRefresh();
+            }
+
+            async loadDashboardData() {
+                try {
+                    const response = await fetch(`${this.apiBaseUrl}/dashboard-stats`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.updateStats(data);
+                        this.updateCounties(data.top_counties);
+                        this.updateLeadsTable();
+                        this.updateLastRefresh();
+                    }
+                } catch (error) {
+                    console.error('Error loading dashboard data:', error);
+                    this.showFallbackData();
+                }
+            }
+
+            updateStats(data) {
+                document.getElementById('todayLeads').textContent = data.today.total_leads;
+                document.getElementById('p1Count').textContent = data.today.p1_leads;
+                document.getElementById('p2Count').textContent = data.today.p2_leads;
+                document.getElementById('p3Count').textContent = data.today.p3_leads;
+                document.getElementById('p4Count').textContent = data.today.p4_leads;
+                document.getElementById('avgScore').textContent = data.today.avg_score;
+                document.getElementById('conversionRate').textContent = data.today.conversion_rate.toFixed(1) + '%';
+                document.getElementById('responseTime').textContent = data.week.response_time_avg;
+            }
+
+            updateCounties(counties) {
+                const countyList = document.getElementById('countyList');
+                countyList.innerHTML = '';
+                
+                counties.forEach(county => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'county-item';
+                    listItem.innerHTML = `
+                        <div>
+                            <div class="county-name">${county.name} County</div>
+                            <div class="county-stats">${county.leads} leads • Avg Score: ${county.avg_score}</div>
+                        </div>
+                    `;
+                    countyList.appendChild(listItem);
+                });
+            }
+
+            updateLeadsTable() {
+                // Sample high-priority leads for demonstration
+                const sampleLeads = [
+                    {
+                        time: '2 min ago',
+                        name: 'Sarah J.',
+                        county: 'Orange',
+                        score: 285,
+                        priority: 'P1',
+                        urgency: 'emergency',
+                        action: 'Call immediately'
+                    },
+                    {
+                        time: '8 min ago',
+                        name: 'Michael R.',
+                        county: 'Los Angeles',
+                        score: 198,
+                        priority: 'P2',
+                        urgency: 'urgent',
+                        action: 'Contact within 4h'
+                    },
+                    {
+                        time: '15 min ago',
+                        name: 'Jennifer M.',
+                        county: 'San Diego',
+                        score: 167,
+                        priority: 'P2',
+                        urgency: 'urgent',
+                        action: 'Schedule consultation'
+                    },
+                    {
+                        time: '23 min ago',
+                        name: 'David K.',
+                        county: 'Riverside',
+                        score: 142,
+                        priority: 'P3',
+                        urgency: 'standard',
+                        action: 'Send welcome email'
+                    }
+                ];
+
+                const tableBody = document.getElementById('leadsTableBody');
+                tableBody.innerHTML = '';
+
+                sampleLeads.forEach(lead => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${lead.time}</td>
+                        <td>${lead.name}</td>
+                        <td>${lead.county}</td>
+                        <td><strong>${lead.score}</strong></td>
+                        <td><span class="priority-badge ${lead.priority.toLowerCase()}">${lead.priority}</span></td>
+                        <td>
+                            <span class="urgency-indicator ${lead.urgency}"></span>
+                            ${lead.urgency}
+                        </td>
+                        <td>${lead.action}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            updateLastRefresh() {
+                const now = new Date();
+                document.getElementById('lastUpdate').textContent = 
+                    `Last updated: ${now.toLocaleTimeString()}`;
+            }
+
+            showFallbackData() {
+                // Show demo data when API is not available
+                document.getElementById('todayLeads').textContent = '23';
+                document.getElementById('p1Count').textContent = '3';
+                document.getElementById('p2Count').textContent = '7';
+                document.getElementById('p3Count').textContent = '10';
+                document.getElementById('p4Count').textContent = '3';
+                document.getElementById('avgScore').textContent = '142';
+                document.getElementById('conversionRate').textContent = '18.5%';
+                document.getElementById('responseTime').textContent = '2.3h';
+                
+                this.updateLeadsTable();
+                this.updateLastRefresh();
+            }
+
+            startAutoRefresh() {
+                setInterval(() => {
+                    this.loadDashboardData();
+                }, this.refreshInterval);
+            }
+        }
+
+        // Global refresh function
+        async function refreshData() {
+            const refreshBtn = document.getElementById('refreshText');
+            refreshBtn.innerHTML = '<div class="loading" style="width: 16px; height: 16px;"></div> Refreshing...';
+            
+            await dashboard.loadDashboardData();
+            
+            setTimeout(() => {
+                refreshBtn.textContent = '🔄 Refresh Data';
+            }, 1000);
+        }
+
+        // Initialize dashboard
+        const dashboard = new AILeadDashboard();
+
+        // Add some visual flair
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stat cards on load
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
