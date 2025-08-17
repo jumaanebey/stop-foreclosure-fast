@@ -1,0 +1,84 @@
+# Environment Variables for Virtual Foreclosure Business
+# Copy this file to .env and fill in your actual values
+# NEVER commit .env to version control
+
+# === EMAIL CONFIGURATION ===
+# Gmail SMTP settings (or your preferred email service)
+EMAIL_USER=help@myforeclosuresolution.com
+EMAIL_PASSWORD=your-secure-app-password-here
+
+# Notification email for high-priority leads
+NOTIFICATION_EMAIL=alerts@myforeclosuresolution.com
+
+# === CRM INTEGRATION ===
+# Your CRM webhook URL (Zapier, HubSpot, etc.)
+CRM_WEBHOOK_URL=https://hooks.zapier.com/hooks/catch/your-webhook-id
+CRM_API_KEY=your-crm-api-key-here
+
+# === GOOGLE SERVICES ===
+# Google Analytics tracking ID
+GA_TRACKING_ID=G-ZC3FHFTPN2
+
+# Google Calendar booking ID (if using Google Calendar integration)
+GOOGLE_CALENDAR_ID=your-calendar-id
+
+# === FACEBOOK INTEGRATION ===
+# Facebook Pixel ID
+FACEBOOK_PIXEL_ID=your-pixel-id-here
+
+# === API SECURITY ===
+# API rate limiting settings
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=5
+
+# JWT secret for secure sessions (if implementing user accounts)
+JWT_SECRET=your-super-secure-jwt-secret-here
+
+# === DATABASE ===
+# If using a database for lead storage
+DATABASE_URL=your-database-connection-string
+
+# === EXTERNAL SERVICES ===
+# Property value estimation API
+PROPERTY_API_KEY=your-property-api-key
+
+# Phone validation service
+PHONE_VALIDATION_API_KEY=your-phone-api-key
+
+# === DEPLOYMENT SETTINGS ===
+NODE_ENV=production
+PORT=3000
+
+# Domain settings for CORS
+ALLOWED_DOMAINS=https://myforeclosuresolution.com,https://www.myforeclosuresolution.com
+
+# === LOGGING AND MONITORING ===
+# Log level (error, warn, info, debug)
+LOG_LEVEL=info
+
+# Monitoring service API key (if using external monitoring)
+MONITORING_API_KEY=your-monitoring-api-key
+
+# === BACKUP AND STORAGE ===
+# Cloud storage for document backup
+CLOUD_STORAGE_BUCKET=your-storage-bucket
+CLOUD_STORAGE_KEY=your-storage-api-key
+
+# === SSL/TLS CONFIGURATION ===
+# SSL certificate paths (if using custom certificates)
+SSL_CERT_PATH=/path/to/ssl/cert.pem
+SSL_KEY_PATH=/path/to/ssl/private.key
+
+# === BUSINESS CONFIGURATION ===
+# Business license numbers
+DRE_LICENSE=02076038
+NMLS_LICENSE=2033637
+
+# Business contact information
+BUSINESS_PHONE=949-328-4811
+BUSINESS_EMAIL=help@myforeclosuresolution.com
+
+# Operating hours for response time calculations
+BUSINESS_HOURS_START=8
+BUSINESS_HOURS_END=20
+BUSINESS_TIMEZONE=America/Los_Angeles
