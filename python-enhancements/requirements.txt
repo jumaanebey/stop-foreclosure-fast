@@ -34,13 +34,8 @@ validator==0.7.0
 # flake8==6.0.0
 # mypy==1.5.1
 
-# Production Dependencies (Optional)
-# Uncomment for production deployment
-
-# gunicorn==21.2.0
-# redis==4.6.0
-# psycopg2-binary==2.9.7
-# celery==5.3.1
+# Production Dependencies
+gunicorn==21.2.0
 
 # Monitoring & Logging (Optional)
 # prometheus-client==0.17.1
