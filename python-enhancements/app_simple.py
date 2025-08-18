@@ -201,6 +201,61 @@ def dashboard():
     </body></html>
     """
 
+@app.route('/api/ai/emergency-booking', methods=['POST'])
+def emergency_booking():
+    """Handle emergency consultation booking"""
+    try:
+        data = request.get_json()
+        
+        # Validate required fields
+        required_fields = ['name', 'phone', 'email']
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({
+                    'success': False,
+                    'error': f'Missing required field: {field}'
+                }), 400
+        
+        # Process the emergency booking
+        booking_data = {
+            'name': data['name'],
+            'phone': data['phone'],
+            'email': data['email'],
+            'property_address': data.get('property_address', ''),
+            'best_time': data.get('best_time', ''),
+            'urgency_level': data.get('urgency_level', 'emergency'),
+            'lead_source': data.get('lead_source', 'ai_assistant'),
+            'ai_situation': data.get('ai_situation', ''),
+            'timestamp': data.get('timestamp', datetime.now().isoformat()),
+            'priority': 'P1',
+            'response_required': 'Within 15 minutes'
+        }
+        
+        # In a real implementation, you would:
+        # 1. Save to database
+        # 2. Send email notification to you
+        # 3. Trigger SMS/webhook for immediate notification
+        # 4. Add to calendar system
+        
+        # For now, we'll log it and return success
+        print(f"🚨 EMERGENCY BOOKING: {booking_data['name']} - {booking_data['phone']}")
+        print(f"   Situation: {booking_data['ai_situation']}")
+        print(f"   Best Time: {booking_data['best_time']}")
+        
+        return jsonify({
+            'success': True,
+            'booking_id': f"EMG-{int(time.time())}",
+            'message': 'Emergency consultation scheduled',
+            'response_time': '15 minutes',
+            'contact_info': booking_data
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 10000))
     debug_mode = os.getenv('FLASK_ENV') == 'development'
