@@ -1342,7 +1342,18 @@
     <script>
         // AI Assistant Functions
         function openAIAssistant() {
-            document.getElementById('ai-assistant-modal').style.display = 'flex';
+            console.log('AI Assistant button clicked');
+            const modal = document.getElementById('ai-assistant-modal');
+            console.log('Modal element found:', modal);
+            
+            if (modal) {
+                modal.style.display = 'flex';
+                console.log('Modal should now be visible');
+            } else {
+                console.error('AI Assistant modal not found!');
+                alert('AI Assistant modal not found. Please refresh the page.');
+                return;
+            }
             
             // Track AI assistant opening
             if (typeof gtag !== 'undefined') {
@@ -1353,9 +1364,20 @@
             }
         }
 
+        // Make function globally available
+        window.openAIAssistant = openAIAssistant;
+
         function closeAIAssistant() {
-            document.getElementById('ai-assistant-modal').style.display = 'none';
+            console.log('Closing AI Assistant modal');
+            const modal = document.getElementById('ai-assistant-modal');
+            if (modal) {
+                modal.style.display = 'none';
+                console.log('Modal hidden');
+            }
         }
+
+        // Make function globally available
+        window.closeAIAssistant = closeAIAssistant;
 
         async function analyzeWithAI() {
             const input = document.getElementById('ai-input').value.trim();
