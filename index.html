@@ -975,17 +975,27 @@
                     
                     <div id="ai-chat-messages" class="ai-chat-messages"></div>
                     
+                    <div class="ai-features">
+                        <h4>Quick Analysis - Select Your Situation:</h4>
+                        <div class="quick-options-grid">
+                            <button onclick="quickAIAnalysis('auction')" class="ai-quick-btn critical">🚨 Auction Scheduled</button>
+                            <button onclick="quickAIAnalysis('notice_default')" class="ai-quick-btn urgent">⚠️ Notice of Default</button>
+                            <button onclick="quickAIAnalysis('missed_payments')" class="ai-quick-btn warning">💰 Behind on Payments</button>
+                            <button onclick="quickAIAnalysis('job_loss')" class="ai-quick-btn warning">💼 Lost Job/Income</button>
+                            <button onclick="quickAIAnalysis('divorce')" class="ai-quick-btn medium">💔 Divorce/Separation</button>
+                            <button onclick="quickAIAnalysis('medical')" class="ai-quick-btn medium">🏥 Medical Bills</button>
+                            <button onclick="quickAIAnalysis('inherited')" class="ai-quick-btn info">🏠 Inherited Property</button>
+                            <button onclick="quickAIAnalysis('exploring')" class="ai-quick-btn info">🤔 Exploring Options</button>
+                        </div>
+                        <div class="or-divider">
+                            <span>OR</span>
+                        </div>
+                    </div>
+                    
                     <div class="ai-input-area">
-                        <textarea id="ai-input" placeholder="Describe your foreclosure situation... (e.g., 'I received a notice of default last week')" rows="3"></textarea>
+                        <textarea id="ai-input" placeholder="Describe your specific foreclosure situation in detail... (e.g., 'I received a notice of default last week and the auction is scheduled for next month')" rows="3"></textarea>
                         <button onclick="analyzeWithAI()" class="ai-analyze-btn">🔍 Analyze My Situation</button>
                     </div>
-                </div>
-                
-                <div class="ai-features">
-                    <h4>Quick AI Analysis:</h4>
-                    <button onclick="quickAIAnalysis('urgent')" class="ai-quick-btn urgent">🚨 Emergency Situation</button>
-                    <button onclick="quickAIAnalysis('behind')" class="ai-quick-btn warning">⚠️ Behind on Payments</button>
-                    <button onclick="quickAIAnalysis('exploring')" class="ai-quick-btn info">ℹ️ Exploring Options</button>
                 </div>
             </div>
         </div>
@@ -1221,14 +1231,23 @@
         }
 
         .ai-quick-btn {
-            display: inline-block;
-            margin: 5px;
-            padding: 8px 15px;
+            padding: 12px 16px;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 180px;
+        }
+
+        .ai-quick-btn.critical {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 2px solid #dc2626;
+            font-weight: 700;
+            animation: pulse-red 2s infinite;
         }
 
         .ai-quick-btn.urgent {
@@ -1243,6 +1262,12 @@
             border: 1px solid #fed7aa;
         }
 
+        .ai-quick-btn.medium {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
         .ai-quick-btn.info {
             background: #f0f9ff;
             color: #0369a1;
@@ -1250,7 +1275,47 @@
         }
 
         .ai-quick-btn:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .quick-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .or-divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        .or-divider:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .or-divider span {
+            background: white;
+            padding: 0 20px;
+            color: #6b7280;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        @keyframes pulse-red {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+            }
+            50% { 
+                box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+            }
         }
 
         .ai-chat-messages {
@@ -1312,6 +1377,14 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .quick-options-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .ai-quick-btn {
+                min-width: 100%;
+                padding: 15px 20px;
+            }
             .ai-floating-btn {
                 bottom: 15px;
                 right: 15px;
@@ -1544,9 +1617,16 @@
 
         function quickAIAnalysis(type) {
             const situations = {
+                auction: 'I received a notice of sale and my property is scheduled for auction next month. I need immediate help to stop the foreclosure sale.',
+                notice_default: 'I received a notice of default from my lender and need to know my options before it goes to auction.',
+                missed_payments: 'I am 3-4 months behind on my mortgage payments and received a letter from my lender about foreclosure.',
+                job_loss: 'I lost my job 6 months ago and have been unable to make mortgage payments. I received foreclosure notices.',
+                divorce: 'I am going through a divorce and cannot afford the mortgage payments on my own. I need to sell quickly.',
+                medical: 'I have medical bills that prevented me from paying my mortgage and now I am facing foreclosure.',
+                inherited: 'I inherited a property that I cannot afford to maintain and need to sell it quickly.',
+                exploring: 'I want to explore my options before foreclosure proceedings begin and understand what help is available.',
                 urgent: 'I received a notice of default and need immediate help with my foreclosure situation.',
-                behind: 'I am behind on my mortgage payments and worried about foreclosure.',
-                exploring: 'I want to explore my options before foreclosure proceedings begin.'
+                behind: 'I am behind on my mortgage payments and worried about foreclosure.'
             };
 
             document.getElementById('ai-input').value = situations[type];
