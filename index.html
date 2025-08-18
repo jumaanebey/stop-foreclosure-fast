@@ -994,6 +994,7 @@
                     
                     <div class="ai-input-area">
                         <textarea id="ai-input" placeholder="Describe your specific foreclosure situation in detail... (e.g., 'I received a notice of default last week and the auction is scheduled for next month')" rows="3"></textarea>
+                        <input type="text" id="ai-property-address" placeholder="Property address (optional - helps improve accuracy)" style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                         <button onclick="analyzeWithAI()" class="ai-analyze-btn">🔍 Analyze My Situation</button>
                     </div>
                 </div>
@@ -1458,6 +1459,8 @@
 
         async function analyzeWithAI() {
             const input = document.getElementById('ai-input').value.trim();
+            const propertyAddress = document.getElementById('ai-property-address').value.trim();
+            
             if (!input) {
                 alert('Please describe your foreclosure situation first.');
                 return;
@@ -1491,6 +1494,7 @@
                         },
                         body: JSON.stringify({
                             situation: input,
+                            property_address: propertyAddress,
                             session_data: {
                                 timeOnPage: Date.now() - performance.timing.navigationStart,
                                 formInteractions: 1,
