@@ -246,6 +246,50 @@ function savePhone() {
     chatbotData.phone = phone;
     console.log('Phone saved:', phone);
     
+    // Move to email step
+    showStep4Email();
+}
+
+function showStep4Email() {
+    updateProgressDots(4, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">What's your email address? (optional)</div>
+        <div class="slide-input">
+            <input type="email" id="step4-email" placeholder="your@email.com">
+            <button onclick="saveEmail()" class="slide-button">Next</button>
+            <button onclick="skipEmail()" style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px;">Skip</button>
+        </div>
+        <p style="font-size: 14px; color: #6b7280; text-align: center; margin-top: 10px;">
+            We'll use this to send you appointment confirmation and helpful resources.
+        </p>
+    `;
+    
+    // Focus on the input
+    setTimeout(() => {
+        const input = document.getElementById('step4-email');
+        if (input) input.focus();
+    }, 100);
+}
+
+function saveEmail() {
+    const emailInput = document.getElementById('step4-email');
+    const email = emailInput ? emailInput.value.trim() : '';
+    
+    chatbotData.email = email;
+    console.log('Email saved:', email);
+    
+    // Move to step 5
+    showStep5();
+}
+
+function skipEmail() {
+    console.log('Email skipped');
+    chatbotData.email = '';
+    
     // Move to step 5
     showStep5();
 }
@@ -264,10 +308,17 @@ function showStep5() {
         <div class="consultation-summary">
             <p><strong>Name:</strong> ${chatbotData.name}</p>
             <p><strong>Phone:</strong> ${chatbotData.phone}</p>
+            ${chatbotData.email ? `<p><strong>Email:</strong> ${chatbotData.email}</p>` : ''}
             <p><strong>Priority Level:</strong> ${chatbotData.riskLevel || 'Standard'}</p>
+            <p><strong>Situation:</strong> ${getSituationText(chatbotData.situation)}</p>
         </div>
         <div class="calendar-section" id="calendar-section">
             <!-- Calendar will be inserted here -->
+        </div>
+        <div style="text-align: center; margin: 15px 0;">
+            <p style="font-size: 14px; color: #6b7280;">
+                Choose your appointment time above, then click Complete Booking below.
+            </p>
         </div>
         <button onclick="completeBooking()" class="slide-button" style="background: #059669;">Complete Booking</button>
     `;
@@ -284,20 +335,46 @@ function generateCalendar(isEmergency) {
     
     const urgencyMessage = isEmergency 
         ? '<div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 20px;">' +
-             '<p style="margin: 0; color: #dc2626; font-weight: 600;">EMERGENCY Priority Scheduling</p>' +
+             '<p style="margin: 0; color: #dc2626; font-weight: 600;">🚨 EMERGENCY Priority Scheduling</p>' +
              '<p style="margin: 5px 0 0 0; color: #991b1b; font-size: 14px;">Same-day appointments available. Please mention this is an emergency consultation when booking.</p>' +
            '</div>'
         : '<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 20px;">' +
-             '<p style="margin: 0; color: #065f46; font-weight: 600;">Standard Consultation Scheduling</p>' +
+             '<p style="margin: 0; color: #065f46; font-weight: 600;">📅 Standard Consultation Scheduling</p>' +
              '<p style="margin: 5px 0 0 0; color: #047857; font-size: 14px;">Select a convenient time for your foreclosure consultation.</p>' +
            '</div>';
     
+    // Create embedded calendar iframe
     calendarSection.innerHTML = urgencyMessage +
-        '<div style="text-align: center; margin: 20px 0;">' +
-            '<a href="' + calendarUrl + '" target="_blank" class="slide-button" style="background: ' + (isEmergency ? '#dc2626' : '#0ea5e9') + '; display: inline-block; text-decoration: none;">' +
-                (isEmergency ? 'Schedule Emergency Consultation' : 'Schedule Consultation') +
-            '</a>' +
+        '<div style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin: 20px 0;">' +
+            '<iframe src="' + calendarUrl + '" ' +
+                'style="width: 100%; height: 400px; border: none; background: white;" ' +
+                'frameborder="0" ' +
+                'scrolling="auto">' +
+            '</iframe>' +
+        '</div>' +
+        '<div style="text-align: center; margin: 15px 0;">' +
+            '<p style="font-size: 14px; color: #6b7280; margin: 0;">Can\'t see the calendar? ' +
+            '<a href="' + calendarUrl + '" target="_blank" style="color: #0ea5e9; text-decoration: none;">Open in new window</a></p>' +
         '</div>';
+    
+    // Try to load Google Calendar scheduling button if available
+    setTimeout(() => {
+        if (window.calendar && window.calendar.schedulingButton) {
+            const buttonContainer = document.createElement('div');
+            buttonContainer.id = 'google-calendar-button-container';
+            buttonContainer.style.textAlign = 'center';
+            buttonContainer.style.marginTop = '15px';
+            
+            calendarSection.appendChild(buttonContainer);
+            
+            window.calendar.schedulingButton.load({
+                url: calendarUrl,
+                color: isEmergency ? '#dc2626' : '#0ea5e9',
+                label: isEmergency ? '🚨 Schedule Emergency Consultation' : '📅 Schedule Consultation',
+                target: buttonContainer,
+            });
+        }
+    }, 1000);
 }
 
 function completeBooking() {
@@ -353,6 +430,18 @@ function closeAIAssistant() {
         modal.style.display = 'none';
         console.log('Modal hidden');
     }
+}
+
+// Helper function to get readable situation text
+function getSituationText(situation) {
+    const situations = {
+        'auction': 'Home scheduled for auction/sale',
+        'default': 'Received notice of default',
+        'behind': 'Behind on mortgage payments',
+        'hardship': 'Facing financial hardship',
+        'exploring': 'Exploring options'
+    };
+    return situations[situation] || situation;
 }
 
 // Make functions globally available immediately
