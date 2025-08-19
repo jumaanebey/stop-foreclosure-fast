@@ -68,6 +68,9 @@
     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
     
+    <!-- AI Functions - Load First -->
+    <script src="js/ai-functions.js"></script>
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
@@ -1665,49 +1668,9 @@
 
     <!-- AI Assistant JavaScript -->
     <script>
-        console.log('AI Assistant JavaScript loading...');
+        console.log('Chatbot JavaScript loading...');
         
-        // Define functions immediately so they're available for onclick handlers
-        function openAIAssistant() {
-            console.log('AI Assistant button clicked');
-            const modal = document.getElementById('ai-assistant-modal');
-            console.log('Modal element found:', modal);
-            
-            if (modal) {
-                modal.style.display = 'flex';
-                startChatbot(); // Initialize the chatbot
-                console.log('Modal opened and chatbot started');
-            } else {
-                console.error('AI Assistant modal not found!');
-                alert('AI Assistant modal not found. Please refresh the page.');
-                return;
-            }
-            
-            // Track AI assistant opening
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'ai_chatbot_opened', {
-                    'event_category': 'AI Interaction',
-                    'event_label': 'Chatbot Started'
-                });
-            }
-        }
-
-        // Make function globally available
-        window.openAIAssistant = openAIAssistant;
-        console.log('openAIAssistant function defined and assigned to window');
-
-        function closeAIAssistant() {
-            console.log('Closing AI Assistant modal');
-            const modal = document.getElementById('ai-assistant-modal');
-            if (modal) {
-                modal.style.display = 'none';
-                console.log('Modal hidden');
-            }
-        }
-
-        // Make function globally available
-        window.closeAIAssistant = closeAIAssistant;
-        console.log('closeAIAssistant function defined and assigned to window');
+        // Note: openAIAssistant and closeAIAssistant functions are now loaded from js/ai-functions.js
         
         // Test function availability
         console.log('Function test:', typeof window.openAIAssistant, typeof window.closeAIAssistant);
