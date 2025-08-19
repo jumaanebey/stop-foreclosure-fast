@@ -962,14 +962,19 @@
                 <div class="ai-chat-container">
                     <div class="ai-welcome-message">
                         <div class="ai-message">
-                            <strong>AI Assistant:</strong> Hi! I'm your AI foreclosure specialist. I can:
-                            <ul>
-                                <li>🔍 Analyze your situation for urgency level</li>
-                                <li>📊 Provide a priority score for your case</li>
-                                <li>💡 Suggest immediate next steps</li>
-                                <li>⚡ Connect you with emergency help if needed</li>
-                            </ul>
-                            Tell me about your foreclosure situation below:
+                            <strong>💙 AI Assistant:</strong> Hello, and thank you for reaching out. I know that dealing with foreclosure can feel overwhelming and scary, but you've taken a brave step by seeking help. I'm here to listen to your situation with compassion and provide you with personalized guidance.
+                            
+                            <div style="margin: 15px 0; padding: 15px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                                <strong style="color: #0369a1;">I can help you by:</strong>
+                                <ul style="margin: 10px 0; color: #0369a1;">
+                                    <li>🤗 Understanding your unique situation with care</li>
+                                    <li>📊 Providing an honest assessment of your timeline</li>
+                                    <li>💡 Suggesting the best next steps for your family</li>
+                                    <li>⚡ Connecting you with immediate help if needed</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="color: #0369a1; font-weight: 600;">Please know that whatever your situation, you're not alone. Let's work together to find the best path forward:</p>
                         </div>
                     </div>
                     
@@ -1535,28 +1540,33 @@
             
             if (score >= 400 || urgencyLevel === 'emergency') {
                 responseTime = 'IMMEDIATE - Within 15 minutes';
-                urgencyMessage = '🚨 CRITICAL: Schedule Emergency Video Call NOW';
+                urgencyMessage = '🤗 We understand this is overwhelming - let\'s get you help immediately';
                 bookingRequired = true;
             } else if (score >= 300 || urgencyLevel === 'high') {
                 responseTime = 'URGENT - Within 1 hour';
-                urgencyMessage = '⚡ HIGH PRIORITY: Book Consultation Today';
+                urgencyMessage = '💙 You\'re not alone in this - we can help you through this crisis';
                 bookingRequired = true;
             } else if (score >= 200 || urgencyLevel === 'medium') {
                 responseTime = 'PRIORITY - Within 4 hours';
-                urgencyMessage = '📅 Schedule Your Consultation';
+                urgencyMessage = '🌟 There are still good options available - let\'s explore them together';
                 bookingRequired = true;
             } else {
                 responseTime = 'Standard - Within 24 hours';
-                urgencyMessage = '📞 Call When Ready';
+                urgencyMessage = '😊 Great that you\'re being proactive - we\'re here to help';
                 bookingRequired = false;
             }
             
             let html = `
                 <div class="ai-response">
+                    <div style="background: #f0f9ff; border-radius: 10px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #0ea5e9;">
+                        <h4 style="margin: 0 0 10px 0; color: #0369a1;">💝 Thank you for trusting us with your situation</h4>
+                        <p style="margin: 0; color: #0369a1;">I've carefully analyzed your situation and want you to know that facing foreclosure is one of life's most stressful experiences. You're being brave by seeking help, and we're here to support you every step of the way.</p>
+                    </div>
+                    
                     <div class="urgency-header" style="background: ${getUrgencyBackgroundColor(score)}; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
                         <h4 style="margin: 0; font-size: 20px;">${urgencyMessage}</h4>
                         <div style="font-size: 24px; font-weight: bold; margin: 10px 0;">${score}/500 Urgency Score</div>
-                        <div style="font-size: 14px; opacity: 0.9;">Response Required: ${responseTime}</div>
+                        <div style="font-size: 14px; opacity: 0.9;">We recommend connecting: ${responseTime}</div>
                     </div>
                     
                     <div class="score-explanation" style="background: #f8f9fa; border-radius: 10px; padding: 20px; margin: 20px 0; border-left: 4px solid ${getUrgencyBackgroundColor(score)};">
@@ -1613,9 +1623,10 @@
 
             if (bookingRequired) {
                 html += `
-                    <div class="appointment-booking" style="background: #f8f9fa; border-radius: 10px; padding: 20px; margin: 20px 0; border-left: 4px solid #28a745;">
-                        <h5 style="margin-top: 0; color: #28a745;">📅 Book Your Emergency Video Consultation</h5>
-                        <p style="margin: 10px 0; color: #666;">Based on your urgency score, you qualify for priority scheduling. Please provide your contact information for immediate callback:</p>
+                    <div class="appointment-booking" style="background: #f0f9ff; border-radius: 10px; padding: 25px; margin: 20px 0; border-left: 4px solid #0ea5e9;">
+                        <h5 style="margin-top: 0; color: #0369a1;">💝 Let's Connect You with Help Right Away</h5>
+                        <p style="margin: 10px 0; color: #0369a1; line-height: 1.6;">Your situation deserves immediate attention and care. We understand how overwhelming this must feel, and we want to connect you with one of our compassionate specialists who will listen to your unique situation and work with you to find the best path forward.</p>
+                        <p style="margin: 15px 0; color: #0369a1; font-weight: 600;">Please share your contact information so we can reach out to you with support:</p>
                         
                         <div id="appointment-form" style="margin-top: 15px;">
                             <input type="text" id="contact-name" placeholder="Your Full Name *" style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px;" required>
@@ -1630,8 +1641,8 @@
                                 <option value="evening">Evening (5pm-8pm)</option>
                             </select>
                             
-                            <button onclick="scheduleEmergencyConsultation()" style="width: 100%; background: #dc2626; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px;">
-                                🚨 SCHEDULE EMERGENCY CONSULTATION
+                            <button onclick="scheduleEmergencyConsultation()" style="width: 100%; background: #0ea5e9; color: white; border: none; padding: 18px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);">
+                                💙 Yes, Please Connect Me with Help
                             </button>
                         </div>
                     </div>
@@ -1701,41 +1712,41 @@
             if (score >= 400) {
                 return `
                     <div style="padding: 15px; background: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
-                        <div style="font-weight: 700; color: #dc2626; margin-bottom: 10px;">🚨 CRITICAL EMERGENCY (400-500)</div>
-                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>What this means:</strong> You're facing immediate foreclosure sale or auction</div>
-                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>Time remaining:</strong> Days or weeks before you lose your home</div>
-                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>Why act now:</strong> Legal deadlines are approaching - waiting means fewer options</div>
-                        <div style="color: #dc2626; font-weight: 600;">⚡ Action required within 15 minutes to save your home</div>
+                        <div style="font-weight: 700; color: #dc2626; margin-bottom: 10px;">🤗 Critical Situation - We're Here for You (400-500)</div>
+                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>Your situation:</strong> You're facing an immediate sale or auction of your home</div>
+                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>What this means:</strong> Every day matters - but there are still options to help you</div>
+                        <div style="color: #7f1d1d; margin-bottom: 8px;"><strong>How we can help:</strong> We specialize in last-minute solutions and emergency interventions</div>
+                        <div style="color: #dc2626; font-weight: 600;">💙 Let's connect within 15 minutes to protect your home and your family</div>
                     </div>
                 `;
             } else if (score >= 300) {
                 return `
                     <div style="padding: 15px; background: #fff7ed; border-radius: 8px; border: 1px solid #fed7aa;">
-                        <div style="font-weight: 700; color: #ea580c; margin-bottom: 10px;">⚠️ HIGH URGENCY (300-399)</div>
-                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>What this means:</strong> Notice of default or serious delinquency</div>
-                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>Time remaining:</strong> 1-3 months before auction</div>
-                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>Why act now:</strong> Still have options but window is closing fast</div>
-                        <div style="color: #ea580c; font-weight: 600;">📞 Schedule consultation within 1 hour</div>
+                        <div style="font-weight: 700; color: #ea580c; margin-bottom: 10px;">💙 High Priority - You Don't Have to Face This Alone (300-399)</div>
+                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>Your situation:</strong> You've received serious notices and time is becoming critical</div>
+                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>What this means:</strong> You still have several options, but acting quickly will give you the best outcomes</div>
+                        <div style="color: #9a3412; margin-bottom: 8px;"><strong>How we can help:</strong> We can create a plan to address your situation and prevent foreclosure</div>
+                        <div style="color: #ea580c; font-weight: 600;">🌟 Let's talk within the hour and create a solution together</div>
                     </div>
                 `;
             } else if (score >= 200) {
                 return `
                     <div style="padding: 15px; background: #fefbeb; border-radius: 8px; border: 1px solid #fcd34d;">
-                        <div style="font-weight: 700; color: #d97706; margin-bottom: 10px;">📅 PRIORITY ACTION (200-299)</div>
-                        <div style="color: #92400e; margin-bottom: 8px;"><strong>What this means:</strong> Behind on payments or facing hardship</div>
-                        <div style="color: #92400e; margin-bottom: 8px;"><strong>Time remaining:</strong> 3-6 months to resolve</div>
-                        <div style="color: #92400e; margin-bottom: 8px;"><strong>Why act now:</strong> Prevention is easier than crisis management</div>
-                        <div style="color: #d97706; font-weight: 600;">📅 Schedule consultation within 4 hours</div>
+                        <div style="font-weight: 700; color: #d97706; margin-bottom: 10px;">🌟 Priority Support - Taking Action is Smart (200-299)</div>
+                        <div style="color: #92400e; margin-bottom: 8px;"><strong>Your situation:</strong> You're experiencing financial challenges but being proactive</div>
+                        <div style="color: #92400e; margin-bottom: 8px;"><strong>What this means:</strong> You have good options available and time to make informed decisions</div>
+                        <div style="color: #92400e; margin-bottom: 8px;"><strong>How we can help:</strong> We can help you prevent problems from escalating and find the right solution</div>
+                        <div style="color: #d97706; font-weight: 600;">😊 Let's connect within a few hours to explore your best options</div>
                     </div>
                 `;
             } else {
                 return `
                     <div style="padding: 15px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
-                        <div style="font-weight: 700; color: #059669; margin-bottom: 10px;">✅ STANDARD CONSULTATION (0-199)</div>
-                        <div style="color: #065f46; margin-bottom: 8px;"><strong>What this means:</strong> Exploring options or early planning</div>
-                        <div style="color: #065f46; margin-bottom: 8px;"><strong>Time remaining:</strong> Not immediate crisis</div>
-                        <div style="color: #065f46; margin-bottom: 8px;"><strong>Why act now:</strong> Get expert advice before problems develop</div>
-                        <div style="color: #059669; font-weight: 600;">📞 Call when convenient within 24 hours</div>
+                        <div style="font-weight: 700; color: #059669; margin-bottom: 10px;">😊 Proactive Planning - You're Making a Wise Choice (0-199)</div>
+                        <div style="color: #065f46; margin-bottom: 8px;"><strong>Your situation:</strong> You're being thoughtful and exploring your options early</div>
+                        <div style="color: #065f46; margin-bottom: 8px;"><strong>What this means:</strong> You have time to make the best decision for your family's future</div>
+                        <div style="color: #065f46; margin-bottom: 8px;"><strong>How we can help:</strong> We can provide expert guidance and help you understand all your options</div>
+                        <div style="color: #059669; font-weight: 600;">🌈 We're here when you're ready - let's talk at your convenience</div>
                     </div>
                 `;
             }
@@ -1783,14 +1794,17 @@
                 if (response.ok) {
                     // Success - show confirmation
                     document.getElementById('appointment-form').innerHTML = `
-                        <div style="background: #d1fae5; border: 1px solid #10b981; border-radius: 8px; padding: 20px; text-align: center;">
-                            <h4 style="color: #065f46; margin: 0 0 10px 0;">✅ Emergency Consultation Scheduled!</h4>
-                            <p style="margin: 10px 0; color: #065f46;">
-                                <strong>We will call you within 15 minutes at ${phone}</strong><br>
-                                If you don't hear from us immediately, call our priority line:
+                        <div style="background: #f0f9ff; border: 2px solid #0ea5e9; border-radius: 12px; padding: 25px; text-align: center;">
+                            <h4 style="color: #0369a1; margin: 0 0 15px 0;">💙 You're Not Alone - Help is Coming!</h4>
+                            <p style="margin: 15px 0; color: #0369a1; line-height: 1.6;">
+                                <strong>We've received your information and one of our caring specialists will call you within 15 minutes at ${phone}</strong><br><br>
+                                We know this is a difficult time, and we're honored that you've trusted us to help. Our team is experienced in handling urgent situations just like yours, and we're going to work together to find the best solution for you and your family.
                             </p>
-                            <button onclick="window.open('tel:9493284811')" style="background: #dc2626; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                                📞 Call Priority Line: (949) 328-4811
+                            <p style="margin: 15px 0; color: #0369a1; font-weight: 600;">
+                                Can't wait? You can call us directly:
+                            </p>
+                            <button onclick="window.open('tel:9493284811')" style="background: #0ea5e9; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">
+                                💙 Call Us Now: (949) 328-4811
                             </button>
                         </div>
                     `;
