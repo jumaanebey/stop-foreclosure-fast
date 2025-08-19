@@ -1665,7 +1665,9 @@
 
     <!-- AI Assistant JavaScript -->
     <script>
-        // AI Assistant Functions
+        console.log('🤖 AI Assistant JavaScript loading...');
+        
+        // Define functions immediately so they're available for onclick handlers
         function openAIAssistant() {
             console.log('AI Assistant button clicked');
             const modal = document.getElementById('ai-assistant-modal');
@@ -1692,6 +1694,7 @@
 
         // Make function globally available
         window.openAIAssistant = openAIAssistant;
+        console.log('✅ openAIAssistant function defined and assigned to window');
 
         function closeAIAssistant() {
             console.log('Closing AI Assistant modal');
@@ -1704,6 +1707,16 @@
 
         // Make function globally available
         window.closeAIAssistant = closeAIAssistant;
+        console.log('✅ closeAIAssistant function defined and assigned to window');
+        
+        // Test function availability
+        console.log('Function test:', typeof window.openAIAssistant, typeof window.closeAIAssistant);
+        
+        // Add to global scope for debugging
+        window.testAI = function() {
+            console.log('Test function called - AI functions available:', typeof window.openAIAssistant);
+            return typeof window.openAIAssistant === 'function';
+        };
 
         // Chatbot system
         let currentStep = 1;

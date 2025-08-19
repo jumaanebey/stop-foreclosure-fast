@@ -54,6 +54,13 @@
             console.log('closeAIAssistant called');
             document.getElementById('ai-assistant-modal').style.display = 'none';
         }
+        
+        // Make functions globally available
+        window.openAIAssistant = openAIAssistant;
+        window.closeAIAssistant = closeAIAssistant;
+        
+        // Test that the function is available
+        console.log('Functions defined:', typeof window.openAIAssistant, typeof window.closeAIAssistant);
     </script>
 </body>
 </html>

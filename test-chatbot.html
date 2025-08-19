@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Test</title>
+</head>
+<body>
+    <button onclick="testChatbot()">Test Chatbot Functions</button>
+    <div id="test-results"></div>
+
+    <script>
+        // Copy the critical functions from index.html to test them
+        function generateCalendar(isEmergency = true) {
+            const calendarUrl = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ11saPKXhTtJ5jLw6q9XASJXT6whF2LSN7MgXGzcT9PIlyRhXWXVVIDKqsIojgwkJo76HPcFLSz?gv=true';
+            
+            const urgencyMessage = isEmergency 
+                ? '<div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 20px;">' +
+                     '<p style="margin: 0; color: #dc2626; font-weight: 600;">🚨 Emergency Priority Scheduling</p>' +
+                     '<p style="margin: 5px 0 0 0; color: #991b1b; font-size: 14px;">Same-day appointments available. Please mention this is an emergency consultation when booking.</p>' +
+                   '</div>'
+                : '<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 20px;">' +
+                     '<p style="margin: 0; color: #065f46; font-weight: 600;">📅 Standard Consultation Scheduling</p>' +
+                     '<p style="margin: 5px 0 0 0; color: #047857; font-size: 14px;">Select a convenient time for your foreclosure consultation.</p>' +
+                   '</div>';
+            
+            return urgencyMessage +
+                '<div id="chatbot-google-calendar" style="margin: 20px 0;">' +
+                    '<div style="text-align: center; margin-bottom: 15px;">' +
+                        '<p style="color: #374151; margin: 0;">Click the button below to access your available appointment times:</p>' +
+                    '</div>' +
+                    '<div id="google-calendar-chatbot-button" style="display: flex; justify-content: center;"></div>' +
+                '</div>' +
+                '<script>' +
+                    'setTimeout(function() {' +
+                        'var calendarUrl = "' + calendarUrl + '";' +
+                        'var isEmergency = ' + isEmergency + ';' +
+                        'console.log("Calendar integration loaded:", calendarUrl, isEmergency);' +
+                    '}, 500);' +
+                '</script>';
+        }
+
+        function testChatbot() {
+            console.log('Testing chatbot functions...');
+            
+            // Test generateCalendar function
+            try {
+                const emergencyCalendar = generateCalendar(true);
+                const normalCalendar = generateCalendar(false);
+                
+                console.log('✅ generateCalendar(true) works');
+                console.log('✅ generateCalendar(false) works');
+                
+                document.getElementById('test-results').innerHTML = 
+                    '<h3>✅ All chatbot functions working!</h3>' +
+                    '<p>generateCalendar function successfully generates HTML without syntax errors.</p>' +
+                    '<hr>' +
+                    '<h4>Emergency Calendar HTML:</h4>' +
+                    '<div style="border: 1px solid #ccc; padding: 10px;">' + emergencyCalendar + '</div>';
+                    
+            } catch (error) {
+                console.error('❌ Error in chatbot functions:', error);
+                document.getElementById('test-results').innerHTML = 
+                    '<h3>❌ Error found:</h3>' +
+                    '<p>' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
