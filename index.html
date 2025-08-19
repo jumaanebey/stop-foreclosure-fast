@@ -902,14 +902,14 @@
         popup.innerHTML = `
             <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 500px; margin: 1rem;">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <h3 style="color: #dc2626; margin-bottom: 0.5rem;">🎯 Priority Consultation Available</h3>
+                    <h3 style="color: #dc2626; margin-bottom: 0.5rem;">Priority Consultation Available</h3>
                     <p>Based on your interest, you qualify for a priority virtual consultation within 4 hours.</p>
                 </div>
                 <div style="text-align: center;">
                     <a href="virtual-consultation.html" onclick="gtag('event', 'priority_consultation_click', {'event_category': 'hot_lead'});" 
                        style="background: #dc2626; color: white; padding: 1rem 2rem; border-radius: 0.5rem; 
                               text-decoration: none; font-weight: 600; margin-right: 1rem;">
-                        📅 Book Priority Consultation
+                        Book Priority Consultation
                     </a>
                     <button onclick="this.closest('#priority-consultation-popup').remove()" 
                             style="background: #6b7280; color: white; padding: 1rem 2rem; border: none; 
@@ -1665,7 +1665,7 @@
 
     <!-- AI Assistant JavaScript -->
     <script>
-        console.log('🤖 AI Assistant JavaScript loading...');
+        console.log('AI Assistant JavaScript loading...');
         
         // Define functions immediately so they're available for onclick handlers
         function openAIAssistant() {
@@ -1694,7 +1694,7 @@
 
         // Make function globally available
         window.openAIAssistant = openAIAssistant;
-        console.log('✅ openAIAssistant function defined and assigned to window');
+        console.log('openAIAssistant function defined and assigned to window');
 
         function closeAIAssistant() {
             console.log('Closing AI Assistant modal');
@@ -1707,7 +1707,7 @@
 
         // Make function globally available
         window.closeAIAssistant = closeAIAssistant;
-        console.log('✅ closeAIAssistant function defined and assigned to window');
+        console.log('closeAIAssistant function defined and assigned to window');
         
         // Test function availability
         console.log('Function test:', typeof window.openAIAssistant, typeof window.closeAIAssistant);
@@ -1749,19 +1749,19 @@
                 <div class="slide-question">What best describes your current situation?</div>
                 <div class="slide-options">
                     <div class="slide-option urgent" onclick="selectSituation('auction', 'fast')">
-                        🚨 My home is scheduled for auction/sale
+                        URGENT: My home is scheduled for auction/sale
                     </div>
                     <div class="slide-option urgent" onclick="selectSituation('default', 'fast')">
-                        ⚠️ I received a notice of default
+                        URGENT: I received a notice of default
                     </div>
                     <div class="slide-option" onclick="selectSituation('behind', 'slow')">
-                        💰 I'm behind on mortgage payments
+                        I'm behind on mortgage payments
                     </div>
                     <div class="slide-option" onclick="selectSituation('hardship', 'slow')">
-                        💔 I'm facing financial hardship
+                        I'm facing financial hardship
                     </div>
                     <div class="slide-option" onclick="selectSituation('exploring', 'slow')">
-                        🤔 I'm exploring my options
+                        I'm exploring my options
                     </div>
                 </div>
             `;
@@ -1788,16 +1788,16 @@
                     <div class="slide-question">When do you need to take action? <span class="urgency-indicator urgency-critical">URGENT</span></div>
                     <div class="slide-options">
                         <div class="slide-option urgent" onclick="selectTimeline('days', 'CRITICAL_RISK')">
-                            🚨 Days - Auction is very soon
+                            CRITICAL: Days - Auction is very soon
                         </div>
                         <div class="slide-option urgent" onclick="selectTimeline('weeks', 'CRITICAL_RISK')">
-                            ⚠️ Weeks - I have some time but not much
+                            URGENT: Weeks - I have some time but not much
                         </div>
                         <div class="slide-option" onclick="selectTimeline('month', 'HIGH_RISK')">
-                            📅 About a month
+                            About a month
                         </div>
                         <div class="slide-option" onclick="selectTimeline('unsure', 'HIGH_RISK')">
-                            🤷 I'm not sure of the timeline
+                            I'm not sure of the timeline
                         </div>
                     </div>
                 `;
@@ -1806,16 +1806,16 @@
                     <div class="slide-question">How urgent do you feel your situation is?</div>
                     <div class="slide-options">
                         <div class="slide-option" onclick="selectTimeline('urgent', 'HIGH_RISK')">
-                            ⚡ Very urgent - need help soon
+                            Very urgent - need help soon
                         </div>
                         <div class="slide-option" onclick="selectTimeline('concerned', 'MODERATE_RISK')">
-                            😟 Concerned but have some time
+                            Concerned but have some time
                         </div>
                         <div class="slide-option" onclick="selectTimeline('planning', 'MODERATE_RISK')">
-                            📋 Planning ahead
+                            Planning ahead
                         </div>
                         <div class="slide-option" onclick="selectTimeline('exploring', 'EARLY_STAGE')">
-                            🔍 Just exploring options
+                            Just exploring options
                         </div>
                     </div>
                 `;
@@ -1947,13 +1947,13 @@
                     <div class="slide-question">When can you schedule an emergency consultation appointment? <span class="urgency-indicator urgency-critical">URGENT</span></div>
                     <div class="slide-options">
                         <div class="slide-option urgent" onclick="selectMeetingTime('asap')">
-                            🚨 As soon as possible today
+                            URGENT: As soon as possible today
                         </div>
                         <div class="slide-option urgent" onclick="selectMeetingTime('within-hours')">
-                            ⚡ Within the next few hours
+                            URGENT: Within the next few hours
                         </div>
                         <div class="slide-option" onclick="selectMeetingTime('tomorrow')">
-                            📅 Tomorrow morning
+                            Tomorrow morning
                         </div>
                         <div class="slide-option" onclick="selectMeetingTime('this-week')">
                             📆 Sometime this week
@@ -1965,7 +1965,7 @@
                     <div class="slide-question">When would work best for a consultation appointment?</div>
                     <div class="slide-options">
                         <div class="slide-option" onclick="selectMeetingTime('this-week')">
-                            📅 This week
+                            This week
                         </div>
                         <div class="slide-option" onclick="selectMeetingTime('next-week')">
                             📆 Next week
@@ -2038,9 +2038,9 @@
                         </div>
                         <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #0ea5e9;">
                             <p style="margin: 0; color: #0369a1; font-size: 14px;">
-                                📧 Confirmation will be sent to: ${chatbotData.email}<br>
-                                🏠 Property: ${chatbotData.property}<br>
-                                ⚡ Emergency Priority - Same day scheduling available
+                                Confirmation will be sent to: ${chatbotData.email}<br>
+                                Property: ${chatbotData.property}<br>
+                                EMERGENCY PRIORITY - Same day scheduling available
                             </p>
                         </div>
                     </div>
@@ -2057,9 +2057,9 @@
                         </div>
                         <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
                             <p style="margin: 0; color: #065f46; font-size: 14px;">
-                                📧 Confirmation will be sent to: ${chatbotData.email}<br>
-                                🏠 Property: ${chatbotData.property}<br>
-                                📅 Standard appointment scheduling
+                                Confirmation will be sent to: ${chatbotData.email}<br>
+                                Property: ${chatbotData.property}<br>
+                                Standard appointment scheduling
                             </p>
                         </div>
                     </div>
@@ -2560,7 +2560,7 @@
                             Your information has been noted. For immediate assistance:
                         </p>
                         <button onclick="window.open('tel:9493284811')" style="background: #dc2626; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">
-                            📞 CALL NOW: (949) 328-4811
+                            CALL NOW: (949) 328-4811
                         </button>
                     </div>
                 `;
