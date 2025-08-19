@@ -1673,7 +1673,8 @@
             
             if (modal) {
                 modal.style.display = 'flex';
-                console.log('Modal should now be visible');
+                startChatbot(); // Initialize the chatbot
+                console.log('Modal opened and chatbot started');
             } else {
                 console.error('AI Assistant modal not found!');
                 alert('AI Assistant modal not found. Please refresh the page.');
@@ -1682,9 +1683,9 @@
             
             // Track AI assistant opening
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'ai_assistant_opened', {
+                gtag('event', 'ai_chatbot_opened', {
                     'event_category': 'AI Interaction',
-                    'event_label': 'AI Assistant Modal Opened'
+                    'event_label': 'Chatbot Started'
                 });
             }
         }
@@ -2045,46 +2046,44 @@
             const calendarUrl = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ11saPKXhTtJ5jLw6q9XASJXT6whF2LSN7MgXGzcT9PIlyRhXWXVVIDKqsIojgwkJo76HPcFLSz?gv=true';
             
             const urgencyMessage = isEmergency 
-                ? `<div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 20px;">
-                     <p style="margin: 0; color: #dc2626; font-weight: 600;">🚨 Emergency Priority Scheduling</p>
-                     <p style="margin: 5px 0 0 0; color: #991b1b; font-size: 14px;">Same-day appointments available. Please mention this is an emergency consultation when booking.</p>
-                   </div>`
-                : `<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 20px;">
-                     <p style="margin: 0; color: #065f46; font-weight: 600;">📅 Standard Consultation Scheduling</p>
-                     <p style="margin: 5px 0 0 0; color: #047857; font-size: 14px;">Select a convenient time for your foreclosure consultation.</p>
-                   </div>`;
+                ? '<div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 20px;">' +
+                     '<p style="margin: 0; color: #dc2626; font-weight: 600;">🚨 Emergency Priority Scheduling</p>' +
+                     '<p style="margin: 5px 0 0 0; color: #991b1b; font-size: 14px;">Same-day appointments available. Please mention this is an emergency consultation when booking.</p>' +
+                   '</div>'
+                : '<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 20px;">' +
+                     '<p style="margin: 0; color: #065f46; font-weight: 600;">📅 Standard Consultation Scheduling</p>' +
+                     '<p style="margin: 5px 0 0 0; color: #047857; font-size: 14px;">Select a convenient time for your foreclosure consultation.</p>' +
+                   '</div>';
             
-            return `
-                ${urgencyMessage}
-                <div id="chatbot-google-calendar" style="margin: 20px 0;">
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <p style="color: #374151; margin: 0;">Click the button below to access your available appointment times:</p>
-                    </div>
-                    <div id="google-calendar-chatbot-button" style="display: flex; justify-content: center;"></div>
-                </div>
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 20px;">
-                    <p style="margin: 0; color: #6b7280; font-size: 14px; text-align: center;">
-                        After booking, your appointment will be confirmed automatically and you'll receive calendar invitations.
-                    </p>
-                </div>
-                <script>
-                    // Initialize Google Calendar scheduling button for chatbot
-                    setTimeout(function() {
-                        if (window.calendar && window.calendar.schedulingButton) {
-                            window.calendar.schedulingButton.load({
-                                url: '${calendarUrl}',
-                                color: '${isEmergency ? '#dc2626' : '#0ea5e9'}',
-                                label: '${isEmergency ? '🚨 Schedule Emergency Consultation' : '📅 Schedule Consultation'}',
-                                target: document.getElementById('google-calendar-chatbot-button'),
-                            });
-                        } else {
-                            // Fallback if Google Calendar script isn't loaded yet
-                            document.getElementById('google-calendar-chatbot-button').innerHTML = 
-                                '<a href="${calendarUrl}" target="_blank" class="slide-button" style="background: ${isEmergency ? '#dc2626' : '#0ea5e9'}; display: inline-block; text-decoration: none;">${isEmergency ? '🚨 Schedule Emergency Consultation' : '📅 Schedule Consultation'}</a>';
-                        }
-                    }, 500);
-                </script>
-            `;
+            return urgencyMessage +
+                '<div id="chatbot-google-calendar" style="margin: 20px 0;">' +
+                    '<div style="text-align: center; margin-bottom: 15px;">' +
+                        '<p style="color: #374151; margin: 0;">Click the button below to access your available appointment times:</p>' +
+                    '</div>' +
+                    '<div id="google-calendar-chatbot-button" style="display: flex; justify-content: center;"></div>' +
+                '</div>' +
+                '<div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 20px;">' +
+                    '<p style="margin: 0; color: #6b7280; font-size: 14px; text-align: center;">' +
+                        'After booking, your appointment will be confirmed automatically and you\'ll receive calendar invitations.' +
+                    '</p>' +
+                '</div>' +
+                '<script>' +
+                    'setTimeout(function() {' +
+                        'var calendarUrl = "' + calendarUrl + '";' +
+                        'var isEmergency = ' + isEmergency + ';' +
+                        'if (window.calendar && window.calendar.schedulingButton) {' +
+                            'window.calendar.schedulingButton.load({' +
+                                'url: calendarUrl,' +
+                                'color: isEmergency ? "#dc2626" : "#0ea5e9",' +
+                                'label: isEmergency ? "🚨 Schedule Emergency Consultation" : "📅 Schedule Consultation",' +
+                                'target: document.getElementById("google-calendar-chatbot-button"),' +
+                            '});' +
+                        '} else {' +
+                            'document.getElementById("google-calendar-chatbot-button").innerHTML = ' +
+                                '"<a href=\\"" + calendarUrl + "\\" target=\\"_blank\\" class=\\"slide-button\\" style=\\"background: " + (isEmergency ? "#dc2626" : "#0ea5e9") + "; display: inline-block; text-decoration: none;\\">" + (isEmergency ? "🚨 Schedule Emergency Consultation" : "📅 Schedule Consultation") + "</a>";' +
+                        '}' +
+                    '}, 500);' +
+                '</script>';
         }
         
         // Note: Google Calendar handles appointment selection directly
@@ -2230,53 +2229,8 @@
             }
         }
 
-        async function submitChatbotData() {
-            try {
-                const response = await fetch('https://stop-foreclosure-fast.onrender.com/api/ai/emergency-booking', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: chatbotData.name,
-                        phone: chatbotData.phone,
-                        email: chatbotData.email || '',
-                        property_address: chatbotData.property || '',
-                        street_address: chatbotData.street || '',
-                        city: chatbotData.city || '',
-                        state: chatbotData.state || '',
-                        zip_code: chatbotData.zip || '',
-                        property_value: chatbotData.propertyValue || '',
-                        best_time: chatbotData.meetingTime || '',
-                        urgency_level: urgencyPath === 'fast' ? 'emergency' : 'standard',
-                        lead_source: 'ai_chatbot',
-                        ai_situation: `${chatbotData.situation} - ${chatbotData.timeline}`,
-                        risk_level: chatbotData.riskLevel,
-                        risk_score: getRiskScore(chatbotData.riskLevel) / 100,  // Convert to 1-4 scale
-                        ai_score: chatbotData.score,  // Keep for backward compatibility
-                        timestamp: new Date().toISOString()
-                    })
-                });
-                
-                console.log('Chatbot data submitted successfully');
-            } catch (error) {
-                console.error('Failed to submit chatbot data:', error);
-            }
-        }
 
-        // Initialize chatbot when modal opens
-        function openAIAssistant() {
-            document.getElementById('ai-assistant-modal').style.display = 'flex';
-            startChatbot();
-            
-            // Track AI assistant opening
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'ai_chatbot_opened', {
-                    'event_category': 'AI Interaction',
-                    'event_label': 'Chatbot Started'
-                });
-            }
-        }
+        // openAIAssistant function defined above
 
         // Legacy function - not used in new chatbot system
         function displayAIAnalysis(urgencyResult, scoreResult) {
