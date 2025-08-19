@@ -1717,6 +1717,20 @@
             console.log('Test function called - AI functions available:', typeof window.openAIAssistant);
             return typeof window.openAIAssistant === 'function';
         };
+        
+        // Force show modal for debugging
+        window.forceShowModal = function() {
+            const modal = document.getElementById('ai-assistant-modal');
+            console.log('Modal element:', modal);
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                console.log('Modal forced to show - computed style:', window.getComputedStyle(modal).display);
+            } else {
+                console.error('Modal not found!');
+            }
+        };
 
         // Chatbot system
         let currentStep = 1;
