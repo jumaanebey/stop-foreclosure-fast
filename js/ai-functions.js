@@ -1,6 +1,19 @@
 // AI Assistant Functions - Standalone file
 console.log('AI Functions JavaScript loading...');
 
+// Add CSS for spinner animation
+const spinnerCSS = `
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+`;
+
+// Add CSS to head
+const style = document.createElement('style');
+style.textContent = spinnerCSS;
+document.head.appendChild(style);
+
 function openAIAssistant() {
     console.log('AI Assistant button clicked');
     const modal = document.getElementById('ai-assistant-modal');
@@ -267,15 +280,185 @@ function saveEmail() {
     chatbotData.email = email;
     console.log('Email saved:', email);
     
-    // Move to step 5
-    showStep5();
+    // Move to address collection step
+    showStep4Address();
 }
 
 function skipEmail() {
     console.log('Email skipped');
     chatbotData.email = '';
     
-    // Move to step 5
+    // Move to address collection step
+    showStep4Address();
+}
+
+function showStep4Address() {
+    updateProgressDots(4, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">What's the property address we'll be discussing?</div>
+        <div class="slide-input">
+            <input type="text" id="step4-street" placeholder="123 Main Street" style="margin-bottom: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 100px 100px; gap: 10px;">
+                <input type="text" id="step4-city" placeholder="City">
+                <input type="text" id="step4-state" placeholder="State" maxlength="2">
+                <input type="text" id="step4-zip" placeholder="Zip" maxlength="10">
+            </div>
+            <button onclick="saveAddress()" class="slide-button">Next</button>
+        </div>
+        <p style="font-size: 14px; color: #6b7280; text-align: center; margin-top: 10px;">
+            This helps us provide more accurate guidance for your specific situation.
+        </p>
+    `;
+    
+    // Focus on the street input
+    setTimeout(() => {
+        const input = document.getElementById('step4-street');
+        if (input) input.focus();
+    }, 100);
+}
+
+async function saveAddress() {
+    const streetInput = document.getElementById('step4-street');
+    const cityInput = document.getElementById('step4-city');
+    const stateInput = document.getElementById('step4-state');
+    const zipInput = document.getElementById('step4-zip');
+    
+    const street = streetInput ? streetInput.value.trim() : '';
+    const city = cityInput ? cityInput.value.trim() : '';
+    const state = stateInput ? stateInput.value.trim().toUpperCase() : '';
+    const zip = zipInput ? zipInput.value.trim() : '';
+    
+    if (!street || !city || !state || !zip) {
+        alert('Please fill in all address fields to continue.');
+        return;
+    }
+    
+    // Save address data
+    chatbotData.propertyAddress = {
+        street: street,
+        city: city,
+        state: state,
+        zip: zip,
+        full: `${street}, ${city}, ${state} ${zip}`
+    };
+    
+    console.log('Address saved:', chatbotData.propertyAddress);
+    
+    // Show loading message while looking up foreclosure data
+    const currentSlide = document.getElementById('current-slide');
+    if (currentSlide) {
+        currentSlide.innerHTML = `
+            <div class="slide-question">Looking up foreclosure data for your area...</div>
+            <div style="text-align: center; padding: 20px;">
+                <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #0ea5e9; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                <p style="margin-top: 15px; color: #6b7280;">
+                    Getting local market insights to better assist you...
+                </p>
+            </div>
+        `;
+    }
+    
+    // Lookup foreclosure data for the area
+    try {
+        await lookupForeclosureData(chatbotData.propertyAddress);
+    } catch (error) {
+        console.log('Foreclosure data lookup failed:', error);
+    }
+    
+    // Move to final step
+    setTimeout(() => showStep5(), 2000);
+}
+
+async function lookupForeclosureData(addressData) {
+    try {
+        const response = await fetch('https://stop-foreclosure-fast.onrender.com/api/foreclosure/area-insights', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                address: addressData.full,
+                zip_code: addressData.zip,
+                city: addressData.city,
+                state: addressData.state
+            })
+        });
+        
+        const data = await response.json();
+        if (data.success && data.area_insights) {
+            chatbotData.foreclosureInsights = data.area_insights;
+            console.log('Foreclosure insights received:', data.area_insights);
+            
+            // Show market insights to user
+            showMarketInsights(data.area_insights);
+        }
+    } catch (error) {
+        console.log('Failed to lookup foreclosure data:', error);
+    }
+}
+
+function showMarketInsights(insights) {
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    const marketMessage = insights.market_message || 'We\'ve analyzed your local area.';
+    const riskLevel = insights.risk_level || 'standard';
+    const activityLevel = insights.market_activity || 'low';
+    
+    // Apply urgency modifier to existing risk level if data shows high foreclosure activity
+    if (insights.urgency_modifier && insights.urgency_modifier > 1.2) {
+        if (chatbotData.riskLevel === 'MODERATE_RISK') {
+            chatbotData.riskLevel = 'HIGH_RISK';
+        } else if (chatbotData.riskLevel === 'EARLY_STAGE') {
+            chatbotData.riskLevel = 'MODERATE_RISK';
+        }
+        console.log('Risk level upgraded based on local market data:', chatbotData.riskLevel);
+    }
+    
+    let activityColor = '#059669'; // green
+    let activityIcon = '🟢';
+    if (activityLevel === 'high') {
+        activityColor = '#dc2626'; // red
+        activityIcon = '🔴';
+    } else if (activityLevel === 'moderate') {
+        activityColor = '#d97706'; // orange
+        activityIcon = '🟡';
+    }
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">Local Market Analysis</div>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid ${activityColor};">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 24px; margin-right: 10px;">${activityIcon}</span>
+                <h4 style="margin: 0; color: ${activityColor};">
+                    ${activityLevel.charAt(0).toUpperCase() + activityLevel.slice(1)} Foreclosure Activity
+                </h4>
+            </div>
+            <p style="margin: 10px 0; line-height: 1.5;">
+                ${marketMessage}
+            </p>
+            ${insights.total_properties ? `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; font-size: 14px;">
+                    <div style="text-align: center; padding: 10px; background: white; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #374151;">${insights.total_properties}</div>
+                        <div style="color: #6b7280;">Total Properties</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: white; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #374151;">${insights.recent_activity || 0}</div>
+                        <div style="color: #6b7280;">Recent Activity</div>
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+        <button onclick="continueToScheduling()" class="slide-button">Continue to Scheduling</button>
+    `;
+}
+
+function continueToScheduling() {
     showStep5();
 }
 
@@ -394,9 +577,12 @@ async function submitLeadToDashboard() {
             body: JSON.stringify({
                 name: chatbotData.name,
                 phone: chatbotData.phone,
-                ai_situation: chatbotData.situation,
+                email: chatbotData.email || '',
+                property_address: chatbotData.propertyAddress ? chatbotData.propertyAddress.full : '',
+                ai_situation: getSituationText(chatbotData.situation),
                 urgency_level: chatbotData.riskLevel,
-                lead_source: 'ai_chatbot',
+                foreclosure_insights: chatbotData.foreclosureInsights || null,
+                lead_source: 'ai_chatbot_with_foreclosure_data',
                 timestamp: new Date().toISOString()
             })
         });

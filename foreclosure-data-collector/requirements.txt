@@ -1,0 +1,7 @@
+# Foreclosure Data Collector Requirements
+requests>=2.25.0
+beautifulsoup4>=4.9.0
+feedparser>=6.0.0
+schedule>=1.1.0
+lxml>=4.6.0
+sqlite3

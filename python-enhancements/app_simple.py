@@ -10,6 +10,7 @@ import json
 import os
 import smtplib
 import time
+import sqlite3
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
@@ -27,6 +28,9 @@ SMTP_PORT = int(os.getenv('SMTP_PORT', 587))
 EMAIL_USER = os.getenv('EMAIL_USER', '')  # Your email
 EMAIL_PASS = os.getenv('EMAIL_PASS', '')  # Your app password
 NOTIFICATION_EMAIL = os.getenv('NOTIFICATION_EMAIL', 'help@myforeclosuresolution.com')  # Where to send alerts
+
+# Foreclosure database configuration
+FORECLOSURE_DB_PATH = os.getenv('FORECLOSURE_DB_PATH', '/tmp/foreclosure_data.db')
 
 def save_lead(lead_data):
     """Save lead to database (using list for now)"""
@@ -95,6 +99,195 @@ Timestamp: {lead_data.get('timestamp', datetime.now().isoformat())}
     except Exception as e:
         print(f"❌ Email notification failed: {str(e)}")
         return False
+
+def init_foreclosure_db():
+    """Initialize foreclosure database if it doesn't exist"""
+    try:
+        conn = sqlite3.connect(FORECLOSURE_DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS foreclosure_properties (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                address TEXT NOT NULL,
+                city TEXT,
+                state TEXT,
+                zip_code TEXT,
+                county TEXT,
+                foreclosure_stage TEXT,
+                auction_date TEXT,
+                filing_date TEXT,
+                lender TEXT,
+                amount REAL,
+                case_number TEXT,
+                trustee TEXT,
+                property_type TEXT,
+                estimated_value REAL,
+                source_url TEXT,
+                data_source TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS rss_entries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT,
+                link TEXT,
+                address TEXT,
+                city TEXT,
+                state TEXT,
+                zip_code TEXT,
+                price REAL,
+                property_type TEXT,
+                foreclosure_stage TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Error initializing foreclosure database: {e}")
+        return False
+
+def query_foreclosure_data(address=None, zip_code=None, city=None, state=None):
+    """Query local foreclosure database for property information"""
+    try:
+        conn = sqlite3.connect(FORECLOSURE_DB_PATH)
+        cursor = conn.cursor()
+        
+        # Search foreclosure properties first
+        conditions = []
+        params = []
+        
+        if address:
+            conditions.append('(address LIKE ? OR address LIKE ?)')
+            params.extend([f'%{address}%', f'%{address.replace(" ", "%")}%'])
+        
+        if zip_code:
+            conditions.append('zip_code = ?')
+            params.append(zip_code)
+        
+        if city:
+            conditions.append('city LIKE ?')
+            params.append(f'%{city}%')
+        
+        if state:
+            conditions.append('state = ?')
+            params.append(state.upper())
+        
+        if conditions:
+            where_clause = 'WHERE ' + ' OR '.join(conditions)
+            query = f'''
+                SELECT * FROM foreclosure_properties 
+                {where_clause}
+                ORDER BY updated_at DESC 
+                LIMIT 10
+            '''
+            cursor.execute(query, params)
+            results = cursor.fetchall()
+            
+            if results:
+                columns = [description[0] for description in cursor.description]
+                foreclosure_data = [dict(zip(columns, row)) for row in results]
+                conn.close()
+                return foreclosure_data
+        
+        # If no foreclosure properties found, check RSS entries
+        if conditions:
+            rss_query = f'''
+                SELECT * FROM rss_entries 
+                {where_clause}
+                ORDER BY created_at DESC 
+                LIMIT 5
+            '''
+            cursor.execute(rss_query, params)
+            rss_results = cursor.fetchall()
+            
+            if rss_results:
+                columns = [description[0] for description in cursor.description]
+                rss_data = [dict(zip(columns, row)) for row in rss_results]
+                conn.close()
+                return rss_data
+        
+        conn.close()
+        return []
+        
+    except Exception as e:
+        print(f"Error querying foreclosure database: {e}")
+        return []
+
+def get_area_foreclosure_stats(zip_code=None, city=None, state=None):
+    """Get foreclosure statistics for an area"""
+    try:
+        conn = sqlite3.connect(FORECLOSURE_DB_PATH)
+        cursor = conn.cursor()
+        
+        conditions = []
+        params = []
+        
+        if zip_code:
+            conditions.append('zip_code = ?')
+            params.append(zip_code)
+        elif city and state:
+            conditions.append('city LIKE ? AND state = ?')
+            params.extend([f'%{city}%', state.upper()])
+        elif state:
+            conditions.append('state = ?')
+            params.append(state.upper())
+        
+        if not conditions:
+            return {}
+        
+        where_clause = 'WHERE ' + ' AND '.join(conditions)
+        
+        # Total foreclosures in area
+        cursor.execute(f'SELECT COUNT(*) FROM foreclosure_properties {where_clause}', params)
+        total_foreclosures = cursor.fetchone()[0]
+        
+        # Recent foreclosures (last 30 days)
+        cursor.execute(f'''
+            SELECT COUNT(*) FROM foreclosure_properties 
+            {where_clause} AND created_at >= date('now', '-30 days')
+        ''', params)
+        recent_foreclosures = cursor.fetchone()[0]
+        
+        # Foreclosure stages breakdown
+        cursor.execute(f'''
+            SELECT foreclosure_stage, COUNT(*) as count
+            FROM foreclosure_properties 
+            {where_clause}
+            GROUP BY foreclosure_stage
+        ''', params)
+        stage_breakdown = dict(cursor.fetchall())
+        
+        # Average property values
+        cursor.execute(f'''
+            SELECT AVG(estimated_value) FROM foreclosure_properties 
+            {where_clause} AND estimated_value > 0
+        ''', params)
+        avg_value_result = cursor.fetchone()[0]
+        avg_value = avg_value_result if avg_value_result else 0
+        
+        conn.close()
+        
+        return {
+            'total_foreclosures': total_foreclosures,
+            'recent_foreclosures': recent_foreclosures,
+            'foreclosure_stages': stage_breakdown,
+            'average_property_value': avg_value,
+            'foreclosure_rate': 'high' if total_foreclosures > 50 else 'moderate' if total_foreclosures > 20 else 'low'
+        }
+        
+    except Exception as e:
+        print(f"Error getting area stats: {e}")
+        return {}
+
+# Initialize foreclosure database on startup
+init_foreclosure_db()
 
 @app.route('/')
 def home():
@@ -482,6 +675,197 @@ def get_property_value():
             'data_source': 'AI Estimation',
             'address': address,
             'market_trends': 'Stable' if confidence > 0.8 else 'Volatile'
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/foreclosure/lookup', methods=['POST'])
+def foreclosure_lookup():
+    """Lookup foreclosure data for address or area"""
+    try:
+        data = request.get_json()
+        address = data.get('address', '')
+        zip_code = data.get('zip_code', '')
+        city = data.get('city', '')
+        state = data.get('state', '')
+        
+        # Query local foreclosure database
+        foreclosure_data = query_foreclosure_data(
+            address=address,
+            zip_code=zip_code,
+            city=city,
+            state=state
+        )
+        
+        # Get area statistics
+        area_stats = get_area_foreclosure_stats(
+            zip_code=zip_code,
+            city=city,
+            state=state
+        )
+        
+        response = {
+            'success': True,
+            'foreclosure_data': foreclosure_data,
+            'area_stats': area_stats,
+            'data_source': 'local_database',
+            'query_params': {
+                'address': address,
+                'zip_code': zip_code,
+                'city': city,
+                'state': state
+            }
+        }
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'message': 'Foreclosure lookup temporarily unavailable'
+        }), 500
+
+@app.route('/api/foreclosure/area-insights', methods=['POST'])
+def area_insights():
+    """Get foreclosure insights for a specific area"""
+    try:
+        data = request.get_json()
+        zip_code = data.get('zip_code', '')
+        city = data.get('city', '')
+        state = data.get('state', '')
+        
+        if not any([zip_code, city, state]):
+            return jsonify({
+                'success': False,
+                'error': 'At least one location parameter required'
+            }), 400
+        
+        # Get comprehensive area statistics
+        area_stats = get_area_foreclosure_stats(zip_code, city, state)
+        
+        if not area_stats:
+            return jsonify({
+                'success': True,
+                'message': 'No foreclosure data available for this area',
+                'insights': {
+                    'market_activity': 'unknown',
+                    'risk_level': 'low',
+                    'recommendation': 'Data not available - proceeding with standard consultation'
+                }
+            })
+        
+        # Generate insights based on data
+        total_foreclosures = area_stats.get('total_foreclosures', 0)
+        recent_foreclosures = area_stats.get('recent_foreclosures', 0)
+        foreclosure_rate = area_stats.get('foreclosure_rate', 'low')
+        
+        insights = {
+            'market_activity': foreclosure_rate,
+            'total_properties': total_foreclosures,
+            'recent_activity': recent_foreclosures,
+            'average_value': area_stats.get('average_property_value', 0)
+        }
+        
+        # Risk assessment based on local data
+        if foreclosure_rate == 'high':
+            insights['risk_level'] = 'elevated'
+            insights['recommendation'] = 'High foreclosure activity area - immediate consultation recommended'
+            insights['urgency_modifier'] = 1.3
+        elif foreclosure_rate == 'moderate':
+            insights['risk_level'] = 'moderate'
+            insights['recommendation'] = 'Moderate foreclosure activity - prompt consultation advised'
+            insights['urgency_modifier'] = 1.1
+        else:
+            insights['risk_level'] = 'low'
+            insights['recommendation'] = 'Lower foreclosure activity area - standard consultation timeline'
+            insights['urgency_modifier'] = 1.0
+        
+        # Market context message
+        if total_foreclosures > 50:
+            insights['market_message'] = f"Your area has significant foreclosure activity ({total_foreclosures} properties). This means there are proven solutions available and you're not alone."
+        elif total_foreclosures > 20:
+            insights['market_message'] = f"There has been moderate foreclosure activity in your area ({total_foreclosures} properties). We have experience helping homeowners in similar situations."
+        else:
+            insights['market_message'] = "Your area has relatively low foreclosure activity, which is positive for your situation."
+        
+        return jsonify({
+            'success': True,
+            'area_insights': insights,
+            'raw_stats': area_stats,
+            'location': {
+                'zip_code': zip_code,
+                'city': city,
+                'state': state
+            }
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/foreclosure/stats', methods=['GET'])
+def foreclosure_stats():
+    """Get overall foreclosure database statistics"""
+    try:
+        conn = sqlite3.connect(FORECLOSURE_DB_PATH)
+        cursor = conn.cursor()
+        
+        # Total properties
+        cursor.execute('SELECT COUNT(*) FROM foreclosure_properties')
+        total_properties = cursor.fetchone()[0]
+        
+        # Total RSS entries
+        cursor.execute('SELECT COUNT(*) FROM rss_entries')
+        total_rss = cursor.fetchone()[0]
+        
+        # Properties by state
+        cursor.execute('''
+            SELECT state, COUNT(*) as count 
+            FROM foreclosure_properties 
+            WHERE state IS NOT NULL AND state != ''
+            GROUP BY state 
+            ORDER BY count DESC 
+            LIMIT 10
+        ''')
+        by_state = dict(cursor.fetchall())
+        
+        # Recent activity (last 7 days)
+        cursor.execute('''
+            SELECT COUNT(*) FROM foreclosure_properties 
+            WHERE created_at >= date('now', '-7 days')
+        ''')
+        recent_activity = cursor.fetchone()[0]
+        
+        # Foreclosure stages
+        cursor.execute('''
+            SELECT foreclosure_stage, COUNT(*) as count
+            FROM foreclosure_properties 
+            WHERE foreclosure_stage IS NOT NULL AND foreclosure_stage != ''
+            GROUP BY foreclosure_stage
+            ORDER BY count DESC
+        ''')
+        by_stage = dict(cursor.fetchall())
+        
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'database_stats': {
+                'total_foreclosure_properties': total_properties,
+                'total_rss_entries': total_rss,
+                'total_records': total_properties + total_rss,
+                'recent_additions': recent_activity,
+                'coverage_by_state': by_state,
+                'foreclosure_stages': by_stage,
+                'last_updated': datetime.now().isoformat()
+            }
         })
         
     except Exception as e:
