@@ -105,10 +105,245 @@ function updateProgressDots(current, total) {
     }
 }
 
+// Chatbot data storage
+let chatbotData = {};
+let urgencyPath = 'slow';
+let currentStep = 1;
+
 function selectSituation(situation, path) {
     console.log('Situation selected:', situation, path);
-    // This will need to connect to the main chatbot functions
-    alert('Chatbot flow will continue here. Selected: ' + situation);
+    chatbotData.situation = situation;
+    urgencyPath = path;
+    
+    // Move to step 2
+    showStep2();
+}
+
+function showStep2() {
+    currentStep = 2;
+    updateProgressDots(2, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    if (urgencyPath === 'fast') {
+        currentSlide.innerHTML = `
+            <div class="slide-question">When do you need to take action? <span class="urgency-indicator urgency-critical">URGENT</span></div>
+            <div class="slide-options">
+                <div class="slide-option urgent" onclick="selectTimeline('days', 'CRITICAL_RISK')">
+                    CRITICAL: Days - Auction is very soon
+                </div>
+                <div class="slide-option urgent" onclick="selectTimeline('weeks', 'CRITICAL_RISK')">
+                    URGENT: Weeks - I have some time but not much
+                </div>
+                <div class="slide-option" onclick="selectTimeline('month', 'HIGH_RISK')">
+                    About a month
+                </div>
+                <div class="slide-option" onclick="selectTimeline('unsure', 'HIGH_RISK')">
+                    I'm not sure of the timeline
+                </div>
+            </div>
+        `;
+    } else {
+        currentSlide.innerHTML = `
+            <div class="slide-question">How urgent do you feel your situation is?</div>
+            <div class="slide-options">
+                <div class="slide-option" onclick="selectTimeline('urgent', 'HIGH_RISK')">
+                    Very urgent - need help soon
+                </div>
+                <div class="slide-option" onclick="selectTimeline('concerned', 'MODERATE_RISK')">
+                    Concerned but have some time
+                </div>
+                <div class="slide-option" onclick="selectTimeline('planning', 'MODERATE_RISK')">
+                    Planning ahead
+                </div>
+                <div class="slide-option" onclick="selectTimeline('exploring', 'EARLY_STAGE')">
+                    Just exploring options
+                </div>
+            </div>
+        `;
+    }
+}
+
+function selectTimeline(timeline, riskLevel) {
+    console.log('Timeline selected:', timeline, riskLevel);
+    chatbotData.timeline = timeline;
+    chatbotData.riskLevel = riskLevel;
+    
+    // Move to step 3
+    showStep3();
+}
+
+function showStep3() {
+    currentStep = 3;
+    updateProgressDots(3, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">What's your name?</div>
+        <div class="slide-input">
+            <input type="text" id="step3-name" placeholder="Enter your first name" maxlength="50">
+            <button onclick="saveName()" class="slide-button">Next</button>
+        </div>
+    `;
+    
+    // Focus on the input
+    setTimeout(() => {
+        const input = document.getElementById('step3-name');
+        if (input) input.focus();
+    }, 100);
+}
+
+function saveName() {
+    const nameInput = document.getElementById('step3-name');
+    const name = nameInput ? nameInput.value.trim() : '';
+    
+    if (!name) {
+        alert('Please enter your name to continue.');
+        return;
+    }
+    
+    chatbotData.name = name;
+    console.log('Name saved:', name);
+    
+    // Move to step 4
+    showStep4();
+}
+
+function showStep4() {
+    currentStep = 4;
+    updateProgressDots(4, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">What's the best phone number to reach you?</div>
+        <div class="slide-input">
+            <input type="tel" id="step4-phone" placeholder="(555) 123-4567" maxlength="20">
+            <button onclick="savePhone()" class="slide-button">Next</button>
+        </div>
+    `;
+    
+    // Focus on the input
+    setTimeout(() => {
+        const input = document.getElementById('step4-phone');
+        if (input) input.focus();
+    }, 100);
+}
+
+function savePhone() {
+    const phoneInput = document.getElementById('step4-phone');
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    
+    if (!phone) {
+        alert('Please enter your phone number to continue.');
+        return;
+    }
+    
+    chatbotData.phone = phone;
+    console.log('Phone saved:', phone);
+    
+    // Move to step 5
+    showStep5();
+}
+
+function showStep5() {
+    currentStep = 5;
+    updateProgressDots(5, 5);
+    
+    const currentSlide = document.getElementById('current-slide');
+    if (!currentSlide) return;
+    
+    const isEmergency = chatbotData.riskLevel === 'CRITICAL_RISK';
+    
+    currentSlide.innerHTML = `
+        <div class="slide-question">Perfect! Let's schedule your consultation.</div>
+        <div class="consultation-summary">
+            <p><strong>Name:</strong> ${chatbotData.name}</p>
+            <p><strong>Phone:</strong> ${chatbotData.phone}</p>
+            <p><strong>Priority Level:</strong> ${chatbotData.riskLevel || 'Standard'}</p>
+        </div>
+        <div class="calendar-section" id="calendar-section">
+            <!-- Calendar will be inserted here -->
+        </div>
+        <button onclick="completeBooking()" class="slide-button" style="background: #059669;">Complete Booking</button>
+    `;
+    
+    // Insert calendar
+    generateCalendar(isEmergency);
+}
+
+function generateCalendar(isEmergency) {
+    const calendarSection = document.getElementById('calendar-section');
+    if (!calendarSection) return;
+    
+    const calendarUrl = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ11saPKXhTtJ5jLw6q9XASJXT6whF2LSN7MgXGzcT9PIlyRhXWXVVIDKqsIojgwkJo76HPcFLSz?gv=true';
+    
+    const urgencyMessage = isEmergency 
+        ? '<div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 20px;">' +
+             '<p style="margin: 0; color: #dc2626; font-weight: 600;">EMERGENCY Priority Scheduling</p>' +
+             '<p style="margin: 5px 0 0 0; color: #991b1b; font-size: 14px;">Same-day appointments available. Please mention this is an emergency consultation when booking.</p>' +
+           '</div>'
+        : '<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 20px;">' +
+             '<p style="margin: 0; color: #065f46; font-weight: 600;">Standard Consultation Scheduling</p>' +
+             '<p style="margin: 5px 0 0 0; color: #047857; font-size: 14px;">Select a convenient time for your foreclosure consultation.</p>' +
+           '</div>';
+    
+    calendarSection.innerHTML = urgencyMessage +
+        '<div style="text-align: center; margin: 20px 0;">' +
+            '<a href="' + calendarUrl + '" target="_blank" class="slide-button" style="background: ' + (isEmergency ? '#dc2626' : '#0ea5e9') + '; display: inline-block; text-decoration: none;">' +
+                (isEmergency ? 'Schedule Emergency Consultation' : 'Schedule Consultation') +
+            '</a>' +
+        '</div>';
+}
+
+function completeBooking() {
+    console.log('Completing booking with data:', chatbotData);
+    
+    // Submit to backend
+    submitLeadToDashboard();
+    
+    // Show success message
+    const currentSlide = document.getElementById('current-slide');
+    if (currentSlide) {
+        currentSlide.innerHTML = `
+            <div class="success-message">
+                <h3 style="color: #059669; margin-bottom: 15px;">Consultation Scheduled!</h3>
+                <p><strong>${chatbotData.name}</strong>, we've received your information and will contact you at <strong>${chatbotData.phone}</strong> within the next hour.</p>
+                <p style="margin-top: 20px;">
+                    <strong>Emergency?</strong> Call us now: <a href="tel:+1-949-328-4811" style="color: #dc2626; font-weight: bold;">(949) 328-4811</a>
+                </p>
+                <button onclick="closeAIAssistant()" class="slide-button" style="background: #059669;">Close</button>
+            </div>
+        `;
+    }
+}
+
+async function submitLeadToDashboard() {
+    try {
+        const response = await fetch('https://stop-foreclosure-fast.onrender.com/api/ai/emergency-booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: chatbotData.name,
+                phone: chatbotData.phone,
+                ai_situation: chatbotData.situation,
+                urgency_level: chatbotData.riskLevel,
+                lead_source: 'ai_chatbot',
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        const result = await response.json();
+        console.log('Lead submitted successfully:', result);
+    } catch (error) {
+        console.error('Error submitting lead:', error);
+    }
 }
 
 function closeAIAssistant() {
