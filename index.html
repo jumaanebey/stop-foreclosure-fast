@@ -1101,12 +1101,14 @@
         .ai-modal-content {
             background: white;
             border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
+            width: 98%;
+            max-width: 1200px;
+            height: 95vh;
+            overflow: hidden;
             position: relative;
             animation: modalSlideIn 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes modalSlideIn {
@@ -1123,20 +1125,21 @@
         .ai-modal-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
+            padding: 35px;
             border-radius: 15px 15px 0 0;
             position: relative;
+            flex-shrink: 0;
         }
 
         .ai-modal-header h3 {
             margin: 0;
-            font-size: 22px;
+            font-size: 26px;
         }
 
         .ai-modal-header p {
-            margin: 5px 0 0 0;
+            margin: 8px 0 0 0;
             opacity: 0.9;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .ai-modal-close {
@@ -1368,16 +1371,18 @@
 
         /* New Chatbot Styles */
         .chatbot-container {
-            height: 500px;
+            flex: 1;
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 30px;
             background: #f8fafc;
+            min-height: 350px;
         }
 
         .ai-message-bubble {
@@ -1442,25 +1447,28 @@
 
         .current-slide {
             background: white;
-            padding: 25px;
+            padding: 35px;
             border-top: 1px solid #e5e7eb;
             border-radius: 0 0 15px 15px;
+            min-height: 380px;
+            flex-shrink: 0;
         }
 
         .slide-question {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
             color: #374151;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            line-height: 1.4;
         }
 
         .slide-options {
             display: grid;
-            gap: 12px;
+            gap: 18px;
         }
 
         .slide-option {
-            padding: 15px 20px;
+            padding: 22px 28px;
             border: 2px solid #e5e7eb;
             border-radius: 12px;
             background: white;
@@ -1468,6 +1476,11 @@
             transition: all 0.3s ease;
             text-align: left;
             font-weight: 600;
+            font-size: 18px;
+            line-height: 1.5;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
         }
 
         .slide-option:hover {
@@ -1719,16 +1732,16 @@
                 document.getElementById('current-slide').innerHTML = `
                     <div class="slide-question">When do you need to take action? <span class="urgency-indicator urgency-critical">URGENT</span></div>
                     <div class="slide-options">
-                        <div class="slide-option urgent" onclick="selectTimeline('days', 450)">
+                        <div class="slide-option urgent" onclick="selectTimeline('days', 'CRITICAL_RISK')">
                             🚨 Days - Auction is very soon
                         </div>
-                        <div class="slide-option urgent" onclick="selectTimeline('weeks', 400)">
+                        <div class="slide-option urgent" onclick="selectTimeline('weeks', 'CRITICAL_RISK')">
                             ⚠️ Weeks - I have some time but not much
                         </div>
-                        <div class="slide-option" onclick="selectTimeline('month', 350)">
+                        <div class="slide-option" onclick="selectTimeline('month', 'HIGH_RISK')">
                             📅 About a month
                         </div>
-                        <div class="slide-option" onclick="selectTimeline('unsure', 300)">
+                        <div class="slide-option" onclick="selectTimeline('unsure', 'HIGH_RISK')">
                             🤷 I'm not sure of the timeline
                         </div>
                     </div>
@@ -1737,16 +1750,16 @@
                 document.getElementById('current-slide').innerHTML = `
                     <div class="slide-question">How urgent do you feel your situation is?</div>
                     <div class="slide-options">
-                        <div class="slide-option" onclick="selectTimeline('urgent', 250)">
+                        <div class="slide-option" onclick="selectTimeline('urgent', 'HIGH_RISK')">
                             ⚡ Very urgent - need help soon
                         </div>
-                        <div class="slide-option" onclick="selectTimeline('concerned', 200)">
+                        <div class="slide-option" onclick="selectTimeline('concerned', 'MODERATE_RISK')">
                             😟 Concerned but have some time
                         </div>
-                        <div class="slide-option" onclick="selectTimeline('planning', 150)">
+                        <div class="slide-option" onclick="selectTimeline('planning', 'MODERATE_RISK')">
                             📋 Planning ahead
                         </div>
-                        <div class="slide-option" onclick="selectTimeline('exploring', 100)">
+                        <div class="slide-option" onclick="selectTimeline('exploring', 'EARLY_STAGE')">
                             🔍 Just exploring options
                         </div>
                     </div>
@@ -1754,9 +1767,10 @@
             }
         }
 
-        function selectTimeline(timeline, score) {
+        function selectTimeline(timeline, riskLevel) {
             chatbotData.timeline = timeline;
-            chatbotData.score = score;
+            chatbotData.riskLevel = riskLevel;
+            chatbotData.score = getRiskScore(riskLevel);  // Keep score for backward compatibility
             
             addUserMessage(getTimelineText(timeline));
             addAIMessage(getTimelineResponse(timeline, urgencyPath));
@@ -1794,71 +1808,191 @@
         }
 
         function showStep4() {
-            updateProgressDots(4, 5);
+            updateProgressDots(4, 7);
             
-            if (chatbotData.score >= 300) {
-                document.getElementById('current-slide').innerHTML = `
-                    <div class="slide-question">${chatbotData.name}, your situation needs immediate attention. What's the best number to reach you?</div>
-                    <input type="tel" class="slide-input" id="step4-phone" placeholder="(555) 123-4567">
-                    <button class="slide-button" onclick="submitContact()">Get Help Now</button>
-                `;
-            } else {
-                document.getElementById('current-slide').innerHTML = `
-                    <div class="slide-question">${chatbotData.name}, I'd like to connect you with the right support. What's your phone number?</div>
-                    <input type="tel" class="slide-input" id="step4-phone" placeholder="(555) 123-4567">
-                    <input type="email" class="slide-input" id="step4-email" placeholder="your.email@example.com (optional)">
-                    <button class="slide-button" onclick="submitContact()">Connect Me</button>
-                `;
-            }
+            document.getElementById('current-slide').innerHTML = `
+                <div class="slide-question">${chatbotData.name}, let me get your contact information:</div>
+                <input type="tel" class="slide-input" id="step4-phone" placeholder="Phone number (555) 123-4567" required>
+                <input type="email" class="slide-input" id="step4-email" placeholder="Email address" required>
+                <button class="slide-button" onclick="submitContact()">Continue</button>
+            `;
         }
 
         function submitContact() {
             const phone = document.getElementById('step4-phone').value.trim();
-            const email = document.getElementById('step4-email')?.value.trim() || '';
+            const email = document.getElementById('step4-email').value.trim();
             
-            if (!phone) {
-                alert('Please enter your phone number so we can help you');
+            if (!phone || !email) {
+                alert('Please enter both your phone number and email address');
                 return;
             }
             
             chatbotData.phone = phone;
             chatbotData.email = email;
             
-            addUserMessage(phone);
+            addUserMessage(`${phone} and ${email}`);
+            addAIMessage("Perfect! Now let me get some details about your property.");
             
             setTimeout(() => {
                 currentStep = 5;
+                showStep5();
+            }, 1500);
+        }
+
+        function showStep5() {
+            updateProgressDots(5, 7);
+            
+            document.getElementById('current-slide').innerHTML = `
+                <div class="slide-question">What's the address of the property you need help with?</div>
+                <input type="text" class="slide-input" id="step5-address" placeholder="Property address (City, State)">
+                <input type="text" class="slide-input" id="step5-value" placeholder="Estimated property value (optional)">
+                <button class="slide-button" onclick="submitProperty()">Continue</button>
+            `;
+        }
+
+        function submitProperty() {
+            const address = document.getElementById('step5-address').value.trim();
+            const value = document.getElementById('step5-value').value.trim();
+            
+            if (!address) {
+                alert('Please enter the property address');
+                return;
+            }
+            
+            chatbotData.property = address;
+            chatbotData.propertyValue = value;
+            
+            addUserMessage(address + (value ? ` (Est. value: ${value})` : ''));
+            addAIMessage("Thank you! Last question - when would be the best time for a consultation meeting?");
+            
+            setTimeout(() => {
+                currentStep = 6;
+                showStep6();
+            }, 1500);
+        }
+
+        function showStep6() {
+            updateProgressDots(6, 7);
+            
+            if (chatbotData.riskLevel === 'CRITICAL_RISK' || chatbotData.riskLevel === 'HIGH_RISK') {
+                document.getElementById('current-slide').innerHTML = `
+                    <div class="slide-question">When can you meet for an emergency consultation? <span class="urgency-indicator urgency-critical">URGENT</span></div>
+                    <div class="slide-options">
+                        <div class="slide-option urgent" onclick="selectMeetingTime('asap')">
+                            🚨 As soon as possible today
+                        </div>
+                        <div class="slide-option urgent" onclick="selectMeetingTime('within-hours')">
+                            ⚡ Within the next few hours
+                        </div>
+                        <div class="slide-option" onclick="selectMeetingTime('tomorrow')">
+                            📅 Tomorrow morning
+                        </div>
+                        <div class="slide-option" onclick="selectMeetingTime('this-week')">
+                            📆 Sometime this week
+                        </div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('current-slide').innerHTML = `
+                    <div class="slide-question">When would work best for a consultation meeting?</div>
+                    <div class="slide-options">
+                        <div class="slide-option" onclick="selectMeetingTime('this-week')">
+                            📅 This week
+                        </div>
+                        <div class="slide-option" onclick="selectMeetingTime('next-week')">
+                            📆 Next week
+                        </div>
+                        <div class="slide-option" onclick="selectMeetingTime('flexible')">
+                            🤝 I'm flexible
+                        </div>
+                        <div class="slide-option" onclick="selectMeetingTime('evenings')">
+                            🌅 Evenings work best
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function getMeetingTimeText(timeframe) {
+            const texts = {
+                'asap': 'As soon as possible today',
+                'within-hours': 'Within the next few hours',
+                'tomorrow': 'Tomorrow morning',
+                'this-week': 'This week',
+                'next-week': 'Next week',
+                'flexible': 'I\'m flexible',
+                'evenings': 'Evenings work best'
+            };
+            return texts[timeframe] || timeframe;
+        }
+        
+        function getRiskScore(riskLevel) {
+            const scores = {
+                'CRITICAL_RISK': 450,
+                'HIGH_RISK': 350,
+                'MODERATE_RISK': 250,
+                'EARLY_STAGE': 150
+            };
+            return scores[riskLevel] || 150;
+        }
+
+        function selectMeetingTime(timeframe) {
+            chatbotData.meetingTime = timeframe;
+            
+            addUserMessage(getMeetingTimeText(timeframe));
+            addAIMessage("Perfect! Let me schedule your consultation meeting.");
+            
+            setTimeout(() => {
+                currentStep = 7;
                 showFinalStep();
-            }, 1000);
+            }, 1500);
         }
 
         function showFinalStep() {
-            updateProgressDots(5, 5);
+            updateProgressDots(7, 7);
             
-            const urgencyLevel = chatbotData.score >= 400 ? 'critical' : 
-                                chatbotData.score >= 300 ? 'high' : 
-                                chatbotData.score >= 200 ? 'medium' : 'standard';
+            const urgencyLevel = chatbotData.riskLevel?.toLowerCase().replace('_', '-') || 'early-stage';
             
             addAIMessage(getFinalMessage(urgencyLevel, chatbotData.name));
             
             // Submit to backend
             submitChatbotData();
             
-            if (chatbotData.score >= 300) {
+            if (chatbotData.riskLevel === 'CRITICAL_RISK' || chatbotData.riskLevel === 'HIGH_RISK') {
                 document.getElementById('current-slide').innerHTML = `
                     <div style="text-align: center; padding: 20px; background: #f0f9ff; border-radius: 12px; border: 2px solid #0ea5e9;">
-                        <h3 style="color: #0369a1; margin: 0 0 15px 0;">💙 Help is on the way, ${chatbotData.name}!</h3>
-                        <p style="color: #0369a1; margin: 15px 0;">We'll call you within 15 minutes at ${chatbotData.phone}</p>
+                        <h3 style="color: #0369a1; margin: 0 0 15px 0;">🗓️ Emergency Consultation Scheduled!</h3>
+                        <p style="color: #0369a1; margin: 15px 0; line-height: 1.6;">
+                            <strong>${chatbotData.name}</strong>, we've scheduled your emergency consultation meeting.<br>
+                            We'll contact you at <strong>${chatbotData.phone}</strong> within 15 minutes to confirm your meeting time.
+                        </p>
+                        <div style="background: rgba(14, 165, 233, 0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <p style="margin: 0; color: #0369a1; font-size: 14px;">
+                                📧 Confirmation details sent to: ${chatbotData.email}<br>
+                                🏠 Property: ${chatbotData.property}<br>
+                                ⏰ Preferred timing: ${getMeetingTimeText(chatbotData.meetingTime)}
+                            </p>
+                        </div>
                         <button onclick="window.open('tel:9493284811')" class="slide-button" style="background: #dc2626; margin-top: 15px;">
-                            📞 Call Us Now: (949) 328-4811
+                            📞 Call Now: (949) 328-4811
                         </button>
                     </div>
                 `;
             } else {
                 document.getElementById('current-slide').innerHTML = `
                     <div style="text-align: center; padding: 20px; background: #f0fdf4; border-radius: 12px; border: 2px solid #10b981;">
-                        <h3 style="color: #065f46; margin: 0 0 15px 0;">✅ Thank you ${chatbotData.name}!</h3>
-                        <p style="color: #065f46; margin: 15px 0;">We'll be in touch within 24 hours at ${chatbotData.phone}</p>
+                        <h3 style="color: #065f46; margin: 0 0 15px 0;">✅ Consultation Meeting Scheduled!</h3>
+                        <p style="color: #065f46; margin: 15px 0; line-height: 1.6;">
+                            <strong>${chatbotData.name}</strong>, thank you for providing your information.<br>
+                            We'll contact you within 24 hours to schedule your consultation meeting.
+                        </p>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <p style="margin: 0; color: #065f46; font-size: 14px;">
+                                📧 Details sent to: ${chatbotData.email}<br>
+                                🏠 Property: ${chatbotData.property}<br>
+                                ⏰ Preferred timing: ${getMeetingTimeText(chatbotData.meetingTime)}
+                            </p>
+                        </div>
                         <button onclick="window.open('tel:9493284811')" class="slide-button" style="background: #10b981; margin-top: 15px;">
                             📞 Call Now: (949) 328-4811
                         </button>
@@ -1975,7 +2109,9 @@
                         urgency_level: urgencyPath === 'fast' ? 'emergency' : 'standard',
                         lead_source: 'ai_chatbot',
                         ai_situation: `${chatbotData.situation} - ${chatbotData.timeline}`,
-                        ai_score: chatbotData.score,
+                        risk_level: chatbotData.riskLevel,
+                        risk_score: getRiskScore(chatbotData.riskLevel) / 100,  // Convert to 1-4 scale
+                        ai_score: chatbotData.score,  // Keep for backward compatibility
                         timestamp: new Date().toISOString()
                     })
                 });
@@ -2319,9 +2455,74 @@
         // Auto-show AI assistant for engaged users
         setTimeout(function() {
             if (sessionStorage.getItem('aiAssistantShown') !== 'true') {
-                // Show subtle hint about AI assistant
+                // Show hint about AI assistant with recommendation
                 const floatingBtn = document.querySelector('.ai-floating-btn');
                 if (floatingBtn) {
+                    // Create recommendation tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'ai-recommendation-tooltip';
+                    tooltip.innerHTML = `
+                        <div class="tooltip-content">
+                            <p><strong>💡 Get personalized help</strong></p>
+                            <p>Try our AI assistant for instant foreclosure guidance!</p>
+                            <button onclick="openAIAssistant(); this.parentElement.parentElement.remove();">Start Chat</button>
+                            <button onclick="this.parentElement.parentElement.remove();" class="close-tooltip">✕</button>
+                        </div>
+                    `;
+                    tooltip.style.cssText = `
+                        position: fixed;
+                        bottom: 90px;
+                        right: 20px;
+                        background: white;
+                        border-radius: 12px;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                        padding: 0;
+                        max-width: 280px;
+                        z-index: 9998;
+                        animation: slideInRight 0.3s ease;
+                    `;
+                    
+                    // Style the tooltip content
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .ai-recommendation-tooltip .tooltip-content {
+                            padding: 20px;
+                        }
+                        .ai-recommendation-tooltip p {
+                            margin: 0 0 10px 0;
+                            color: #374151;
+                            font-size: 14px;
+                            line-height: 1.4;
+                        }
+                        .ai-recommendation-tooltip button {
+                            background: #667eea;
+                            color: white;
+                            border: none;
+                            padding: 10px 16px;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            margin-right: 10px;
+                            margin-top: 5px;
+                        }
+                        .ai-recommendation-tooltip .close-tooltip {
+                            background: #6b7280;
+                            padding: 8px 12px;
+                        }
+                        @keyframes slideInRight {
+                            from { transform: translateX(100%); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    document.body.appendChild(tooltip);
+                    
+                    // Auto-hide after 10 seconds
+                    setTimeout(() => {
+                        if (tooltip.parentElement) tooltip.remove();
+                    }, 10000);
+                    
+                    // Also animate the floating button
                     floatingBtn.style.animation = 'bounce 2s infinite';
                     setTimeout(() => {
                         floatingBtn.style.animation = '';
@@ -2329,7 +2530,56 @@
                 }
                 sessionStorage.setItem('aiAssistantShown', 'true');
             }
-        }, 30000); // After 30 seconds on page
+        }, 90000); // After 90 seconds on page (delayed from 30 seconds)
+        
+        // Show chatbot recommendation when user scrolls to bottom
+        let bottomReached = false;
+        window.addEventListener('scroll', function() {
+            if (!bottomReached && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                bottomReached = true;
+                setTimeout(() => {
+                    if (sessionStorage.getItem('aiBottomShown') !== 'true') {
+                        showBottomChatbotRecommendation();
+                        sessionStorage.setItem('aiBottomShown', 'true');
+                    }
+                }, 2000); // 2 second delay after reaching bottom
+            }
+        });
+        
+        function showBottomChatbotRecommendation() {
+            const existingTooltip = document.querySelector('.ai-recommendation-tooltip');
+            if (existingTooltip) return; // Don't show if already showing
+            
+            const tooltip = document.createElement('div');
+            tooltip.className = 'ai-recommendation-tooltip';
+            tooltip.innerHTML = `
+                <div class="tooltip-content">
+                    <p><strong>🤔 Still have questions?</strong></p>
+                    <p>Get instant answers about your foreclosure situation with our AI assistant!</p>
+                    <button onclick="openAIAssistant(); this.parentElement.parentElement.remove();">Get Help Now</button>
+                    <button onclick="this.parentElement.parentElement.remove();" class="close-tooltip">Maybe Later</button>
+                </div>
+            `;
+            tooltip.style.cssText = `
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                padding: 0;
+                max-width: 280px;
+                z-index: 9998;
+                animation: slideInRight 0.3s ease;
+                border: 2px solid #667eea;
+            `;
+            document.body.appendChild(tooltip);
+            
+            // Auto-hide after 15 seconds
+            setTimeout(() => {
+                if (tooltip.parentElement) tooltip.remove();
+            }, 15000);
+        }
     </script>
 
     <!-- Bounce Animation CSS -->

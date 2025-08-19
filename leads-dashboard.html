@@ -208,19 +208,19 @@
         <div class="stats-grid" id="stats-grid">
             <div class="stat-card">
                 <div class="stat-number critical" id="critical-count">-</div>
-                <div class="stat-label">Critical (400-500)</div>
+                <div class="stat-label">🔴 Critical Risk</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number high" id="high-count">-</div>
-                <div class="stat-label">High Priority (300-399)</div>
+                <div class="stat-label">🟡 High Risk</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number medium" id="medium-count">-</div>
-                <div class="stat-label">Priority (200-299)</div>
+                <div class="stat-label">🟠 Moderate Risk</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number standard" id="standard-count">-</div>
-                <div class="stat-label">Standard (0-199)</div>
+                <div class="stat-label">🟢 Early Stage</div>
             </div>
         </div>
 
@@ -232,8 +232,8 @@
             
             <div class="filters">
                 <button class="filter-btn active" onclick="filterLeads('all')">All Leads</button>
-                <button class="filter-btn" onclick="filterLeads('critical')">Critical (400+)</button>
-                <button class="filter-btn" onclick="filterLeads('high')">High Priority (300+)</button>
+                <button class="filter-btn" onclick="filterLeads('critical')">🔴 Critical Risk</button>
+                <button class="filter-btn" onclick="filterLeads('high')">🟡 High Risk</button>
                 <button class="filter-btn" onclick="filterLeads('today')">Today</button>
             </div>
             
@@ -267,10 +267,10 @@
         }
 
         function updateStats(data) {
-            const criticalCount = allLeads.filter(l => l.ai_score >= 400).length;
-            const highCount = allLeads.filter(l => l.ai_score >= 300 && l.ai_score < 400).length;
-            const mediumCount = allLeads.filter(l => l.ai_score >= 200 && l.ai_score < 300).length;
-            const standardCount = allLeads.filter(l => l.ai_score < 200).length;
+            const criticalCount = allLeads.filter(l => l.risk_level === 'CRITICAL_RISK').length;
+            const highCount = allLeads.filter(l => l.risk_level === 'HIGH_RISK').length;
+            const mediumCount = allLeads.filter(l => l.risk_level === 'MODERATE_RISK').length;
+            const standardCount = allLeads.filter(l => l.risk_level === 'EARLY_STAGE').length;
 
             document.getElementById('critical-count').textContent = criticalCount;
             document.getElementById('high-count').textContent = highCount;
@@ -291,23 +291,34 @@
         }
 
         function createLeadCard(lead) {
-            const score = lead.ai_score || 0;
-            const scoreClass = score >= 400 ? 'critical' : score >= 300 ? 'high' : score >= 200 ? 'medium' : 'standard';
-            const priority = score >= 400 ? 'CRITICAL' : score >= 300 ? 'HIGH' : score >= 200 ? 'PRIORITY' : 'STANDARD';
+            const riskLevel = lead.risk_level || 'EARLY_STAGE';
+            const riskScore = lead.risk_score || 1;
             
-            const responseTime = score >= 400 ? '15 minutes' : score >= 300 ? '1 hour' : score >= 200 ? '4 hours' : '24 hours';
+            // Map risk levels to display info
+            const riskInfo = {
+                'CRITICAL_RISK': { class: 'critical', emoji: '🔴', label: 'CRITICAL RISK', time: '15 minutes', color: '#dc2626' },
+                'HIGH_RISK': { class: 'high', emoji: '🟡', label: 'HIGH RISK', time: '1 hour', color: '#ea580c' },
+                'MODERATE_RISK': { class: 'medium', emoji: '🟠', label: 'MODERATE RISK', time: '4 hours', color: '#d97706' },
+                'EARLY_STAGE': { class: 'standard', emoji: '🟢', label: 'EARLY STAGE', time: '24 hours', color: '#059669' }
+            };
+            
+            const info = riskInfo[riskLevel];
+            const responseTime = lead.response_time || info.time;
             
             return `
                 <div class="lead-card">
                     <div class="lead-header">
-                        <div class="lead-score ${scoreClass}" style="background: ${getScoreColor(score)}">${score}</div>
+                        <div class="lead-score ${info.class}" style="background: ${info.color}">
+                            ${info.emoji}<br>
+                            <small style="font-size: 10px; opacity: 0.9;">${riskScore}</small>
+                        </div>
                         <div class="lead-info">
                             <div class="lead-name">${lead.name || 'Anonymous'}</div>
                             <div class="lead-contact">
                                 📞 ${lead.phone || 'No phone'} | 📧 ${lead.email || 'No email'}
                             </div>
                             <div style="font-size: 12px; color: #6b7280;">
-                                ${priority} Priority • Response required within ${responseTime}
+                                ${info.label} • Response required within ${responseTime}
                             </div>
                         </div>
                         <div style="text-align: right; font-size: 12px; color: #6b7280;">
@@ -340,12 +351,6 @@
             `;
         }
 
-        function getScoreColor(score) {
-            if (score >= 400) return '#dc2626';
-            if (score >= 300) return '#ea580c';
-            if (score >= 200) return '#d97706';
-            return '#059669';
-        }
 
         function formatDate(dateString) {
             if (!dateString) return 'Unknown';
@@ -364,10 +369,10 @@
             
             switch(filter) {
                 case 'critical':
-                    filteredLeads = allLeads.filter(lead => lead.ai_score >= 400);
+                    filteredLeads = allLeads.filter(lead => lead.risk_level === 'CRITICAL_RISK');
                     break;
                 case 'high':
-                    filteredLeads = allLeads.filter(lead => lead.ai_score >= 300);
+                    filteredLeads = allLeads.filter(lead => lead.risk_level === 'HIGH_RISK' || lead.risk_level === 'CRITICAL_RISK');
                     break;
                 case 'today':
                     const today = new Date().toDateString();

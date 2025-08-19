@@ -128,25 +128,42 @@ def score_lead():
     try:
         lead_data = request.json or {}
         
-        # Simple scoring algorithm
-        score = 100  # Base score
+        # Risk-based scoring algorithm
+        risk_level = 'EARLY_STAGE'  # Default
+        risk_score = 1  # 1-4 scale for internal calculations
         
-        # Add points for engagement
-        session_data = lead_data.get('session_data', {})
-        if session_data.get('timeOnPage', 0) > 300000:  # 5+ minutes
-            score += 50
-        if session_data.get('formInteractions', 0) > 0:
-            score += 30
-        if session_data.get('phoneClicks', 0) > 0:
-            score += 40
-        
-        # Add points for urgency keywords
+        # Analyze situation for risk keywords
         situation = lead_data.get('situation', '').lower()
-        urgent_keywords = ['auction', 'foreclosure', 'notice', 'default', 'emergency']
-        for keyword in urgent_keywords:
-            if keyword in situation:
-                score += 50
-                break
+        
+        # Critical risk keywords (foreclosure sale imminent)
+        critical_keywords = ['auction', 'foreclosure sale', 'trustee sale', 'sale date', 'courthouse steps']
+        # High risk keywords (legal process started)
+        high_keywords = ['notice of default', 'nod', 'default notice', 'foreclosure notice', 'legal notice']
+        # Moderate risk keywords (payment issues)
+        moderate_keywords = ['behind on payments', 'missed payments', 'can\'t pay', 'payment problems', '90 days', '60 days']
+        
+        # Determine risk level based on keywords
+        if any(keyword in situation for keyword in critical_keywords):
+            risk_level = 'CRITICAL_RISK'
+            risk_score = 4
+        elif any(keyword in situation for keyword in high_keywords):
+            risk_level = 'HIGH_RISK'
+            risk_score = 3
+        elif any(keyword in situation for keyword in moderate_keywords):
+            risk_level = 'MODERATE_RISK'
+            risk_score = 2
+        else:
+            risk_level = 'EARLY_STAGE'
+            risk_score = 1
+        
+        # Engagement modifiers (can increase risk urgency)
+        session_data = lead_data.get('session_data', {})
+        if session_data.get('timeOnPage', 0) > 300000:  # 5+ minutes - shows desperation
+            if risk_score < 4:
+                risk_score = min(risk_score + 0.5, 4)
+        if session_data.get('phoneClicks', 0) > 0:  # Tried to call - urgent
+            if risk_score < 4:
+                risk_score = min(risk_score + 0.5, 4)
         
         # Property value scoring (if provided)
         property_address = lead_data.get('property_address', '')
@@ -178,48 +195,69 @@ def score_lead():
             except Exception:
                 score += 10  # Default bonus for providing address
         
-        # Determine priority
-        if score >= 200:
-            priority = 'P1'
-            response_time = '1 hour'
-        elif score >= 150:
-            priority = 'P2'
-            response_time = '4 hours'
-        elif score >= 100:
-            priority = 'P3'
-            response_time = '24 hours'
+        # Update risk level based on final score
+        if risk_score >= 3.5:
+            risk_level = 'CRITICAL_RISK'
+        elif risk_score >= 2.5:
+            risk_level = 'HIGH_RISK'
+        elif risk_score >= 1.5:
+            risk_level = 'MODERATE_RISK'
         else:
-            priority = 'P4'
-            response_time = '72 hours'
+            risk_level = 'EARLY_STAGE'
         
-        # Basic recommendations
+        # Determine priority and response time based on risk level
+        if risk_level == 'CRITICAL_RISK':
+            priority = 'P1'
+            response_time = '15 minutes'
+        elif risk_level == 'HIGH_RISK':
+            priority = 'P2'
+            response_time = '1 hour'
+        elif risk_level == 'MODERATE_RISK':
+            priority = 'P3'
+            response_time = '4 hours'
+        else:  # EARLY_STAGE
+            priority = 'P4'
+            response_time = '24 hours'
+        
+        # Risk-based recommendations
         recommendations = []
-        if score >= 200:
+        if risk_level == 'CRITICAL_RISK':
             recommendations = [
-                "IMMEDIATE PRIORITY: Call within 1 hour",
-                "Offer same-day virtual consultation",
-                "Prepare emergency response materials"
+                "🚨 EMERGENCY: Contact within 15 minutes",
+                "Offer immediate virtual consultation",
+                "Prepare emergency foreclosure prevention materials",
+                "Consider attorney referral for sale postponement"
             ]
-        elif score >= 150:
+        elif risk_level == 'HIGH_RISK':
             recommendations = [
-                "HIGH PRIORITY: Contact within 4 hours",
-                "Send priority email sequence",
-                "Schedule consultation within 24 hours"
+                "⚡ URGENT: Contact within 1 hour", 
+                "Schedule same-day consultation",
+                "Review loan modification options",
+                "Prepare NOD response strategy"
             ]
-        else:
+        elif risk_level == 'MODERATE_RISK':
             recommendations = [
-                "QUALIFIED LEAD: Contact within 24 hours",
-                "Send standard welcome sequence",
-                "Provide educational resources"
+                "📞 PRIORITY: Contact within 4 hours",
+                "Schedule consultation within 24 hours",
+                "Review payment assistance options",
+                "Provide foreclosure prevention resources"
+            ]
+        else:  # EARLY_STAGE
+            recommendations = [
+                "📋 QUALIFIED: Contact within 24 hours",
+                "Send foreclosure prevention guide",
+                "Schedule educational consultation",
+                "Provide early intervention resources"
             ]
         
         response = {
             'success': True,
-            'ai_score': min(score, 500),
+            'risk_level': risk_level,
+            'risk_score': round(risk_score, 1),
             'priority': priority,
             'response_time': response_time,
-            'conversion_probability': min(score / 500, 1.0),
             'recommendations': recommendations[:3],
+            'keywords_detected': [],
             'timestamp': datetime.now().isoformat()
         }
         
@@ -341,7 +379,8 @@ def emergency_booking():
             'timestamp': data.get('timestamp', datetime.now().isoformat()),
             'priority': 'P1',
             'response_time': 'Within 15 minutes',
-            'ai_score': 450,  # Emergency bookings get high score
+            'risk_level': 'CRITICAL_RISK',  # Emergency bookings are critical
+            'risk_score': 4.0,
             'keywords_detected': ['emergency booking', 'scheduled consultation']
         }
         
@@ -397,7 +436,8 @@ def get_leads():
             'leads': filtered_leads,
             'total_count': len(leads_database),
             'filtered_count': len(filtered_leads),
-            'high_priority_count': len([l for l in leads_database if l.get('ai_score', 0) >= 300])
+            'critical_risk_count': len([l for l in leads_database if l.get('risk_level') == 'CRITICAL_RISK']),
+            'high_risk_count': len([l for l in leads_database if l.get('risk_level') == 'HIGH_RISK'])
         })
         
     except Exception as e:
