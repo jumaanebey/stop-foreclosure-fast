@@ -31,38 +31,23 @@ function openAIAssistant() {
 function initializeChatbot() {
     console.log('Initializing chatbot...');
     
-    // Clear any existing static content and show the chatbot interface
-    const chatMessages = document.getElementById('chat-messages');
-    if (chatMessages) {
-        chatMessages.style.display = 'none';
-    }
-    
-    // Get or create the current slide container
-    let currentSlide = document.getElementById('current-slide');
-    if (!currentSlide) {
-        // Create the chatbot interface if it doesn't exist
-        const modalBody = document.querySelector('.ai-modal-body');
-        if (modalBody) {
-            modalBody.innerHTML = `
-                <div class="chatbot-interface">
-                    <div class="progress-container">
-                        <div class="progress-dots" id="progress-dots"></div>
-                    </div>
-                    <div class="current-slide" id="current-slide">
-                        <!-- Chatbot content will be inserted here -->
-                    </div>
+    // Get the modal body and completely replace its content
+    const modalBody = document.getElementById('ai-modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = `
+            <div class="chatbot-interface">
+                <div class="progress-container">
+                    <div class="progress-dots" id="progress-dots"></div>
                 </div>
-            `;
-        }
+                <div class="current-slide" id="current-slide">
+                    <!-- Chatbot content will be inserted here -->
+                </div>
+            </div>
+        `;
     }
     
-    // Start the chatbot flow
-    if (typeof startChatbot === 'function') {
-        startChatbot();
-    } else {
-        // If startChatbot isn't available yet, start with step 1 directly
-        showStep1();
-    }
+    // Start with step 1 directly
+    showStep1();
 }
 
 function showStep1() {

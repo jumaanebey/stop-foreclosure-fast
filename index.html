@@ -961,36 +961,8 @@
                 <span class="ai-modal-close" onclick="closeAIAssistant()">&times;</span>
             </div>
             
-            <div class="ai-modal-body">
-                <div id="chatbot-container" class="chatbot-container">
-                    <!-- Chat messages will appear here -->
-                    <div id="chat-messages" class="chat-messages">
-                        <div class="ai-message-bubble">
-                            <div class="ai-avatar">AI</div>
-                            <div class="message-content">
-                                <p>Hi there! I'm here to help you understand your foreclosure situation and connect you with the right support.</p>
-                                <p>Let's start with a simple question:</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Current question/slide -->
-                    <div id="current-slide" class="current-slide">
-                        <!-- Dynamic content based on current step -->
-                    </div>
-                    
-                    <!-- Hidden data collection -->
-                    <div id="chatbot-data" style="display: none;">
-                        <input type="hidden" id="cb-situation" value="">
-                        <input type="hidden" id="cb-urgency" value="">
-                        <input type="hidden" id="cb-timeline" value="">
-                        <input type="hidden" id="cb-name" value="">
-                        <input type="hidden" id="cb-phone" value="">
-                        <input type="hidden" id="cb-email" value="">
-                        <input type="hidden" id="cb-property" value="">
-                        <input type="hidden" id="cb-score" value="0">
-                    </div>
-                </div>
+            <div class="ai-modal-body" id="ai-modal-body">
+                <!-- Chatbot interface will be inserted here dynamically -->
             </div>
         </div>
     </div>
@@ -2352,8 +2324,8 @@
 
         // openAIAssistant function defined above
 
-        // Legacy function - not used in new chatbot system
-        function displayAIAnalysis(urgencyResult, scoreResult) {
+        // Legacy function - DISABLED in favor of new chatbot system
+        function displayAIAnalysis_DISABLED(urgencyResult, scoreResult) {
             const messagesContainer = document.getElementById('ai-chat-messages');
             const score = scoreResult.ai_score || 0;
             const urgencyLevel = urgencyResult.urgency_level;
@@ -2495,7 +2467,7 @@
             messagesContainer.innerHTML = html;
         }
 
-        function quickAIAnalysis(type) {
+        function quickAIAnalysis_DISABLED(type) {
             const situations = {
                 auction: 'I received a notice of sale and my property is scheduled for auction next month. I need immediate help to stop the foreclosure sale.',
                 notice_default: 'I received a notice of default from my lender and need to know my options before it goes to auction.',
@@ -2688,7 +2660,7 @@
         }
     </style>
 
-    <!-- AI Integration - Add your Google Cloud Run URL in ai-integration.js -->
-    <script src="js/ai-integration.js"></script>
+    <!-- AI Integration - Disabled in favor of new chatbot system -->
+    <!-- <script src="js/ai-integration.js"></script> -->
 </body>
 </html>
