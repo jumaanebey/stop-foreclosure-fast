@@ -259,4 +259,4 @@ fetch(GOOGLE_SCRIPT_URL, {
 - **Real business impact**: Changes affect real leads and revenue
 - **Document significant changes**: Update this README
 
-**Contact**: This is a live business. Handle with care and always verify changes work correctly before committing.
+**Contact**: This is a live business. Handle with care and always verify changes work correctly before committing.# Force deployment Sun Aug 31 08:58:02 PDT 2025
