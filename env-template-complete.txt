@@ -2,6 +2,24 @@
 # Copy this file to .env and fill in your actual values
 # NEVER commit .env to version control
 
+# === CONVERTKIT INTEGRATION (CRITICAL - SECURITY FIX!) ===
+# Get NEW keys from: https://app.convertkit.com/account_settings/advanced_settings
+# REPLACE the exposed keys immediately!
+CONVERTKIT_API_KEY=your-new-convertkit-api-key-here
+CONVERTKIT_API_SECRET=your-new-convertkit-api-secret-here
+CONVERTKIT_FORM_ID=8430004
+URGENT_FORECLOSURE_SEQUENCE=2459120
+
+# === GOOGLE SERVICES ===
+# Google Sheets for lead storage
+GOOGLE_SHEET_ID=1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU
+
+# Google Analytics tracking ID
+GA_TRACKING_ID=G-ZC3FHFTPN2
+
+# Google Calendar booking ID (if using Google Calendar integration)
+GOOGLE_CALENDAR_ID=your-calendar-id
+
 # === EMAIL CONFIGURATION ===
 # Gmail SMTP settings (or your preferred email service)
 EMAIL_USER=help@myforeclosuresolution.com
@@ -14,13 +32,6 @@ NOTIFICATION_EMAIL=alerts@myforeclosuresolution.com
 # Your CRM webhook URL (Zapier, HubSpot, etc.)
 CRM_WEBHOOK_URL=https://hooks.zapier.com/hooks/catch/your-webhook-id
 CRM_API_KEY=your-crm-api-key-here
-
-# === GOOGLE SERVICES ===
-# Google Analytics tracking ID
-GA_TRACKING_ID=G-ZC3FHFTPN2
-
-# Google Calendar booking ID (if using Google Calendar integration)
-GOOGLE_CALENDAR_ID=your-calendar-id
 
 # === FACEBOOK INTEGRATION ===
 # Facebook Pixel ID
@@ -72,7 +83,7 @@ SSL_KEY_PATH=/path/to/ssl/private.key
 # === BUSINESS CONFIGURATION ===
 # Business license numbers
 DRE_LICENSE=02076038
-NMLS_LICENSE=2033637
+NMLS_LICENSE=2033637 
 
 # Business contact information
 BUSINESS_PHONE=949-328-4811

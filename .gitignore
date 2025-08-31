@@ -51,4 +51,4 @@ service_account.json
 # Temporary files
 temp/
 tmp/
-*.tmp
+*.tmp*.env
