@@ -68,59 +68,34 @@
     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
     
-    <!-- AI Functions - Load First -->
-    <script src="js/ai-functions.js"></script>
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXX'); // Replace GTM-XXXXXX with your Container ID</script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- Backup Analytics (in case GTM fails) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-ZC3FHFTPN2', {
-            'enhanced_conversions': true,
-            'custom_map': {
-                'custom_parameter_1': 'lead_source',
-                'custom_parameter_2': 'urgency_level'
-            }
-        });
-        
-        // Enhanced conversion tracking
-        gtag('config', 'AW-XXXXXXXXX'); // Replace with Google Ads Conversion ID
+        gtag('config', 'G-ZC3FHFTPN2');
     </script>
     
-    <!-- CallRail Dynamic Number Insertion -->
+    <!-- Facebook Pixel -->
     <script>
-        var _cr_config = {
-            "company_id": "XXXXXXXX", // Replace with CallRail Company ID
-            "session_id": null,
-            "number_selector": ".tracking-phone",
-            "callback": function(number, session_id) {
-                // Track number swap
-                gtag('event', 'phone_number_displayed', {
-                    'event_category': 'CallRail',
-                    'event_label': session_id,
-                    'phone_number': number
-                });
-            }
-        };
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID'); // Replace with your Facebook Pixel ID
+        fbq('track', 'PageView');
     </script>
-    <script src="//d2omdg5bxcfqii.cloudfront.net/assets/script/main.js" async></script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+             src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -129,7 +104,6 @@
                 <a href="virtual-consultation.html">Virtual Consultation</a>
                 <a href="california-foreclosure-help.html">All CA Counties</a>
                 <a href="foreclosure-faq.html">FAQ</a>
-                <button class="ai-assistant-btn" onclick="openAIAssistant()">🤖 AI Assistant</button>
                 <a href="tel:+1-949-328-4811" class="cta-button">Call (949) 328-4811</a>
             </nav>
         </div>
@@ -139,37 +113,23 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Stop Foreclosure in California. See Your Options in 24 Hours.</h1>
-                <h2 class="hero-subtitle">Free, no-pressure consultation. We're not a law firm. Multiple paths: retain home, sell fast, or surplus recovery.</h2>
-                <div class="hero-benefits">
-                    <div class="benefit-item">✓ Keep your home (loan mod/repayment)</div>
-                    <div class="benefit-item">✓ Sell fast (no fees)</div>
-                    <div class="benefit-item">✓ Claim surplus funds</div>
-                </div>
+                <h1 class="hero-title">California's Leading Online Foreclosure Specialists</h1>
+                <h2 class="hero-subtitle">Virtual Consultations • Remote Cash Offers • Serving All 58 CA Counties Since 2014</h2>
+                <p class="hero-description">
+                    Facing foreclosure anywhere in California? Get expert help from home. We provide virtual consultations, remote property evaluations, and online cash offers. 
+                    Licensed professionals serving the entire state - no need to drive anywhere. Get started with a free online consultation today.
+                </p>
                 <div class="hero-cta">
-                    <a href="tel:+1-949-328-4811" class="cta-button-large primary" onclick="gtag('event', 'hero_phone_click', {'event_category': 'conversion'});">
-                        📞 Call Now (949) 328-4811
+                    <a href="sms:+1-949-328-4811?body=EMERGENCY: I need immediate virtual foreclosure help anywhere in California. Please call me ASAP!" class="cta-button-large" onclick="handleEmergencyButtonClick(); gtag('event', 'emergency_foreclosure_help', {'event_category': 'urgent_lead'});" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);">
+                        📞 Emergency Virtual Consultation
                     </a>
-                    <button onclick="openPrequalForm()" class="cta-button-large secondary" onclick="gtag('event', 'hero_form_click', {'event_category': 'conversion'});">
-                        Get My Options
-                    </button>
-                </div>
-                <div class="hero-trust">
-                    <div class="trust-badges">
-                        <div class="trust-badge">⭐ 4.8★ Google Reviews</div>
-                        <div class="trust-badge">🏆 BBB A+ Rating</div>
-                        <div class="trust-badge">🛡️ Licensed CA Real Estate</div>
-                    </div>
-                    <p class="micro-trust">Hundreds of homeowners helped since 2014 • We serve California statewide</p>
-                    <div class="spanish-toggle">
-                        <a href="tel:+1-949-328-4811" onclick="gtag('event', 'spanish_phone_click', {'event_category': 'conversion'});">
-                            🇲🇽 Español: (949) 328-4811
-                        </a>
-                    </div>
+                    <a href="cash-offer-calculator.html" class="cta-button-secondary" onclick="gtag('event', 'calculator_click', {'event_category': 'engagement'});">
+                        💻 Get Online Cash Offer
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/hero-image.svg" alt="Happy California family saved from foreclosure" width="500" height="400" loading="lazy">
+                <img src="images/hero-image.svg" alt="Happy family saved from foreclosure" width="500" height="400">
             </div>
         </div>
     </section>
@@ -347,120 +307,46 @@
         </div>
     </section>
 
-    <!-- 4-Step Prequalification Form -->
-    <div id="prequal-overlay" class="form-overlay" style="display: none;">
-        <div class="form-container">
-            <div class="form-header">
-                <h3>Get Your Options in 24 Hours</h3>
-                <button class="form-close" onclick="closePrequalForm()">&times;</button>
-            </div>
-            
-            <div class="form-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <span class="progress-text">Step <span id="current-step">1</span> of 4</span>
-            </div>
-
-            <form id="prequal-form" class="multi-step-form">
-                <!-- Step 1: Property Address -->
-                <div class="form-step active" id="step-1">
-                    <h4>What's your property address?</h4>
-                    <input type="text" id="property-address" name="address" placeholder="123 Main St, Los Angeles, CA 90210" required autocomplete="street-address">
-                    <button type="button" onclick="nextStep(2)" class="step-button">Continue</button>
-                </div>
-
-                <!-- Step 2: Timeline/Notice Status -->
-                <div class="form-step" id="step-2">
-                    <h4>What's your timeline situation?</h4>
-                    <div class="option-grid">
-                        <div class="option-card urgent" onclick="selectOption('timeline', 'notice-received')">
-                            <div class="option-icon">📄</div>
-                            <div class="option-text">I received a notice of default</div>
-                        </div>
-                        <div class="option-card urgent" onclick="selectOption('timeline', 'auction-scheduled')">
-                            <div class="option-icon">🏛️</div>
-                            <div class="option-text">My home is scheduled for auction</div>
-                        </div>
-                        <div class="option-card" onclick="selectOption('timeline', 'behind-payments')">
-                            <div class="option-icon">💰</div>
-                            <div class="option-text">I'm behind on payments</div>
-                        </div>
-                        <div class="option-card" onclick="selectOption('timeline', 'exploring-options')">
-                            <div class="option-icon">🔍</div>
-                            <div class="option-text">Just exploring my options</div>
-                        </div>
-                    </div>
-                    <input type="hidden" id="timeline-status" name="timeline" required>
-                </div>
-
-                <!-- Step 3: Goal/Preference -->
-                <div class="form-step" id="step-3">
-                    <h4>What would you prefer to do?</h4>
-                    <div class="option-grid">
-                        <div class="option-card" onclick="selectOption('goal', 'keep-home')">
-                            <div class="option-icon">🏠</div>
-                            <div class="option-text">Keep my home (loan modification)</div>
-                        </div>
-                        <div class="option-card" onclick="selectOption('goal', 'sell-fast')">
-                            <div class="option-icon">💸</div>
-                            <div class="option-text">Sell quickly for cash</div>
-                        </div>
-                        <div class="option-card" onclick="selectOption('goal', 'surplus-funds')">
-                            <div class="option-icon">💰</div>
-                            <div class="option-text">Claim surplus funds after auction</div>
-                        </div>
-                        <div class="option-card" onclick="selectOption('goal', 'unsure')">
-                            <div class="option-icon">🤔</div>
-                            <div class="option-text">Not sure - need guidance</div>
-                        </div>
-                    </div>
-                    <input type="hidden" id="goal-preference" name="goal" required>
-                </div>
-
-                <!-- Step 4: Contact Info & TCPA -->
-                <div class="form-step" id="step-4">
-                    <h4>How can we reach you with your options?</h4>
-                    <div class="contact-inputs">
-                        <input type="text" id="full-name" name="name" placeholder="Your Full Name" required autocomplete="name">
-                        <input type="email" id="email-address" name="email" placeholder="Your Email Address" required autocomplete="email">
-                        <input type="tel" id="phone-number" name="phone" placeholder="Your Phone Number" required autocomplete="tel">
-                    </div>
-                    
-                    <div class="tcpa-consent">
-                        <label class="consent-checkbox">
-                            <input type="checkbox" id="tcpa-consent" name="consent" required>
-                            <span class="checkmark"></span>
-                            <span class="consent-text">
-                                <strong>I agree to be contacted</strong> by phone, text, and email at the number/address provided above, including by automated dialing systems and prerecorded messages, regarding foreclosure assistance services. Consent is not required to purchase services. Message/data rates may apply.
-                            </span>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="submit-button-final">
-                        🚀 Get My Options Now
-                    </button>
-                    
-                    <p class="privacy-text">Your information is 100% secure. We'll call you within 60 seconds during business hours.</p>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get Your Options in 24 Hours</h2>
-            <p>Start with our quick 4-step form or call us directly at (949) 328-4811</p>
+            <h2>Get Your Free Cash Offer Today</h2>
+            <p>Fill out the form below and we'll contact you within 2 hours during business hours with your options.</p>
             
-            <div class="contact-options">
-                <button onclick="openPrequalForm()" class="primary-option">
-                    📋 Quick 4-Step Form (60 seconds)
+            <form id="contact-form" class="contact-form" action="contact-form.html" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Property Address</label>
+                    <input type="text" id="address" name="address" placeholder="123 Main St, City, State">
+                </div>
+                
+                <div class="form-group">
+                    <label for="situation">Describe Your Situation</label>
+                    <textarea id="situation" name="situation" rows="4" placeholder="Tell us about your foreclosure timeline and any other details..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button" onclick="gtag('event', 'form_submit', {'event_category': 'lead'});">
+                    Get My Free Cash Offer
                 </button>
-                <a href="tel:+1-949-328-4811" class="secondary-option">
-                    📞 Call Now: (949) 328-4811
-                </a>
-            </div>
+                
+                <p class="privacy-text">
+                    Your information is 100% secure and will never be shared with third parties.
+                </p>
+            </form>
         </div>
     </section>
 
@@ -696,174 +582,6 @@
     </div>
 
     <script defer src="js/script.js"></script>
-    
-    <!-- Multi-Step Form JavaScript -->
-    <script>
-        let currentFormStep = 1;
-        let formData = {};
-
-        function openPrequalForm() {
-            document.getElementById('prequal-overlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            gtag('event', 'prequal_form_opened', {'event_category': 'conversion'});
-        }
-
-        function closePrequalForm() {
-            document.getElementById('prequal-overlay').style.display = 'none';
-            document.body.style.overflow = '';
-        }
-
-        function nextStep(step) {
-            // Validate current step
-            if (!validateCurrentStep()) {
-                return;
-            }
-
-            // Hide current step
-            document.getElementById(`step-${currentFormStep}`).classList.remove('active');
-            
-            // Show next step
-            currentFormStep = step;
-            document.getElementById(`step-${step}`).classList.add('active');
-            
-            // Update progress
-            updateProgress();
-            
-            gtag('event', 'prequal_step_completed', {
-                'event_category': 'conversion',
-                'step': currentFormStep - 1
-            });
-        }
-
-        function selectOption(type, value) {
-            formData[type] = value;
-            document.getElementById(`${type}-status`) ? document.getElementById(`${type}-status`).value = value :
-            document.getElementById(`${type}-preference`).value = value;
-            
-            // Add selected class
-            document.querySelectorAll(`#step-${currentFormStep} .option-card`).forEach(card => {
-                card.classList.remove('selected');
-            });
-            event.target.closest('.option-card').classList.add('selected');
-            
-            // Auto-advance after selection
-            setTimeout(() => {
-                nextStep(currentFormStep + 1);
-            }, 500);
-        }
-
-        function validateCurrentStep() {
-            switch(currentFormStep) {
-                case 1:
-                    const address = document.getElementById('property-address').value;
-                    if (!address.trim()) {
-                        alert('Please enter your property address');
-                        return false;
-                    }
-                    formData.address = address;
-                    break;
-                case 2:
-                    if (!formData.timeline) {
-                        alert('Please select your timeline situation');
-                        return false;
-                    }
-                    break;
-                case 3:
-                    if (!formData.goal) {
-                        alert('Please select your preferred outcome');
-                        return false;
-                    }
-                    break;
-            }
-            return true;
-        }
-
-        function updateProgress() {
-            const progress = (currentFormStep / 4) * 100;
-            document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('current-step').textContent = currentFormStep;
-        }
-
-        // Form submission with instant call trigger
-        document.getElementById('prequal-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate final step
-            const name = document.getElementById('full-name').value;
-            const email = document.getElementById('email-address').value;
-            const phone = document.getElementById('phone-number').value;
-            const consent = document.getElementById('tcpa-consent').checked;
-            
-            if (!name || !email || !phone || !consent) {
-                alert('Please complete all required fields and agree to be contacted.');
-                return;
-            }
-
-            // Collect all form data
-            const finalData = {
-                ...formData,
-                name: name,
-                email: email,
-                phone: phone,
-                timestamp: new Date().toISOString(),
-                leadSource: 'website_prequal_form'
-            };
-
-            // Send to backend for processing
-            submitPrequalForm(finalData);
-            
-            // Track conversion
-            gtag('event', 'prequal_form_submitted', {
-                'event_category': 'conversion',
-                'value': calculateLeadValue(finalData)
-            });
-
-            // Close form and show success
-            closePrequalForm();
-            showSuccessMessage(finalData);
-        });
-
-        function submitPrequalForm(data) {
-            // Send to Google Sheets, CRM, or backend
-            fetch('/api/prequal-submit', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            }).then(response => {
-                if (response.ok) {
-                    // Trigger instant call connect via Twilio
-                    triggerInstantCall(data);
-                }
-            }).catch(err => {
-                console.error('Form submission error:', err);
-            });
-        }
-
-        function triggerInstantCall(data) {
-            // Implement Twilio click-to-call functionality
-            console.log('Triggering instant call for:', data.phone);
-        }
-
-        function calculateLeadValue(data) {
-            let value = 50; // Base value
-            if (data.timeline === 'auction-scheduled') value += 100;
-            if (data.timeline === 'notice-received') value += 75;
-            if (data.goal === 'sell-fast') value += 50;
-            return value;
-        }
-
-        function showSuccessMessage(data) {
-            const urgencyText = data.timeline === 'auction-scheduled' || data.timeline === 'notice-received' 
-                ? 'URGENT SITUATION DETECTED' : 'We\'ll contact you shortly';
-            
-            alert(`✅ Thank you ${data.name}! Your information has been received. ${urgencyText}. Expect a call within 60 seconds during business hours.`);
-        }
-
-        // Close form on overlay click
-        document.getElementById('prequal-overlay').addEventListener('click', function(e) {
-            if (e.target === this) closePrequalForm();
-        });
-    </script>
     
     <!-- Advanced Analytics & Lead Scoring System -->
     <script>
@@ -1183,14 +901,14 @@
         popup.innerHTML = `
             <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 500px; margin: 1rem;">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <h3 style="color: #dc2626; margin-bottom: 0.5rem;">Priority Consultation Available</h3>
+                    <h3 style="color: #dc2626; margin-bottom: 0.5rem;">🎯 Priority Consultation Available</h3>
                     <p>Based on your interest, you qualify for a priority virtual consultation within 4 hours.</p>
                 </div>
                 <div style="text-align: center;">
                     <a href="virtual-consultation.html" onclick="gtag('event', 'priority_consultation_click', {'event_category': 'hot_lead'});" 
                        style="background: #dc2626; color: white; padding: 1rem 2rem; border-radius: 0.5rem; 
                               text-decoration: none; font-weight: 600; margin-right: 1rem;">
-                        Book Priority Consultation
+                        📅 Book Priority Consultation
                     </a>
                     <button onclick="this.closest('#priority-consultation-popup').remove()" 
                             style="background: #6b7280; color: white; padding: 1rem 2rem; border: none; 
@@ -1229,472 +947,5 @@
         });
     });
     </script>
-
-    <!-- AI Assistant Modal -->
-    <div id="ai-assistant-modal" class="ai-modal" style="display: none;">
-        <div class="ai-modal-content">
-            <div class="ai-modal-header">
-                <h3>AI Foreclosure Assistant</h3>
-                <p>Get instant analysis of your foreclosure situation</p>
-                <span class="ai-modal-close" onclick="closeAIAssistant()">&times;</span>
-            </div>
-            
-            <div class="ai-modal-body" id="ai-modal-body">
-                <!-- Chatbot interface will be inserted here dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating AI Chat Button -->
-    <div class="ai-floating-btn" onclick="openAIAssistant()" title="AI Foreclosure Assistant">
-        <div class="ai-btn-content">
-            <span class="ai-emoji">🤖</span>
-            <span class="ai-btn-text">AI Help</span>
-        </div>
-        <div class="ai-pulse"></div>
-    </div>
-
-    <!-- AI Assistant Styles -->
-    <style>
-        /* AI Assistant Button in Navigation */
-        .ai-assistant-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .ai-assistant-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Floating AI Button */
-        .ai-floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .ai-floating-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
-        }
-
-        .ai-btn-content {
-            text-align: center;
-            color: white;
-        }
-
-        .ai-emoji {
-            font-size: 24px;
-            display: block;
-        }
-
-        .ai-btn-text {
-            font-size: 10px;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        .ai-pulse {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 12px;
-            height: 12px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
-        }
-
-        /* AI Modal Styles */
-        .ai-modal {
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.2);
-            display: flex;
-            align-items: stretch;
-            justify-content: flex-end;
-        }
-
-        .ai-modal-content {
-            background: white;
-            border-radius: 15px 0 0 15px;
-            width: 45%;
-            max-width: 600px;
-            min-width: 500px;
-            height: 100vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideInFromRight 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
-        }
-
-        @keyframes slideInFromRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                transform: scale(0.7);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .ai-modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px 0 0 0;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .ai-modal-header h3 {
-            margin: 0;
-            font-size: 26px;
-        }
-
-        .ai-modal-header p {
-            margin: 8px 0 0 0;
-            opacity: 0.9;
-            font-size: 16px;
-        }
-
-        .ai-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            line-height: 1;
-        }
-
-        .ai-modal-body {
-            padding: 25px;
-        }
-
-        /* Chatbot Interface Styles */
-        .chatbot-interface {
-            padding: 20px;
-        }
-
-        .progress-container {
-            margin-bottom: 20px;
-        }
-
-        .progress-dots {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .progress-dot.active {
-            background: #0ea5e9;
-            transform: scale(1.2);
-        }
-
-        .slide-question {
-            font-size: 18px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .slide-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .slide-option {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            font-weight: 500;
-        }
-
-        .slide-option:hover {
-            border-color: #0ea5e9;
-            background: #f0f9ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .slide-option.urgent {
-            border-color: #fbbf24;
-            background: #fffbeb;
-        }
-
-        .slide-option.urgent:hover {
-            border-color: #f59e0b;
-            background: #fef3c7;
-        }
-
-        .slide-input {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .slide-input input {
-            width: 100%;
-            max-width: 300px;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .slide-input input:focus {
-            border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-        }
-
-        .slide-button {
-            background: #0ea5e9;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-
-        .slide-button:hover {
-            background: #0284c7;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
-        }
-
-        .consultation-summary {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .consultation-summary p {
-            margin: 8px 0;
-            color: #475569;
-        }
-
-        .success-message {
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .success-message h3 {
-            margin-bottom: 20px;
-        }
-
-        .success-message p {
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .urgency-indicator {
-            background: #fef2f2;
-            color: #dc2626;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .urgency-critical {
-            background: #fef2f2;
-            color: #dc2626;
-            animation: pulse 2s infinite;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .ai-floating-btn {
-                bottom: 15px;
-                right: 15px;
-                width: 55px;
-                height: 55px;
-            }
-
-            .ai-emoji {
-                font-size: 20px;
-            }
-
-            .ai-btn-text {
-                font-size: 9px;
-            }
-
-            .ai-modal {
-                justify-content: center;
-                align-items: center;
-            }
-            .ai-modal-content {
-                width: 95%;
-                max-width: 500px;
-                height: 90vh;
-                border-radius: 15px;
-                margin: 20px;
-                box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            }
-            .ai-modal-header {
-                border-radius: 15px 15px 0 0;
-            }
-
-            .ai-assistant-btn {
-                display: none; /* Hide in nav on mobile, use floating button */
-            }
-        }
-    </style>
-
-    <!-- AI Assistant JavaScript -->
-    <script>
-        console.log('Main AI system loaded - all functions available in js/ai-functions.js');
-        
-        // Helper functions for text responses
-        function getSituationResponse(situation, path) {
-            const responses = {
-                'auction': "I understand this is extremely urgent. Let's get you immediate help.",
-                'default': "A notice of default is serious - we need to act quickly to protect your options.",
-                'behind': "Many homeowners face this situation. Let's explore your options together.",
-                'hardship': "Financial hardship is challenging. Let's find the best solution for your family.",
-                'exploring': "It's wise to understand your options before you need them."
-            };
-            return responses[situation] || "Let me help you understand your situation.";
-        }
-
-        function getTimelineResponse(timeline, path) {
-            if (path === 'fast') {
-                return "Given your urgent timeline, I'm going to prioritize getting you connected with immediate help.";
-            }
-            return "Thank you for sharing that. Let's make sure we connect you with the right assistance.";
-        }
-
-        function getFinalMessage(urgencyLevel, name) {
-            if (urgencyLevel.includes('critical') || urgencyLevel.includes('high')) {
-                return `${name}, based on your situation, I've identified this as requiring immediate attention. I'm going to connect you with priority scheduling so you can get help as soon as possible.`;
-            }
-            return `${name}, I've analyzed your situation and prepared a consultation appointment for you. Let's get you scheduled with one of our specialists.`;
-        }
-
-        function getTimelineText(timeline) {
-            const texts = {
-                'days': 'Days - this is critical',
-                'weeks': 'Weeks - urgent but manageable', 
-                'month': 'About a month',
-                'unsure': 'Not sure of timeline',
-                'urgent': 'Very urgent',
-                'concerned': 'Concerned but have time',
-                'planning': 'Planning ahead',
-                'exploring': 'Just exploring'
-            };
-            return texts[timeline] || timeline;
-        }
-
-        // Test function for debugging
-        window.testChatbot = function() {
-            console.log('Testing chatbot system...');
-            console.log('openAIAssistant function available:', typeof window.openAIAssistant === 'function');
-            if (typeof window.openAIAssistant === 'function') {
-                console.log('✅ Chatbot system ready');
-                return true;
-            } else {
-                console.log('❌ Chatbot system not ready');
-                return false;
-            }
-        };
-    </script>
-
-    <!-- Bounce Animation CSS -->
-    <style>
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-    </style>
-
-    <!-- AI Integration - Disabled in favor of new chatbot system -->
-    <!-- <script src="js/ai-integration.js"></script> -->
 </body>
 </html>
