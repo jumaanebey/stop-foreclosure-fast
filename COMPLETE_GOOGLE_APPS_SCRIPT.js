@@ -2,8 +2,10 @@
 // Copy this entire code into your Google Apps Script Code.gs file
 
 // ============ CONFIGURATION ============
-var CONVERTKIT_API_KEY = 'Hh9PtQFOyWkQN4SZ3w0iXA';
-var CONVERTKIT_API_SECRET = 't1mpiB_IoR99DjTudHfQ25yF00U8uAAXepwbu0CsDn4';
+// SECURITY: API keys must be stored as Google Apps Script properties
+// Use: PropertiesService.getScriptProperties().setProperty('CONVERTKIT_API_KEY', 'your-key-here')
+var CONVERTKIT_API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY');
+var CONVERTKIT_API_SECRET = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_SECRET');
 var GOOGLE_SHEET_ID = '1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU';
 var NOTIFICATION_EMAIL = 'jumaanebey@gmail.com';
 var CONVERTKIT_FORM_ID = '8430004';

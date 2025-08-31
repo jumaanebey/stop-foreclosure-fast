@@ -2,8 +2,9 @@
 // Replace your existing Code.gs with this updated version
 
 // ============ CONFIGURATION ============
-var CONVERTKIT_API_KEY = 'Hh9PtQFOyWkQN4SZ3w0iXA';
-var CONVERTKIT_API_SECRET = 't1mpiB_IoR99DjTudHfQ25yF00U8uAAXepwbu0CsDn4';
+// SECURITY: Store API keys in Google Apps Script Properties, not in code
+var CONVERTKIT_API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY');
+var CONVERTKIT_API_SECRET = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_SECRET');
 var GOOGLE_SHEET_ID = '1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU';
 var NOTIFICATION_EMAIL = 'jumaanebey@gmail.com';
 var CONVERTKIT_FORM_ID = '8430004';

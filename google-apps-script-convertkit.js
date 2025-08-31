@@ -18,8 +18,10 @@
  */
 
 // ============ CONFIGURATION ============
-const CONVERTKIT_API_KEY = 'Hh9PtQFOyWkQN4SZ3w0iXA';
-const CONVERTKIT_API_SECRET = 't1mpiB_IoR99DjTudHfQ25yF00U8uAAXepwbu0CsDn4';
+// SECURITY: API keys moved to Google Apps Script Properties
+// Set these in your Google Apps Script: Project Settings > Script Properties
+const CONVERTKIT_API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY');
+const CONVERTKIT_API_SECRET = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_SECRET');
 const GOOGLE_SHEET_ID = '1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU';
 const NOTIFICATION_EMAIL = 'jumaanebey@gmail.com';
 
