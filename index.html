@@ -63,6 +63,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Tailwind CSS for UI/UX Optimization -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Calendar Appointment Scheduling -->
     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
@@ -121,19 +123,71 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo"><a href="/" onclick="location.reload(); return false;">My Foreclosure Solution</a></h1>
-            <nav class="nav">
-                <a href="virtual-consultation.html">Virtual Consultation</a>
-                <a href="california-foreclosure-help.html">All CA Counties</a>
-                <a href="foreclosure-faq.html">FAQ</a>
-                <button class="ai-assistant-btn" onclick="openAIAssistant()">🤖 AI Assistant</button>
-                <a href="tel:+1-949-328-4811" class="cta-button">Call (949) 328-4811</a>
-            </nav>
+    <!-- Header - Optimized for User Intent -->
+    <header class="header bg-white shadow-sm sticky top-0 z-50">
+        <div class="container max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <h1 class="logo">
+                    <a href="/" onclick="location.reload(); return false;" class="text-2xl font-bold text-blue-600 hover:text-blue-700">
+                        My Foreclosure Solution
+                    </a>
+                </h1>
+                <nav class="nav hidden md:flex items-center space-x-6">
+                    <!-- Primary Actions (User Intent 1: Stop Foreclosure) -->
+                    <a href="virtual-consultation.html" class="text-gray-700 hover:text-blue-600 font-medium">
+                        Free Consultation
+                    </a>
+                    <a href="california-foreclosure-help.html" class="text-gray-700 hover:text-blue-600 font-medium">
+                        All CA Counties
+                    </a>
+                    <!-- Secondary Support (User Intent 3: Get Help) -->
+                    <a href="foreclosure-faq.html" class="text-gray-700 hover:text-blue-600">
+                        FAQ
+                    </a>
+                    <button class="ai-assistant-btn bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg text-sm" onclick="openAIAssistant()">
+                        🤖 AI Help
+                    </button>
+                    <!-- Primary CTA (User Intent 1: Contact Now) -->
+                    <a href="tel:+1-949-328-4811" class="cta-button bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">
+                        📞 (949) 328-4811
+                    </a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu - Hidden by default -->
+            <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+                <div class="py-4 space-y-4">
+                    <a href="virtual-consultation.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium">
+                        Free Consultation
+                    </a>
+                    <a href="california-foreclosure-help.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium">
+                        All CA Counties
+                    </a>
+                    <a href="foreclosure-faq.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                        FAQ
+                    </a>
+                    <button class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50" onclick="openAIAssistant()">
+                        🤖 AI Help
+                    </button>
+                    <a href="tel:+1-949-328-4811" class="block mx-4 mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold text-center">
+                        📞 Call (949) 328-4811
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
+    
+    <script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+    </script>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -150,7 +204,7 @@
                     <a href="tel:+1-949-328-4811" class="cta-button-large primary" onclick="gtag('event', 'hero_phone_click', {'event_category': 'conversion'});">
                         📞 Call Now (949) 328-4811
                     </a>
-                    <button onclick="openPrequalForm()" class="cta-button-large secondary" onclick="gtag('event', 'hero_form_click', {'event_category': 'conversion'});">
+                    <button onclick="openPrequalForm(); gtag('event', 'hero_form_click', {'event_category': 'conversion'});" class="cta-button-large secondary">
                         Get My Options
                     </button>
                 </div>
@@ -174,29 +228,32 @@
         </div>
     </section>
 
-    <!-- Trust Indicators -->
-    <section class="trust-indicators">
-        <div class="container">
-            <h2>Why Homeowners Trust Us</h2>
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <div class="trust-icon">🏠</div>
-                    <h3>10+ Years Experience</h3>
-                    <p>Licensed real estate professionals helping homeowners since 2014</p>
+    <!-- Trust Indicators - Optimized for User Intent -->
+    <section class="trust-indicators bg-gray-50 py-16">
+        <div class="container max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Homeowners Choose Us to Stop Foreclosure</h2>
+                <p class="text-lg text-gray-600">Licensed professionals serving California since 2014</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="trust-item text-center bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="trust-icon text-4xl mb-4">🏠</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">10+ Years Experience</h3>
+                    <p class="text-gray-600">Licensed CA real estate professionals helping homeowners since 2014</p>
                 </div>
-                <div class="trust-item">
-                    <div class="trust-icon">💰</div>
-                    <h3>No Hidden Fees</h3>
-                    <p>We pay all closing costs. You get the full cash amount we agree on</p>
+                <div class="trust-item text-center bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="trust-icon text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">No Hidden Fees</h3>
+                    <p class="text-gray-600">We pay all closing costs. You get the full cash amount we agree on</p>
                 </div>
-                <div class="trust-item">
-                    <div class="trust-icon">⚡</div>
-                    <h3>Fast Closing</h3>
-                    <p>Close in 7 days or on your timeline. Stop foreclosure immediately</p>
+                <div class="trust-item text-center bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="trust-icon text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Stop Foreclosure Fast</h3>
+                    <p class="text-gray-600">Close in 7 days or on your timeline. Stop foreclosure immediately</p>
                 </div>
-                <div class="trust-item">
-                    <div class="trust-icon">🛡️</div>
-                    <h3>Professional Service</h3>
+                <div class="trust-item text-center bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="trust-icon text-4xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Licensed & Trusted</h3>
                     <p>Licensed real estate professionals providing transparent, honest solutions</p>
                 </div>
             </div>
