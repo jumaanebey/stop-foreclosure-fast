@@ -104,10 +104,9 @@
         <div class="container">
             <h1 class="logo"><a href="/" onclick="location.reload(); return false;">My Foreclosure Solution</a></h1>
             <nav class="nav">
-                <a href="virtual-consultation.html">Virtual Consultation</a>
-                <a href="california-foreclosure-help.html">All CA Counties</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
                 <a href="foreclosure-faq.html">FAQ</a>
-                <button class="ai-assistant-btn" onclick="openAIAssistant()">🤖 AI Assistant</button>
                 <a href="tel:+1-949-328-4811" class="cta-button">Call (949) 328-4811</a>
             </nav>
         </div>
@@ -117,23 +116,38 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">California's Leading Online Foreclosure Specialists</h1>
-                <h2 class="hero-subtitle">Virtual Consultations • Remote Cash Offers • Serving All 58 CA Counties Since 2014</h2>
-                <p class="hero-description">
-                    Facing foreclosure anywhere in California? Get expert help from home. We provide virtual consultations, remote property evaluations, and online cash offers. 
-                    Licensed professionals serving the entire state - no need to drive anywhere. Get started with a free online consultation today.
-                </p>
-                <div class="hero-cta">
-                    <a href="sms:+1-949-328-4811?body=EMERGENCY: I need immediate virtual foreclosure help anywhere in California. Please call me ASAP!" class="cta-button-large" onclick="handleEmergencyButtonClick(); gtag('event', 'emergency_foreclosure_help', {'event_category': 'urgent_lead'});" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);">
-                        📞 Emergency Virtual Consultation
-                    </a>
-                    <a href="cash-offer-calculator.html" class="cta-button-secondary" onclick="gtag('event', 'calculator_click', {'event_category': 'engagement'});">
-                        💻 Get Online Cash Offer
-                    </a>
+                <h1 class="hero-title">Stop Foreclosure Fast. We Buy Houses in ANY Condition.</h1>
+                <h2 class="hero-subtitle">Get a Fair Cash Offer Today • Close in 7 Days • No Repairs Needed</h2>
+                
+                <!-- Primary Address Form -->
+                <div class="hero-form">
+                    <h3>Get Your Cash Offer Now</h3>
+                    <form id="address-form" class="address-form">
+                        <div class="form-row">
+                            <input type="text" id="property-address" placeholder="Enter Your Property Address" required>
+                            <button type="submit" class="submit-btn">Get Cash Offer</button>
+                        </div>
+                        <div class="form-benefits">
+                            <span>✓ No obligation</span>
+                            <span>✓ Fast response</span>
+                            <span>✓ Fair offer</span>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="images/hero-professional.svg" alt="Professional foreclosure solution - California homeowners saved" width="600" height="400">
+
+                <div class="hero-phone">
+                    <p>Or call us directly:</p>
+                    <a href="tel:+1-949-328-4811" class="phone-large">(949) 328-4811</a>
+                </div>
+
+                <div class="hero-trust">
+                    <div class="trust-badges">
+                        <span class="trust-badge">⭐ 4.8★ Google Reviews</span>
+                        <span class="trust-badge">🏆 BBB A+ Rating</span>
+                        <span class="trust-badge">🛡️ Licensed CA Real Estate</span>
+                    </div>
+                    <p class="experience">10+ years helping California homeowners • 200+ families saved</p>
+                </div>
             </div>
         </div>
     </section>
@@ -2678,7 +2692,29 @@
         }
     </style>
 
-    <!-- AI Integration - Disabled in favor of new chatbot system -->
-    <!-- <script src="js/ai-integration.js"></script> -->
+    <!-- Address Form Handler -->
+    <script>
+        document.getElementById('address-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const address = document.getElementById('property-address').value;
+            
+            if (address.trim() === '') {
+                alert('Please enter your property address');
+                return;
+            }
+            
+            // Track the form submission
+            gtag('event', 'address_form_submit', {
+                'event_category': 'lead_generation',
+                'event_label': 'hero_form'
+            });
+            
+            // Redirect to contact form with address prefilled
+            window.location.href = `#contact-form?address=${encodeURIComponent(address)}`;
+            
+            // Show success message
+            alert('Thank you! We will contact you within 2 hours with your cash offer.');
+        });
+    </script>
 </body>
 </html>
