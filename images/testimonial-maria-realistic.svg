@@ -1,0 +1,124 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Photorealistic Woman Portrait -->
+  <defs>
+    <!-- Realistic skin tone gradients -->
+    <radialGradient id="skinToneRealistic" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F7D7C4;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#EFBF9D;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#E8AC7A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4956B;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Hair with realistic highlights -->
+    <linearGradient id="hairRealistic" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Eye details -->
+    <radialGradient id="eyeRealistic" cx="30%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#191970;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Clothing gradient -->
+    <linearGradient id="clothingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C3E50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34495E;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Background with depth -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E9ECEF;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background with professional studio lighting -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Neck and shoulders -->
+  <ellipse cx="150" cy="260" rx="60" ry="40" fill="url(#skinToneRealistic)"/>
+  
+  <!-- Professional blazer -->
+  <path d="M90,240 Q150,220 210,240 L210,300 L90,300 Z" fill="url(#clothingGrad)" filter="url(#dropShadow)"/>
+  
+  <!-- Collar/shirt -->
+  <path d="M120,235 Q150,225 180,235 L175,250 Q150,240 125,250 Z" fill="#FFFFFF"/>
+  
+  <!-- Face shape with realistic contours -->
+  <ellipse cx="150" cy="140" rx="45" ry="55" fill="url(#skinToneRealistic)" filter="url(#dropShadow)"/>
+  
+  <!-- Face shading for dimension -->
+  <ellipse cx="130" cy="130" rx="8" ry="15" fill="#E8AC7A" opacity="0.4"/>
+  <ellipse cx="170" cy="130" rx="8" ry="15" fill="#E8AC7A" opacity="0.4"/>
+  <ellipse cx="150" cy="165" rx="12" ry="8" fill="#E8AC7A" opacity="0.3"/>
+  
+  <!-- Hair with realistic texture and movement -->
+  <path d="M105,110 Q150,60 195,110 Q190,80 175,70 Q150,55 125,70 Q110,80 105,110" fill="url(#hairRealistic)"/>
+  <!-- Hair highlights -->
+  <path d="M125,75 Q140,70 155,75 Q145,68 135,70 Q130,72 125,75" fill="#CD853F" opacity="0.6"/>
+  <path d="M165,75 Q175,70 185,80 Q180,68 175,70 Q170,72 165,75" fill="#CD853F" opacity="0.6"/>
+  
+  <!-- Eyebrows with individual hairs -->
+  <path d="M125,115 Q135,110 145,115" stroke="#654321" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M155,115 Q165,110 175,115" stroke="#654321" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Individual eyebrow hairs -->
+  <line x1="128" y1="113" x2="130" y2="117" stroke="#8B4513" stroke-width="0.5"/>
+  <line x1="132" y1="111" x2="134" y2="115" stroke="#8B4513" stroke-width="0.5"/>
+  <line x1="136" y1="112" x2="138" y2="116" stroke="#8B4513" stroke-width="0.5"/>
+  
+  <!-- Eyes with realistic details -->
+  <!-- Left eye -->
+  <ellipse cx="135" cy="125" rx="12" ry="8" fill="#FFFFFF"/>
+  <ellipse cx="135" cy="125" rx="8" ry="6" fill="url(#eyeRealistic)"/>
+  <circle cx="135" cy="125" r="3" fill="#000000"/>
+  <circle cx="136" cy="123" r="1" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Eyelashes -->
+  <path d="M125,120 Q130,118 135,120" stroke="#000000" stroke-width="1" fill="none"/>
+  <path d="M135,120 Q140,118 145,120" stroke="#000000" stroke-width="1" fill="none"/>
+  
+  <!-- Right eye -->
+  <ellipse cx="165" cy="125" rx="12" ry="8" fill="#FFFFFF"/>
+  <ellipse cx="165" cy="125" rx="8" ry="6" fill="url(#eyeRealistic)"/>
+  <circle cx="165" cy="125" r="3" fill="#000000"/>
+  <circle cx="166" cy="123" r="1" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Eyelashes -->
+  <path d="M155,120 Q160,118 165,120" stroke="#000000" stroke-width="1" fill="none"/>
+  <path d="M165,120 Q170,118 175,120" stroke="#000000" stroke-width="1" fill="none"/>
+  
+  <!-- Nose with realistic shading -->
+  <ellipse cx="150" cy="140" rx="4" ry="8" fill="#E8AC7A" opacity="0.6"/>
+  <ellipse cx="148" cy="145" rx="1.5" ry="3" fill="#D4956B" opacity="0.8"/>
+  <ellipse cx="152" cy="145" rx="1.5" ry="3" fill="#D4956B" opacity="0.8"/>
+  
+  <!-- Mouth with realistic lip color -->
+  <ellipse cx="150" cy="160" rx="8" ry="4" fill="#CD5C5C"/>
+  <ellipse cx="150" cy="158" rx="6" ry="2" fill="#F08080" opacity="0.7"/>
+  <!-- Lip highlight -->
+  <ellipse cx="150" cy="157" rx="3" ry="1" fill="#FFFFFF" opacity="0.3"/>
+  
+  <!-- Subtle makeup/blush -->
+  <ellipse cx="125" cy="145" rx="8" ry="6" fill="#FFB6C1" opacity="0.2"/>
+  <ellipse cx="175" cy="145" rx="8" ry="6" fill="#FFB6C1" opacity="0.2"/>
+  
+  <!-- Professional jewelry -->
+  <circle cx="150" cy="210" r="3" fill="#FFD700" opacity="0.8"/>
+  <circle cx="150" cy="210" r="1.5" fill="#FFF8DC"/>
+  
+  <!-- Earrings -->
+  <circle cx="110" cy="135" r="2" fill="#FFD700"/>
+  <circle cx="190" cy="135" r="2" fill="#FFD700"/>
+  
+  <!-- Professional confidence indicator -->
+  <circle cx="260" cy="40" r="20" fill="#27AE60"/>
+  <path d="M250,40 L258,48 L270,30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
