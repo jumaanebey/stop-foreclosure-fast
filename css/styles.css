@@ -753,8 +753,8 @@ p {
 }
 
 .hero-title {
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-size: 3rem;
+    font-weight: 900;
     color: white;
     margin-bottom: var(--space-lg);
     line-height: 1.1;
@@ -898,9 +898,153 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.experience {
-    color: rgba(255, 255, 255, 0.8);
+/* Senior-Level Redesign Styles */
+.hero-urgency {
+    background: rgba(234, 88, 12, 0.9);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin: var(--space-xl) 0;
+    border-left: 4px solid var(--accent-light);
+}
+
+.hero-urgency p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.single-cta {
+    background: rgba(255, 255, 255, 0.95);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin: var(--space-xl) 0;
+    border: 3px solid var(--accent-color);
+}
+
+.single-cta h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
+}
+
+.primary-cta {
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    text-decoration: none;
+    margin: var(--space-lg) 0;
+    padding: var(--space-lg) var(--space-xl);
+    border: 3px solid var(--accent-color);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+}
+
+.primary-cta:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.cta-support {
+    color: var(--gray-600);
     font-size: 0.9rem;
+    margin: 0;
+}
+
+.proof-cases {
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-xl);
+}
+
+.proof-cases h4 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.case-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.case {
+    background: rgba(255, 255, 255, 0.9);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    color: var(--gray-800);
+    font-size: 0.95rem;
+}
+
+.case strong {
+    color: var(--primary-color);
+}
+
+.proof-section {
+    padding: var(--space-4xl) 0;
+    background: white;
+}
+
+.proof-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: var(--space-2xl);
+}
+
+.solutions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+}
+
+.solution {
+    background: var(--gray-50);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 2px solid var(--primary-color);
+}
+
+.solution h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.solution p {
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.urgency-reminder {
+    background: var(--accent-color);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: white;
+}
+
+.urgency-reminder h3 {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-md);
+}
+
+.inline-cta {
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.inline-cta:hover {
+    color: var(--accent-light);
 }
 
 /* Trust Indicators */
