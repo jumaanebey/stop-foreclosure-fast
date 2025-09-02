@@ -741,14 +741,16 @@ p {
 }
 
 .hero .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 var(--space-lg);
     position: relative;
     z-index: 1;
 }
 
 .hero-content {
-    max-width: 600px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .hero-title {
@@ -851,6 +853,55 @@ p {
     left: 0;
     color: var(--success-color);
     font-weight: 700;
+}
+
+/* Hero Image */
+.hero-image {
+    margin-top: var(--space-2xl);
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Success Image */
+.success-image {
+    text-align: center;
+    margin: var(--space-2xl) 0;
+}
+
+.success-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Header Phone Styling */
+.header-phone {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 1.1rem;
+}
+
+.header-phone span {
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.header-phone a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.header-phone a:hover {
+    color: var(--primary-dark);
 }
 
 .hero-description {
@@ -1107,17 +1158,24 @@ p {
     line-height: 1.6;
 }
 
-.urgency-reminder {
-    background: var(--accent-color);
+.consultation-reminder {
+    background: var(--primary-color);
     padding: var(--space-2xl);
     border-radius: var(--radius-lg);
     text-align: center;
     color: white;
 }
 
-.urgency-reminder h3 {
-    font-size: 1.8rem;
+.consultation-reminder h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: var(--space-md);
+}
+
+.hours-note {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: var(--space-sm);
 }
 
 .inline-cta {

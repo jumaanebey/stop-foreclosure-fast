@@ -1,0 +1,131 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Realistic photo-style image of family in distress about foreclosure -->
+  <defs>
+    <!-- Realistic skin tones -->
+    <radialGradient id="manSkinDistress" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#E8C5A0;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C19660;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="womanSkinDistress" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F4C2A1;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#EFBF9D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8AC7A;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Hair colors -->
+    <linearGradient id="darkHairMale" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A4A4A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F2F2F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="brownHairFemale" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Background with soft lighting -->
+    <radialGradient id="photoBackground" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Shadow effects -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Photo-style background -->
+  <rect width="100%" height="100%" fill="url(#photoBackground)"/>
+  
+  <!-- Sitting on couch/furniture suggestion -->
+  <rect x="50" y="280" width="500" height="120" fill="#8B7355" rx="10"/>
+  <rect x="50" y="280" width="500" height="30" fill="#A0845C" rx="10"/>
+  
+  <!-- Male figure (husband) - worried posture -->
+  <g transform="translate(200, 150)">
+    <!-- Body -->
+    <ellipse cx="0" cy="70" rx="25" ry="35" fill="#4169E1" transform="rotate(-5)"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="20" ry="25" fill="url(#manSkinDistress)"/>
+    <!-- Hair -->
+    <path d="M-18,-20 Q0,-30 18,-20 Q15,-25 10,-28 Q0,-32 -10,-28 Q-15,-25 -18,-20" fill="url(#darkHairMale)"/>
+    <!-- Worried facial features -->
+    <!-- Eyes (looking down, stressed) -->
+    <ellipse cx="-6" cy="-3" rx="4" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="6" cy="-3" rx="4" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="-6" cy="-2" rx="2" ry="1.5" fill="#654321"/>
+    <ellipse cx="6" cy="-2" rx="2" ry="1.5" fill="#654321"/>
+    <!-- Furrowed brow -->
+    <path d="M-12,-8 L-4,-6" stroke="#C19660" stroke-width="1.5" fill="none"/>
+    <path d="M4,-6 L12,-8" stroke="#C19660" stroke-width="1.5" fill="none"/>
+    <!-- Concerned mouth -->
+    <path d="M-6,8 Q0,12 6,8" stroke="#CD5C5C" stroke-width="2" fill="none"/>
+    <!-- Arms - one hand on head (stress gesture) -->
+    <ellipse cx="-20" cy="35" rx="8" ry="20" fill="url(#manSkinDistress)" transform="rotate(-20)"/>
+    <ellipse cx="25" cy="25" rx="8" ry="20" fill="url(#manSkinDistress)" transform="rotate(45)"/>
+    <!-- Hand on forehead -->
+    <ellipse cx="-25" cy="10" rx="6" ry="4" fill="url(#manSkinDistress)" transform="rotate(-30)"/>
+  </g>
+  
+  <!-- Female figure (wife) - comforting but worried -->
+  <g transform="translate(320, 160)">
+    <!-- Body -->
+    <ellipse cx="0" cy="65" rx="22" ry="32" fill="#DC143C"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="18" ry="23" fill="url(#womanSkinDistress)"/>
+    <!-- Hair -->
+    <path d="M-16,-18 Q0,-25 16,-18 Q16,-15 12,-12 Q8,-8 0,-8 Q-8,-8 -12,-12 Q-16,-15 -16,-18" fill="url(#brownHairFemale)"/>
+    <path d="M-12,-12 Q-8,-5 -4,-8 Q0,-3 4,-8 Q8,-5 12,-12" fill="url(#brownHairFemale)"/>
+    <!-- Eyes (caring but worried) -->
+    <ellipse cx="-5" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="5" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="-5" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+    <ellipse cx="5" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+    <!-- Concerned expression -->
+    <path d="M-4,6 Q0,9 4,6" stroke="#CD5C5C" stroke-width="1.5" fill="none"/>
+    <!-- Arms - one reaching toward husband -->
+    <ellipse cx="-25" cy="40" rx="7" ry="18" fill="url(#womanSkinDistress)" transform="rotate(-30)"/>
+    <ellipse cx="18" cy="45" rx="7" ry="18" fill="url(#womanSkinDistress)" transform="rotate(15)"/>
+  </g>
+  
+  <!-- Child figure - between parents, confused -->
+  <g transform="translate(260, 200)">
+    <!-- Small body -->
+    <ellipse cx="0" cy="40" rx="12" ry="20" fill="#32CD32"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="12" ry="15" fill="url(#womanSkinDistress)"/>
+    <!-- Hair -->
+    <path d="M-10,-12 Q0,-16 10,-12 Q8,-14 4,-15 Q0,-16 -4,-15 Q-8,-14 -10,-12" fill="url(#brownHairFemale)"/>
+    <!-- Innocent, confused eyes -->
+    <ellipse cx="-3" cy="-2" rx="2" ry="1.5" fill="#FFFFFF"/>
+    <ellipse cx="3" cy="-2" rx="2" ry="1.5" fill="#FFFFFF"/>
+    <circle cx="-3" cy="-2" r="1" fill="#654321"/>
+    <circle cx="3" cy="-2" r="1" fill="#654321"/>
+    <!-- Small mouth -->
+    <ellipse cx="0" cy="4" rx="2" ry="1" fill="#FFB6C1"/>
+  </g>
+  
+  <!-- Environmental details suggesting financial stress -->
+  <!-- Stack of papers/bills on side table -->
+  <g transform="translate(450, 200)">
+    <rect x="0" y="0" width="60" height="4" fill="#FFFFFF" stroke="#CCCCCC"/>
+    <rect x="2" y="4" width="60" height="4" fill="#FFFFFF" stroke="#CCCCCC"/>
+    <rect x="1" y="8" width="60" height="4" fill="#FFE4E1" stroke="#CCCCCC"/>
+    <rect x="3" y="12" width="60" height="4" fill="#FFE4E1" stroke="#CCCCCC"/>
+    <!-- "NOTICE" text on top paper -->
+    <text x="30" y="14" text-anchor="middle" fill="#DC143C" font-family="Arial" font-size="6" font-weight="bold">NOTICE</text>
+  </g>
+  
+  <!-- Laptop/computer suggesting research -->
+  <g transform="translate(100, 240)">
+    <rect x="0" y="0" width="40" height="25" fill="#2F2F2F" rx="2"/>
+    <rect x="2" y="2" width="36" height="20" fill="#4A90E2"/>
+    <rect x="-5" y="25" width="50" height="3" fill="#2F2F2F" rx="1"/>
+  </g>
+  
+  <!-- Subtle lighting to enhance realism -->
+  <ellipse cx="300" cy="400" rx="250" ry="30" fill="#000000" opacity="0.1"/>
+</svg>
