@@ -855,30 +855,75 @@ p {
     font-weight: 700;
 }
 
-/* Hero Image */
-.hero-image {
+/* Professional Image Containers */
+.hero-image-container {
     margin-top: var(--space-2xl);
     text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.hero-image img {
-    max-width: 100%;
+.hero-image {
+    width: 100%;
     height: auto;
+    max-height: 500px;
+    object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    transition: opacity 0.3s ease;
 }
 
-/* Success Image */
-.success-image {
+.success-image-container {
     text-align: center;
     margin: var(--space-2xl) 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.success-image img {
-    max-width: 100%;
+.success-image {
+    width: 100%;
     height: auto;
+    max-height: 500px;
+    object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease;
+}
+
+/* Professional Headshot */
+.professional-headshot-container {
+    text-align: center;
+    margin: var(--space-xl) 0;
+}
+
+.professional-headshot {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mobile Responsiveness for Images */
+@media (max-width: 768px) {
+    .hero-image-container,
+    .success-image-container {
+        margin-left: var(--space-md);
+        margin-right: var(--space-md);
+    }
+    
+    .hero-image,
+    .success-image {
+        max-height: 300px;
+    }
+    
+    .professional-headshot {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 /* Header Phone Styling */
