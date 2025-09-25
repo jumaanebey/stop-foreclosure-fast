@@ -63,6 +63,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ui-enhancements.css">
     
     <!-- Google Calendar Appointment Scheduling -->
     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
@@ -100,9 +101,14 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="main-header">
         <div class="container">
             <h1 class="logo">My Foreclosure Solution</h1>
+            <nav class="nav-links">
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#testimonials" class="nav-link">Success Stories</a>
+                <a href="#get-help" class="nav-link nav-cta">Get Help Now</a>
+            </nav>
             <div class="header-phone">
                 <span>Free Consultation:</span>
                 <a href="tel:+1-949-328-4811">(949) 328-4811</a>
@@ -114,9 +120,33 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
+                <!-- Animated Urgency Indicator -->
+                <div class="urgency-indicator">
+                    <span class="pulse-dot"></span>
+                    <span class="urgency-text">Only <span id="consultation-slots">3</span> consultation slots available today</span>
+                </div>
+
                 <h1 class="hero-title">Facing Foreclosure in California?</h1>
                 <h2 class="hero-subtitle">We're licensed real estate professionals who can help you explore your options.</h2>
-                
+
+                <!-- Trust Signals Carousel -->
+                <div class="trust-carousel">
+                    <div class="trust-items">
+                        <div class="trust-item active">
+                            <img src="images/bbb-logo.svg" alt="BBB Accredited" class="trust-logo">
+                            <span>BBB Accredited Business</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-number">500+</span>
+                            <span>Families Helped</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">🏆</span>
+                            <span>10+ Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="credentials-bar">
                     <span>California DRE License #02076038</span>
                     <span>•</span>
@@ -631,6 +661,8 @@
     </div>
 
     <script defer src="js/script.js"></script>
+    <script defer src="js/ui-enhancements.js"></script>
+    <script defer src="google-ai-setup/website-integration.js"></script>
     
     <!-- Advanced Analytics & Lead Scoring System -->
     <script>
