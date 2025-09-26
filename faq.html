@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foreclosure FAQ - Your Questions Answered | My Foreclosure Solution</title>
+    <meta name="description" content="Get answers to all your foreclosure questions. No judgment, just honest help from licensed California professionals.">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #374151;
+            background: #fffbf7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 2px solid #fed7aa;
+            padding: 20px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ea580c;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #fff8f3 0%, #fef3e2 50%, #ffffff 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* FAQ Categories */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #fed7aa;
+            border-radius: 12px;
+            color: #7c2d12;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: linear-gradient(135deg, #fb923c, #ea580c);
+            color: white;
+            border-color: #ea580c;
+            transform: translateY(-2px);
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(251, 146, 60, 0.1);
+            border: 1px solid #fed7aa;
+            margin-bottom: 40px;
+        }
+
+        .faq-section {
+            display: none;
+        }
+
+        .faq-section.active {
+            display: block;
+        }
+
+        .faq-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #fef3e2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-size: 19px;
+            font-weight: 600;
+            color: #7c2d12;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: #ea580c;
+        }
+
+        .faq-question::after {
+            content: '▼';
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: #6b7280;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #7c2d12 0%, #92400e 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fb923c, #ea580c);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .faq-content {
+                padding: 25px 20px;
+            }
+
+            .faq-question {
+                font-size: 17px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">My Foreclosure Solution</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="learn-more.html">Process</a>
+                <a href="faq.html">FAQ</a>
+                <a href="tel:+1-949-328-4811">Call Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Foreclosure Questions Answered</h1>
+            <p class="subtitle">No judgment, just honest answers and real solutions from people who care.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- FAQ Categories -->
+        <div class="faq-categories">
+            <button class="category-btn active" onclick="showCategory('urgent')">Urgent Questions</button>
+            <button class="category-btn" onclick="showCategory('process')">The Process</button>
+            <button class="category-btn" onclick="showCategory('financial')">Money & Costs</button>
+            <button class="category-btn" onclick="showCategory('emotional')">Personal Concerns</button>
+        </div>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+            <!-- Urgent Questions -->
+            <div class="faq-section active" id="urgent">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">My auction is in 3 days. Is it too late?</div>
+                    <div class="faq-answer">It's not too late! We've stopped foreclosures the day before auction. The key is acting NOW. Call us immediately at (949) 328-4811. We can file emergency paperwork, negotiate with your lender, or arrange a quick sale. Every hour counts at this stage.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Can you really stop a foreclosure in 7 days?</div>
+                    <div class="faq-answer">Yes, through several legal methods: filing for bankruptcy (immediate automatic stay), requesting emergency loan modification, arranging a short sale, or finding a cash buyer. The exact strategy depends on your situation, which is why we need to evaluate your case immediately.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">What if I just ignore the notices?</div>
+                    <div class="faq-answer">Please don't. Ignoring the notices won't make this go away. The bank will proceed with the sale, you'll be evicted (often by sheriff), and you'll lose any equity in your home. Even if you're overwhelmed, one phone call to us can change everything. We handle the stressful parts for you.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">I got a Notice of Default. How much time do I have?</div>
+                    <div class="faq-answer">In California, after a Notice of Default, you typically have 90 days before a Notice of Sale is recorded, then another 21 days before auction. But don't wait - the sooner we start, the more options you'll have and the better outcome we can achieve.</div>
+                </div>
+            </div>
+
+            <!-- Process Questions -->
+            <div class="faq-section" id="process">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">What happens after I contact you?</div>
+                    <div class="faq-answer">Within 30 minutes, we'll call you for a private, no-pressure conversation. We'll review your situation, explain all your options (keep the home, sell it, or walk away), and create an action plan. If you decide to work with us, we immediately start protecting your interests.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Will I have to leave my home immediately?</div>
+                    <div class="faq-answer">No! Our first goal is always to help you stay if that's what you want. If staying isn't possible, we'll ensure you have time to relocate with dignity. Even in a sale, you typically have 30-60 days to move, and we can sometimes negotiate cash for relocation.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">What documents do I need?</div>
+                    <div class="faq-answer">Initially, just basic information about your loan and the notices you've received. We'll help you gather everything else. Don't let missing paperwork stop you from calling - we can work with whatever you have.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Can you negotiate with my bank?</div>
+                    <div class="faq-answer">Yes! We negotiate with lenders daily. We speak their language, know what they'll accept, and often achieve solutions homeowners couldn't get on their own: loan modifications, payment plans, principal reductions, or short sale approvals.</div>
+                </div>
+            </div>
+
+            <!-- Financial Questions -->
+            <div class="faq-section" id="financial">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">How much will your help cost me?</div>
+                    <div class="faq-answer">Our consultation is completely FREE. If we help you sell your home, our commission comes from the sale proceeds - you don't pay anything out of pocket. If we help you keep your home through loan modification, we'll discuss any costs upfront. We never ask for money without explaining exactly what it's for.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Will I owe money after foreclosure?</div>
+                    <div class="faq-answer">Possibly. If your home sells for less than you owe, the bank might pursue a deficiency judgment. However, we often negotiate to eliminate this debt, or structure sales that protect you from owing anything. Every situation is different, which is why professional help matters.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">What if my home is worth less than I owe?</div>
+                    <div class="faq-answer">This is called being "underwater," and we have solutions. A short sale lets you sell for less than owed (we negotiate bank approval). Sometimes loan modification can reduce principal. Even if you walk away, we can minimize the financial damage.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Can I get any money from my home's equity?</div>
+                    <div class="faq-answer">If you have equity, YES! This is crucial - in foreclosure, the bank takes everything. But if we help you sell quickly, you keep your equity minus selling costs. We've helped clients walk away with tens of thousands instead of nothing.</div>
+                </div>
+            </div>
+
+            <!-- Emotional/Personal Questions -->
+            <div class="faq-section" id="emotional">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">I'm embarrassed about my situation. Will you judge me?</div>
+                    <div class="faq-answer">Never. Life happens - job loss, medical bills, divorce, business failure. We've seen it all and we're not here to judge. You're taking a brave step by seeking help. We treat every client with respect and dignity, focusing on solutions, not blame.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Will my neighbors know?</div>
+                    <div class="faq-answer">We handle everything discreetly. While foreclosure notices are public record, we can often resolve things before it becomes neighborhood knowledge. If we need to sell, we market professionally without "distressed sale" signs that embarrass you.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">How will this affect my credit?</div>
+                    <div class="faq-answer">Foreclosure severely damages credit (200-300 point drop, 7 years on report). But alternatives like short sale or loan modification have less impact. We'll explain how each option affects your credit and help you choose the path that preserves your financial future.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">Can I trust you? There are so many scams.</div>
+                    <div class="faq-answer">You're right to be cautious. We're licensed California real estate professionals (DRE #02076038). We never ask for upfront fees, never tell you to stop talking to your lender, and never promise unrealistic outcomes. Check our license, read our reviews, and trust your instincts.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">What if I just want this nightmare to end?</div>
+                    <div class="faq-answer">We understand. This is exhausting and scary. That's why we're here - to take the burden off your shoulders. We handle the calls, paperwork, negotiations, and stress. You just make the decisions. Many clients tell us their biggest relief was simply not facing this alone anymore.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Still Have Questions?</h2>
+            <p class="cta-subtitle">Every situation is unique. Let's discuss your specific concerns.</p>
+            <div class="cta-buttons">
+                <a href="tel:+1-949-328-4811" class="btn-primary">
+                    📞 Call Now: (949) 328-4811
+                </a>
+                <a href="index.html#form" class="btn-primary">
+                    📝 Get Free Consultation
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showCategory(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Show selected category
+            document.querySelectorAll('.faq-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(category).classList.add('active');
+        }
+
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('open');
+        }
+
+        // Open FAQ items by default on mobile for better UX
+        if (window.innerWidth < 768) {
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.add('open');
+            });
+        }
+    </script>
+</body>
+</html>
