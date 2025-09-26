@@ -150,35 +150,6 @@
             display: block;
         }
 
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .step {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #374151;
-            color: #9ca3af;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-
-        .step.active {
-            background: #10b981;
-            color: white;
-        }
-
-        .step.completed {
-            background: #10b981;
-            color: white;
-        }
-
         .form-navigation {
             display: flex;
             justify-content: space-between;
@@ -489,12 +460,6 @@
             <h2 class="form-title">Get Free Help Now</h2>
             <p class="form-subtitle">Takes 30 seconds • No obligation • 100% confidential</p>
 
-            <!-- Step Indicator -->
-            <div class="step-indicator">
-                <div class="step active" id="step-1-indicator">1</div>
-                <div class="step" id="step-2-indicator">2</div>
-                <div class="step" id="step-3-indicator">3</div>
-            </div>
 
             <form class="simple-form" id="foreclosure-help-form">
                 <!-- Step 1: Basic Contact Information -->
@@ -510,7 +475,7 @@
                     </div>
                     <div class="form-navigation">
                         <span></span>
-                        <button type="button" class="btn-next" onclick="nextStep()">Next Step →</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Continue →</button>
                     </div>
                 </div>
 
@@ -530,8 +495,8 @@
                         </select>
                     </div>
                     <div class="form-navigation">
-                        <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
-                        <button type="button" class="btn-next" onclick="nextStep()">Next Step →</button>
+                        <button type="button" class="btn-prev" onclick="prevStep()">← Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Almost Done →</button>
                     </div>
                 </div>
 
@@ -550,7 +515,7 @@
                         <input type="number" name="months_behind" placeholder="Months Behind on Payments" required>
                     </div>
                     <div class="form-navigation">
-                        <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
+                        <button type="button" class="btn-prev" onclick="prevStep()">← Back</button>
                         <button type="submit" class="submit-btn">Get My Free Consultation →</button>
                     </div>
                 </div>
@@ -608,11 +573,9 @@
                 await capturePartialData();
 
                 document.getElementById(`step-${currentStep}`).classList.remove('active');
-                document.getElementById(`step-${currentStep}-indicator`).classList.add('completed');
 
                 currentStep++;
                 document.getElementById(`step-${currentStep}`).classList.add('active');
-                document.getElementById(`step-${currentStep}-indicator`).classList.add('active');
             }
         }
 
@@ -642,11 +605,9 @@
 
         function prevStep() {
             document.getElementById(`step-${currentStep}`).classList.remove('active');
-            document.getElementById(`step-${currentStep}-indicator`).classList.remove('active');
 
             currentStep--;
             document.getElementById(`step-${currentStep}`).classList.add('active');
-            document.getElementById(`step-${currentStep+1}-indicator`).classList.remove('completed');
         }
 
         function validateCurrentStep() {
