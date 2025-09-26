@@ -431,30 +431,163 @@
             color: #0d9488;
         }
 
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #fed7aa;
+        }
+
+        .faq-title {
+            font-size: 28px;
+            color: #1f2937;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #fef3e2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #7c2d12;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question::before {
+            content: '❓';
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: #6b7280;
+            line-height: 1.7;
+            padding-left: 35px;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero .subheadline {
+                font-size: 18px;
+            }
+
             .trust-badges {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
 
             .benefits {
-                padding: 20px;
+                padding: 30px 20px;
             }
 
             .form-section {
+                padding: 40px 20px;
+                border-radius: 16px;
+            }
+
+            .form-group input,
+            .form-group select {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 18px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 20px;
+                font-size: 18px;
+            }
+
+            .btn-next, .btn-prev {
+                padding: 16px 24px;
+                font-size: 16px;
+            }
+
+            .form-navigation {
+                gap: 10px;
+            }
+
+            .faq-section {
                 padding: 30px 20px;
+            }
+
+            .faq-title {
+                font-size: 24px;
+            }
+
+            .faq-question {
+                font-size: 17px;
+            }
+
+            .faq-answer {
+                font-size: 15px;
+                padding-left: 30px;
             }
 
             .button-group {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .btn-primary,
             .btn-secondary {
                 width: 100%;
                 text-align: center;
+                padding: 20px;
             }
+
+            /* Sticky CTA bar on mobile */
+            .mobile-cta-bar {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #ea580c, #dc2626);
+                padding: 15px;
+                z-index: 1000;
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            }
+
+            .mobile-cta-bar a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 600;
+                gap: 10px;
+            }
+
+            /* Add padding to body to account for sticky bar */
+            body {
+                padding-bottom: 70px;
+            }
+        }
+
+        /* Hide mobile CTA bar on desktop */
+        .mobile-cta-bar {
+            display: none;
         }
 
         /* Floating Phone Button - Mobile Only */
@@ -621,6 +754,36 @@
             <p class="form-privacy">🔒 Your information is 100% secure and confidential</p>
         </div>
 
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">Common Questions (We Get It, This Is Scary)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Will I lose my home for sure?</div>
+                <div class="faq-answer">No! Many of our clients keep their homes through loan modifications, repayment plans, or other solutions. Even if you're days away from auction, there are still options.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How much will this cost me?</div>
+                <div class="faq-answer">Our consultation is completely free. If we help you sell, our commission comes from the sale proceeds - you don't pay out of pocket. We'll be transparent about any costs before you commit to anything.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What if I'm embarrassed about my situation?</div>
+                <div class="faq-answer">Please don't be. Job loss, medical bills, divorce - life happens. We've seen it all and we're not here to judge. We're here to help you move forward with dignity.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you really stop a foreclosure in 7 days?</div>
+                <div class="faq-answer">Yes, through various legal methods including bankruptcy filing, loan modification requests, or quick cash sales. The exact strategy depends on your situation, which is why we need to talk ASAP.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens after I fill out the form?</div>
+                <div class="faq-answer">We'll call you within 30 minutes during business hours (or first thing in the morning if after hours). We'll discuss your situation privately, explain your options, and create an action plan. No pressure, just honest advice.</div>
+            </div>
+        </div>
+
         <!-- CTA Section -->
         <div class="cta-section">
             <h2 class="cta-title">Ready to Save Your Home?</h2>
@@ -648,8 +811,13 @@
         </div>
     </footer>
 
-    <!-- Floating Phone Button (Mobile Only) -->
-    <a href="tel:+1-949-328-4811" class="floating-phone" aria-label="Call us"></a>
+    <!-- Mobile Sticky CTA Bar -->
+    <div class="mobile-cta-bar">
+        <a href="tel:+1-949-328-4811">
+            <span>📞</span>
+            <span>Call Now - Free Consultation</span>
+        </a>
+    </div>
 
     <!-- Simple JavaScript -->
     <script>
@@ -676,19 +844,30 @@
             data.completedStep = currentStep;
             data.timestamp = new Date().toISOString();
             data.isPartialSubmission = true;
+            data.source = 'foreclosure-landing-page';
 
             // Send partial data to your system
             try {
                 console.log(`Step ${currentStep} completed:`, data);
 
-                // Here you would send to your backend/CRM
-                // Example: await fetch('/api/partial-lead', { method: 'POST', body: JSON.stringify(data) });
+                // Send to Google Apps Script
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
 
-                // For now, store in localStorage as backup
+                // Store in localStorage as backup
                 localStorage.setItem('foreclosureFormProgress', JSON.stringify(data));
+                console.log('Lead data captured successfully');
 
             } catch (error) {
                 console.error('Failed to capture partial data:', error);
+                // Still save locally if API fails
+                localStorage.setItem('foreclosureFormProgress', JSON.stringify(data));
             }
         }
 
