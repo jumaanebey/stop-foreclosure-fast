@@ -141,6 +141,68 @@
             margin-bottom: 40px;
         }
 
+        /* Multi-step form styles */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #374151;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .step.active {
+            background: #10b981;
+            color: white;
+        }
+
+        .step.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-next, .btn-prev {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-prev {
+            background: #6b7280;
+        }
+
+        .btn-next:hover, .btn-prev:hover {
+            opacity: 0.9;
+        }
+
         .form-title {
             font-size: 28px;
             margin-bottom: 10px;
@@ -427,42 +489,71 @@
             <h2 class="form-title">Get Free Help Now</h2>
             <p class="form-subtitle">Takes 30 seconds • No obligation • 100% confidential</p>
 
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step-1-indicator">1</div>
+                <div class="step" id="step-2-indicator">2</div>
+                <div class="step" id="step-3-indicator">3</div>
+            </div>
+
             <form class="simple-form" id="foreclosure-help-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                <!-- Step 1: Basic Contact Information -->
+                <div class="form-step active" id="step-1">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-navigation">
+                        <span></span>
+                        <button type="button" class="btn-next" onclick="nextStep()">Next Step →</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="tel" name="phone" placeholder="Phone Number" required>
+
+                <!-- Step 2: Timeline & Property Basics -->
+                <div class="form-step" id="step-2">
+                    <div class="form-group">
+                        <input type="text" name="property_address" placeholder="Property Address" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="timeline" required>
+                            <option value="">When is your foreclosure sale?</option>
+                            <option value="7days">Within 7 days (URGENT)</option>
+                            <option value="30days">Within 30 days</option>
+                            <option value="60days">Within 60 days</option>
+                            <option value="over60">More than 60 days</option>
+                            <option value="unsure">Not sure</option>
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Next Step →</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Email Address" required>
+
+                <!-- Step 3: Financial Details -->
+                <div class="form-step" id="step-3">
+                    <div class="form-group">
+                        <input type="number" name="property_value" placeholder="Estimated Property Value" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="mortgage_balance" placeholder="Current Mortgage Balance" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="monthly_payment" placeholder="Monthly Mortgage Payment" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="months_behind" placeholder="Months Behind on Payments" required>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
+                        <button type="submit" class="submit-btn">Get My Free Consultation →</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="property_address" placeholder="Property Address" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" name="property_value" placeholder="Estimated Property Value" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" name="mortgage_balance" placeholder="Current Mortgage Balance" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" name="monthly_payment" placeholder="Monthly Mortgage Payment" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" name="months_behind" placeholder="Months Behind on Payments" required>
-                </div>
-                <div class="form-group">
-                    <select name="timeline" required>
-                        <option value="">When is your foreclosure sale?</option>
-                        <option value="7days">Within 7 days (URGENT)</option>
-                        <option value="30days">Within 30 days</option>
-                        <option value="60days">Within 60 days</option>
-                        <option value="over60">More than 60 days</option>
-                        <option value="unsure">Not sure</option>
-                    </select>
-                </div>
-                <button type="submit" class="submit-btn">Get My Free Consultation →</button>
             </form>
             <p class="form-privacy">🔒 Your information is 100% secure and confidential</p>
         </div>
@@ -508,6 +599,46 @@
 
     <!-- Simple JavaScript -->
     <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                document.getElementById(`step-${currentStep}`).classList.remove('active');
+                document.getElementById(`step-${currentStep}-indicator`).classList.add('completed');
+
+                currentStep++;
+                document.getElementById(`step-${currentStep}`).classList.add('active');
+                document.getElementById(`step-${currentStep}-indicator`).classList.add('active');
+            }
+        }
+
+        function prevStep() {
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            document.getElementById(`step-${currentStep}-indicator`).classList.remove('active');
+
+            currentStep--;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            document.getElementById(`step-${currentStep+1}-indicator`).classList.remove('completed');
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = document.getElementById(`step-${currentStep}`);
+            const requiredFields = currentStepElement.querySelectorAll('[required]');
+
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    field.style.borderColor = '#dc2626';
+                    setTimeout(() => {
+                        field.style.borderColor = '#374151';
+                    }, 3000);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         // Form submission with AI integration
         document.getElementById('foreclosure-help-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -524,7 +655,7 @@
             console.log('Form submitted:', data);
 
             // Show success message
-            e.target.innerHTML = `
+            document.querySelector('.form-section').innerHTML = `
                 <div style="text-align: center; padding: 40px;">
                     <h3 style="color: #10b981; font-size: 32px; margin-bottom: 20px;">✅ Thank You!</h3>
                     <p style="font-size: 20px; margin-bottom: 20px;">We received your request for help.</p>
@@ -538,7 +669,7 @@
             `;
 
             // Scroll to form
-            e.target.scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
         });
 
         // Add urgency for timeline
