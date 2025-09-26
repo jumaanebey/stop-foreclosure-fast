@@ -602,14 +602,41 @@
         let currentStep = 1;
         const totalSteps = 3;
 
-        function nextStep() {
+        async function nextStep() {
             if (validateCurrentStep()) {
+                // Capture partial form data before advancing
+                await capturePartialData();
+
                 document.getElementById(`step-${currentStep}`).classList.remove('active');
                 document.getElementById(`step-${currentStep}-indicator`).classList.add('completed');
 
                 currentStep++;
                 document.getElementById(`step-${currentStep}`).classList.add('active');
                 document.getElementById(`step-${currentStep}-indicator`).classList.add('active');
+            }
+        }
+
+        async function capturePartialData() {
+            const formData = new FormData(document.getElementById('foreclosure-help-form'));
+            const data = Object.fromEntries(formData);
+
+            // Add step completion info
+            data.completedStep = currentStep;
+            data.timestamp = new Date().toISOString();
+            data.isPartialSubmission = true;
+
+            // Send partial data to your system
+            try {
+                console.log(`Step ${currentStep} completed:`, data);
+
+                // Here you would send to your backend/CRM
+                // Example: await fetch('/api/partial-lead', { method: 'POST', body: JSON.stringify(data) });
+
+                // For now, store in localStorage as backup
+                localStorage.setItem('foreclosureFormProgress', JSON.stringify(data));
+
+            } catch (error) {
+                console.error('Failed to capture partial data:', error);
             }
         }
 
@@ -670,6 +697,41 @@
 
             // Scroll to form
             document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Capture data on page exit if user has started filling form
+        window.addEventListener('beforeunload', async (e) => {
+            const form = document.getElementById('foreclosure-help-form');
+            const nameField = form.querySelector('[name="name"]');
+
+            // Only capture if user has started filling out the form
+            if (nameField && nameField.value.trim()) {
+                await capturePartialData();
+
+                // Show exit intent message for important leads
+                const phoneField = form.querySelector('[name="phone"]');
+                if (phoneField && phoneField.value.trim()) {
+                    e.preventDefault();
+                    e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                    return e.returnValue;
+                }
+            }
+        });
+
+        // Auto-save as user types in critical fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const criticalFields = ['name', 'phone', 'email'];
+
+            criticalFields.forEach(fieldName => {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (field) {
+                    field.addEventListener('blur', async () => {
+                        if (field.value.trim()) {
+                            await capturePartialData();
+                        }
+                    });
+                }
+            });
         });
 
         // Add urgency for timeline
