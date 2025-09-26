@@ -590,6 +590,193 @@
             display: none;
         }
 
+        /* Text Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-trigger {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+            transition: all 0.3s;
+            animation: pulse-chat 3s infinite;
+        }
+
+        .chat-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(234, 88, 12, 0.5);
+        }
+
+        .chat-trigger::after {
+            content: '💬';
+            font-size: 28px;
+        }
+
+        @keyframes pulse-chat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid #fed7aa;
+        }
+
+        .chat-window.open {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .chat-close:hover {
+            opacity: 1;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fffbf7;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+
+        .chat-message.bot {
+            background: #fef3e2;
+            color: #7c2d12;
+            border: 1px solid #fed7aa;
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-input-area {
+            padding: 15px 20px;
+            border-top: 1px solid #fed7aa;
+            background: white;
+        }
+
+        .chat-input-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #fed7aa;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            border-color: #ea580c;
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .chat-send:hover {
+            transform: translateY(-1px);
+        }
+
+        .chat-quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: 2px solid #fed7aa;
+            color: #7c2d12;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .quick-action-btn:hover {
+            background: #fef3e2;
+            border-color: #fb923c;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .chat-window {
+                width: 300px;
+                height: 400px;
+            }
+
+            .chat-widget {
+                bottom: 80px; /* Above mobile CTA bar */
+            }
+        }
+
         /* Floating Phone Button - Mobile Only */
         @media (max-width: 768px) {
             .floating-phone {
@@ -790,6 +977,42 @@
         </a>
     </div>
 
+    <!-- Text Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-trigger" onclick="toggleChat()"></div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>💬 Quick Help</span>
+                <button class="chat-close" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    Hi! I'm here to help. What's your situation?
+                </div>
+                <div class="chat-quick-actions">
+                    <button class="quick-action-btn" onclick="quickAction('urgent')">
+                        🚨 My auction is within 7 days
+                    </button>
+                    <button class="quick-action-btn" onclick="quickAction('timeline')">
+                        📅 What's my timeline?
+                    </button>
+                    <button class="quick-action-btn" onclick="quickAction('cost')">
+                        💰 What will this cost me?
+                    </button>
+                    <button class="quick-action-btn" onclick="quickAction('options')">
+                        🏠 What are my options?
+                    </button>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <form class="chat-input-form" onsubmit="sendMessage(event)">
+                    <input type="text" class="chat-input" placeholder="Type your question..." id="chatInput">
+                    <button type="submit" class="chat-send">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Simple JavaScript -->
     <script>
         let currentStep = 1;
@@ -947,6 +1170,162 @@
                 }
             }
         });
+
+        // Chat Widget Functionality
+        let chatOpen = false;
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatOpen = !chatOpen;
+
+            if (chatOpen) {
+                chatWindow.classList.add('open');
+                // Auto-scroll to bottom
+                setTimeout(() => {
+                    const messages = document.getElementById('chatMessages');
+                    messages.scrollTop = messages.scrollHeight;
+                }, 100);
+            } else {
+                chatWindow.classList.remove('open');
+            }
+        }
+
+        function addMessage(text, isUser = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.textContent = text;
+
+            // Remove quick actions if they exist
+            const quickActions = messagesContainer.querySelector('.chat-quick-actions');
+            if (quickActions && isUser) {
+                quickActions.remove();
+            }
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function quickAction(action) {
+            const responses = {
+                urgent: {
+                    user: "My auction is within 7 days",
+                    bot: "This is URGENT! Call me immediately at (949) 328-4811. Even with 7 days, we can still stop the sale through emergency legal methods. Don't wait - every hour counts. I can also send you a quick text if that's easier."
+                },
+                timeline: {
+                    user: "What's my timeline?",
+                    bot: "Timeline depends on your situation. Notice of Default = 90+ days. Notice of Sale = 21+ days. Sale scheduled = immediate action needed. Tell me where you are in the process and I'll give you exact timelines."
+                },
+                cost: {
+                    user: "What will this cost me?",
+                    bot: "Our consultation is 100% FREE. If we help you sell, we get paid from the sale proceeds - you pay nothing out of pocket. If we help you keep your home, any costs are explained upfront. No hidden fees, ever."
+                },
+                options: {
+                    user: "What are my options?",
+                    bot: "You have 3 main paths: 1) Keep your home (loan modification, repayment plan) 2) Sell quickly (short sale, cash offer) 3) Walk away with dignity. Best option depends on your equity, income, and goals. Let's talk!"
+                }
+            };
+
+            const response = responses[action];
+            addMessage(response.user, true);
+
+            setTimeout(() => {
+                addMessage(response.bot);
+                addCallToAction();
+            }, 1000);
+        }
+
+        function addCallToAction() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const ctaDiv = document.createElement('div');
+            ctaDiv.className = 'chat-quick-actions';
+            ctaDiv.innerHTML = `
+                <button class="quick-action-btn" onclick="requestCallback()">
+                    📞 Request callback in 30 minutes
+                </button>
+                <button class="quick-action-btn" onclick="window.location.href='tel:+1-949-328-4811'">
+                    📱 Call now: (949) 328-4811
+                </button>
+                <button class="quick-action-btn" onclick="requestText()">
+                    💬 Text me instead
+                </button>
+            `;
+            messagesContainer.appendChild(ctaDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function requestCallback() {
+            addMessage("I'd like a callback in 30 minutes", true);
+            setTimeout(() => {
+                addMessage("Perfect! I'll call you within 30 minutes. Can you quickly fill out the form on this page so I have your details? It takes 30 seconds and helps me prepare for our call.");
+                scrollToForm();
+            }, 1000);
+        }
+
+        function requestText() {
+            addMessage("I'd prefer to text", true);
+            setTimeout(() => {
+                addMessage("Great! Text me at (949) 328-4811 and I'll respond quickly. Include your name and when your foreclosure sale is scheduled so I can prioritize your message.");
+            }, 1000);
+        }
+
+        function scrollToForm() {
+            document.querySelector('.form-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+            setTimeout(() => {
+                toggleChat(); // Close chat to show form
+            }, 2000);
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addMessage(message, true);
+            input.value = '';
+
+            // Simple keyword-based responses
+            setTimeout(() => {
+                const response = getSmartResponse(message.toLowerCase());
+                addMessage(response);
+
+                // After any response, show CTA options
+                setTimeout(() => {
+                    addCallToAction();
+                }, 1500);
+            }, 1000);
+        }
+
+        function getSmartResponse(message) {
+            if (message.includes('auction') || message.includes('sale date') || message.includes('days')) {
+                return "Time is critical! If your auction is soon, we need to act immediately. The exact options depend on your timeline. Call me now at (949) 328-4811 for urgent help.";
+            }
+            if (message.includes('cost') || message.includes('money') || message.includes('fee')) {
+                return "No upfront costs! Our consultation is free, and if we help you sell, we're paid from proceeds. If we help you keep your home, any costs are explained clearly first.";
+            }
+            if (message.includes('keep') || message.includes('stay') || message.includes('home')) {
+                return "Keeping your home is often possible! Options include loan modification, repayment plans, or refinancing. Success depends on your income and how far behind you are.";
+            }
+            if (message.includes('behind') || message.includes('payments') || message.includes('months')) {
+                return "Being behind on payments doesn't mean you'll lose your home. We've helped people who were 12+ months behind. The key is acting now while you still have options.";
+            }
+            if (message.includes('embarrassed') || message.includes('ashamed') || message.includes('judge')) {
+                return "Please don't feel embarrassed. Life happens - job loss, medical bills, divorce. We see this daily and we're here to help, not judge. You're being smart by seeking help.";
+            }
+
+            return "I understand your concern. Every situation is unique, which is why I'd love to talk with you personally. A quick call helps me give you specific advice for your situation. Can I call you?";
+        }
+
+        // Auto-open chat after 30 seconds if user hasn't interacted
+        setTimeout(() => {
+            if (!chatOpen && !localStorage.getItem('foreclosureFormProgress')) {
+                toggleChat();
+            }
+        }, 30000);
     </script>
 </body>
 </html>
