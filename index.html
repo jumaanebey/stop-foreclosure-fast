@@ -1570,31 +1570,48 @@
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
         }
 
-        // SMS Follow-up Integration
-        async function sendSMSNotification(phoneNumber, message) {
-            // This would connect to your SMS service (Twilio, etc.)
-            // For now, we'll log and save for follow-up
+        // SMS Follow-up Integration with Twilio
+        async function sendSMSNotification(phoneNumber, message, leadName, timeline) {
             const smsData = {
                 phone: phoneNumber,
                 message: message,
-                timestamp: new Date().toISOString(),
-                type: 'automated_followup'
+                leadName: leadName || 'Friend',
+                timeline: timeline || 'unknown'
             };
 
-            console.log('SMS to send:', smsData);
+            console.log('Sending SMS via Twilio:', smsData);
 
-            // Send to your backend
+            // Send to your local server with Twilio
             try {
-                await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+                const response = await fetch('http://localhost:8080/api/send-sms', {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(smsData)
                 });
+
+                const result = await response.json();
+                if (result.success) {
+                    console.log('SMS sent successfully:', result.messageSid);
+                } else {
+                    console.error('SMS failed:', result.error);
+                }
             } catch (error) {
                 console.error('SMS notification error:', error);
+                // Fallback to Google Apps Script
+                try {
+                    await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({...smsData, fallback: true})
+                    });
+                } catch (fallbackError) {
+                    console.error('Fallback also failed:', fallbackError);
+                }
             }
         }
 
@@ -1609,20 +1626,20 @@
             // Check SMS consent
             if (data.sms_consent) {
                 // Schedule immediate SMS
-                const immediateMessage = `Hi ${data.name}, I got your urgent foreclosure request. This is [Your Name] from My Foreclosure Solution. Your situation is time-sensitive. When can we talk today? Reply with best time or call me now: (949) 328-4811`;
+                const immediateMessage = `Hi ${data.name}, I got your urgent foreclosure request. This is from My Foreclosure Solution. Your situation is time-sensitive. When can we talk today? Reply with best time or call me now: (949) 328-4811`;
 
-                await sendSMSNotification(data.phone, immediateMessage);
+                await sendSMSNotification(data.phone, immediateMessage, data.name, data.timeline);
 
                 // Schedule 5-minute follow-up
                 setTimeout(async () => {
                     const followupMessage = `${data.name}, I'm ready to discuss your foreclosure options right now. Every hour matters with your timeline. Text YES for immediate callback or call: (949) 328-4811`;
-                    await sendSMSNotification(data.phone, followupMessage);
+                    await sendSMSNotification(data.phone, followupMessage, data.name, data.timeline);
                 }, 5 * 60 * 1000);
 
                 // Schedule 30-minute follow-up
                 setTimeout(async () => {
                     const urgentMessage = `URGENT for ${data.name}: With your auction approaching, we need to act TODAY. I have solutions ready. Please respond ASAP or call: (949) 328-4811`;
-                    await sendSMSNotification(data.phone, urgentMessage);
+                    await sendSMSNotification(data.phone, urgentMessage, data.name, data.timeline);
                 }, 30 * 60 * 1000);
             }
 
