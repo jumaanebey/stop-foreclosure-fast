@@ -1,0 +1,133 @@
+<!-- SIMPLE FORM REPLACEMENT -->
+<!-- Replace the complex multi-step form with this simple version -->
+
+<form id="foreclosure-help-form">
+    <div class="form-step active">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" autocomplete="name" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email Address" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="property_address" placeholder="Property Address" autocomplete="street-address" required>
+        </div>
+        <div class="form-group">
+            <select name="timeline" required>
+                <option value="">When is your foreclosure sale?</option>
+                <option value="7days">Within 7 days 🚨</option>
+                <option value="30days">Within 30 days</option>
+                <option value="60days">Within 60 days</option>
+                <option value="over60">Over 60 days</option>
+                <option value="unsure">I'm not sure</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="foreclosure_stage" required>
+                <option value="">Where are you in the foreclosure process?</option>
+                <option value="behind_payments">Behind on payments</option>
+                <option value="notice_of_default">Received Notice of Default</option>
+                <option value="notice_of_sale">Received Notice of Sale</option>
+                <option value="auction_scheduled">Auction is scheduled</option>
+                <option value="unsure">I'm not sure</option>
+            </select>
+        </div>
+
+        <!-- SMS Opt-in -->
+        <div class="sms-optin active">
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="sms_consent" name="sms_consent" value="1">
+                <label for="sms_consent">
+                    <span class="checkmark"></span>
+                    Yes, text me updates and urgent reminders
+                </label>
+            </div>
+            <p class="consent-note">Standard messaging rates apply. You can opt out anytime.</p>
+        </div>
+
+        <div class="form-navigation">
+            <button type="submit" class="submit-btn">Get My Free Consultation →</button>
+        </div>
+    </div>
+</form>
+
+<!-- SIMPLIFIED JAVASCRIPT -->
+<script>
+// Remove all complex multi-step logic and just handle simple form submission
+document.getElementById('foreclosure-help-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+
+    // Show loading state
+    submitBtn.textContent = 'Processing...';
+    submitBtn.disabled = true;
+
+    try {
+        // Get form data
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        console.log('Form submission:', data);
+
+        // Send lead alert to business email
+        const alertData = {
+            type: 'lead_alert',
+            to: 'help@myforeclosuresolutions.com',
+            subject: `${data.timeline === '7days' ? '🚨 URGENT' : '📋 NEW'} FORECLOSURE LEAD - ${data.name}`,
+            message: `NEW FORECLOSURE LEAD RECEIVED
+
+📞 Name: ${data.name}
+📱 Phone: ${data.phone}
+📧 Email: ${data.email}
+🏠 Property: ${data.property_address}
+⏰ Timeline: ${data.timeline}
+📋 Stage: ${data.foreclosure_stage}
+📱 SMS OK: ${data.sms_consent ? 'YES' : 'NO'}
+
+ACTION REQUIRED: Contact immediately!
+Submitted: ${new Date().toLocaleString()}`,
+            leadData: data
+        };
+
+        // Send to Google Apps Script
+        await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(alertData)
+        });
+
+        // Send main form data too
+        await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        // Show success message
+        document.querySelector('.form-section').innerHTML = `
+            <div style="text-align: center; padding: 40px; background: white; border-radius: 20px;">
+                <h3 style="color: #10b981; font-size: 32px; margin-bottom: 20px;">✅ Thank You!</h3>
+                <p style="font-size: 20px; margin-bottom: 20px;">We received your foreclosure request.</p>
+                <p style="font-size: 18px; color: #ea580c; margin-bottom: 15px;">📧 Alert sent to our team!</p>
+                <p style="font-size: 18px; color: #9ca3af; margin-bottom: 30px;">A specialist will contact you within 30 minutes.</p>
+                <a href="tel:+1-949-328-4811" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block;">
+                    📞 Call Now: (949) 328-4811
+                </a>
+            </div>
+        `;
+
+    } catch (error) {
+        console.error('Submission error:', error);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        alert('There was an error submitting your request. Please call (949) 328-4811 directly.');
+    }
+});
+</script>
