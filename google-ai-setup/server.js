@@ -6,14 +6,15 @@
 const express = require('express');
 const cors = require('cors');
 const twilio = require('twilio');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Initialize Twilio client (update with your credentials)
-const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID || 'YOUR_ACCOUNT_SID';
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN || 'YOUR_AUTH_TOKEN';
-const twilioPhoneNumber = process.env.TWILIO_PHONE || '+19493284811';
+// Initialize Twilio client
+const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONE;
 
 const twilioClient = twilio(twilioAccountSid, twilioAuthToken);
 

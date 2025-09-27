@@ -1570,49 +1570,57 @@
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
         }
 
-        // SMS Follow-up Integration with Twilio
-        async function sendSMSNotification(phoneNumber, message, leadName, timeline) {
-            const smsData = {
-                phone: phoneNumber,
-                message: message,
-                leadName: leadName || 'Friend',
-                timeline: timeline || 'unknown'
+        // Lead Alert System - Send alerts to your iPhone
+        async function sendLeadAlert(leadData) {
+            const urgencyLevel = leadData.timeline === '7days' ? '🚨 URGENT' :
+                                leadData.timeline === '30days' ? '⚡ HIGH' : '📋 NEW';
+
+            const alertData = {
+                type: 'lead_alert',
+                to: '9493284811@txt.att.com', // Your AT&T SMS gateway
+                subject: `${urgencyLevel} LEAD`,
+                message: `${urgencyLevel} FORECLOSURE LEAD
+📞 ${leadData.name}
+📱 ${leadData.phone}
+🏠 ${leadData.property_address || 'Address pending'}
+⏰ Sale: ${leadData.timeline}
+💰 Value: $${leadData.property_value || 'Unknown'}
+📍 Action: Call immediately!
+
+Captured: ${new Date().toLocaleString()}`,
+                leadData: leadData
             };
 
-            console.log('Sending SMS via Twilio:', smsData);
+            console.log('Sending lead alert to iPhone:', alertData);
 
-            // Send to your local server with Twilio
+            // Send to Google Apps Script (which can send emails)
             try {
-                const response = await fetch('http://localhost:8080/api/send-sms', {
+                await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(smsData)
+                    body: JSON.stringify(alertData)
                 });
-
-                const result = await response.json();
-                if (result.success) {
-                    console.log('SMS sent successfully:', result.messageSid);
-                } else {
-                    console.error('SMS failed:', result.error);
-                }
+                console.log('Lead alert sent to iPhone successfully');
             } catch (error) {
-                console.error('SMS notification error:', error);
-                // Fallback to Google Apps Script
-                try {
-                    await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({...smsData, fallback: true})
-                    });
-                } catch (fallbackError) {
-                    console.error('Fallback also failed:', fallbackError);
-                }
+                console.error('Lead alert failed:', error);
             }
+        }
+
+        // SMS to lead function (optional - for sending automated messages to leads)
+        async function sendSMSToLead(phone, message, leadName, timeline) {
+            console.log(`Would send SMS to lead ${leadName} at ${phone}: ${message}`);
+
+            // For now, just log the SMS that would be sent
+            // In the future, you could integrate with Twilio or another SMS service
+            // The iPhone alerts are the main focus
+
+            return Promise.resolve({
+                success: true,
+                message: 'SMS logged (not sent - iPhone alerts are primary)'
+            });
         }
 
         // Enhanced form submission with SMS
@@ -1623,24 +1631,38 @@
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
 
-            // Check SMS consent
+            // Send immediate alert to your iPhone for every lead
+            try {
+                await sendLeadAlert(data);
+                console.log('Lead alert sent to iPhone successfully');
+            } catch (error) {
+                console.error('Failed to send iPhone alert:', error);
+            }
+
+            // Send automated SMS to lead if they opted in
             if (data.sms_consent) {
-                // Schedule immediate SMS
-                const immediateMessage = `Hi ${data.name}, I got your urgent foreclosure request. This is from My Foreclosure Solution. Your situation is time-sensitive. When can we talk today? Reply with best time or call me now: (949) 328-4811`;
+                try {
+                    // Schedule immediate SMS to lead
+                    const immediateMessage = `Hi ${data.name}, I got your urgent foreclosure request. This is from My Foreclosure Solution. Your situation is time-sensitive. When can we talk today? Reply with best time or call me now: (949) 328-4811`;
 
-                await sendSMSNotification(data.phone, immediateMessage, data.name, data.timeline);
+                    await sendSMSToLead(data.phone, immediateMessage, data.name, data.timeline);
 
-                // Schedule 5-minute follow-up
-                setTimeout(async () => {
-                    const followupMessage = `${data.name}, I'm ready to discuss your foreclosure options right now. Every hour matters with your timeline. Text YES for immediate callback or call: (949) 328-4811`;
-                    await sendSMSNotification(data.phone, followupMessage, data.name, data.timeline);
-                }, 5 * 60 * 1000);
+                    // Schedule 5-minute follow-up
+                    setTimeout(async () => {
+                        const followupMessage = `${data.name}, I'm ready to discuss your foreclosure options right now. Every hour matters with your timeline. Text YES for immediate callback or call: (949) 328-4811`;
+                        await sendSMSToLead(data.phone, followupMessage, data.name, data.timeline);
+                    }, 5 * 60 * 1000);
 
-                // Schedule 30-minute follow-up
-                setTimeout(async () => {
-                    const urgentMessage = `URGENT for ${data.name}: With your auction approaching, we need to act TODAY. I have solutions ready. Please respond ASAP or call: (949) 328-4811`;
-                    await sendSMSNotification(data.phone, urgentMessage, data.name, data.timeline);
-                }, 30 * 60 * 1000);
+                    // Schedule 30-minute follow-up for urgent cases
+                    if (data.timeline === '7days' || data.timeline === '30days') {
+                        setTimeout(async () => {
+                            const urgentMessage = `URGENT for ${data.name}: With your auction approaching, we need to act TODAY. I have solutions ready. Please respond ASAP or call: (949) 328-4811`;
+                            await sendSMSToLead(data.phone, urgentMessage, data.name, data.timeline);
+                        }, 30 * 60 * 1000);
+                    }
+                } catch (error) {
+                    console.error('SMS to lead failed:', error);
+                }
             }
 
             // Continue with original form submission

@@ -39,13 +39,22 @@ function doPost(e) {
     // Parse the incoming data
     const data = JSON.parse(e.postData.contents);
     console.log('Received data:', data);
-    
+
+    // Handle iPhone lead alerts (email-to-SMS)
+    if (data.type === 'lead_alert' && data.to && data.to.includes('@txt.att.com')) {
+      console.log('Processing iPhone lead alert');
+      sendPhoneAlert(data);
+      return ContentService
+        .createTextOutput(JSON.stringify({success: true, type: 'phone_alert'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Save to Google Sheets
     saveToGoogleSheets(data);
-    
+
     // Add to ConvertKit
     addToConvertKit(data);
-    
+
     // Send notification if urgent
     if (isUrgentLead(data)) {
       sendUrgentNotification(data);
@@ -284,6 +293,50 @@ function isUrgentLead(data) {
   return data.timeline === 'immediate' || 
          data.foreclosure_status === 'yes' ||
          data.type === 'emergency_help';
+}
+
+// ============ PHONE ALERT FUNCTIONS ============
+function sendPhoneAlert(data) {
+  try {
+    // Extract phone number from AT&T email gateway format
+    const phoneNumber = data.to.split('@')[0];
+
+    console.log(`Sending iPhone alert to ${phoneNumber}: ${data.subject}`);
+
+    // Send email to AT&T SMS gateway
+    GmailApp.sendEmail(
+      data.to,           // To: 9493284811@txt.att.com
+      data.subject,      // Subject: 🚨 URGENT LEAD
+      data.message       // Body: Lead details
+    );
+
+    console.log('iPhone alert sent successfully via email-to-SMS gateway');
+
+    // Also send a copy to your main email as backup
+    GmailApp.sendEmail(
+      NOTIFICATION_EMAIL,
+      `[BACKUP] ${data.subject}`,
+      `iPhone Alert Sent:\n\n${data.message}\n\nOriginal sent to: ${data.to}`
+    );
+
+    return true;
+
+  } catch (error) {
+    console.error('Failed to send iPhone alert:', error);
+
+    // If SMS gateway fails, still send regular email notification
+    try {
+      GmailApp.sendEmail(
+        NOTIFICATION_EMAIL,
+        `[FALLBACK] ${data.subject}`,
+        `iPhone SMS alert failed, sending email backup:\n\n${data.message}\n\nError: ${error.toString()}`
+      );
+    } catch (emailError) {
+      console.error('Fallback email also failed:', emailError);
+    }
+
+    return false;
+  }
 }
 
 // ============ NOTIFICATION FUNCTIONS ============
