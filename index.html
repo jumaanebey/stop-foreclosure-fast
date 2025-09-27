@@ -663,70 +663,36 @@
             border-radius: 8px;
         }
 
-        /* SMS Form Styles */
-        .sms-optin {
-            background: #fef3e2;
-            padding: 15px;
+        /* Google Form Styles */
+        .google-form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(251, 146, 60, 0.15);
+            border: 1px solid #fed7aa;
+        }
+
+        .google-form-container iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
             border-radius: 8px;
-            margin-top: 15px;
-            border: 2px solid #fb923c;
-            display: none;
         }
 
-        .sms-optin.active {
-            display: block;
+        .form-fallback {
+            margin-top: 20px;
         }
 
-        .sms-optin-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #7c2d12;
-            margin-bottom: 10px;
-        }
+        /* Mobile responsive for Google Forms */
+        @media (max-width: 768px) {
+            .google-form-container {
+                padding: 10px;
+                margin: 0 -10px;
+            }
 
-        .sms-checkbox {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .sms-checkbox input {
-            margin-top: 5px;
-        }
-
-        .sms-checkbox label {
-            font-size: 14px;
-            color: #92400e;
-            line-height: 1.5;
-        }
-
-        .sms-number {
-            font-weight: bold;
-            color: #ea580c;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .checkbox-wrapper input {
-            margin-top: 5px;
-        }
-
-        .checkbox-wrapper label {
-            font-size: 14px;
-            color: #92400e;
-            line-height: 1.5;
-        }
-
-        .consent-note {
-            font-size: 12px;
-            color: #6b7280;
-            margin: 0;
+            .google-form-container iframe {
+                min-height: 600px;
+            }
         }
 
         /* Text Chat Widget */
@@ -1018,58 +984,42 @@
             <p class="form-subtitle">Every situation is unique. Tell us a bit about yours, and we'll reach out with personalized solutions.</p>
 
 
-            <form class="simple-form" action="https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec" method="POST">
-                <div class="form-step active">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" autocomplete="name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Email Address" autocomplete="email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="property_address" placeholder="Property Address" autocomplete="street-address" required>
-                    </div>
-                    <div class="form-group">
-                        <select name="timeline" required>
-                            <option value="">When is your foreclosure sale?</option>
-                            <option value="7days">Within 7 days 🚨</option>
-                            <option value="30days">Within 30 days</option>
-                            <option value="60days">Within 60 days</option>
-                            <option value="over60">Over 60 days</option>
-                            <option value="unsure">I'm not sure</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select name="foreclosure_stage" required>
-                            <option value="">Where are you in the foreclosure process?</option>
-                            <option value="behind_payments">Behind on payments</option>
-                            <option value="notice_of_default">Received Notice of Default</option>
-                            <option value="notice_of_sale">Received Notice of Sale</option>
-                            <option value="auction_scheduled">Auction is scheduled</option>
-                            <option value="unsure">I'm not sure</option>
-                        </select>
-                    </div>
+            <!-- GOOGLE FORMS INTEGRATION -->
+            <!--
+                STEP 1: Create your Google Form at https://forms.google.com
+                STEP 2: Get the embed code
+                STEP 3: Replace the iframe below with your embed code
 
-                    <!-- SMS Opt-in -->
-                    <div class="sms-optin active">
-                        <div class="checkbox-wrapper">
-                            <input type="checkbox" id="sms_consent" name="sms_consent" value="1">
-                            <label for="sms_consent">
-                                <span class="checkmark"></span>
-                                Yes, text me updates and urgent reminders
-                            </label>
-                        </div>
-                        <p class="consent-note">Standard messaging rates apply. You can opt out anytime.</p>
-                    </div>
+                Benefits of Google Forms:
+                - Zero CSP issues
+                - Instant email notifications
+                - Automatic data collection
+                - Works on all devices
+                - 100% reliable
+            -->
 
-                    <div class="form-navigation">
-                        <button type="submit" class="submit-btn">Get My Free Consultation →</button>
-                    </div>
-                </div>
-            </form>
+            <!-- REPLACE THIS IFRAME WITH YOUR GOOGLE FORM EMBED CODE -->
+            <div class="google-form-container">
+                <iframe
+                    src="https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform?embedded=true"
+                    width="100%"
+                    height="800"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    style="border-radius: 12px; background: white;"
+                >
+                    Loading Google Form...
+                </iframe>
+            </div>
+
+            <!-- Fallback message if Google Forms doesn't load -->
+            <div class="form-fallback" style="text-align: center; padding: 20px; background: #fef3e2; border-radius: 12px; margin-top: 20px;">
+                <p style="color: #92400e; font-size: 16px; margin-bottom: 15px;">📋 Can't see the form above?</p>
+                <a href="tel:+1-949-328-4811" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block;">
+                    📞 Call Now: (949) 328-4811
+                </a>
+            </div>
             <p class="form-privacy">🔒 Your information is 100% secure and confidential</p>
         </div>
 
@@ -1111,10 +1061,6 @@
 
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
-    <!-- NO JAVASCRIPT - Plain HTML form submission -->
-    <script>
-        // Completely removed all JavaScript to avoid CSP issues
-        // Form submits directly to Google Apps Script via POST
-    </script>
+    <!-- NO JAVASCRIPT NEEDED - Google Forms handles everything! -->
 </body>
 </html>
