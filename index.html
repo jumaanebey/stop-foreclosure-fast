@@ -1128,41 +1128,7 @@
         </a>
     </div>
 
-    <!-- Text Chat Widget -->
-    <div class="chat-widget">
-        <div class="chat-trigger" onclick="toggleChat()"></div>
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <span>💬 Quick Help</span>
-                <button class="chat-close" onclick="toggleChat()">×</button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="chat-message bot">
-                    Hi! I'm here to help. What's your situation?
-                </div>
-                <div class="chat-quick-actions">
-                    <button class="quick-action-btn" onclick="quickAction('urgent')">
-                        🚨 My auction is within 7 days
-                    </button>
-                    <button class="quick-action-btn" onclick="quickAction('timeline')">
-                        📅 What's my timeline?
-                    </button>
-                    <button class="quick-action-btn" onclick="quickAction('cost')">
-                        💰 What will this cost me?
-                    </button>
-                    <button class="quick-action-btn" onclick="quickAction('options')">
-                        🏠 What are my options?
-                    </button>
-                </div>
-            </div>
-            <div class="chat-input-area">
-                <form class="chat-input-form" onsubmit="sendMessage(event)">
-                    <input type="text" class="chat-input" placeholder="Type your question..." id="chatInput">
-                    <button type="submit" class="chat-send">Send</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
     <!-- Multi-Step Form JavaScript - No Inline Handlers -->
     <script>
@@ -1213,50 +1179,7 @@
             return true;
         }
 
-        function showUrgencyTimer(timeline) {
-            const timer = document.getElementById('urgencyTimer');
-            const smsOptin = document.getElementById('smsOptin');
-
-            if (!timeline || timeline === 'unsure') {
-                timer.classList.remove('active');
-                smsOptin.classList.remove('active');
-                return;
-            }
-
-            timer.classList.add('active');
-            smsOptin.classList.add('active');
-
-            // Update timer based on timeline
-            let daysToAdd;
-            let warningMessage;
-
-            if (timeline === '7days') {
-                daysToAdd = 7;
-                warningMessage = "⚠️ CRITICAL: Your home could be sold THIS WEEK! We need to act immediately.";
-            } else if (timeline === '30days') {
-                daysToAdd = 30;
-                warningMessage = "⚡ URGENT: Less than a month to save your home. Every day matters.";
-            } else if (timeline === '60days') {
-                daysToAdd = 60;
-                warningMessage = "⏰ TIME SENSITIVE: You have time, but we should start the process now.";
-            } else if (timeline === 'over60') {
-                daysToAdd = 90;
-                warningMessage = "✅ Good timing. We have options, but don't wait too long to act.";
-            }
-
-            document.getElementById('timerWarning').textContent = warningMessage;
-
-            // Set target date and start countdown
-            const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + daysToAdd);
-            targetDate.setHours(9, 0, 0, 0);
-
-            updateCountdown(targetDate);
-            // Use function reference instead of string to avoid CSP issues
-            var countdownInterval = setInterval(function() {
-                updateCountdown(targetDate);
-            }, 1000);
-        }
+        // Duplicate function removed - using the one below
 
         function updateCountdown(targetDate) {
             const now = new Date().getTime();
@@ -1338,162 +1261,6 @@
             });
         });
 
-        // Chat Widget Functionality
-        let chatOpen = false;
-
-        function toggleChat() {
-            const chatWindow = document.getElementById('chatWindow');
-            chatOpen = !chatOpen;
-
-            if (chatOpen) {
-                chatWindow.classList.add('open');
-                // Auto-scroll to bottom
-                setTimeout(() => {
-                    const messages = document.getElementById('chatMessages');
-                    messages.scrollTop = messages.scrollHeight;
-                }, 100);
-            } else {
-                chatWindow.classList.remove('open');
-            }
-        }
-
-        function addMessage(text, isUser = false) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-            messageDiv.textContent = text;
-
-            // Remove quick actions if they exist
-            const quickActions = messagesContainer.querySelector('.chat-quick-actions');
-            if (quickActions && isUser) {
-                quickActions.remove();
-            }
-
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function quickAction(action) {
-            const responses = {
-                urgent: {
-                    user: "My auction is within 7 days",
-                    bot: "This is URGENT! Call me immediately at (949) 328-4811. Even with 7 days, we can still stop the sale through emergency legal methods. Don't wait - every hour counts. I can also send you a quick text if that's easier."
-                },
-                timeline: {
-                    user: "What's my timeline?",
-                    bot: "Timeline depends on your situation. Notice of Default = 90+ days. Notice of Sale = 21+ days. Sale scheduled = immediate action needed. Tell me where you are in the process and I'll give you exact timelines."
-                },
-                cost: {
-                    user: "What will this cost me?",
-                    bot: "Our consultation is 100% FREE. If we help you sell, we get paid from the sale proceeds - you pay nothing out of pocket. If we help you keep your home, any costs are explained upfront. No hidden fees, ever."
-                },
-                options: {
-                    user: "What are my options?",
-                    bot: "You have 3 main paths: 1) Keep your home (loan modification, repayment plan) 2) Sell quickly (short sale, cash offer) 3) Walk away with dignity. Best option depends on your equity, income, and goals. Let's talk!"
-                }
-            };
-
-            const response = responses[action];
-            addMessage(response.user, true);
-
-            setTimeout(() => {
-                addMessage(response.bot);
-                addCallToAction();
-            }, 1000);
-        }
-
-        function addCallToAction() {
-            const messagesContainer = document.getElementById('chatMessages');
-            const ctaDiv = document.createElement('div');
-            ctaDiv.className = 'chat-quick-actions';
-            ctaDiv.innerHTML = `
-                <button class="quick-action-btn" onclick="requestCallback()">
-                    📞 Request callback in 30 minutes
-                </button>
-                <button class="quick-action-btn" onclick="window.location.href='tel:+1-949-328-4811'">
-                    📱 Call now: (949) 328-4811
-                </button>
-                <button class="quick-action-btn" onclick="requestText()">
-                    💬 Text me instead
-                </button>
-            `;
-            messagesContainer.appendChild(ctaDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function requestCallback() {
-            addMessage("I'd like a callback in 30 minutes", true);
-            setTimeout(() => {
-                addMessage("Perfect! I'll call you within 30 minutes. Can you quickly fill out the form on this page so I have your details? It takes 30 seconds and helps me prepare for our call.");
-                scrollToForm();
-            }, 1000);
-        }
-
-        function requestText() {
-            addMessage("I'd prefer to text", true);
-            setTimeout(() => {
-                addMessage("Great! Text me at (949) 328-4811 and I'll respond quickly. Include your name and when your foreclosure sale is scheduled so I can prioritize your message.");
-            }, 1000);
-        }
-
-        function scrollToForm() {
-            document.querySelector('.form-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-            setTimeout(() => {
-                toggleChat(); // Close chat to show form
-            }, 2000);
-        }
-
-        function sendMessage(event) {
-            event.preventDefault();
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-
-            if (!message) return;
-
-            addMessage(message, true);
-            input.value = '';
-
-            // Simple keyword-based responses
-            setTimeout(() => {
-                const response = getSmartResponse(message.toLowerCase());
-                addMessage(response);
-
-                // After any response, show CTA options
-                setTimeout(() => {
-                    addCallToAction();
-                }, 1500);
-            }, 1000);
-        }
-
-        function getSmartResponse(message) {
-            if (message.includes('auction') || message.includes('sale date') || message.includes('days')) {
-                return "Time is critical! If your auction is soon, we need to act immediately. The exact options depend on your timeline. Call me now at (949) 328-4811 for urgent help.";
-            }
-            if (message.includes('cost') || message.includes('money') || message.includes('fee')) {
-                return "No upfront costs! Our consultation is free, and if we help you sell, we're paid from proceeds. If we help you keep your home, any costs are explained clearly first.";
-            }
-            if (message.includes('keep') || message.includes('stay') || message.includes('home')) {
-                return "Keeping your home is often possible! Options include loan modification, repayment plans, or refinancing. Success depends on your income and how far behind you are.";
-            }
-            if (message.includes('behind') || message.includes('payments') || message.includes('months')) {
-                return "Being behind on payments doesn't mean you'll lose your home. We've helped people who were 12+ months behind. The key is acting now while you still have options.";
-            }
-            if (message.includes('embarrassed') || message.includes('ashamed') || message.includes('judge')) {
-                return "Please don't feel embarrassed. Life happens - job loss, medical bills, divorce. We see this daily and we're here to help, not judge. You're being smart by seeking help.";
-            }
-
-            return "I understand your concern. Every situation is unique, which is why I'd love to talk with you personally. A quick call helps me give you specific advice for your situation. Can I call you?";
-        }
-
-        // Auto-open chat after 30 seconds if user hasn't interacted
-        setTimeout(() => {
-            if (!chatOpen && !localStorage.getItem('foreclosureFormProgress')) {
-                toggleChat();
-            }
-        }, 30000);
-
         // Urgency Timer Functions
         let countdownInterval;
 
@@ -1546,24 +1313,13 @@
             if (countdownInterval) clearInterval(countdownInterval);
 
             // Start countdown
-            countdownInterval = setInterval(() => {
+            countdownInterval = setInterval(function() {
                 updateCountdown(targetDate);
             }, 1000);
 
             updateCountdown(targetDate);
 
-            // If urgent, also show in chat
-            if (timeline === '7days') {
-                setTimeout(() => {
-                    if (!chatOpen) {
-                        toggleChat();
-                        setTimeout(() => {
-                            addMessage("I see your auction is in 7 days! This is extremely urgent. Let's talk RIGHT NOW.", false);
-                            addCallToAction();
-                        }, 1000);
-                    }
-                }, 2000);
-            }
+            // Chat functionality removed for CSP compliance
         }
 
         function updateCountdown(targetDate) {
