@@ -1238,38 +1238,7 @@
             return true;
         }
 
-        // Form submission with AI integration
-        document.getElementById('foreclosure-help-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const submitBtn = e.target.querySelector('.submit-btn');
-            submitBtn.textContent = 'Processing...';
-            submitBtn.disabled = true;
-
-            // Collect form data
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-
-            // Here you'd send to your AI system
-            console.log('Form submitted:', data);
-
-            // Show success message
-            document.querySelector('.form-section').innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <h3 style="color: #10b981; font-size: 32px; margin-bottom: 20px;">✅ Thank You!</h3>
-                    <p style="font-size: 20px; margin-bottom: 20px;">We received your request for help.</p>
-                    <p style="font-size: 18px; color: #9ca3af;">A foreclosure specialist will contact you within 30 minutes.</p>
-                    <hr style="margin: 30px 0; border: none; border-top: 1px solid #374151;">
-                    <p style="font-size: 16px;">Need immediate help?</p>
-                    <a href="tel:+1-949-328-4811" style="color: #10b981; font-size: 20px; font-weight: bold; text-decoration: none;">
-                        📞 Call: (949) 328-4811
-                    </a>
-                </div>
-            `;
-
-            // Scroll to form
-            document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
-        });
+        // This handler is removed - using the enhanced one below with iPhone alerts
 
         // Capture data on page exit if user has started filling form
         window.addEventListener('beforeunload', async (e) => {
@@ -1623,8 +1592,7 @@ Captured: ${new Date().toLocaleString()}`,
             });
         }
 
-        // Enhanced form submission with SMS
-        const originalFormSubmit = document.getElementById('foreclosure-help-form').onsubmit;
+        // Enhanced form submission with iPhone alerts
         document.getElementById('foreclosure-help-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 

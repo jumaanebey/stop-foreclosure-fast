@@ -23,7 +23,7 @@
 const CONVERTKIT_API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY');
 const CONVERTKIT_API_SECRET = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_SECRET');
 const GOOGLE_SHEET_ID = '1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU';
-const NOTIFICATION_EMAIL = 'jumaanebey@gmail.com';
+const NOTIFICATION_EMAIL = 'help@myforeclosuresolutions.com';
 
 // ConvertKit Form IDs (create these in ConvertKit first)
 const CONVERTKIT_FORMS = {
