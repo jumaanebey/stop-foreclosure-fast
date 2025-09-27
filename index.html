@@ -1186,7 +1186,9 @@
             const distance = targetDate.getTime() - now;
 
             if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<div class="time-unit"><span class="time-value">EXPIRED</span></div>';
+                document.getElementById('days').textContent = 'EX';
+                document.getElementById('hours').textContent = 'PI';
+                document.getElementById('minutes').textContent = 'RED';
                 return;
             }
 
@@ -1244,15 +1246,68 @@
                     body: JSON.stringify(data)
                 });
             }).then(function() {
-                // Show success message
-                const successHTML = '<div style="text-align: center; padding: 40px; background: white; border-radius: 20px;">' +
-                    '<h3 style="color: #10b981; font-size: 32px; margin-bottom: 20px;">✅ Thank You!</h3>' +
-                    '<p style="font-size: 20px; margin-bottom: 20px;">We received your foreclosure request.</p>' +
-                    '<p style="font-size: 18px; color: #ea580c; margin-bottom: 15px;">📧 Alert sent to our team!</p>' +
-                    '<p style="font-size: 18px; color: #9ca3af; margin-bottom: 30px;">A specialist will contact you within 30 minutes.</p>' +
-                    '<a href="tel:+1-949-328-4811" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block;">' +
-                    '📞 Call Now: (949) 328-4811</a></div>';
-                document.querySelector('.form-section').innerHTML = successHTML;
+                // Show success message using safe DOM manipulation
+                const formSection = document.querySelector('.form-section');
+
+                // Clear existing content
+                while (formSection.firstChild) {
+                    formSection.removeChild(formSection.firstChild);
+                }
+
+                // Create success container
+                const successDiv = document.createElement('div');
+                successDiv.style.textAlign = 'center';
+                successDiv.style.padding = '40px';
+                successDiv.style.background = 'white';
+                successDiv.style.borderRadius = '20px';
+
+                // Create title
+                const title = document.createElement('h3');
+                title.style.color = '#10b981';
+                title.style.fontSize = '32px';
+                title.style.marginBottom = '20px';
+                title.textContent = '✅ Thank You!';
+
+                // Create main message
+                const mainMsg = document.createElement('p');
+                mainMsg.style.fontSize = '20px';
+                mainMsg.style.marginBottom = '20px';
+                mainMsg.textContent = 'We received your foreclosure request.';
+
+                // Create alert message
+                const alertMsg = document.createElement('p');
+                alertMsg.style.fontSize = '18px';
+                alertMsg.style.color = '#ea580c';
+                alertMsg.style.marginBottom = '15px';
+                alertMsg.textContent = '📧 Alert sent to our team!';
+
+                // Create timing message
+                const timingMsg = document.createElement('p');
+                timingMsg.style.fontSize = '18px';
+                timingMsg.style.color = '#9ca3af';
+                timingMsg.style.marginBottom = '30px';
+                timingMsg.textContent = 'A specialist will contact you within 30 minutes.';
+
+                // Create call button
+                const callBtn = document.createElement('a');
+                callBtn.href = 'tel:+1-949-328-4811';
+                callBtn.style.background = 'linear-gradient(135deg, #fb923c, #ea580c)';
+                callBtn.style.color = 'white';
+                callBtn.style.padding = '15px 30px';
+                callBtn.style.borderRadius = '12px';
+                callBtn.style.textDecoration = 'none';
+                callBtn.style.fontWeight = '600';
+                callBtn.style.fontSize = '18px';
+                callBtn.style.display = 'inline-block';
+                callBtn.textContent = '📞 Call Now: (949) 328-4811';
+
+                // Append all elements
+                successDiv.appendChild(title);
+                successDiv.appendChild(mainMsg);
+                successDiv.appendChild(alertMsg);
+                successDiv.appendChild(timingMsg);
+                successDiv.appendChild(callBtn);
+                formSection.appendChild(successDiv);
             }).catch(function(error) {
                 console.error('Submission error:', error);
                 submitBtn.textContent = originalText;
