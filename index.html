@@ -1018,7 +1018,7 @@
             <p class="form-subtitle">Every situation is unique. Tell us a bit about yours, and we'll reach out with personalized solutions.</p>
 
 
-            <form class="simple-form" id="foreclosure-help-form">
+            <form class="simple-form" action="https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec" method="POST">
                 <div class="form-step active">
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" autocomplete="name" required>
@@ -1111,121 +1111,10 @@
 
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
-    <!-- Simple Form JavaScript - CSP Compliant -->
+    <!-- NO JAVASCRIPT - Plain HTML form submission -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('foreclosure-help-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const submitBtn = this.querySelector('.submit-btn');
-                const originalText = submitBtn.textContent;
-
-                submitBtn.textContent = 'Processing...';
-                submitBtn.disabled = true;
-
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
-
-                // Create alert message
-                const alertData = {
-                    type: 'lead_alert',
-                    to: 'help@myforeclosuresolutions.com',
-                    subject: (data.timeline === '7days' ? 'URGENT' : 'NEW') + ' FORECLOSURE LEAD - ' + data.name,
-                    message: 'NEW FORECLOSURE LEAD RECEIVED\n\nName: ' + data.name +
-                            '\nPhone: ' + data.phone +
-                            '\nEmail: ' + data.email +
-                            '\nProperty: ' + data.property_address +
-                            '\nTimeline: ' + data.timeline +
-                            '\nStage: ' + data.foreclosure_stage +
-                            '\nSMS OK: ' + (data.sms_consent ? 'YES' : 'NO') +
-                            '\n\nACTION REQUIRED: Contact immediately!\nSubmitted: ' + new Date().toLocaleString(),
-                    leadData: data
-                };
-
-                // Send to Google Apps Script
-                fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(alertData)
-                }).then(function() {
-                    return fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                }).then(function() {
-                    // Show success message using safe DOM manipulation
-                    const formSection = document.querySelector('.form-section');
-
-                    // Clear existing content safely
-                    while (formSection.firstChild) {
-                        formSection.removeChild(formSection.firstChild);
-                    }
-
-                    // Create success container
-                    const successDiv = document.createElement('div');
-                    successDiv.style.textAlign = 'center';
-                    successDiv.style.padding = '40px';
-                    successDiv.style.background = 'white';
-                    successDiv.style.borderRadius = '20px';
-
-                    // Create title
-                    const title = document.createElement('h3');
-                    title.style.color = '#10b981';
-                    title.style.fontSize = '32px';
-                    title.style.marginBottom = '20px';
-                    title.textContent = 'Thank You!';
-
-                    // Create main message
-                    const mainMsg = document.createElement('p');
-                    mainMsg.style.fontSize = '20px';
-                    mainMsg.style.marginBottom = '20px';
-                    mainMsg.textContent = 'We received your foreclosure request.';
-
-                    // Create alert message
-                    const alertMsg = document.createElement('p');
-                    alertMsg.style.fontSize = '18px';
-                    alertMsg.style.color = '#ea580c';
-                    alertMsg.style.marginBottom = '15px';
-                    alertMsg.textContent = 'Alert sent to our team!';
-
-                    // Create timing message
-                    const timingMsg = document.createElement('p');
-                    timingMsg.style.fontSize = '18px';
-                    timingMsg.style.color = '#9ca3af';
-                    timingMsg.style.marginBottom = '30px';
-                    timingMsg.textContent = 'A specialist will contact you within 30 minutes.';
-
-                    // Create call button
-                    const callBtn = document.createElement('a');
-                    callBtn.href = 'tel:+1-949-328-4811';
-                    callBtn.style.background = 'linear-gradient(135deg, #fb923c, #ea580c)';
-                    callBtn.style.color = 'white';
-                    callBtn.style.padding = '15px 30px';
-                    callBtn.style.borderRadius = '12px';
-                    callBtn.style.textDecoration = 'none';
-                    callBtn.style.fontWeight = '600';
-                    callBtn.style.fontSize = '18px';
-                    callBtn.style.display = 'inline-block';
-                    callBtn.textContent = 'Call Now: (949) 328-4811';
-
-                    // Append all elements
-                    successDiv.appendChild(title);
-                    successDiv.appendChild(mainMsg);
-                    successDiv.appendChild(alertMsg);
-                    successDiv.appendChild(timingMsg);
-                    successDiv.appendChild(callBtn);
-                    formSection.appendChild(successDiv);
-                }).catch(function(error) {
-                    console.error('Submission error:', error);
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    alert('There was an error submitting your request. Please call (949) 328-4811 directly.');
-                });
-            });
-        });
+        // Completely removed all JavaScript to avoid CSP issues
+        // Form submits directly to Google Apps Script via POST
     </script>
 </body>
 </html>
