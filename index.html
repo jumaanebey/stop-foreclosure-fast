@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://script.google.com;">
     <title>Stop Your California Foreclosure in 7 Days | My Foreclosure Solution</title>
     <meta name="description" content="Facing foreclosure in California? Get immediate help. Free consultation. Licensed professionals ready to help you explore your options.">
 
@@ -1008,7 +1009,7 @@
                         <input type="text" name="property_address" placeholder="Property Address" autocomplete="street-address" required>
                     </div>
                     <div class="form-group">
-                        <select name="timeline" required>
+                        <select name="timeline" autocomplete="off" required>
                             <option value="">When is your foreclosure sale?</option>
                             <option value="7days">Within 7 days 🚨</option>
                             <option value="30days">Within 30 days</option>
@@ -1018,7 +1019,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select name="foreclosure_stage" required>
+                        <select name="foreclosure_stage" autocomplete="off" required>
                             <option value="">Where are you in the foreclosure process?</option>
                             <option value="behind_payments">Behind on payments</option>
                             <option value="notice_of_default">Received Notice of Default</option>
