@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://script.google.com;">
     <title>Stop Your California Foreclosure in 7 Days | My Foreclosure Solution</title>
     <meta name="description" content="Facing foreclosure in California? Get immediate help. Free consultation. Licensed professionals ready to help you explore your options.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -13,8 +16,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1237,7 +1238,8 @@
             targetDate.setHours(9, 0, 0, 0);
 
             updateCountdown(targetDate);
-            setInterval(function() {
+            // Use function reference instead of string to avoid CSP issues
+            var countdownInterval = setInterval(function() {
                 updateCountdown(targetDate);
             }, 1000);
         }
@@ -1255,9 +1257,9 @@
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('days').textContent = (days < 10 ? '0' : '') + days;
+            document.getElementById('hours').textContent = (hours < 10 ? '0' : '') + hours;
+            document.getElementById('minutes').textContent = (minutes < 10 ? '0' : '') + minutes;
         }
 
         // Form submission
@@ -1567,9 +1569,9 @@
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('days').textContent = (days < 10 ? '0' : '') + days;
+            document.getElementById('hours').textContent = (hours < 10 ? '0' : '') + hours;
+            document.getElementById('minutes').textContent = (minutes < 10 ? '0' : '') + minutes;
         }
 
         // Old functions removed - using simplified form submission above
