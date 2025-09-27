@@ -590,6 +590,120 @@
             display: none;
         }
 
+        /* Urgency Timer Styles */
+        .urgency-timer {
+            display: none;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        .urgency-timer.active {
+            display: block;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .timer-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-display {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-size: 42px;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .time-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .timer-warning {
+            font-size: 16px;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        /* SMS Form Styles */
+        .sms-optin {
+            background: #fef3e2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 2px solid #fb923c;
+            display: none;
+        }
+
+        .sms-optin.active {
+            display: block;
+        }
+
+        .sms-optin-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #7c2d12;
+            margin-bottom: 10px;
+        }
+
+        .sms-checkbox {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .sms-checkbox input {
+            margin-top: 5px;
+        }
+
+        .sms-checkbox label {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.5;
+        }
+
+        .sms-number {
+            font-weight: bold;
+            color: #ea580c;
+        }
+
         /* Text Chat Widget */
         .chat-widget {
             position: fixed;
@@ -903,7 +1017,7 @@
                         <input type="text" name="property_address" placeholder="Property Address" required>
                     </div>
                     <div class="form-group">
-                        <select name="timeline" required>
+                        <select name="timeline" required onchange="showUrgencyTimer(this.value)">
                             <option value="">When is your foreclosure sale?</option>
                             <option value="7days">Within 7 days (URGENT)</option>
                             <option value="30days">Within 30 days</option>
@@ -912,6 +1026,41 @@
                             <option value="unsure">Not sure</option>
                         </select>
                     </div>
+
+                    <!-- Urgency Timer (shows after timeline selection) -->
+                    <div class="urgency-timer" id="urgencyTimer">
+                        <div class="timer-title">⚡ Time Until Your Auction</div>
+                        <div class="countdown-display" id="countdown">
+                            <div class="time-unit">
+                                <span class="time-value" id="days">--</span>
+                                <span class="time-label">Days</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="hours">--</span>
+                                <span class="time-label">Hours</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="minutes">--</span>
+                                <span class="time-label">Minutes</span>
+                            </div>
+                        </div>
+                        <div class="timer-warning" id="timerWarning">
+                            Every hour counts. We need to act NOW.
+                        </div>
+                    </div>
+
+                    <!-- SMS Opt-in -->
+                    <div class="sms-optin" id="smsOptin">
+                        <div class="sms-optin-title">📱 Get Instant Text Updates</div>
+                        <div class="sms-checkbox">
+                            <input type="checkbox" id="sms_consent" name="sms_consent" checked>
+                            <label for="sms_consent">
+                                Yes, text me at the number I provided. I'll get immediate updates about saving my home.
+                                <span class="sms-number">Message frequency varies. Reply STOP to cancel.</span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="form-navigation">
                         <button type="button" class="btn-prev" onclick="prevStep()">← Back</button>
                         <button type="button" class="btn-next" onclick="nextStep()">Almost Done →</button>
@@ -1326,6 +1475,194 @@
                 toggleChat();
             }
         }, 30000);
+
+        // Urgency Timer Functions
+        let countdownInterval;
+
+        function showUrgencyTimer(timeline) {
+            const timer = document.getElementById('urgencyTimer');
+            const smsOptin = document.getElementById('smsOptin');
+
+            if (!timeline || timeline === 'unsure') {
+                timer.classList.remove('active');
+                smsOptin.classList.remove('active');
+                if (countdownInterval) clearInterval(countdownInterval);
+                return;
+            }
+
+            // Show timer and SMS opt-in
+            timer.classList.add('active');
+            smsOptin.classList.add('active');
+
+            // Calculate target date based on selection
+            let daysToAdd;
+            let warningMessage;
+
+            switch(timeline) {
+                case '7days':
+                    daysToAdd = 7;
+                    warningMessage = "⚠️ CRITICAL: Your home could be sold THIS WEEK! We need to act immediately.";
+                    break;
+                case '30days':
+                    daysToAdd = 30;
+                    warningMessage = "⚡ URGENT: Less than a month to save your home. Every day matters.";
+                    break;
+                case '60days':
+                    daysToAdd = 60;
+                    warningMessage = "⏰ TIME SENSITIVE: You have time, but we should start the process now.";
+                    break;
+                case 'over60':
+                    daysToAdd = 90;
+                    warningMessage = "✅ Good timing. We have options, but don't wait too long to act.";
+                    break;
+            }
+
+            document.getElementById('timerWarning').textContent = warningMessage;
+
+            // Set target date
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + daysToAdd);
+            targetDate.setHours(9, 0, 0, 0); // Set to 9 AM
+
+            // Clear any existing countdown
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            // Start countdown
+            countdownInterval = setInterval(() => {
+                updateCountdown(targetDate);
+            }, 1000);
+
+            updateCountdown(targetDate);
+
+            // If urgent, also show in chat
+            if (timeline === '7days') {
+                setTimeout(() => {
+                    if (!chatOpen) {
+                        toggleChat();
+                        setTimeout(() => {
+                            addMessage("I see your auction is in 7 days! This is extremely urgent. Let's talk RIGHT NOW.", false);
+                            addCallToAction();
+                        }, 1000);
+                    }
+                }, 2000);
+            }
+        }
+
+        function updateCountdown(targetDate) {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('timerWarning').textContent = "⚠️ IMMEDIATE ACTION REQUIRED!";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        }
+
+        // SMS Follow-up Integration
+        async function sendSMSNotification(phoneNumber, message) {
+            // This would connect to your SMS service (Twilio, etc.)
+            // For now, we'll log and save for follow-up
+            const smsData = {
+                phone: phoneNumber,
+                message: message,
+                timestamp: new Date().toISOString(),
+                type: 'automated_followup'
+            };
+
+            console.log('SMS to send:', smsData);
+
+            // Send to your backend
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(smsData)
+                });
+            } catch (error) {
+                console.error('SMS notification error:', error);
+            }
+        }
+
+        // Enhanced form submission with SMS
+        const originalFormSubmit = document.getElementById('foreclosure-help-form').onsubmit;
+        document.getElementById('foreclosure-help-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            // Check SMS consent
+            if (data.sms_consent) {
+                // Schedule immediate SMS
+                const immediateMessage = `Hi ${data.name}, I got your urgent foreclosure request. This is [Your Name] from My Foreclosure Solution. Your situation is time-sensitive. When can we talk today? Reply with best time or call me now: (949) 328-4811`;
+
+                await sendSMSNotification(data.phone, immediateMessage);
+
+                // Schedule 5-minute follow-up
+                setTimeout(async () => {
+                    const followupMessage = `${data.name}, I'm ready to discuss your foreclosure options right now. Every hour matters with your timeline. Text YES for immediate callback or call: (949) 328-4811`;
+                    await sendSMSNotification(data.phone, followupMessage);
+                }, 5 * 60 * 1000);
+
+                // Schedule 30-minute follow-up
+                setTimeout(async () => {
+                    const urgentMessage = `URGENT for ${data.name}: With your auction approaching, we need to act TODAY. I have solutions ready. Please respond ASAP or call: (949) 328-4811`;
+                    await sendSMSNotification(data.phone, urgentMessage);
+                }, 30 * 60 * 1000);
+            }
+
+            // Continue with original form submission
+            const submitBtn = e.target.querySelector('.submit-btn');
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+
+            // Send to backend
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Show success message
+                document.querySelector('.form-section').innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h3 style="color: #10b981; font-size: 32px; margin-bottom: 20px;">✅ Thank You!</h3>
+                        <p style="font-size: 20px; margin-bottom: 20px;">We received your request for help.</p>
+                        ${data.sms_consent ? '<p style="font-size: 18px; color: #ea580c; margin-bottom: 15px;">📱 Check your phone - I just texted you!</p>' : ''}
+                        <p style="font-size: 18px; color: #9ca3af;">A foreclosure specialist will contact you within 30 minutes.</p>
+                        <hr style="margin: 30px 0; border: none; border-top: 1px solid #374151;">
+                        <p style="font-size: 16px;">Need immediate help?</p>
+                        <a href="tel:+1-949-328-4811" style="color: #10b981; font-size: 20px; font-weight: bold; text-decoration: none;">
+                            📞 Call: (949) 328-4811
+                        </a>
+                    </div>
+                `;
+
+                // Scroll to form
+                document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Form submission error:', error);
+            }
+        });
     </script>
 </body>
 </html>
