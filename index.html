@@ -467,6 +467,12 @@
             margin-bottom: 12px;
             display: flex;
             align-items: center;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: #ea580c;
         }
 
         .faq-question::before {
@@ -480,6 +486,23 @@
             color: #6b7280;
             line-height: 1.7;
             padding-left: 35px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-bottom: 15px;
+            transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+        }
+
+        .faq-item.active .faq-question {
+            color: #ea580c;
+        }
+
+        .faq-item.active .faq-question::before {
+            content: '✅';
         }
 
         /* Mobile Responsive */
@@ -1024,6 +1047,61 @@
             <p class="form-privacy">🔒 Your information is 100% secure and confidential</p>
         </div>
 
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">❓ Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">How quickly can you stop my foreclosure?</div>
+                <div class="faq-answer">We can often stop a foreclosure sale in as little as 24-48 hours. If your sale is within 7 days, call us immediately at (949) 328-4811. We have emergency procedures that can halt the auction even at the last minute through legal methods like bankruptcy filing, loan modification requests, or negotiating with your lender.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do I have to pay anything upfront?</div>
+                <div class="faq-answer">No! Our initial consultation is completely free with no obligation. We'll review your situation, explain all your options, and create a plan. You only pay if you decide to move forward with one of our solutions, and even then, many options require no upfront payment - costs can be rolled into the solution itself.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What if my auction is tomorrow?</div>
+                <div class="faq-answer">Call us IMMEDIATELY at (949) 328-4811! Even with less than 24 hours, we have emergency strategies that can work. We've stopped auctions the morning of the sale. Don't give up - we have attorneys and specialists standing by for urgent cases. The sooner you call, the more options we have.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you help if I owe more than my home is worth?</div>
+                <div class="faq-answer">Yes! Being "underwater" on your mortgage doesn't mean you're out of options. We specialize in short sales, where the bank accepts less than what's owed. We also negotiate principal reductions and can explore options like deed in lieu of foreclosure. You may even qualify for relocation assistance money.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What are my options to avoid foreclosure?</div>
+                <div class="faq-answer">You have several options: 1) Loan Modification - renegotiate your terms for lower payments, 2) Forbearance - temporarily pause or reduce payments, 3) Short Sale - sell for less than owed with bank approval, 4) Cash Sale - we can make a cash offer quickly, 5) Bankruptcy - can stop foreclosure immediately, 6) Deed in Lieu - give property back to avoid foreclosure. We'll help you choose the best option for your situation.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Will this hurt my credit?</div>
+                <div class="faq-answer">A foreclosure can drop your credit score by 200-300 points and stay on your report for 7 years. However, alternatives like short sales or loan modifications have much less impact. The sooner you act, the more options you have to minimize credit damage. Some solutions can even help you start rebuilding credit immediately.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What if I've already received a Notice of Default or Sale?</div>
+                <div class="faq-answer">You still have options! A Notice of Default starts a timeline (usually 90 days), but doesn't mean immediate foreclosure. Even with a Notice of Sale, you typically have 21 days before auction. We know exactly how to work within these timelines and what paperwork to file to protect you. Don't wait - each day matters.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Are you legitimate? How do I know this isn't a scam?</div>
+                <div class="faq-answer">We're licensed California Real Estate Professionals (DRE #02076038) and mortgage specialists (NMLS #2033637). You can verify our licenses on the California DRE website. We never ask for upfront fees, we provide everything in writing, and we work with licensed attorneys. We've helped over 500 families since 2010, and you can read reviews and testimonials from real clients.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I stay in my home during this process?</div>
+                <div class="faq-answer">In most cases, yes! You can typically remain in your home throughout the process. Some solutions like loan modifications let you keep your home permanently. Even with a short sale, you usually have 30-90 days to relocate. We'll make sure you understand the timeline for each option and help you plan accordingly.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What information do I need to get started?</div>
+                <div class="faq-answer">Basic information includes: your mortgage statements, any foreclosure notices you've received, rough estimate of your home's value, and how many payments you've missed. Don't worry if you don't have everything - we can work with whatever information you have. The most important thing is to reach out now so we can start helping immediately.</div>
+            </div>
+        </div>
+
         <!-- CTA Section -->
         <div class="cta-section">
             <h2 class="cta-title">Ready to Save Your Home?</h2>
@@ -1031,8 +1109,8 @@
                 <a href="tel:+1-949-328-4811" class="btn-primary">
                     📞 Call Now: (949) 328-4811
                 </a>
-                <a href="faq.html" class="btn-secondary">
-                    View Common Questions
+                <a href="#foreclosure-help-form" class="btn-secondary">
+                    Fill Out Form Above
                 </a>
             </div>
         </div>
@@ -1062,6 +1140,28 @@
 
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
-    <!-- NO JAVASCRIPT NEEDED - Google Forms handles everything! -->
+    <!-- Simple FAQ Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(function(item) {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', function() {
+                    // Close other items
+                    faqItems.forEach(function(otherItem) {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
