@@ -220,6 +220,97 @@
             color: #6b7280;
         }
 
+        /* Emergency Checklist Section */
+        .checklist-section {
+            background: linear-gradient(135deg, #fef2f2 0%, #fef3e2 100%);
+            padding: 60px 40px;
+            margin: 60px 0;
+            border-radius: 20px;
+            border: 3px solid #fed7aa;
+            position: relative;
+        }
+
+        .checklist-title {
+            text-align: center;
+            font-size: 32px;
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .checklist-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #7c2d12;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .checklist-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.1);
+            border: 2px solid #fed7aa;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .checklist-number {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .checklist-content h3 {
+            color: #7c2d12;
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .checklist-content p {
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .urgent-notice {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .urgent-notice h3 {
+            color: white;
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+
+        .urgent-notice p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
         /* Form - Warm and Trustworthy */
         .form-section {
             background: linear-gradient(135deg, #7c2d12 0%, #92400e 100%);
@@ -535,6 +626,30 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .checklist-section {
+                padding: 40px 20px;
+                margin: 40px 0;
+            }
+
+            .checklist-title {
+                font-size: 26px;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .checklist-item {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .checklist-number {
+                margin: 0 auto 15px auto;
+            }
+
             #lead-magnet-form > div {
                 flex-direction: column;
             }
@@ -1041,6 +1156,67 @@
                     <div class="benefit-title">Multiple Options Available</div>
                     <div class="benefit-desc">Loan modification, quick sale, or cash offer - we find what works for you</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Emergency Checklist Section -->
+        <div class="checklist-section">
+            <h2 class="checklist-title">🚨 Emergency Action Checklist</h2>
+            <p class="checklist-subtitle">If your foreclosure sale is soon, do these steps TODAY:</p>
+
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <div class="checklist-number">1</div>
+                    <div class="checklist-content">
+                        <h3>Call Your Lender NOW</h3>
+                        <p>Ask for the "Loss Mitigation Department" immediately. Document the call: date, time, and representative name.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-number">2</div>
+                    <div class="checklist-content">
+                        <h3>Request Emergency Options</h3>
+                        <p>Ask for forbearance, modification, or payment plan. Say "I want to keep my home and need help."</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-number">3</div>
+                    <div class="checklist-content">
+                        <h3>Get Our FREE Guide</h3>
+                        <p><a href="free-guide.html" style="color: #ea580c; font-weight: 600;">Download our 7-Day Survival Guide</a> with exact scripts and legal rights.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-number">4</div>
+                    <div class="checklist-content">
+                        <h3>Contact HUD Counselor</h3>
+                        <p>Call 1-800-569-4287 for FREE government counseling. They can advocate for you with your lender.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-number">5</div>
+                    <div class="checklist-content">
+                        <h3>Know Your Property Value</h3>
+                        <p>Check Zillow or Redfin. If you have equity, you have options to keep the money instead of losing it.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-number">6</div>
+                    <div class="checklist-content">
+                        <h3>Call Us for Expert Help</h3>
+                        <p><a href="tel:+1-949-328-4811" style="color: #dc2626; font-weight: 600;">📞 (949) 328-4811</a> - We've stopped foreclosures the day before auction.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="urgent-notice">
+                <h3>⚠️ Don't Wait: Every Hour Counts</h3>
+                <p>The closer you get to the sale date, the fewer options you have. Start with step 1 RIGHT NOW, then work through the rest today.</p>
             </div>
         </div>
 
