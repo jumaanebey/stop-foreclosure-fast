@@ -13,7 +13,7 @@
 
 // Configuration - UPDATE THESE VALUES
 const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // Replace with your Google Sheet ID
-const PDF_FILE_ID = 'YOUR_PDF_FILE_ID'; // Replace with your PDF file ID from Google Drive
+const PDF_FILE_ID = '1YmRSqk8LJIEW97xgDaQEQ7-7gjcHRYuj'; // Your PDF file ID from Google Drive
 const YOUR_EMAIL = 'help@myforeclosuresolutions.com'; // Your notification email
 
 /**
