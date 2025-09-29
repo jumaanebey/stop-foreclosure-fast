@@ -533,17 +533,32 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
+        /* Desktop Layout - Ensure logo left, nav right */
+        @media (min-width: 769px) {
+            header .container > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             header .container > div {
                 flex-direction: column;
                 gap: 15px;
+                text-align: center;
             }
 
             nav {
                 gap: 20px !important;
                 flex-wrap: wrap;
                 justify-content: center;
+                order: 2;
+            }
+
+            .logo {
+                order: 1;
             }
 
             nav a {
