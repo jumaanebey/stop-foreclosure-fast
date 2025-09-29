@@ -1228,9 +1228,39 @@
                     frameborder="0"
                     marginheight="0"
                     marginwidth="0"
+                    onload="this.style.display='block'"
+                    onerror="document.getElementById('form-fallback').style.display='block'; this.style.display='none';"
                 >
                     Loading…
                 </iframe>
+
+                <!-- Enhanced Fallback for Cookie Issues -->
+                <div id="form-fallback" style="display: none; text-align: center; padding: 40px; background: linear-gradient(135deg, #fef3e2, #fff8f3); border-radius: 15px; border: 2px solid #fed7aa;">
+                    <h3 style="color: #7c2d12; margin-bottom: 20px; font-size: 24px;">📋 Can't See the Form?</h3>
+                    <p style="color: #6b7280; margin-bottom: 25px; font-size: 16px;">The form may be blocked by cookie settings. Here are your options:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                        <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #fed7aa;">
+                            <h4 style="color: #ea580c; margin-bottom: 15px;">📞 Call Directly</h4>
+                            <a href="tel:+1-949-328-4811" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 15px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
+                                Call (949) 328-4811
+                            </a>
+                            <p style="font-size: 14px; color: #6b7280; margin-top: 10px;">Fastest way to get help</p>
+                        </div>
+
+                        <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #fed7aa;">
+                            <h4 style="color: #ea580c; margin-bottom: 15px;">📝 Open Form</h4>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0garo-VUPg9IwzfKZsvBP3TyFrpu2m1Cbia6MvOPAsSwoVA/viewform" target="_blank" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
+                                Open in New Tab
+                            </a>
+                            <p style="font-size: 14px; color: #6b7280; margin-top: 10px;">Fill out the form directly</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; border-left: 4px solid #10b981;">
+                        <p style="color: #059669; margin: 0; font-weight: 500;">💡 <strong>Quick Fix:</strong> Enable cookies for this site or use the "Open in New Tab" option above.</p>
+                    </div>
+                </div>
 
                 <div class="trust-indicators">
                     <div class="trust-indicator">
@@ -1305,6 +1335,36 @@
 
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
-    <!-- No JavaScript needed - Google Forms handles everything! -->
+    <script>
+        // Check if Google Forms iframe loads properly
+        setTimeout(function() {
+            const iframe = document.querySelector('iframe');
+            const fallback = document.getElementById('form-fallback');
+
+            try {
+                // If iframe is blocked or not loading, show fallback
+                if (!iframe || iframe.style.display === 'none' || !iframe.offsetHeight) {
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                    }
+                }
+            } catch (e) {
+                // If there's any error, show fallback
+                if (fallback) {
+                    fallback.style.display = 'block';
+                }
+            }
+        }, 3000); // Check after 3 seconds
+
+        // Also check if cookies are disabled
+        if (!navigator.cookieEnabled) {
+            setTimeout(function() {
+                const fallback = document.getElementById('form-fallback');
+                if (fallback) {
+                    fallback.style.display = 'block';
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
