@@ -12,8 +12,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jumaanebey.github.io/stop-foreclosure-fast/free-guide.html">
 
-    <!-- Google Ads Conversion Tracking (Add your ID) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script> -->
+    <!-- Google Analytics 4 (Replace GA_MEASUREMENT_ID with your actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Google Ads Conversion Tracking (Replace AW-XXXXXXXXX with your conversion ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-XXXXXXXXX');
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -484,6 +499,21 @@
             setTimeout(function() {
                 form.style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
+
+                // Track conversion events
+                if (typeof gtag !== 'undefined') {
+                    // Google Analytics conversion event
+                    gtag('event', 'conversion', {
+                        'event_category': 'Lead Generation',
+                        'event_label': 'PDF Guide Download',
+                        'value': 1
+                    });
+
+                    // Google Ads conversion (replace 'CONVERSION_LABEL' with your actual label)
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-XXXXXXXXX/CONVERSION_LABEL'
+                    });
+                }
 
                 // Smooth scroll to form
                 document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
