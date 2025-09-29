@@ -43,9 +43,9 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 40px;
         }
 
         /* Header - Minimal */
@@ -544,6 +544,9 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 15px 20px;
+            }
             header .container > div {
                 grid-template-columns: 1fr !important;
                 gap: 20px;
