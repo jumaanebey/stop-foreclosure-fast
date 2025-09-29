@@ -1001,34 +1001,6 @@
 
     <!-- Main Content Container -->
     <div class="container">
-        <!-- Lead Magnet Section -->
-        <div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; text-align: center; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: -20px; right: -20px; font-size: 120px; opacity: 0.1; transform: rotate(-15deg);">📚</div>
-            <h2 style="font-size: 32px; margin-bottom: 15px; font-weight: 700;">🎁 FREE Download: "7-Day Foreclosure Survival Guide"</h2>
-            <p style="font-size: 18px; margin-bottom: 20px; opacity: 0.95;">Learn the exact steps to take when facing foreclosure - from emergency strategies to long-term solutions</p>
-
-            <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 25px;">
-                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
-                    <div>✅ Stop foreclosure in 24 hours</div>
-                    <div>✅ Keep your home equity</div>
-                    <div>✅ Know your legal rights</div>
-                    <div>✅ Avoid common mistakes</div>
-                </div>
-            </div>
-
-            <form id="lead-magnet-form" style="max-width: 500px; margin: 0 auto;">
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <input type="email" name="email" placeholder="Enter your email for instant download" required style="flex: 1; padding: 15px; border-radius: 8px; border: none; font-size: 16px;">
-                    <button type="submit" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 15px 30px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; white-space: nowrap;">Get Free Guide →</button>
-                </div>
-                <p style="font-size: 14px; opacity: 0.9; margin: 0;">🔒 Your email is 100% secure. No spam, ever. Instant download.</p>
-            </form>
-
-            <div id="lead-magnet-success" style="display: none; padding: 20px; background: rgba(16, 185, 129, 0.2); border-radius: 12px; margin-top: 20px;">
-                <h3 style="font-size: 24px; margin-bottom: 10px;">✅ Success! Check Your Email</h3>
-                <p>Your free guide has been sent. Check your inbox (and spam folder) for "7-Day Foreclosure Survival Guide"</p>
-            </div>
-        </div>
         <!-- 3 Simple Benefits -->
         <div class="benefits">
             <div class="benefit">
@@ -1146,49 +1118,6 @@
 
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
 
-    <!-- Lead Magnet JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const leadMagnetForm = document.getElementById('lead-magnet-form');
-            if (leadMagnetForm) {
-                leadMagnetForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Get email
-                    const email = this.querySelector('input[name="email"]').value;
-                    const button = this.querySelector('button');
-                    const originalText = button.textContent;
-
-                    // Show loading state
-                    button.textContent = 'Sending...';
-                    button.disabled = true;
-
-                    // Send to Google Apps Script
-                    const data = {
-                        type: 'lead_magnet',
-                        email: email,
-                        requested: '7-Day Foreclosure Survival Guide',
-                        timestamp: new Date().toISOString()
-                    };
-
-                    fetch('https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-
-                    // Show success message
-                    setTimeout(function() {
-                        document.getElementById('lead-magnet-form').style.display = 'none';
-                        document.getElementById('lead-magnet-success').style.display = 'block';
-                    }, 1000);
-
-                    // Note: In real implementation, you'd actually send the PDF via email
-                    // For now, this captures the lead and shows a success message
-                });
-            }
-        });
-    </script>
+    <!-- No JavaScript needed - Google Forms handles everything! -->
 </body>
 </html>
