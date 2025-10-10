@@ -1,0 +1,225 @@
+{
+  "name": "Foreclosure Lead - Email Follow-up Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "b8b61072-3d64-4e77-9a87-8929b3bdd928",
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "options": {}
+      },
+      "id": "e32a7d91-2c93-4f8a-bb58-7f2e9daa84a4",
+      "name": "Get New Leads from Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c4f45b28-a3e6-4e32-881f-ec83e9df2c49",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "New",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "5b3d8f0a-2e0f-4a82-9e91-1efc21c82b5a",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7d8e9a12-4b3c-5d6e-8f9a-0b1c2d3e4f5a",
+      "name": "Filter: Status = New AND Email exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.Email }}",
+        "subject": "={{ $json['Owner Name'] }} - Important information about {{ $json['Property Address'] }}",
+        "emailType": "text",
+        "message": "Hi {{ $json['Owner Name'] }},\n\nMy name is [YOUR NAME], and I'm a licensed California real estate professional specializing in foreclosure assistance.\n\nI noticed you received a Notice of Default on your property at {{ $json['Property Address'] }}. I'm reaching out because I've helped hundreds of California homeowners in similar situations save their homes or sell with equity intact.\n\nYou still have options:\n\n✅ Stop the foreclosure process\n✅ Negotiate with your lender  \n✅ Sell quickly and keep your equity\n✅ Explore loan modification programs\n\nI'm offering a free, no-obligation consultation to review your specific situation. I can usually identify 2-3 viable solutions within 15 minutes.\n\nIf you'd like to talk, I'm available:\n\n📞 Call/text: (949) 328-4811\n📧 Email: help@myforeclosuresolution.com\n\nI understand this is a difficult time, but please know that solutions exist even at the last minute. I've stopped foreclosures the day before auction.\n\nYou're not alone in this.\n\nBest regards,\n[YOUR NAME]\nMy Foreclosure Solution\nCA DRE #02076038 | NMLS #2033637\n(949) 328-4811",
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "appendAttribution": false
+        }
+      },
+      "id": "9a0b1c2d-3e4f-5a6b-7c8d-9e0f1a2b3c4d",
+      "name": "Send Initial Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [900, 240],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "Gmail SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "=Email Sent - {{ $now.format('MM/DD/YYYY') }}",
+            "Last Contact": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": ["Property Address"],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Contact",
+              "displayName": "Last Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
+      "name": "Update Status in Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [1120, 240],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get New Leads from Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get New Leads from Sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter: Status = New AND Email exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter: Status = New AND Email exists": {
+      "main": [
+        [
+          {
+            "node": "Send Initial Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Initial Email": {
+      "main": [
+        [
+          {
+            "node": "Update Status in Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "1",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}
