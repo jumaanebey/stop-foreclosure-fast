@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Tracker - Foreclosure Leads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #1f2937;
+            font-size: 24px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .stat-card.calls { border-left: 4px solid #3b82f6; }
+        .stat-card.contacts { border-left: 4px solid #10b981; }
+        .stat-card.appointments { border-left: 4px solid #f59e0b; }
+        .stat-card.deals { border-left: 4px solid #8b5cf6; }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+        }
+
+        .call-form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .call-form h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .calls-list {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .calls-list h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .call-entry {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .call-entry:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.1);
+        }
+
+        .call-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .call-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        .call-time {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .call-address {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .call-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .status-contacted { background: #d1fae5; color: #065f46; }
+        .status-no-answer { background: #fef3c7; color: #92400e; }
+        .status-voicemail { background: #dbeafe; color: #1e40af; }
+        .status-appointment { background: #fce7f3; color: #9f1239; }
+        .status-not-interested { background: #fee2e2; color: #991b1b; }
+
+        .call-notes {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .export-btn {
+            background: #10b981;
+            margin-top: 10px;
+        }
+
+        .timer {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .call-form {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📞 Call Tracking Dashboard</h1>
+            <div class="timer" id="sessionTimer">00:00:00</div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card calls">
+                <h3>Total Calls Today</h3>
+                <div class="number" id="totalCalls">0</div>
+            </div>
+            <div class="stat-card contacts">
+                <h3>Contacts Made</h3>
+                <div class="number" id="contactsMade">0</div>
+            </div>
+            <div class="stat-card appointments">
+                <h3>Appointments Set</h3>
+                <div class="number" id="appointmentsSet">0</div>
+            </div>
+            <div class="stat-card deals">
+                <h3>Contact Rate</h3>
+                <div class="number" id="contactRate">0%</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="call-form">
+                <h2>Log Call</h2>
+                <form id="callForm">
+                    <div class="form-group">
+                        <label>Owner Name *</label>
+                        <input type="text" id="ownerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Property Address *</label>
+                        <input type="text" id="propertyAddress" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phoneNumber">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Call Result *</label>
+                        <select id="callResult" required>
+                            <option value="">Select result...</option>
+                            <option value="contacted">Contacted - Had Conversation</option>
+                            <option value="appointment">Contacted - Appointment Set</option>
+                            <option value="no-answer">No Answer</option>
+                            <option value="voicemail">Voicemail Left</option>
+                            <option value="not-interested">Not Interested</option>
+                            <option value="wrong-number">Wrong Number</option>
+                            <option value="send-guide">Send Free Guide</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="callNotes" placeholder="Key points from conversation, next steps, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Follow-up Date</label>
+                        <input type="date" id="followupDate">
+                    </div>
+
+                    <button type="submit" class="btn">Log Call</button>
+                    <button type="button" class="btn export-btn" onclick="exportToCSV()">Export to CSV</button>
+                </form>
+            </div>
+
+            <div class="calls-list">
+                <h2>Today's Calls</h2>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterCalls('all')">All</button>
+                    <button class="filter-btn" onclick="filterCalls('contacted')">Contacted</button>
+                    <button class="filter-btn" onclick="filterCalls('appointment')">Appointments</button>
+                    <button class="filter-btn" onclick="filterCalls('no-answer')">No Answer</button>
+                    <button class="filter-btn" onclick="filterCalls('voicemail')">Voicemail</button>
+                </div>
+
+                <div id="callsList">
+                    <p style="text-align: center; color: #6b7280; padding: 40px;">
+                        No calls logged yet. Start making calls and log them here!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        let calls = JSON.parse(localStorage.getItem('calls_today') || '[]');
+        let currentFilter = 'all';
+        let sessionStart = Date.now();
+
+        // Session timer
+        setInterval(() => {
+            const elapsed = Date.now() - sessionStart;
+            const hours = Math.floor(elapsed / 3600000);
+            const minutes = Math.floor((elapsed % 3600000) / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            document.getElementById('sessionTimer').textContent =
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }, 1000);
+
+        // Load calls on page load
+        renderCalls();
+        updateStats();
+
+        // Form submission
+        document.getElementById('callForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const call = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                ownerName: document.getElementById('ownerName').value,
+                propertyAddress: document.getElementById('propertyAddress').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                result: document.getElementById('callResult').value,
+                notes: document.getElementById('callNotes').value,
+                followupDate: document.getElementById('followupDate').value
+            };
+
+            calls.unshift(call);
+            localStorage.setItem('calls_today', JSON.stringify(calls));
+
+            // Reset form
+            this.reset();
+
+            // Update UI
+            renderCalls();
+            updateStats();
+
+            // Show confirmation
+            alert('Call logged successfully!');
+        });
+
+        function renderCalls() {
+            const container = document.getElementById('callsList');
+
+            let filteredCalls = calls;
+            if (currentFilter !== 'all') {
+                filteredCalls = calls.filter(c => c.result === currentFilter);
+            }
+
+            if (filteredCalls.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 40px;">No calls match this filter.</p>';
+                return;
+            }
+
+            container.innerHTML = filteredCalls.map(call => {
+                const time = new Date(call.timestamp).toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit'
+                });
+
+                const statusClass = `status-${call.result}`;
+                const statusText = call.result.split('-').map(w =>
+                    w.charAt(0).toUpperCase() + w.slice(1)
+                ).join(' ');
+
+                return `
+                    <div class="call-entry">
+                        <div class="call-header">
+                            <div>
+                                <div class="call-name">${call.ownerName}</div>
+                                <div class="call-address">${call.propertyAddress}</div>
+                            </div>
+                            <div class="call-time">${time}</div>
+                        </div>
+                        <div class="call-status ${statusClass}">${statusText}</div>
+                        ${call.notes ? `<div class="call-notes">${call.notes}</div>` : ''}
+                        ${call.followupDate ? `<div class="call-notes"><strong>Follow-up:</strong> ${call.followupDate}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateStats() {
+            const totalCalls = calls.length;
+            const contacts = calls.filter(c => c.result === 'contacted' || c.result === 'appointment').length;
+            const appointments = calls.filter(c => c.result === 'appointment').length;
+            const contactRate = totalCalls > 0 ? Math.round((contacts / totalCalls) * 100) : 0;
+
+            document.getElementById('totalCalls').textContent = totalCalls;
+            document.getElementById('contactsMade').textContent = contacts;
+            document.getElementById('appointmentsSet').textContent = appointments;
+            document.getElementById('contactRate').textContent = contactRate + '%';
+        }
+
+        function filterCalls(filter) {
+            currentFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            renderCalls();
+        }
+
+        function exportToCSV() {
+            if (calls.length === 0) {
+                alert('No calls to export!');
+                return;
+            }
+
+            const headers = ['Timestamp', 'Owner Name', 'Property Address', 'Phone', 'Result', 'Notes', 'Follow-up Date'];
+            const rows = calls.map(call => [
+                call.timestamp,
+                call.ownerName,
+                call.propertyAddress,
+                call.phoneNumber || '',
+                call.result,
+                call.notes || '',
+                call.followupDate || ''
+            ]);
+
+            let csv = headers.join(',') + '\n';
+            csv += rows.map(row =>
+                row.map(cell => `"${cell}"`).join(',')
+            ).join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `calls_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        // Reset daily
+        const today = new Date().toDateString();
+        const lastReset = localStorage.getItem('last_reset');
+        if (lastReset !== today) {
+            // Archive yesterday's calls if needed
+            const archive = JSON.parse(localStorage.getItem('calls_archive') || '[]');
+            if (calls.length > 0) {
+                archive.push({
+                    date: lastReset || today,
+                    calls: calls
+                });
+                localStorage.setItem('calls_archive', JSON.stringify(archive));
+            }
+
+            // Reset for today
+            calls = [];
+            localStorage.setItem('calls_today', JSON.stringify(calls));
+            localStorage.setItem('last_reset', today);
+        }
+    </script>
+</body>
+</html>
