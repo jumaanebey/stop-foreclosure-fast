@@ -1,0 +1,161 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Realistic photo-style image of family who successfully avoided foreclosure -->
+  <defs>
+    <!-- Happier, relieved skin tones -->
+    <radialGradient id="manSkinHappy" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F0D5B0;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#E8C5A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A574;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="womanSkinHappy" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F8D7C4;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#F4C2A1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EFBF9D;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Brighter background for success -->
+    <radialGradient id="successBackground" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#FFF8F0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0F8FF;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Hair (same colors but styled differently) -->
+    <linearGradient id="maleHairSuccess" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5A5A5A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3F3F3F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="femaleHairSuccess" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Brighter background -->
+  <rect width="100%" height="100%" fill="url(#successBackground)"/>
+  
+  <!-- Their home in background (saved) -->
+  <g transform="translate(400, 80)">
+    <!-- House -->
+    <rect x="0" y="40" width="120" height="80" fill="#F5DEB3"/>
+    <polygon points="0,40 60,10 120,40" fill="#8B4513"/>
+    <rect x="20" y="55" width="25" height="35" fill="#654321"/>
+    <rect x="55" y="55" width="30" height="25" fill="#87CEEB" stroke="#2F4F4F" stroke-width="2"/>
+    <rect x="85" y="85" width="25" height="35" fill="#D3D3D3"/>
+    <!-- "SAVED" sign -->
+    <rect x="10" y="100" width="40" height="25" fill="#27AE60" rx="3"/>
+    <text x="30" y="115" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="bold">SAVED</text>
+  </g>
+  
+  <!-- Professional consultant/helper figure -->
+  <g transform="translate(150, 120)">
+    <!-- Body in business attire -->
+    <ellipse cx="0" cy="70" rx="25" ry="35" fill="#2F4F4F"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="18" ry="22" fill="url(#manSkinHappy)"/>
+    <!-- Professional hair -->
+    <path d="M-16,-18 Q0,-25 16,-18 Q14,-22 8,-24 Q0,-26 -8,-24 Q-14,-22 -16,-18" fill="url(#maleHairSuccess)"/>
+    <!-- Confident, helpful expression -->
+    <ellipse cx="-5" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="5" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+    <ellipse cx="-5" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+    <ellipse cx="5" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+    <!-- Warm, reassuring smile -->
+    <path d="M-6,6 Q0,10 6,6" stroke="#CD5C5C" stroke-width="2" fill="none"/>
+    <!-- Arms - one extended in handshake gesture -->
+    <ellipse cx="25" cy="40" rx="8" ry="18" fill="url(#manSkinHappy)" transform="rotate(30)"/>
+    <ellipse cx="-20" cy="45" rx="8" ry="18" fill="url(#manSkinHappy)" transform="rotate(-15)"/>
+    <!-- Tie -->
+    <polygon points="-3,25 3,25 4,55 -4,55" fill="#8B0000"/>
+  </g>
+  
+  <!-- Happy couple - relieved and grateful -->
+  <g transform="translate(280, 140)">
+    <!-- Male - much more relaxed -->
+    <g transform="translate(-30, 0)">
+      <!-- Body -->
+      <ellipse cx="0" cy="65" rx="22" ry="32" fill="#4169E1"/>
+      <!-- Head -->
+      <ellipse cx="0" cy="0" rx="18" ry="22" fill="url(#manSkinHappy)"/>
+      <!-- Hair -->
+      <path d="M-16,-18 Q0,-25 16,-18 Q12,-20 4,-22 Q0,-24 -4,-22 Q-12,-20 -16,-18" fill="url(#maleHairSuccess)"/>
+      <!-- Happy, relieved eyes -->
+      <ellipse cx="-5" cy="-3" rx="3" ry="2" fill="#FFFFFF"/>
+      <ellipse cx="5" cy="-3" rx="3" ry="2" fill="#FFFFFF"/>
+      <ellipse cx="-5" cy="-3" rx="2" ry="1.5" fill="#654321"/>
+      <ellipse cx="5" cy="-3" rx="2" ry="1.5" fill="#654321"/>
+      <!-- Genuine smile -->
+      <path d="M-5,6 Q0,10 5,6" stroke="#CD5C5C" stroke-width="2" fill="none"/>
+      <!-- Relaxed arms -->
+      <ellipse cx="-18" cy="40" rx="7" ry="18" fill="url(#manSkinHappy)" transform="rotate(-10)"/>
+      <ellipse cx="18" cy="45" rx="7" ry="18" fill="url(#manSkinHappy)" transform="rotate(10)"/>
+    </g>
+    
+    <!-- Female - happy and grateful -->
+    <g transform="translate(30, 0)">
+      <!-- Body -->
+      <ellipse cx="0" cy="65" rx="20" ry="30" fill="#DC143C"/>
+      <!-- Head -->
+      <ellipse cx="0" cy="0" rx="16" ry="20" fill="url(#womanSkinHappy)"/>
+      <!-- Hair -->
+      <path d="M-14,-16 Q0,-22 14,-16 Q14,-12 10,-10 Q6,-6 0,-6 Q-6,-6 -10,-10 Q-14,-12 -14,-16" fill="url(#femaleHairSuccess)"/>
+      <!-- Bright, grateful eyes -->
+      <ellipse cx="-4" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+      <ellipse cx="4" cy="-2" rx="3" ry="2" fill="#FFFFFF"/>
+      <ellipse cx="-4" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+      <ellipse cx="4" cy="-2" rx="2" ry="1.5" fill="#4682B4"/>
+      <!-- Warm smile -->
+      <path d="M-4,6 Q0,9 4,6" stroke="#CD5C5C" stroke-width="1.5" fill="none"/>
+      <!-- Arms in grateful gesture -->
+      <ellipse cx="-16" cy="40" rx="6" ry="16" fill="url(#womanSkinHappy)" transform="rotate(-20)"/>
+      <ellipse cx="16" cy="40" rx="6" ry="16" fill="url(#womanSkinHappy)" transform="rotate(20)"/>
+    </g>
+  </g>
+  
+  <!-- Child - happy and secure -->
+  <g transform="translate(300, 220)">
+    <!-- Body -->
+    <ellipse cx="0" cy="35" rx="10" ry="18" fill="#32CD32"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="10" ry="12" fill="url(#womanSkinHappy)"/>
+    <!-- Hair -->
+    <path d="M-8,-10 Q0,-14 8,-10 Q6,-12 2,-13 Q0,-14 -2,-13 Q-6,-12 -8,-10" fill="url(#femaleHairSuccess)"/>
+    <!-- Happy child eyes -->
+    <ellipse cx="-2" cy="-2" rx="2" ry="1.5" fill="#FFFFFF"/>
+    <ellipse cx="2" cy="-2" rx="2" ry="1.5" fill="#FFFFFF"/>
+    <circle cx="-2" cy="-2" r="1" fill="#654321"/>
+    <circle cx="2" cy="-2" r="1" fill="#654321"/>
+    <!-- Big smile -->
+    <path d="M-3,3 Q0,6 3,3" stroke="#CD5C5C" stroke-width="1.5" fill="none"/>
+  </g>
+  
+  <!-- Success elements -->
+  <!-- Documents showing "APPROVED" or "RESOLVED" -->
+  <g transform="translate(80, 280)">
+    <rect x="0" y="0" width="50" height="35" fill="#FFFFFF" stroke="#CCCCCC"/>
+    <text x="25" y="15" text-anchor="middle" fill="#27AE60" font-family="Arial" font-size="8" font-weight="bold">APPROVED</text>
+    <text x="25" y="25" text-anchor="middle" fill="#666666" font-family="Arial" font-size="6">Loan Modification</text>
+  </g>
+  
+  <!-- Handshake between professional and couple -->
+  <g transform="translate(200, 200)">
+    <!-- Two hands meeting -->
+    <ellipse cx="0" cy="0" rx="8" ry="4" fill="url(#manSkinHappy)" transform="rotate(-20)"/>
+    <ellipse cx="15" cy="5" rx="8" ry="4" fill="url(#womanSkinHappy)" transform="rotate(20)"/>
+  </g>
+  
+  <!-- Positive environmental lighting -->
+  <circle cx="100" cy="50" r="40" fill="#FFE135" opacity="0.3"/>
+  
+  <!-- Success checkmarks -->
+  <g transform="translate(500, 300)">
+    <circle cx="0" cy="0" r="15" fill="#27AE60"/>
+    <path d="M-6,0 L-2,4 L6,-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <g transform="translate(470, 320)">
+    <circle cx="0" cy="0" r="12" fill="#27AE60"/>
+    <path d="M-4,0 L-1,3 L4,-3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

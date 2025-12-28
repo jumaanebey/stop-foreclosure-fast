@@ -1,0 +1,147 @@
+{
+  "name": "Chatbot to Google Sheets - Lead Capture",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatbot-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Chatbot Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "webhookId": "chatbot-lead-capture"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract and format chatbot lead data\nconst lead = $input.item.json.body;\n\nconst now = new Date();\nconst formattedDate = now.toLocaleDateString('en-US');\nconst formattedTime = now.toLocaleTimeString('en-US');\n\nreturn {\n  json: {\n    timestamp: formattedDate + ' ' + formattedTime,\n    name: lead.name || '',\n    phone: lead.phone || '',\n    email: lead.email || '',\n    property_address: lead.propertyAddress || '',\n    situation: lead.situation || '',\n    foreclosure_stage: lead.foreclosureStage || 'Unknown',\n    source: lead.source || 'Website Chatbot',\n    conversation_summary: lead.conversationSummary || '',\n    priority_score: '', // Will be filled by AI scorer\n    status: 'New',\n    assigned_to: '',\n    notes: ''\n  }\n};"
+      },
+      "id": "format-data",
+      "name": "Format Lead Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": ["phone"],
+          "value": {}
+        },
+        "options": {}
+      },
+      "id": "add-to-sheet",
+      "name": "Add to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"Lead captured successfully\", \"leadId\": $json.phone } }}"
+      },
+      "id": "webhook-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "🆕 New Chatbot Lead: {{ $json.name }}",
+        "emailType": "text",
+        "message": "NEW LEAD FROM WEBSITE CHATBOT\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 Name: {{ $json.name }}\n📞 Phone: {{ $json.phone }}\n📧 Email: {{ $json.email }}\n🏠 Property: {{ $json.property_address }}\n🎯 Goal: {{ $json.situation }}\n📍 Source: {{ $json.source }}\n⏰ Time: {{ $json.timestamp }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n💬 CONVERSATION SUMMARY:\n{{ $json.conversation_summary }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nNEXT STEPS:\n1. Call lead within 5 minutes: {{ $json.phone }}\n2. Send welcome email with free guide\n3. AI Lead Scorer will analyze and prioritize\n\nView in Google Sheet:\nhttps://docs.google.com/spreadsheets/d/1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw/edit\n\n---\nMy Foreclosure Solution | CA DRE #02076038",
+        "options": {}
+      },
+      "id": "notify-email",
+      "name": "Send Notification Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [900, 460]
+    },
+    {
+      "parameters": {
+        "content": "## Chatbot to Google Sheets\n\nThis workflow captures leads from your website chatbot and adds them to Google Sheets.\n\n**Trigger:** Webhook receives POST from chatbot\n**Process:** Format data → Add to sheet → Notify you\n**Result:** Instant lead capture with email notification\n\n**Webhook URL:**\nCopy the webhook URL from the Webhook node and add it to your chatbot configuration (GOOGLE_SHEET_WEBHOOK).\n\n**Data Captured:**\n- Name, Phone, Email\n- Property Address\n- Goal (keep/sell/unsure)\n- Full conversation transcript\n- Timestamp and source\n\n**Next:** AI Lead Scorer will automatically score new leads.",
+        "height": 400,
+        "width": 300,
+        "color": 4
+      },
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 480]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook - Chatbot Lead": {
+      "main": [
+        [
+          {
+            "node": "Format Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Lead Data": {
+      "main": [
+        [
+          {
+            "node": "Add to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Notification Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "1",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}

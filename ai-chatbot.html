@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Foreclosure Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Chatbot Button */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        #chatbot-button:hover {
+            transform: scale(1.1);
+        }
+
+        #chatbot-button.hidden {
+            display: none;
+        }
+
+        /* Chatbot Container */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px;
+            height: 600px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        #chatbot-container.active {
+            display: flex;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            #chatbot-container {
+                width: 100vw;
+                height: 100vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+        }
+
+        /* Header */
+        #chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chatbot-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        #chatbot-header p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        #close-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Messages Area */
+        #chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f7f7f7;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* Quick Replies */
+        #quick-replies {
+            padding: 0 20px 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: #f7f7f7;
+        }
+
+        .quick-reply-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-reply-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Input Area */
+        #chatbot-input-area {
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 8px;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #chatbot-input:focus {
+            border-color: #667eea;
+        }
+
+        #send-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form Elements */
+        .lead-form {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-form-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .submit-form-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chatbot Button -->
+    <button id="chatbot-button" aria-label="Open chat">💬</button>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+        <!-- Header -->
+        <div id="chatbot-header">
+            <div>
+                <h3>Foreclosure Helper</h3>
+                <p>We're here to help 24/7</p>
+            </div>
+            <button id="close-button" aria-label="Close chat">×</button>
+        </div>
+
+        <!-- Messages -->
+        <div id="chatbot-messages">
+            <!-- Messages will be added here dynamically -->
+        </div>
+
+        <!-- Quick Replies -->
+        <div id="quick-replies"></div>
+
+        <!-- Input Area -->
+        <div id="chatbot-input-area">
+            <input type="text" id="chatbot-input" placeholder="Type your message..." />
+            <button id="send-button" aria-label="Send message">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            OPENAI_API_KEY: 'YOUR_OPENAI_API_KEY_HERE', // Replace with your OpenAI API key
+            GOOGLE_SHEET_WEBHOOK: 'YOUR_N8N_WEBHOOK_URL_HERE', // Replace with your n8n webhook URL
+            SYSTEM_PROMPT: `You are a helpful, empathetic AI assistant for My Foreclosure Solution, a California real estate company specializing in foreclosure assistance (CA DRE #02076038).
+
+Your goal is to:
+1. Understand the visitor's foreclosure situation
+2. Provide helpful, accurate information about their options
+3. Collect their contact information
+4. Guide them toward booking a free consultation
+
+CONVERSATION FLOW:
+- Start with a warm greeting and ask if they're facing foreclosure
+- Be empathetic - they're stressed and scared
+- Ask key qualifying questions naturally in conversation
+- Provide value before asking for contact info
+- Offer the free 7-Day Foreclosure Survival Guide
+- Collect: Name, Phone, Email, Property Address, and their goal (keep home or sell)
+
+TONE:
+- Warm, professional, and supportive
+- NOT sales-y or pushy
+- Informative and helpful
+- Show genuine care for their situation
+
+KEY INFORMATION TO SHARE:
+- "You still have options - it's not too late"
+- "We've helped over 500 California families"
+- "Free consultation, no cost, no obligation"
+- "We can explore loan modification, refinancing, or selling with equity intact"
+- "Licensed California real estate professionals"
+
+If they ask about cost: "The consultation is completely free. We only get paid if we successfully help you, through the transaction."
+
+Remember: Keep responses concise (2-3 sentences max). Ask one question at a time. Be conversational, not robotic.`
+        };
+
+        // State Management
+        let conversationHistory = [];
+        let leadData = {
+            name: '',
+            phone: '',
+            email: '',
+            propertyAddress: '',
+            situation: '', // 'keep' or 'sell'
+            foreclosureStage: '',
+            timestamp: new Date().toISOString()
+        };
+
+        // DOM Elements
+        const chatbotButton = document.getElementById('chatbot-button');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeButton = document.getElementById('close-button');
+        const messagesContainer = document.getElementById('chatbot-messages');
+        const quickRepliesContainer = document.getElementById('quick-replies');
+        const inputField = document.getElementById('chatbot-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Event Listeners
+        chatbotButton.addEventListener('click', openChat);
+        closeButton.addEventListener('click', closeChat);
+        sendButton.addEventListener('click', sendMessage);
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Initialize Chat
+        function openChat() {
+            chatbotContainer.classList.add('active');
+            chatbotButton.classList.add('hidden');
+
+            if (conversationHistory.length === 0) {
+                setTimeout(() => {
+                    addBotMessage("Hi there! 👋 I'm here to help you understand your foreclosure options in California. Are you currently facing foreclosure or exploring your options?");
+                    showQuickReplies([
+                        { text: "Yes, I received a notice", value: "received_notice" },
+                        { text: "Exploring options", value: "exploring" },
+                        { text: "I have questions", value: "questions" }
+                    ]);
+                }, 500);
+            }
+        }
+
+        function closeChat() {
+            chatbotContainer.classList.remove('active');
+            chatbotButton.classList.remove('hidden');
+        }
+
+        // Send Message
+        async function sendMessage() {
+            const message = inputField.value.trim();
+            if (!message) return;
+
+            addUserMessage(message);
+            inputField.value = '';
+            clearQuickReplies();
+
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Call OpenAI
+            try {
+                const response = await callOpenAI(message);
+                hideTypingIndicator();
+                addBotMessage(response);
+
+                // Check if we should collect info
+                checkForLeadCapture(response);
+
+            } catch (error) {
+                hideTypingIndicator();
+                addBotMessage("I apologize, but I'm having trouble connecting right now. Please call us directly at (949) 565-5285 for immediate assistance.");
+                console.error('OpenAI Error:', error);
+            }
+        }
+
+        // Call OpenAI API
+        async function callOpenAI(userMessage) {
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${CONFIG.OPENAI_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4',
+                    messages: [
+                        { role: 'system', content: CONFIG.SYSTEM_PROMPT },
+                        ...conversationHistory
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 200
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('OpenAI API request failed');
+            }
+
+            const data = await response.json();
+            const botMessage = data.choices[0].message.content;
+
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'assistant',
+                content: botMessage
+            });
+
+            return botMessage;
+        }
+
+        // Quick Reply Handler
+        function handleQuickReply(value, text) {
+            addUserMessage(text);
+            clearQuickReplies();
+
+            conversationHistory.push({
+                role: 'user',
+                content: text
+            });
+
+            // Handle specific quick replies
+            if (value === 'received_notice') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addBotMessage("I'm sorry you're going through this. The good news is you still have options. Do you want to keep your home, or would you prefer to sell and walk away with your equity?");
+                    showQuickReplies([
+                        { text: "Keep my home", value: "keep" },
+                        { text: "Sell my home", value: "sell" },
+                        { text: "Not sure yet", value: "unsure" }
+                    ]);
+                }, 1000);
+            } else if (value === 'keep' || value === 'sell') {
+                leadData.situation = value;
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addBotMessage("Great! I'd love to connect you with one of our specialists for a free consultation. They can review your specific situation and create an action plan. Can I get your name and best contact number?");
+                    showLeadForm();
+                }, 1000);
+            } else {
+                // Send to OpenAI for other responses
+                sendMessage();
+            }
+        }
+
+        // Check if we should capture lead info
+        function checkForLeadCapture(botMessage) {
+            const lowerMessage = botMessage.toLowerCase();
+            if ((lowerMessage.includes('name') && lowerMessage.includes('contact')) ||
+                lowerMessage.includes('consultation') ||
+                (conversationHistory.length > 6 && !leadData.name)) {
+                // Show lead capture form after a few exchanges
+                setTimeout(() => {
+                    showLeadForm();
+                }, 2000);
+            }
+        }
+
+        // Show Lead Capture Form
+        function showLeadForm() {
+            const formHTML = `
+                <div class="lead-form">
+                    <div class="form-group">
+                        <label for="lead-name">Full Name *</label>
+                        <input type="text" id="lead-name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-phone">Phone Number *</label>
+                        <input type="tel" id="lead-phone" placeholder="(XXX) XXX-XXXX" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-email">Email</label>
+                        <input type="email" id="lead-email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-address">Property Address</label>
+                        <input type="text" id="lead-address" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-goal">What's your goal? *</label>
+                        <select id="lead-goal" required>
+                            <option value="">Select...</option>
+                            <option value="keep">Keep my home</option>
+                            <option value="sell">Sell my home</option>
+                            <option value="unsure">Not sure yet</option>
+                        </select>
+                    </div>
+                    <button class="submit-form-btn" onclick="submitLeadForm()">Submit & Get Free Guide</button>
+                </div>
+            `;
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content" style="max-width: 90%;">
+                    ${formHTML}
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Submit Lead Form
+        window.submitLeadForm = async function() {
+            const name = document.getElementById('lead-name').value.trim();
+            const phone = document.getElementById('lead-phone').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const address = document.getElementById('lead-address').value.trim();
+            const goal = document.getElementById('lead-goal').value;
+
+            if (!name || !phone || !goal) {
+                alert('Please fill in all required fields (Name, Phone, and Goal)');
+                return;
+            }
+
+            // Store lead data
+            leadData = {
+                name,
+                phone,
+                email,
+                propertyAddress: address,
+                situation: goal,
+                conversationSummary: conversationHistory.map(m => `${m.role}: ${m.content}`).join('\n'),
+                timestamp: new Date().toISOString(),
+                source: 'Website Chatbot'
+            };
+
+            // Send to Google Sheets via n8n webhook
+            try {
+                await fetch(CONFIG.GOOGLE_SHEET_WEBHOOK, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(leadData)
+                });
+
+                addBotMessage(`Thank you, ${name}! 🎉 I've sent your information to our team. You'll receive our FREE 7-Day Foreclosure Survival Guide via email, and one of our specialists will reach out within 24 hours. If you need immediate assistance, call us at (949) 565-5285.`);
+
+            } catch (error) {
+                console.error('Webhook error:', error);
+                addBotMessage(`Thank you, ${name}! I've recorded your information. Please call us at (949) 565-5285 so we can help you right away.`);
+            }
+        };
+
+        // UI Helper Functions
+        function addBotMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">${text}</div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `
+                <div class="message-content">${text}</div>
+                <div class="message-avatar">👤</div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typing-indicator-message';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="typing-indicator active">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator-message');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function showQuickReplies(replies) {
+            clearQuickReplies();
+            replies.forEach(reply => {
+                const button = document.createElement('button');
+                button.className = 'quick-reply-btn';
+                button.textContent = reply.text;
+                button.onclick = () => handleQuickReply(reply.value, reply.text);
+                quickRepliesContainer.appendChild(button);
+            });
+        }
+
+        function clearQuickReplies() {
+            quickRepliesContainer.innerHTML = '';
+        }
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Templates - Foreclosure Leads</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f9fafb;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 30px;
+        }
+
+        .template-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .template-section h2 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .template-section h3 {
+            color: #374151;
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+        }
+
+        .template-box {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .usage-note {
+            background: #fef3e2;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #92400e;
+        }
+
+        .placeholder {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .template-preview {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📧 Email Templates for Foreclosure Leads</h1>
+
+    <!-- Template 1: Initial Contact After Call -->
+    <div class="template-section">
+        <h2>
+            <span>1. Follow-up After Phone Call</span>
+            <button class="copy-btn" onclick="copyTemplate('template1')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> Send immediately after speaking with a homeowner who showed interest.
+            Replace <span class="placeholder">[NAME]</span>, <span class="placeholder">[ADDRESS]</span>, etc.
+        </div>
+
+        <div class="template-box" id="template1">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> Great speaking with you today - Next steps for [ADDRESS]</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>Thank you for taking my call today. I know dealing with foreclosure is stressful, and I'm here to help make this process as smooth as possible.</p>
+                <br>
+                <p>As we discussed, you have a few options:</p>
+                <br>
+                <p><strong>Option 1: Keep Your Home</strong><br>
+                - Negotiate a loan modification with your lender<br>
+                - Explore refinancing options if you have equity<br>
+                - Create a repayment plan to catch up on missed payments</p>
+                <br>
+                <p><strong>Option 2: Sell and Preserve Your Equity</strong><br>
+                - You have approximately $[EQUITY_AMOUNT] in equity<br>
+                - We can sell quickly and you walk away with cash<br>
+                - Avoid foreclosure on your credit report</p>
+                <br>
+                <p><strong>Option 3: Short Sale</strong><br>
+                - If you're underwater on your loan<br>
+                - Bank agrees to accept less than what's owed<br>
+                - You walk away without owing anything</p>
+                <br>
+                <p>I've attached our FREE 7-Day Foreclosure Survival Guide that explains all your rights and options in detail.</p>
+                <br>
+                <p><strong>Your Next Step:</strong></p>
+                <p>Let's schedule a time to review your specific situation and create an action plan. I have availability:</p>
+                <p>- [DAY] at [TIME]<br>
+                - [DAY] at [TIME]<br>
+                - [DAY] at [TIME]</p>
+                <br>
+                <p>Just reply with which time works best, or call me directly at (949) 565-5285.</p>
+                <br>
+                <p>Remember: Every day counts in foreclosure, but you still have options. Let's work together to find the best solution for you.</p>
+                <br>
+                <p>Best regards,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution<br>
+                CA DRE #02076038 | NMLS #2033637<br>
+                (949) 565-5285<br>
+                help@myforeclosuresolution.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 2: Cold Email (No Prior Contact) -->
+    <div class="template-section">
+        <h2>
+            <span>2. Cold Outreach Email</span>
+            <button class="copy-btn" onclick="copyTemplate('template2')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> First contact with homeowner via email (if you have their email from skip tracing).
+        </div>
+
+        <div class="template-box" id="template2">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> [NAME] - Important information about [ADDRESS]</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>My name is [YOUR NAME], and I'm a licensed California real estate professional specializing in foreclosure assistance.</p>
+                <br>
+                <p>I noticed you received a Notice of Default on your property at [ADDRESS]. I'm reaching out because I've helped over 500 California homeowners in similar situations save their homes or sell with equity intact.</p>
+                <br>
+                <p><strong>You still have options:</strong></p>
+                <br>
+                <p>✅ Stop the foreclosure process<br>
+                ✅ Negotiate with your lender<br>
+                ✅ Sell quickly and keep your equity<br>
+                ✅ Explore loan modification programs</p>
+                <br>
+                <p>I'm offering a <strong>free, no-obligation consultation</strong> to review your specific situation. I can usually identify 2-3 viable solutions within 15 minutes.</p>
+                <br>
+                <p><strong>Download our FREE guide:</strong><br>
+                I've attached our "7-Day Foreclosure Survival Guide" - it explains your legal rights, common mistakes to avoid, and step-by-step action plans.</p>
+                <br>
+                <p>If you'd like to talk, I'm available:</p>
+                <p>📞 Call/text: (949) 565-5285<br>
+                📧 Email: help@myforeclosuresolution.com<br>
+                🌐 Schedule online: [CALENDAR_LINK]</p>
+                <br>
+                <p>I understand this is a difficult time, but please know that solutions exist even at the last minute. I've stopped foreclosures the day before auction.</p>
+                <br>
+                <p>You're not alone in this.</p>
+                <br>
+                <p>Best regards,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution<br>
+                CA DRE #02076038 | NMLS #2033637</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 3: Follow-up After No Response -->
+    <div class="template-section">
+        <h2>
+            <span>3. Follow-up (No Response)</span>
+            <button class="copy-btn" onclick="copyTemplate('template3')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> 3-5 days after initial email with no response. Keep it short and urgent.
+        </div>
+
+        <div class="template-box" id="template3">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> Re: [ADDRESS] - Time is running out</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>I reached out a few days ago about your property at [ADDRESS].</p>
+                <br>
+                <p>I wanted to follow up because your foreclosure timeline is moving forward, and your options decrease as time passes.</p>
+                <br>
+                <p><strong>Quick question:</strong> Do you want to keep your home, or would you prefer to sell and walk away with cash?</p>
+                <br>
+                <p>Either way, I can help. Free consultation, no pressure.</p>
+                <br>
+                <p>Call me: (949) 565-5285<br>
+                Or just reply to this email.</p>
+                <br>
+                <p>Best,<br>
+                [YOUR NAME]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 4: After Voicemail -->
+    <div class="template-section">
+        <h2>
+            <span>4. After Leaving Voicemail</span>
+            <button class="copy-btn" onclick="copyTemplate('template4')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> Immediately after leaving a voicemail to increase response rate.
+        </div>
+
+        <div class="template-box" id="template4">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> Just called about [ADDRESS]</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>I just tried calling you at [PHONE] about your property at [ADDRESS]. I left a voicemail but wanted to send a quick email too.</p>
+                <br>
+                <p><strong>Bottom line:</strong> I help California homeowners stop foreclosure or sell with equity intact. I've been doing this for years and have seen almost every situation.</p>
+                <br>
+                <p>I'd love to offer you a free consultation to review your options. No cost, no obligation - just honest advice.</p>
+                <br>
+                <p>You can:</p>
+                <p>📞 Call me back: (949) 565-5285<br>
+                📧 Reply to this email<br>
+                📄 Download our free guide: [LINK]</p>
+                <br>
+                <p>Talk soon,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution<br>
+                (949) 565-5285</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 5: Appointment Confirmation -->
+    <div class="template-section">
+        <h2>
+            <span>5. Appointment Confirmation</span>
+            <button class="copy-btn" onclick="copyTemplate('template5')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> Immediately after scheduling a consultation appointment.
+        </div>
+
+        <div class="template-box" id="template5">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> Confirmed: Your foreclosure consultation on [DATE] at [TIME]</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>Great speaking with you! I'm looking forward to our consultation.</p>
+                <br>
+                <p><strong>Appointment Details:</strong><br>
+                📅 Date: [DAY, DATE]<br>
+                🕐 Time: [TIME]<br>
+                📍 Location: [IN-PERSON ADDRESS or "Phone Call" or "Video Conference"]<br>
+                📞 My number: (949) 565-5285</p>
+                <br>
+                <p><strong>Please bring (if available):</strong></p>
+                <p>✅ Notice of Default or Notice of Sale<br>
+                ✅ Recent mortgage statement<br>
+                ✅ Any correspondence from your lender<br>
+                ✅ Property tax bills (if you have them)</p>
+                <br>
+                <p><strong>Before we meet, here's what to expect:</strong></p>
+                <br>
+                <p>1. We'll review your situation (15 min)<br>
+                2. I'll explain all available options (15 min)<br>
+                3. We'll create an action plan together (15 min)<br>
+                4. You decide if you want to work together - zero pressure</p>
+                <br>
+                <p><strong>In the meantime:</strong><br>
+                I've attached our 7-Day Foreclosure Survival Guide. Give it a read before our meeting - it'll help you understand your options.</p>
+                <br>
+                <p>If you need to reschedule, just call or email me.</p>
+                <br>
+                <p>See you [DAY] at [TIME]!</p>
+                <br>
+                <p>Best regards,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution<br>
+                CA DRE #02076038<br>
+                (949) 565-5285<br>
+                help@myforeclosuresolution.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 6: After Consultation (Interested) -->
+    <div class="template-section">
+        <h2>
+            <span>6. Post-Consultation Follow-up (Interested)</span>
+            <button class="copy-btn" onclick="copyTemplate('template6')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> After a consultation where they showed interest but haven't committed yet.
+        </div>
+
+        <div class="template-box" id="template6">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> Next steps for [ADDRESS] - Action plan inside</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>Thank you for taking the time to meet with me today. I know you're dealing with a lot right now, and I appreciate your trust.</p>
+                <br>
+                <p><strong>Here's what we discussed:</strong></p>
+                <br>
+                <p>[SUMMARIZE SITUATION - example below]<br>
+                - You're [X] months behind on payments<br>
+                - Your home is worth approximately $[VALUE]<br>
+                - You owe approximately $[LOAN_AMOUNT]<br>
+                - Your equity position: $[EQUITY]<br>
+                - Auction date: [DATE] or Not yet scheduled</p>
+                <br>
+                <p><strong>Recommended Action Plan:</strong></p>
+                <br>
+                <p><strong>Option 1:</strong> [MOST VIABLE OPTION]<br>
+                [Explain in 2-3 sentences]<br>
+                Timeline: [TIMEFRAME]<br>
+                Expected outcome: [OUTCOME]</p>
+                <br>
+                <p><strong>Option 2:</strong> [ALTERNATIVE OPTION]<br>
+                [Explain in 2-3 sentences]<br>
+                Timeline: [TIMEFRAME]<br>
+                Expected outcome: [OUTCOME]</p>
+                <br>
+                <p><strong>Immediate Next Steps (This Week):</strong></p>
+                <br>
+                <p>✅ Step 1: [SPECIFIC ACTION]<br>
+                ✅ Step 2: [SPECIFIC ACTION]<br>
+                ✅ Step 3: [SPECIFIC ACTION]</p>
+                <br>
+                <p><strong>How I can help:</strong></p>
+                <p>- Handle all communication with your lender<br>
+                - Negotiate on your behalf<br>
+                - Coordinate paperwork and deadlines<br>
+                - Provide regular updates on progress</p>
+                <br>
+                <p>If you'd like to move forward, I've attached the service agreement for your review. We can get started as soon as you're ready.</p>
+                <br>
+                <p>If you have any questions, call me anytime: (949) 565-5285</p>
+                <br>
+                <p>Remember: Time is critical. The sooner we start, the more options you have.</p>
+                <br>
+                <p>Best regards,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution<br>
+                (949) 565-5285</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template 7: Monthly Value Email -->
+    <div class="template-section">
+        <h2>
+            <span>7. Monthly Value Email (Stay Top of Mind)</span>
+            <button class="copy-btn" onclick="copyTemplate('template7')">Copy Template</button>
+        </h2>
+
+        <div class="usage-note">
+            <strong>When to use:</strong> Send to your entire email list monthly with helpful content (not sales-focused).
+        </div>
+
+        <div class="template-box" id="template7">
+            <div class="template-preview">
+                <p><strong>Subject:</strong> [MONTH] Update: New California foreclosure laws + your rights</p>
+                <br>
+                <p>Hi [NAME],</p>
+                <br>
+                <p>I wanted to share some important updates about foreclosure laws in California that might affect you:</p>
+                <br>
+                <p><strong>What's New This Month:</strong></p>
+                <br>
+                <p>📋 [RELEVANT UPDATE - check CA foreclosure laws quarterly]<br>
+                💰 [MARKET UPDATE - rising/falling home values in your area]<br>
+                ⚖️ [LEGAL UPDATE - new homeowner protections]</p>
+                <br>
+                <p><strong>Quick Tip:</strong></p>
+                <p>[ACTIONABLE TIP - example: "If you're behind on payments, call your lender NOW. Many banks are offering 3-month forbearance programs that can buy you time."]</p>
+                <br>
+                <p><strong>Resource of the Month:</strong><br>
+                [LINK TO BLOG POST, ARTICLE, OR FREE RESOURCE]</p>
+                <br>
+                <p>As always, if you need help or have questions, I'm here:</p>
+                <p>📞 (949) 565-5285<br>
+                📧 help@myforeclosuresolution.com</p>
+                <br>
+                <p>Wishing you all the best,<br>
+                [YOUR NAME]<br>
+                My Foreclosure Solution</p>
+                <br>
+                <p style="font-size: 12px; color: #6b7280;">You're receiving this because you requested information about foreclosure assistance. Reply "UNSUBSCRIBE" to stop receiving these emails.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyTemplate(templateId) {
+            const template = document.getElementById(templateId);
+            const text = template.innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Template copied to clipboard! Paste into your email and customize the [PLACEHOLDERS]');
+            }).catch(err => {
+                alert('Could not copy template. Please select and copy manually.');
+            });
+        }
+    </script>
+
+    <div style="background: white; border-radius: 10px; padding: 30px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #1f2937; margin-bottom: 20px;">📝 Email Best Practices</h2>
+
+        <h3>Personalization</h3>
+        <ul>
+            <li>Always use the homeowner's first name</li>
+            <li>Reference their specific property address</li>
+            <li>Mention details from your conversation (if applicable)</li>
+            <li>Calculate and show their equity if known</li>
+        </ul>
+
+        <h3>Timing</h3>
+        <ul>
+            <li><strong>Best send times:</strong> Tuesday-Thursday, 10 AM - 2 PM</li>
+            <li>Send follow-up within 1 hour of phone call</li>
+            <li>Wait 3-5 days before second follow-up</li>
+            <li>Monthly value emails: First week of month</li>
+        </ul>
+
+        <h3>Subject Lines That Work</h3>
+        <ul>
+            <li>Include property address (increases open rate 30%)</li>
+            <li>Create urgency without being pushy</li>
+            <li>Use "Re:" for follow-ups (appears as ongoing conversation)</li>
+            <li>Keep under 50 characters</li>
+        </ul>
+
+        <h3>Always Include</h3>
+        <ul>
+            <li>✅ Your phone number (949) 565-5285</li>
+            <li>✅ Your license numbers (DRE #02076038)</li>
+            <li>✅ Free guide PDF attachment (when appropriate)</li>
+            <li>✅ Clear next step / call to action</li>
+            <li>✅ Professional email signature</li>
+        </ul>
+
+        <h3>What to Avoid</h3>
+        <ul>
+            <li>❌ All caps subject lines (looks like spam)</li>
+            <li>❌ Making guarantees ("I guarantee I can stop foreclosure")</li>
+            <li>❌ Talking about money/fees in first email</li>
+            <li>❌ Being overly salesy or pushy</li>
+            <li>❌ Sending at odd hours (early morning, late night, weekends)</li>
+        </ul>
+    </div>
+</body>
+</html>

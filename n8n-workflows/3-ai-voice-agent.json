@@ -1,0 +1,376 @@
+{
+  "name": "AI Voice Agent - Bland AI Call Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute",
+              "minute": 5
+            }
+          ]
+        },
+        "triggerOn": "specificSheet",
+        "sheetId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "trigger-new-lead",
+      "name": "When High-Priority Lead Added",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "id": "high-priority",
+              "leftValue": "={{ $json['Priority Score'] }}",
+              "rightValue": 7,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "has-phone",
+              "leftValue": "={{ $json['Phone Number'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            },
+            {
+              "id": "not-called",
+              "leftValue": "={{ $json['Call Status'] }}",
+              "rightValue": "Called",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-should-call",
+      "name": "Should AI Call This Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bland.ai/v1/calls",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "authorization",
+              "value": "YOUR_BLAND_AI_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "phone_number",
+              "value": "={{ $json['Phone Number'] }}"
+            },
+            {
+              "name": "task",
+              "value": "Call and qualify foreclosure lead, book free consultation"
+            },
+            {
+              "name": "voice",
+              "value": "maya"
+            },
+            {
+              "name": "language",
+              "value": "en"
+            },
+            {
+              "name": "model",
+              "value": "enhanced"
+            },
+            {
+              "name": "max_duration",
+              "value": 10
+            },
+            {
+              "name": "record",
+              "value": true
+            },
+            {
+              "name": "wait_for_greeting",
+              "value": true
+            },
+            {
+              "name": "first_sentence",
+              "value": "=Hi, is this {{ $json['Owner Name'].split(' ')[0] }}? This is Sarah calling from My Foreclosure Solution. I'm a licensed California real estate professional."
+            },
+            {
+              "name": "prompt",
+              "value": "You are Sarah, a licensed California real estate professional working for My Foreclosure Solution (CA DRE #02076038).\n\nYour job is to call homeowners who received a Notice of Default and help them understand their options.\n\nCONTEXT:\n- The homeowner is facing foreclosure\n- They are stressed and may be defensive\n- Your goal is to help, not sell\n- You want to book a free consultation appointment\n\nCALL SCRIPT:\n\nOpening:\n\"Hi, is this [FIRST_NAME]? This is Sarah calling from My Foreclosure Solution. I'm a licensed California real estate professional. I noticed you received a notice on your property. I specialize in helping homeowners in your situation stop foreclosure or sell with their equity intact. Do you have a couple minutes to talk about your options?\"\n\nIf YES, continue:\n\"Great. First, I want you to know you're not alone and you still have options. Can I ask - do you want to keep your home, or would you prefer to sell and walk away with cash?\"\n\nQUALIFYING QUESTIONS:\n1. \"When did you receive the Notice of Default?\"\n2. \"How many payments are you behind?\"\n3. \"Have you spoken with your lender about a loan modification?\"\n4. \"Do you know roughly what your home is worth versus what you owe?\"\n\nIf they want to KEEP HOME:\n\"Perfect. We can explore loan modification, refinancing, or repayment plans. I'd like to schedule a free consultation where we can review your specific situation and create an action plan. I have availability tomorrow at 2 PM or Thursday at 10 AM. Which works better for you?\"\n\nIf they want to SELL:\n\"I understand. The good news is we can help you sell quickly and you'll walk away with your equity instead of losing it to foreclosure. I'd like to schedule a free consultation to review your numbers. I have availability tomorrow at 2 PM or Thursday at 10 AM. Which works better?\"\n\nIf NOT INTERESTED:\n\"I completely understand. Can I just send you our free 7-Day Foreclosure Survival Guide? It explains all your rights and options in California - no cost, no obligation. What's the best email for you?\"\n\nOBJECTION HANDLING:\n\n\"I can't afford to pay you\"\n→ \"The consultation is completely free, no cost at all. We only get paid if we successfully help you, and that comes from the transaction - never out of your pocket upfront.\"\n\n\"I already talked to my lender\"\n→ \"That's great that you're being proactive. What did they offer you? Sometimes we can negotiate better terms or explore options they didn't mention.\"\n\n\"I'm working with someone else\"\n→ \"That's fine, I'm glad you have help. Just so you know, we've stopped foreclosures the day before auction, so if you ever need a second opinion, we're here. Can I send you our free guide just to have as a resource?\"\n\nAPPOINTMENT BOOKING:\nWhen they agree to consultation, confirm:\n- Their name\n- Phone number\n- Email address\n- Best time to meet (offer 2-3 specific slots)\n- Confirm property address\n\nEnd call:\n\"Perfect, I've got you scheduled for [DAY] at [TIME]. You'll receive a confirmation email at [EMAIL] with all the details. If anything changes, just call us at (949) 565-5285. Looking forward to helping you, [NAME].\"\n\nIMPORTANT RULES:\n- Be empathetic and genuine\n- Don't sound robotic or scripted\n- Listen more than you talk\n- Never guarantee outcomes\n- If they're very emotional, acknowledge it\n- If they're angry, stay calm and professional\n- If they ask technical questions you don't know, say \"That's a great question. Let me have our specialist address that in the consultation.\"\n\nDATA TO COLLECT:\n- Want to keep home or sell? [KEEP/SELL]\n- Months behind on payments: [NUMBER]\n- Talked to lender? [YES/NO]\n- Estimated home value: [AMOUNT]\n- Estimated loan balance: [AMOUNT]\n- Timeline urgency: [DAYS UNTIL SALE if known]\n- Email address: [EMAIL]\n- Best phone number: [PHONE]\n- Appointment booked? [YES/NO]\n- Appointment date/time: [DATETIME]\n\nAfter call, provide summary in this format:\n---\nCALL SUMMARY\nLead: [NAME]\nStatus: [APPOINTMENT BOOKED / SEND GUIDE / NOT INTERESTED / CALLBACK]\nInterest Level: [HIGH / MEDIUM / LOW]\nWants to: [KEEP HOME / SELL / UNSURE]\nMonths Behind: [X]\nNext Action: [DESCRIPTION]\nNotes: [KEY POINTS FROM CONVERSATION]\n---"
+            },
+            {
+              "name": "transfer_phone_number",
+              "value": "+19495655285"
+            },
+            {
+              "name": "metadata",
+              "value": "={{ { \"lead_id\": $json['Property Address'], \"property_address\": $json['Property Address'], \"owner_name\": $json['Owner Name'], \"priority_score\": $json['Priority Score'] } }}"
+            },
+            {
+              "name": "webhook",
+              "value": "YOUR_N8N_WEBHOOK_URL/bland-callback"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bland-ai-call",
+      "name": "Bland AI - Make Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Call Status": "Calling",
+            "Last Contact": "={{ new Date().toLocaleDateString() }}",
+            "Notes": "=🤖 AI Voice Agent initiated call on {{ new Date().toLocaleString() }}"
+          },
+          "matchingColumns": ["Phone Number"]
+        },
+        "options": {}
+      },
+      "id": "update-status",
+      "name": "Update Call Status",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "📞 AI Calling: {{ $json['Owner Name'] }} (Priority {{ $json['Priority Score'] }})",
+        "emailType": "text",
+        "message": "AI VOICE AGENT IS CALLING HIGH-PRIORITY LEAD\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 Lead: {{ $json['Owner Name'] }}\n📞 Phone: {{ $json['Phone Number'] }}\n🏠 Property: {{ $json['Property Address'] }}\n📊 Priority Score: {{ $json['Priority Score'] }}/10\n💰 Estimated Equity: {{ $json['Estimated Equity'] || 'Unknown' }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nAI VOICE AGENT (Sarah) is now calling this lead to:\n✓ Qualify their situation\n✓ Determine if they want to keep or sell\n✓ Book a free consultation appointment\n✓ Collect additional information\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nYou'll receive another notification when the call completes with:\n- Call recording\n- Transcript\n- Call summary\n- Next recommended action\n\nIf lead is HOT and wants immediate help, AI will transfer to you at: (949) 565-5285\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nBland AI Call ID: {{ $('Bland AI - Make Call').item.json.call_id }}\n\nView Lead:\nhttps://docs.google.com/spreadsheets/d/1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw/edit\n\n---\nMy Foreclosure Solution | CA DRE #02076038",
+        "options": {}
+      },
+      "id": "notify-calling",
+      "name": "Notify You - Call Started",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bland-callback",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-callback",
+      "name": "Webhook - Call Completed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 600],
+      "webhookId": "bland-callback"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Bland AI callback data\nconst callback = $input.item.json.body;\n\nreturn {\n  json: {\n    call_id: callback.call_id,\n    call_status: callback.status,\n    call_duration: callback.call_length,\n    transcript: callback.transcript,\n    summary: callback.summary,\n    recording_url: callback.recording_url,\n    appointment_booked: callback.analysis?.appointment_booked || false,\n    interest_level: callback.analysis?.interest_level || 'Unknown',\n    wants_to: callback.analysis?.wants_to || 'Unknown',\n    next_action: callback.analysis?.next_action || 'Follow up',\n    property_address: callback.metadata?.property_address,\n    owner_name: callback.metadata?.owner_name\n  }\n};"
+      },
+      "id": "parse-callback",
+      "name": "Parse Call Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 600]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Call Status": "={{ $json.appointment_booked ? 'Appointment Booked' : 'Called - ' + $json.interest_level }}",
+            "Last Contact": "={{ new Date().toLocaleDateString() }}",
+            "Notes": "=📞 AI Call completed: {{ $json.summary }}. Recording: {{ $json.recording_url }}"
+          },
+          "matchingColumns": ["Property Address"]
+        },
+        "options": {}
+      },
+      "id": "update-results",
+      "name": "Update Sheet with Results",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [680, 600]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "={{ $json.appointment_booked ? '✅ APPOINTMENT BOOKED' : '📋 Call Complete' }}: {{ $json.owner_name }}",
+        "emailType": "text",
+        "message": "AI VOICE AGENT CALL COMPLETED\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 Lead: {{ $json.owner_name }}\n🏠 Property: {{ $json.property_address }}\n📞 Call Duration: {{ $json.call_duration }} seconds\n📊 Status: {{ $json.call_status }}\n⭐ Interest Level: {{ $json.interest_level }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📝 CALL SUMMARY:\n{{ $json.summary }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🎯 LEAD WANTS TO:\n{{ $json.wants_to }}\n\n📅 APPOINTMENT BOOKED:\n{{ $json.appointment_booked ? '✅ YES! Follow up to confirm details.' : '❌ No - ' + $json.next_action }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🎧 LISTEN TO RECORDING:\n{{ $json.recording_url }}\n\n📄 FULL TRANSCRIPT:\n{{ $json.transcript }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nNEXT ACTION:\n{{ $json.next_action }}\n\nView Lead:\nhttps://docs.google.com/spreadsheets/d/1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw/edit\n\n---\nMy Foreclosure Solution | CA DRE #02076038",
+        "options": {}
+      },
+      "id": "notify-results",
+      "name": "Notify You - Call Results",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [900, 600]
+    },
+    {
+      "parameters": {
+        "content": "## AI Voice Agent (Bland AI)\n\nAutomatically calls high-priority leads and qualifies them.\n\n**Trigger:** New lead with Priority Score >= 7\n\n**Process:**\n1. Check if lead should be called (high priority + has phone + not yet called)\n2. Send call request to Bland AI with Sarah agent\n3. Sarah calls lead and has empathetic conversation\n4. Collects info and tries to book appointment\n5. Updates sheet with call status\n6. Notifies you when call starts\n7. Receives callback when call ends\n8. Updates sheet with results and transcript\n9. Notifies you with recording and summary\n\n**Cost:** $0.09/minute (~$0.45 per 5-min call)\n\n**Setup Required:**\n1. Sign up for Bland AI (bland.ai)\n2. Get API key\n3. Add API key to this workflow\n4. Copy webhook URL and add to Bland AI config\n\n**Result:** AI makes 10-100 calls per day while you focus on closing deals.",
+        "height": 540,
+        "width": 320,
+        "color": 4
+      },
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 820]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When High-Priority Lead Added": {
+      "main": [
+        [
+          {
+            "node": "Should AI Call This Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Should AI Call This Lead?": {
+      "main": [
+        [
+          {
+            "node": "Bland AI - Make Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bland AI - Make Call": {
+      "main": [
+        [
+          {
+            "node": "Update Call Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Call Status": {
+      "main": [
+        [
+          {
+            "node": "Notify You - Call Started",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Call Completed": {
+      "main": [
+        [
+          {
+            "node": "Parse Call Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Call Results": {
+      "main": [
+        [
+          {
+            "node": "Update Sheet with Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sheet with Results": {
+      "main": [
+        [
+          {
+            "node": "Notify You - Call Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3",
+  "id": "3",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}

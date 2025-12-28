@@ -1,0 +1,294 @@
+/* ===== UI ENHANCEMENTS - Priority Features 1,2,4,5 ===== */
+
+/* 1. ANIMATED URGENCY INDICATOR */
+.urgency-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%);
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    border: 2px solid #f59e0b;
+    animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.urgency-indicator .urgency-text {
+    font-weight: 600;
+    color: #dc2626;
+}
+
+/* 2. TRUST SIGNALS CAROUSEL */
+.trust-carousel {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.trust-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+}
+
+.trust-item.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.trust-logo {
+    width: 60px;
+    height: auto;
+}
+
+.trust-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0d9488;
+}
+
+.trust-icon {
+    font-size: 28px;
+}
+
+/* 4. STICKY NAVIGATION */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header.scrolled {
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #f3f4f6;
+    color: #0d9488;
+}
+
+.nav-cta {
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    color: white !important;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 148, 136, 0.3);
+}
+
+/* Adjust body padding for fixed header */
+body {
+    padding-top: 80px;
+}
+
+/* 5. PERFORMANCE & LOADING STATES */
+
+/* Skeleton Loader */
+.skeleton-loader {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Lazy Load Fade In */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f4f6;
+    border-top-color: #0d9488;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Image Optimization */
+img {
+    loading: lazy;
+}
+
+/* Floating Phone Button (Mobile) */
+@media (max-width: 768px) {
+    .floating-phone {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ea580c, #fb923c);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        box-shadow: 0 5px 20px rgba(234, 88, 12, 0.4);
+        z-index: 999;
+        animation: float-button 3s ease-in-out infinite;
+        text-decoration: none;
+    }
+
+    @keyframes float-button {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .floating-phone:after {
+        content: "📞";
+    }
+
+    .nav-links {
+        display: none; /* Hide on mobile, use hamburger menu instead */
+    }
+}
+
+/* Content Loading Animation */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Optimize Form Focus States */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #0d9488;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+/* Button Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading:after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid white;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+/* Quick Wins - Additional Enhancements */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Responsive Images */
+.hero-image,
+.success-image,
+.professional-headshot {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}

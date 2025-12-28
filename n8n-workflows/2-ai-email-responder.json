@@ -1,0 +1,278 @@
+{
+  "name": "AI Email Responder - Auto-Reply to Leads",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute",
+              "minute": 5
+            }
+          ]
+        },
+        "filters": {
+          "from": "",
+          "subject": "",
+          "labelIds": ["INBOX", "UNREAD"]
+        },
+        "format": "resolved",
+        "options": {
+          "attachments": false
+        }
+      },
+      "id": "gmail-trigger",
+      "name": "When Email Received",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "filters": {
+          "conditions": {
+            "options": {},
+            "conditions": [
+              {
+                "id": "email-match",
+                "leftValue": "={{ $json.from }}",
+                "rightValue": "={{ $('When Email Received').item.json.from }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ]
+          }
+        },
+        "options": {}
+      },
+      "id": "lookup-lead",
+      "name": "Lookup Lead in Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "id": "found",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-if-lead",
+      "name": "Is This a Known Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an AI email assistant for My Foreclosure Solution, a California real estate company helping homeowners facing foreclosure (CA DRE #02076038).\n\nYour job is to respond to emails from leads with empathy, helpfulness, and professionalism.\n\nGUIDELINES:\n- Keep responses concise (3-5 sentences max)\n- Be warm and empathetic\n- Answer their question directly\n- Provide value, not just sales pitch\n- Include soft CTA to book consultation or call\n- Sign as: \"[Your Name], My Foreclosure Solution | (949) 565-5285\"\n\nKEY TALKING POINTS:\n- Free consultation, no obligation\n- Licensed CA real estate professionals (DRE #02076038)\n- Helped 500+ families\n- Can stop foreclosure or sell with equity intact\n- Available 24/7 for emergencies\n\nPRICING RESPONSE:\n\"The consultation is completely free. We only get paid if we successfully help you, through the transaction - never out of your pocket.\"\n\nSCHEDULING:\nOffer these times:\n- Tuesday 10 AM or 2 PM\n- Wednesday 11 AM or 3 PM\n- Thursday 9 AM or 1 PM\nOr suggest they call: (949) 565-5285\n\nWrite a professional, empathetic email response."
+            },
+            {
+              "role": "user",
+              "content": "LEAD CONTEXT:\nName: {{ $('Lookup Lead in Sheet').item.json.name }}\nProperty: {{ $('Lookup Lead in Sheet').item.json.property_address }}\nGoal: {{ $('Lookup Lead in Sheet').item.json.situation }}\nPrevious Contact: {{ $('Lookup Lead in Sheet').item.json.notes }}\n\nTHEIR EMAIL:\nFrom: {{ $('When Email Received').item.json.from }}\nSubject: {{ $('When Email Received').item.json.subject }}\n\n{{ $('When Email Received').item.json.textPlain }}\n\nWrite a helpful email response that addresses their concerns and guides them toward booking a consultation."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "generate-response",
+      "name": "OpenAI - Generate Response",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.3,
+      "position": [900, 240],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('When Email Received').item.json.id }}",
+        "message": "={{ $json.message.content }}",
+        "options": {}
+      },
+      "id": "send-reply",
+      "name": "Send Email Reply",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1120, 240],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Last Contact": "={{ new Date().toLocaleDateString() }}",
+            "Notes": "=📧 AI replied on {{ new Date().toLocaleDateString() }}: {{ $('OpenAI - Generate Response').item.json.message.content.substring(0, 100) }}..."
+          },
+          "matchingColumns": ["email"]
+        },
+        "options": {}
+      },
+      "id": "update-sheet",
+      "name": "Update Lead Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [1340, 240]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "🤖 AI Responded to: {{ $('Lookup Lead in Sheet').item.json.name }}",
+        "emailType": "text",
+        "message": "AI AUTO-RESPONDER SENT EMAIL\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 Lead: {{ $('Lookup Lead in Sheet').item.json.name }}\n📧 Their Email: {{ $('When Email Received').item.json.from }}\n📝 Subject: {{ $('When Email Received').item.json.subject }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTHEIR MESSAGE:\n{{ $('When Email Received').item.json.textPlain }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nAI RESPONSE SENT:\n{{ $('OpenAI - Generate Response').item.json.message.content }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nREVIEW: If this response needs human follow-up, reply to the lead directly.\n\nView Lead:\nhttps://docs.google.com/spreadsheets/d/1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw/edit",
+        "options": {}
+      },
+      "id": "notify-you",
+      "name": "Notify You of Response",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "content": "## AI Email Responder\n\nAutomatically responds to lead emails with intelligent, empathetic replies.\n\n**How It Works:**\n1. Monitors Gmail inbox every 5 minutes\n2. Checks if sender is in your leads sheet\n3. Sends email + lead context to GPT-4\n4. GPT-4 writes personalized response\n5. Sends reply automatically\n6. Updates lead sheet with interaction\n7. Notifies you\n\n**Cost:** ~$0.03 per email\n\n**Benefits:**\n- Instant responses (5-minute max)\n- Always empathetic and professional\n- Never forgets to follow up\n- Frees up hours of your time\n\n**Safety:** You get notified of every AI response so you can intervene if needed.",
+        "height": 440,
+        "width": 300,
+        "color": 4
+      },
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 460]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Email Received": {
+      "main": [
+        [
+          {
+            "node": "Lookup Lead in Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Lead in Sheet": {
+      "main": [
+        [
+          {
+            "node": "Is This a Known Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is This a Known Lead?": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Response": {
+      "main": [
+        [
+          {
+            "node": "Send Email Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email Reply": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify You of Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2",
+  "id": "2",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}

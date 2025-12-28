@@ -1,0 +1,239 @@
+{
+  "name": "Follow-up Automation - 30-Day Drip Campaign",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "schedule-daily",
+      "name": "Every Day at 9 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "readRows",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "filters": {},
+        "options": {}
+      },
+      "id": "get-leads",
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Find leads that need follow-up\nconst items = $input.all();\nconst today = new Date();\nconst followUpLeads = [];\n\nfor (const item of items) {\n  const data = item.json;\n  \n  // Skip if already closed/converted\n  if (data['Status'] === 'Closed' || data['Status'] === 'Converted') {\n    continue;\n  }\n  \n  // Parse last contact date\n  const lastContact = data['Last Contact'] ? new Date(data['Last Contact']) : null;\n  \n  if (!lastContact) {\n    continue;\n  }\n  \n  // Calculate days since last contact\n  const daysSinceContact = Math.floor((today - lastContact) / (1000 * 60 * 60 * 24));\n  \n  // Follow-up schedule:\n  // Day 2: Check-in email\n  // Day 7: Value email (blog post)\n  // Day 14: Case study email\n  // Day 21: Last chance email\n  // Day 30: Final follow-up\n  \n  let emailType = null;\n  \n  if (daysSinceContact === 2) {\n    emailType = 'check-in';\n  } else if (daysSinceContact === 7) {\n    emailType = 'value-blog';\n  } else if (daysSinceContact === 14) {\n    emailType = 'case-study';\n  } else if (daysSinceContact === 21) {\n    emailType = 'last-chance';\n  } else if (daysSinceContact === 30) {\n    emailType = 'final-followup';\n  }\n  \n  if (emailType) {\n    followUpLeads.push({\n      json: {\n        ...data,\n        days_since_contact: daysSinceContact,\n        email_type: emailType\n      }\n    });\n  }\n}\n\nreturn followUpLeads;"
+      },
+      "id": "filter-followups",
+      "name": "Find Leads Needing Follow-up",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an AI email writer for My Foreclosure Solution.\n\nWrite follow-up emails based on the email type requested.\n\nEMAIL TYPES:\n\n1. CHECK-IN (Day 2):\n- Short and friendly\n- \"Just checking in, did you get our guide?\"\n- \"Do you have any questions?\"\n- Soft CTA to reply or call\n\n2. VALUE-BLOG (Day 7):\n- Share helpful blog post/resource\n- \"I thought this might help your situation\"\n- Educational, not sales-y\n- Link to blog post about foreclosure options\n\n3. CASE-STUDY (Day 14):\n- Share success story\n- \"We recently helped [Name] in similar situation\"\n- Show results (saved home, walked away with $X)\n- Inspire hope\n\n4. LAST-CHANCE (Day 21):\n- Urgency but not pushy\n- \"Time is running out - foreclosure auction approaching\"\n- \"We can still help if you act now\"\n- Strong CTA to book consultation\n\n5. FINAL-FOLLOWUP (Day 30):\n- \"This is my last email\"\n- \"I hope you found a solution\"\n- \"If not, we're still here: (949) 565-5285\"\n- Leave door open\n\nTONE:\n- Empathetic and caring\n- Professional\n- Not desperate or pushy\n- Show you genuinely want to help\n\nFORMAT:\nSubject: [engaging subject line]\nBody: [2-3 short paragraphs]\nSign: [Your Name], My Foreclosure Solution | (949) 565-5285\n\nWrite the email now."
+            },
+            {
+              "role": "user",
+              "content": "Write a {{ $json.email_type }} follow-up email for:\n\nName: {{ $json.name }}\nProperty: {{ $json.property_address }}\nGoal: {{ $json.situation }}\nDays since last contact: {{ $json.days_since_contact }}\n\nWrite the email subject and body."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "id": "generate-email",
+      "name": "OpenAI - Generate Follow-up",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.3,
+      "position": [900, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse email from OpenAI response\nconst response = $input.item.json.message.content;\n\n// Extract subject and body\nconst subjectMatch = response.match(/Subject:\\s*(.+)/i);\nconst subject = subjectMatch ? subjectMatch[1].trim() : 'Following up on your foreclosure situation';\n\n// Remove subject line from body\nlet body = response.replace(/Subject:\\s*.+/i, '').trim();\n\nreturn {\n  json: {\n    ...($input.item.json),\n    email_subject: subject,\n    email_body: body\n  }\n};"
+      },
+      "id": "parse-email",
+      "name": "Parse Email Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "={{ $json.email_subject }}",
+        "emailType": "text",
+        "message": "={{ $json.email_body }}",
+        "options": {}
+      },
+      "id": "send-email",
+      "name": "Send Follow-up Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Last Contact": "={{ new Date().toLocaleDateString() }}",
+            "Notes": "=📧 Follow-up sent (Day {{ $json.days_since_contact }}): {{ $json.email_type }}"
+          },
+          "matchingColumns": ["email"]
+        },
+        "options": {}
+      },
+      "id": "update-sheet",
+      "name": "Update Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "content": "## Follow-up Automation\n\nAutomatically nurtures leads with timed follow-up emails.\n\n**Schedule:**\n- Day 2: Check-in email\n- Day 7: Value/education email\n- Day 14: Case study/success story\n- Day 21: Urgency email\n- Day 30: Final follow-up\n\n**How It Works:**\n1. Runs every day at 9 AM\n2. Checks all leads in sheet\n3. Calculates days since last contact\n4. Finds leads due for follow-up\n5. Generates personalized email with GPT-4\n6. Sends email\n7. Updates sheet\n\n**Benefits:**\n- Never let a lead go cold\n- Automatic nurture sequence\n- Personalized with AI\n- Set it and forget it\n\n**Cost:** ~$0.03 per email\n\n**Result:** Leads stay warm for 30 days, more conversions.",
+        "height": 440,
+        "width": 300,
+        "color": 4
+      },
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 480]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every Day at 9 AM": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Find Leads Needing Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Leads Needing Follow-up": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Follow-up": {
+      "main": [
+        [
+          {
+            "node": "Parse Email Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Email Content": {
+      "main": [
+        [
+          {
+            "node": "Send Follow-up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Follow-up Email": {
+      "main": [
+        [
+          {
+            "node": "Update Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4",
+  "id": "4",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}

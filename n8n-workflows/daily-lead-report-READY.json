@@ -1,0 +1,100 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every Day at 8 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-800, 80]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-580, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\nlet stats = {\n  total: leads.length,\n  new: 0,\n  emailSent: 0,\n  followUpSent: 0,\n  contacted: 0,\n  consultationScheduled: 0,\n  contractSigned: 0\n};\n\nleads.forEach(item => {\n  const s = item.json.Status || '';\n  if (s === 'New') stats.new++;\n  if (s === 'Email Sent') stats.emailSent++;\n  if (s === 'Follow-up Sent') stats.followUpSent++;\n  if (s === 'Contacted') stats.contacted++;\n  if (s === 'Consultation Scheduled') stats.consultationScheduled++;\n  if (s === 'Contract Signed') stats.contractSigned++;\n});\n\nreturn [{ json: stats }];"
+      },
+      "name": "Calculate Stats",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-360, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "Daily Lead Report",
+        "emailType": "html",
+        "message": "<h1>Daily Lead Report</h1><table border='1' cellpadding='8'><tr><td><b>Total Leads</b></td><td>{{ $json.total }}</td></tr><tr><td><b>New</b></td><td>{{ $json.new }}</td></tr><tr><td><b>Email Sent</b></td><td>{{ $json.emailSent }}</td></tr><tr><td><b>Follow-up Sent</b></td><td>{{ $json.followUpSent }}</td></tr><tr><td><b>Contacted</b></td><td>{{ $json.contacted }}</td></tr><tr><td><b>Consultation Scheduled</b></td><td>{{ $json.consultationScheduled }}</td></tr><tr><td><b>Contract Signed</b></td><td>{{ $json.contractSigned }}</td></tr></table><p><a href='https://docs.google.com/spreadsheets/d/1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw'>Open Google Sheet</a></p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Daily Report",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [-140, 80]
+    }
+  ],
+  "connections": {
+    "Every Day at 8 AM": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Calculate Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Stats": {
+      "main": [
+        [
+          {
+            "node": "Send Daily Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

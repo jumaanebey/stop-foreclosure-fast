@@ -1,0 +1,266 @@
+{
+  "name": "AI Lead Scorer - OpenAI Priority Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute",
+              "minute": 5
+            }
+          ]
+        },
+        "triggerOn": "specificSheet",
+        "sheetId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "trigger-new-lead",
+      "name": "When New Lead Added",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "id": "a1",
+              "leftValue": "={{ $json['Priority Score'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isEmpty"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-not-scored",
+      "name": "Check if Not Yet Scored",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4-turbo-preview",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an AI lead scoring expert for a foreclosure assistance real estate company in California. Your job is to analyze leads and assign a priority score from 1-10 (10 being highest priority).\n\nScoring Criteria:\n- Property value $500k+: +2 points\n- Estimated equity $100k+: +3 points  \n- Equity $50k-$100k: +2 points\n- Phone number available: +1 point\n- Email available: +1 point\n- Days since NOD < 30: +1 point (urgent)\n- Days since NOD 30-60: +0 points\n- Days since NOD > 60: +2 points (very urgent)\n- Property in LA, OC, SD: +1 point (valuable markets)\n\nAlso provide:\n- Priority Level: LOW / MEDIUM / HIGH / URGENT\n- Recommended Action: What to do next\n- Key Insight: One sentence about why this lead matters\n\nRespond ONLY with valid JSON in this exact format:\n{\n  \"priority_score\": 8,\n  \"priority_level\": \"HIGH\",\n  \"recommended_action\": \"AI voice agent should call within 1 hour\",\n  \"key_insight\": \"High equity lead with urgent timeline - strong potential for quick close\",\n  \"estimated_equity\": 120000,\n  \"equity_tier\": \"HIGH\"\n}"
+            },
+            {
+              "role": "user",
+              "content": "Analyze this foreclosure lead:\n\nOwner: {{ $json['Owner Name'] }}\nProperty: {{ $json['Property Address'] }}\nCounty: {{ $json['County'] || 'Unknown' }}\nEstimated Value: {{ $json['Estimated Value'] || 'Unknown' }}\nLender: {{ $json['Lender'] || 'Unknown' }}\nRecording Date: {{ $json['Recording Date'] || 'Unknown' }}\nDays Since NOD: {{ $json['Days Since NOD'] || 'Unknown' }}\nPhone Number: {{ $json['Phone Number'] ? 'Available' : 'Not available' }}\nEmail: {{ $json['Email'] ? 'Available' : 'Not available' }}\n\nScore this lead and provide analysis."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.3,
+          "responseFormat": "json_object"
+        }
+      },
+      "id": "openai-score",
+      "name": "OpenAI - Score Lead",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.3,
+      "position": [680, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse OpenAI response\nconst response = JSON.parse($input.item.json.message.content);\nconst leadData = $input.item.json;\n\nreturn {\n  json: {\n    ...leadData,\n    ai_priority_score: response.priority_score,\n    ai_priority_level: response.priority_level,\n    ai_recommended_action: response.recommended_action,\n    ai_key_insight: response.key_insight,\n    ai_estimated_equity: response.estimated_equity,\n    ai_equity_tier: response.equity_tier,\n    ai_scored_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "parse-response",
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "documentId": {
+          "__rl": true,
+          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "NOD Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Priority Score": "={{ $json.ai_priority_score }}",
+            "Notes": "=🤖 AI Score: {{ $json.ai_priority_score }}/10 ({{ $json.ai_priority_level }}) - {{ $json.ai_key_insight }}"
+          },
+          "matchingColumns": ["Property Address"]
+        },
+        "options": {}
+      },
+      "id": "update-sheet",
+      "name": "Update Sheet with AI Score",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [
+            {
+              "id": "a1",
+              "leftValue": "={{ $json.ai_priority_score }}",
+              "rightValue": 7,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-high-priority",
+      "name": "Is High Priority? (Score >= 7)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "🚨 HIGH PRIORITY LEAD - AI Score: {{ $json.ai_priority_score }}/10",
+        "emailType": "text",
+        "message": "HIGH PRIORITY LEAD DETECTED BY AI\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 Owner: {{ $json['Owner Name'] }}\n🏠 Property: {{ $json['Property Address'] }}\n📊 AI Priority Score: {{ $json.ai_priority_score }}/10\n⚡ Priority Level: {{ $json.ai_priority_level }}\n💰 Estimated Equity: ${{ $json.ai_estimated_equity.toLocaleString() }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🎯 AI RECOMMENDATION:\n{{ $json.ai_recommended_action }}\n\n💡 KEY INSIGHT:\n{{ $json.ai_key_insight }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCONTACT INFO:\n📞 Phone: {{ $json['Phone Number'] || 'Need to skip trace' }}\n📧 Email: {{ $json['Email'] || 'Not available' }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nLEAD DETAILS:\n• County: {{ $json['County'] || 'Unknown' }}\n• Lender: {{ $json['Lender'] || 'Unknown' }}\n• Days Since NOD: {{ $json['Days Since NOD'] || 'Unknown' }}\n• Recording Date: {{ $json['Recording Date'] || 'Unknown' }}\n• Estimated Value: {{ $json['Estimated Value'] || 'Unknown' }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nNEXT STEPS:\n1. Review lead in Google Sheet\n2. {{ $json['Phone Number'] ? 'Call immediately: ' + $json['Phone Number'] : 'Skip trace phone number' }}\n3. {{ $json.ai_priority_level === 'URGENT' ? 'Drop everything - this is time-sensitive!' : 'Prioritize this lead today' }}\n\nView in Sheet:\nhttps://docs.google.com/spreadsheets/d/1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw/edit\n\n---\nAI-Scored at: {{ $json.ai_scored_at }}\nMy Foreclosure Solution | CA DRE #02076038",
+        "options": {}
+      },
+      "id": "alert-email",
+      "name": "Send High-Priority Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1560, 240]
+    },
+    {
+      "parameters": {
+        "content": "## What This Workflow Does:\n\n1. Triggers when new lead added to Google Sheet\n2. Sends lead data to OpenAI GPT-4\n3. AI analyzes and scores lead 1-10\n4. Updates Google Sheet with score\n5. If score >= 7: Sends you urgent alert\n\n## Why This Matters:\n\nNot all leads are equal. AI helps you focus on:\n- High equity leads (bigger commissions)\n- Urgent timelines (need immediate action)\n- Leads with contact info (easier to reach)\n\n## Cost:\n\n~$0.01 per lead scored\n100 leads = $1\n\nCheaper than hiring a VA, more consistent.",
+        "height": 400,
+        "width": 300,
+        "color": 4
+      },
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 500]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When New Lead Added": {
+      "main": [
+        [
+          {
+            "node": "Check if Not Yet Scored",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Not Yet Scored": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Score Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Score Lead": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Update Sheet with AI Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sheet with AI Score": {
+      "main": [
+        [
+          {
+            "node": "Is High Priority? (Score >= 7)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is High Priority? (Score >= 7)": {
+      "main": [
+        [
+          {
+            "node": "Send High-Priority Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5",
+  "id": "5",
+  "meta": {
+    "instanceId": "your-instance-id"
+  },
+  "tags": []
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Basic Form</title>
+</head>
+<body>
+    <h1>Basic Form Test</h1>
+    <form action="https://script.google.com/macros/s/AKfycbwot6SWKdQKzoOmVizO8_mh93aU_A6cIkGnpu5yrnzmPrfkn4pDQ7E07asi1_PXSpsq/exec" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.querySelector('button').addEventListener('click', function() {
+            alert('Button clicked!');
+        });
+    </script>
+</body>
+</html>
