@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOD Lead Dashboard - My Foreclosure Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 20px 30px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #f8fafc;
+        }
+
+        .header .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .controls {
+            background: #1e293b;
+            padding: 20px 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .filter-group select {
+            padding: 10px 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .table-container {
+            padding: 20px 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            background: #1e293b;
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background: #334155;
+        }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        tr:hover {
+            background: #1e293b;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-new {
+            background: #10b981;
+            color: white;
+        }
+
+        .status-contacted {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .status-email-sent {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .status-followup {
+            background: #f59e0b;
+            color: #1e293b;
+        }
+
+        .phone-link {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+
+        .address {
+            max-width: 250px;
+        }
+
+        .county-la {
+            color: #f59e0b;
+        }
+
+        .county-riverside {
+            color: #3b82f6;
+        }
+
+        .equity-positive {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .equity-negative {
+            color: #ef4444;
+        }
+
+        .urgent {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #94a3b8;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #334155;
+            border-top-color: #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #7f1d1d;
+            color: #fecaca;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 30px;
+        }
+
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .password-box {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .password-box h2 {
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 16px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-box">
+            <h2>NOD Lead Dashboard</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Enter password to access</p>
+            <input type="password" id="password-input" placeholder="Password" onkeypress="if(event.key==='Enter')checkPassword()">
+            <button class="btn btn-primary" onclick="checkPassword()" style="width: 100%;">Access Dashboard</button>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <header class="header">
+            <div>
+                <h1>NOD Lead Dashboard</h1>
+                <p class="subtitle">My Foreclosure Solution - Lead Tracking System</p>
+            </div>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="total-leads">-</div>
+                    <div class="stat-label">Total Leads</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="new-leads">-</div>
+                    <div class="stat-label">New</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="contacted-leads">-</div>
+                    <div class="stat-label">Contacted</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="urgent-leads">-</div>
+                    <div class="stat-label">Urgent</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search by address, owner name, or city..." oninput="filterTable()">
+            </div>
+
+            <div class="filter-group">
+                <label>County:</label>
+                <select id="filter-county" onchange="filterTable()">
+                    <option value="">All Counties</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="Riverside">Riverside</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Status:</label>
+                <select id="filter-status" onchange="filterTable()">
+                    <option value="">All Statuses</option>
+                    <option value="New">New</option>
+                    <option value="Email Sent">Email Sent</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Follow-up Sent">Follow-up Sent</option>
+                    <option value="Consultation Scheduled">Scheduled</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="loadData()">Refresh Data</button>
+            <button class="btn btn-secondary" onclick="exportCSV()">Export CSV</button>
+        </div>
+
+        <div class="table-container">
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 15px;">Loading leads...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <table id="leads-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Date Found</th>
+                        <th onclick="sortTable(1)">Owner</th>
+                        <th onclick="sortTable(2)">Address</th>
+                        <th onclick="sortTable(3)">City</th>
+                        <th onclick="sortTable(4)">County</th>
+                        <th onclick="sortTable(5)">Value</th>
+                        <th onclick="sortTable(6)">Phone</th>
+                        <th onclick="sortTable(7)">Status</th>
+                        <th onclick="sortTable(8)">Days Since NOD</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No leads found</h3>
+                <p>Run the daily collection script to populate leads.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const SHEET_ID = '1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw';
+        const API_KEY = ''; // Add your Google Sheets API key here for read-only access
+        // Password is stored as hash - set your own password by changing this hash
+        // To generate: console.log(btoa('yourpassword'))
+        const PASSWORD_HASH = 'Zm9yZWNsb3N1cmUyMDI0'; // Base64 encoded
+
+        let allData = [];
+        let sortColumn = 0;
+        let sortDirection = 1;
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            // Compare base64 encoded input to stored hash
+            if (btoa(input) === PASSWORD_HASH) {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                loadData();
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        async function loadData() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('leads-table').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'none';
+
+            try {
+                // If API key is set, use Google Sheets API
+                if (API_KEY) {
+                    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1!A:Q?key=${API_KEY}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.values && data.values.length > 1) {
+                        processData(data.values);
+                    } else {
+                        showEmpty();
+                    }
+                } else {
+                    // Demo mode with sample data
+                    loadDemoData();
+                }
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Error loading data: ' + error.message;
+            }
+        }
+
+        function loadDemoData() {
+            // Demo mode - shows message to configure API key
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'block';
+            document.getElementById('empty-state').innerHTML = `
+                <h3>API Key Required</h3>
+                <p>To view real data, add your Google Sheets API key to the API_KEY constant.</p>
+                <p>Get an API key from: <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a></p>
+                <p style="margin-top: 1rem;"><a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit" target="_blank" class="btn-primary">Open Google Sheet Directly</a></p>
+            `;
+        }
+
+        function processData(values) {
+            const headers = values[0];
+            allData = values.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((header, i) => {
+                    obj[header] = row[i] || '';
+                });
+                return obj;
+            });
+
+            updateStats();
+            renderTable();
+
+            document.getElementById('loading').style.display = 'none';
+
+            if (allData.length === 0) {
+                showEmpty();
+            } else {
+                document.getElementById('leads-table').style.display = 'table';
+            }
+        }
+
+        function showEmpty() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'block';
+        }
+
+        function updateStats() {
+            document.getElementById('total-leads').textContent = allData.length;
+            document.getElementById('new-leads').textContent = allData.filter(d => d['Status'] === 'New').length;
+            document.getElementById('contacted-leads').textContent = allData.filter(d => d['Status'] === 'Contacted').length;
+
+            // Urgent = auction within 30 days
+            const today = new Date();
+            const urgent = allData.filter(d => {
+                if (!d['Auction Date']) return false;
+                const auction = new Date(d['Auction Date']);
+                const days = Math.ceil((auction - today) / (1000 * 60 * 60 * 24));
+                return days > 0 && days <= 30;
+            }).length;
+            document.getElementById('urgent-leads').textContent = urgent;
+        }
+
+        function filterTable() {
+            renderTable();
+        }
+
+        function renderTable() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const countyFilter = document.getElementById('filter-county').value;
+            const statusFilter = document.getElementById('filter-status').value;
+
+            let filtered = allData.filter(row => {
+                const matchSearch = !search ||
+                    (row['Property Address'] || '').toLowerCase().includes(search) ||
+                    (row['Owner Name'] || '').toLowerCase().includes(search) ||
+                    (row['City'] || '').toLowerCase().includes(search);
+
+                const matchCounty = !countyFilter || row['County'] === countyFilter;
+                const matchStatus = !statusFilter || row['Status'] === statusFilter;
+
+                return matchSearch && matchCounty && matchStatus;
+            });
+
+            // Sort
+            filtered.sort((a, b) => {
+                const aVal = Object.values(a)[sortColumn] || '';
+                const bVal = Object.values(b)[sortColumn] || '';
+                return aVal.localeCompare(bVal) * sortDirection;
+            });
+
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = filtered.map(row => {
+                const statusClass = getStatusClass(row['Status']);
+                const countyClass = row['County'] === 'Los Angeles' ? 'county-la' : 'county-riverside';
+
+                // Calculate days since NOD
+                let daysSinceNOD = '';
+                if (row['Recording Date']) {
+                    const recDate = new Date(row['Recording Date']);
+                    const today = new Date();
+                    daysSinceNOD = Math.ceil((today - recDate) / (1000 * 60 * 60 * 24));
+                }
+
+                // Format phone as clickable link
+                const phoneDisplay = row['Phone']
+                    ? `<a href="tel:${row['Phone']}" class="phone-link">${row['Phone']}</a>`
+                    : '-';
+
+                return `
+                    <tr>
+                        <td>${row['Date Found'] || '-'}</td>
+                        <td>${row['Owner Name'] || '-'}</td>
+                        <td class="address">${row['Property Address'] || '-'}</td>
+                        <td>${row['City'] || '-'}</td>
+                        <td class="${countyClass}">${row['County'] || '-'}</td>
+                        <td>${row['Estimated Value'] || '-'}</td>
+                        <td>${phoneDisplay}</td>
+                        <td><span class="status-badge ${statusClass}">${row['Status'] || 'New'}</span></td>
+                        <td>${daysSinceNOD ? daysSinceNOD + ' days' : '-'}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function getStatusClass(status) {
+            switch(status) {
+                case 'New': return 'status-new';
+                case 'Contacted': return 'status-contacted';
+                case 'Email Sent': return 'status-email-sent';
+                case 'Follow-up Sent': return 'status-followup';
+                default: return 'status-new';
+            }
+        }
+
+        function sortTable(column) {
+            if (sortColumn === column) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = column;
+                sortDirection = 1;
+            }
+            renderTable();
+        }
+
+        function exportCSV() {
+            const headers = ['Date Found', 'Owner Name', 'Phone', 'Email', 'Property Address', 'City', 'County', 'Estimated Value', 'Status'];
+            const csv = [headers.join(',')];
+
+            allData.forEach(row => {
+                const values = headers.map(h => {
+                    const val = row[h] || '';
+                    return `"${val.replace(/"/g, '""')}"`;
+                });
+                csv.push(values.join(','));
+            });
+
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nod-leads-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+    </script>
+</body>
+</html>

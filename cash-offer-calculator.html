@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Cash Offer Calculator | My Foreclosure Solution</title>
+    <meta name="description" content="Calculate your instant cash offer for foreclosure. Get an estimated cash offer for your California home in 60 seconds. No obligation, completely free.">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free Cash Offer Calculator | My Foreclosure Solution">
+    <meta property="og:description" content="Calculate your instant cash offer for foreclosure. Get an estimated cash offer for your California home in 60 seconds.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myforeclosuresolution.com/cash-offer-calculator.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZC3FHFTPN2');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">My Foreclosure Solution</a></h1>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="index.html#about">About Us</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Hero Section -->
+    <section class="calculator-hero">
+        <div class="container">
+            <div class="calculator-hero-content">
+                <h1>🏠 Cash Offer Request Form</h1>
+                <p class="calculator-hero-description">
+                    Tell us about your property and what you'd like to sell for. 
+                    We'll respond within 2 hours with our best cash offer. Completely confidential.
+                </p>
+                <div class="calculator-benefits">
+                    <div class="calc-benefit">✅ Quick property details form</div>
+                    <div class="calc-benefit">✅ Tell us your desired price</div>
+                    <div class="calc-benefit">✅ Get our response in 2 hours</div>
+                    <div class="calc-benefit">✅ 100% confidential and no obligation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Tool -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-container">
+                <div class="calculator-steps">
+                    <div class="step-indicator">
+                        <div class="step active" id="step-1-indicator">1</div>
+                        <div class="step" id="step-2-indicator">2</div>
+                        <div class="step" id="step-3-indicator">3</div>
+                        <div class="step" id="step-4-indicator">4</div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Property Info -->
+                <div class="calculator-step active" id="step-1">
+                    <h2>Step 1: Tell us about your property</h2>
+                    <div class="calc-form-grid">
+                        <div class="calc-form-group">
+                            <label for="property-address">Property Address</label>
+                            <input type="text" id="property-address" placeholder="123 Main St, Los Angeles, CA" required>
+                            <small>Don't worry - this is completely confidential</small>
+                        </div>
+                        <div class="calc-form-group">
+                            <label for="property-type">Property Type</label>
+                            <select id="property-type" required>
+                                <option value="">Select property type</option>
+                                <option value="single-family">Single Family Home</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="condo">Condominium</option>
+                                <option value="multi-family">Multi-Family (2-4 units)</option>
+                                <option value="mobile-home">Mobile Home</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="calc-form-group">
+                            <label for="square-footage">Approximate Square Footage</label>
+                            <select id="square-footage" required>
+                                <option value="">Select size</option>
+                                <option value="under-1000">Under 1,000 sq ft</option>
+                                <option value="1000-1500">1,000 - 1,500 sq ft</option>
+                                <option value="1500-2000">1,500 - 2,000 sq ft</option>
+                                <option value="2000-2500">2,000 - 2,500 sq ft</option>
+                                <option value="2500-3000">2,500 - 3,000 sq ft</option>
+                                <option value="over-3000">Over 3,000 sq ft</option>
+                            </select>
+                        </div>
+                        <div class="calc-form-group">
+                            <label for="bedrooms">Bedrooms</label>
+                            <select id="bedrooms" required>
+                                <option value="">Select bedrooms</option>
+                                <option value="1">1 bedroom</option>
+                                <option value="2">2 bedrooms</option>
+                                <option value="3">3 bedrooms</option>
+                                <option value="4">4 bedrooms</option>
+                                <option value="5+">5+ bedrooms</option>
+                            </select>
+                        </div>
+                        <div class="calc-form-group">
+                            <label for="bathrooms">Bathrooms</label>
+                            <select id="bathrooms" required>
+                                <option value="">Select bathrooms</option>
+                                <option value="1">1 bathroom</option>
+                                <option value="1.5">1.5 bathrooms</option>
+                                <option value="2">2 bathrooms</option>
+                                <option value="2.5">2.5 bathrooms</option>
+                                <option value="3">3 bathrooms</option>
+                                <option value="3.5+">3.5+ bathrooms</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" onclick="nextStep(2)" class="calc-next-button">Next Step →</button>
+                </div>
+
+                <!-- Step 2: Property Condition -->
+                <div class="calculator-step" id="step-2">
+                    <h2>Step 2: What's the condition of your property?</h2>
+                    <div class="condition-options">
+                        <div class="condition-card" data-value="excellent">
+                            <div class="condition-icon">🏆</div>
+                            <h3>Excellent</h3>
+                            <p>Move-in ready, recently updated, no repairs needed</p>
+                            <div class="condition-adjustment">+10% to 15%</div>
+                        </div>
+                        <div class="condition-card" data-value="good">
+                            <div class="condition-icon">👍</div>
+                            <h3>Good</h3>
+                            <p>Well-maintained, minor cosmetic updates needed</p>
+                            <div class="condition-adjustment">0% to 5%</div>
+                        </div>
+                        <div class="condition-card" data-value="fair">
+                            <div class="condition-icon">🔧</div>
+                            <h3>Fair</h3>
+                            <p>Needs some repairs, updating, normal wear and tear</p>
+                            <div class="condition-adjustment">-10% to 15%</div>
+                        </div>
+                        <div class="condition-card" data-value="poor">
+                            <div class="condition-icon">⚠️</div>
+                            <h3>Needs Work</h3>
+                            <p>Major repairs needed, significant updating required</p>
+                            <div class="condition-adjustment">-20% to 30%</div>
+                        </div>
+                    </div>
+                    <div class="calc-nav-buttons">
+                        <button type="button" onclick="prevStep(1)" class="calc-prev-button">← Previous</button>
+                        <button type="button" onclick="nextStep(3)" class="calc-next-button" id="condition-next" disabled>Next Step →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Desired Price & Situation -->
+                <div class="calculator-step" id="step-3">
+                    <h2>Step 3: What would you like to sell for?</h2>
+                    <div class="price-input-section">
+                        <div class="price-form-group">
+                            <label for="desired-price">What would you like to sell your home for?</label>
+                            
+                            <!-- Quick Price Selection Buttons -->
+                            <div class="price-quick-select">
+                                <div class="price-ranges">
+                                    <button type="button" class="price-range-btn" data-price="200000">$200K</button>
+                                    <button type="button" class="price-range-btn" data-price="300000">$300K</button>
+                                    <button type="button" class="price-range-btn" data-price="400000">$400K</button>
+                                    <button type="button" class="price-range-btn" data-price="500000">$500K</button>
+                                    <button type="button" class="price-range-btn" data-price="600000">$600K</button>
+                                    <button type="button" class="price-range-btn" data-price="700000">$700K</button>
+                                    <button type="button" class="price-range-btn" data-price="800000">$800K</button>
+                                    <button type="button" class="price-range-btn" data-price="900000">$900K</button>
+                                    <button type="button" class="price-range-btn" data-price="1000000">$1M</button>
+                                    <button type="button" class="price-range-btn" data-price="1250000">$1.25M</button>
+                                    <button type="button" class="price-range-btn" data-price="1500000">$1.5M</button>
+                                    <button type="button" class="price-range-btn custom-btn">Custom</button>
+                                </div>
+                                <p class="quick-select-text">👆 Click a price range or enter your own below</p>
+                            </div>
+                            
+                            <input type="text" id="desired-price" placeholder="Or enter your exact amount (e.g., $450,000)" required>
+                            <small>This helps us prepare the most accurate offer for you</small>
+                        </div>
+                        
+                        <div class="timeline-question">
+                            <h3>How quickly do you need to sell?</h3>
+                            <div class="timeline-radios">
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="immediate">
+                                    <span class="radio-custom"></span>
+                                    Immediate (1-2 weeks) - Foreclosure scheduled
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="fast">
+                                    <span class="radio-custom"></span>
+                                    Fast (1-2 months) - Facing foreclosure
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="timeline" value="flexible">
+                                    <span class="radio-custom"></span>
+                                    Flexible (2-6 months) - Exploring options
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="situation-question">
+                        <h3>Are you currently in foreclosure?</h3>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="foreclosure-status" value="yes">
+                                <span class="radio-custom"></span>
+                                Yes, I'm in foreclosure
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="foreclosure-status" value="behind">
+                                <span class="radio-custom"></span>
+                                Behind on payments
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="foreclosure-status" value="no">
+                                <span class="radio-custom"></span>
+                                Current on payments
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-nav-buttons">
+                        <button type="button" onclick="prevStep(2)" class="calc-prev-button">← Previous</button>
+                        <button type="button" onclick="nextStep(4)" class="calc-next-button" id="timeline-next" disabled>Submit My Request →</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contact Info & Submission -->
+                <div class="calculator-step" id="step-4">
+                    <div class="request-summary" id="request-summary">
+                        <h2>📋 Your Cash Offer Request</h2>
+                        <div class="summary-details">
+                            <div class="summary-item">
+                                <span>Property Address:</span>
+                                <span id="summary-address">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Property Type:</span>
+                                <span id="summary-type">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Size:</span>
+                                <span id="summary-size">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Condition:</span>
+                                <span id="summary-condition">-</span>
+                            </div>
+                            <div class="summary-item highlight">
+                                <span>Desired Selling Price:</span>
+                                <span id="summary-price">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Timeline:</span>
+                                <span id="summary-timeline">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Foreclosure Status:</span>
+                                <span id="summary-foreclosure">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="what-happens-next">
+                            <h3>What Happens Next:</h3>
+                            <div class="next-step">✓ We'll review your property details</div>
+                            <div class="next-step">✓ We'll research comparable sales in your area</div>
+                            <div class="next-step">✓ We'll contact you within 2 hours with our best cash offer</div>
+                            <div class="next-step">✓ No obligation - you decide if our offer works for you</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lead-capture-section">
+                        <h3>Submit Your Request</h3>
+                        <p>Provide your contact information so we can get back to you with our best cash offer:</p>
+                        
+                        <form id="calculator-lead-form" class="calculator-lead-form">
+                            <div class="calc-form-grid">
+                                <div class="calc-form-group">
+                                    <label for="lead-name">Full Name *</label>
+                                    <input type="text" id="lead-name" name="name" required>
+                                </div>
+                                <div class="calc-form-group">
+                                    <label for="lead-email">Email Address *</label>
+                                    <input type="email" id="lead-email" name="email" required>
+                                </div>
+                                <div class="calc-form-group">
+                                    <label for="lead-phone">Phone Number *</label>
+                                    <input type="tel" id="lead-phone" name="phone" required>
+                                </div>
+                                <div class="calc-form-group">
+                                    <label for="best-time">Best Time to Call</label>
+                                    <select id="best-time" name="best_time">
+                                        <option value="">Select preferred time</option>
+                                        <option value="morning">Morning (8AM - 12PM)</option>
+                                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                        <option value="evening">Evening (5PM - 8PM)</option>
+                                        <option value="anytime">Anytime</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="calc-submit-button" onclick="gtag('event', 'calculator_lead_submit', {'event_category': 'lead'});">
+                                🏠 Submit My Cash Offer Request
+                            </button>
+                            <p class="calc-privacy-text">
+                                Your information is 100% secure. We'll contact you within 2 hours during business hours with our best cash offer based on your desired price.
+                            </p>
+                        </form>
+                    </div>
+                    
+                    <div class="calc-nav-buttons">
+                        <button type="button" onclick="prevStep(3)" class="calc-prev-button">← Previous</button>
+                        <button type="button" onclick="startOver()" class="calc-secondary-button">🔄 Calculate Another Property</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>My Foreclosure Solution</h3>
+                    <p>Helping homeowners since 2014</p>
+                    <p>📞 (949) 565-5285</p>
+                    <p>📧 help@myforeclosuresolution.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="index.html#how-it-works">How It Works</a>
+                    <a href="index.html#about">About Us</a>
+                    <a href="index.html#contact">Contact</a>
+                    <a href="blog/index.html">Foreclosure Help Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h4>California Resources</h4>
+                    <a href="blog/california-foreclosure-timeline.html">CA Foreclosure Timeline</a>
+                    <a href="blog/stop-foreclosure-los-angeles.html">Los Angeles Help</a>
+                    <a href="blog/california-foreclosure-laws.html">CA Foreclosure Laws</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 My Foreclosure Solution. All rights reserved.</p>
+                <p>Licensed Real Estate Professional DRE #02076038 | NMLS #2033637 | Equal Housing Opportunity</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/calculator.js"></script>
+</body>
+</html>
