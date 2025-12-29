@@ -78,6 +78,33 @@
             color: #ea580c;
         }
 
+        .nav-links .call-btn {
+            background: linear-gradient(135deg, #fb923c, #ea580c);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .nav-links .call-btn:hover {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+        }
+
+        .emergency-bar {
+            background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .emergency-bar a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 2px solid white;
+        }
+
         /* Emergency Alert */
         .emergency-alert {
             background: linear-gradient(135deg, #dc2626, #991b1b);
@@ -314,6 +341,11 @@
     </style>
 </head>
 <body>
+    <!-- Urgency Banner -->
+    <div class="emergency-bar">
+        ⚡ URGENT: If your sale is within 7 days, <a href="tel:+1-949-565-5285">call now: (949) 565-5285</a>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="header-content">
@@ -322,7 +354,7 @@
                 <a href="index.html">Home</a>
                 <a href="faq.html">FAQ</a>
                 <a href="free-guide.html">Free Guide</a>
-                <a href="tel:+1-949-565-5285">Emergency: (949) 565-5285</a>
+                <a href="tel:+1-949-565-5285" class="call-btn">Call Now</a>
             </nav>
         </div>
     </header>
