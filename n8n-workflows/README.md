@@ -149,6 +149,49 @@ High-equity leads = bigger commissions. This ensures you never miss a $20k+ deal
 
 ---
 
+### 9. Voice AI Caller (Vapi)
+**File:** `9-voice-ai-caller.json`
+
+**What it does:**
+- Runs at 9 AM and 2 PM on weekdays (optimal call times)
+- Finds leads with phone numbers
+- Makes AI voice calls via Vapi
+- Updates lead status after call
+- Notifies you of each call
+
+**Requirements:**
+- Vapi.ai account (~$0.05-0.10/min)
+- See `VAPI-SETUP.md` for full setup guide
+
+---
+
+### 10. Full Sales Pipeline
+**File:** `10-full-sales-pipeline.json`
+
+**What it does:**
+- Runs every hour
+- Manages complete email drip sequence:
+  - **Day 0:** Introduction email (new leads)
+  - **Day 2:** Follow-up email
+  - **Day 5:** Urgency email
+  - **Day 10:** Final outreach
+- Auto-updates lead status at each stage
+- Includes calendar booking links
+
+**Requirements:**
+- Google Sheets OAuth2 credentials
+- SMTP credentials
+
+**Email Sequence:**
+```
+Day 0  → Introduction + schedule call CTA
+Day 2  → "Just checking in" + phone CTA
+Day 5  → "Time is critical" + urgency
+Day 10 → "Final outreach" + door always open
+```
+
+---
+
 ## Daily Automation Schedule
 
 | Time | Automation |
@@ -157,9 +200,27 @@ High-equity leads = bigger commissions. This ensures you never miss a $20k+ deal
 | 6:00 AM | Auction countdown alert |
 | 7:00 AM | Lead scoring runs |
 | 8:00 AM | Daily pipeline report |
+| 9:00 AM | Voice AI calls batch 1 (Vapi) |
+| 2:00 PM | Voice AI calls batch 2 (Vapi) |
+| Every hour | Email drip sequence |
 | Every 15 min | New lead notifications |
-| Every 15 min | First email follow-up |
-| 48 hours | Second email follow-up |
+
+---
+
+## Complete Workflow List
+
+| # | File | Purpose | Schedule |
+|---|------|---------|----------|
+| 1 | `1-email-followup-automation.json` | First email to new leads | Every 15 min |
+| 2 | `2-daily-lead-report.json` | Pipeline summary | 8 AM |
+| 3 | `3-sms-followup-automation.json` | SMS follow-up | 6 hours |
+| 4 | `4-high-value-lead-alert.json` | Alert for $100K+ equity | On add |
+| 5 | `5-ai-lead-scorer.json` | AI scoring (optional) | On demand |
+| 6 | `6-new-lead-processor.json` | New lead notifications | 15 min |
+| 7 | `7-lead-scoring.json` | Auto-score by equity/urgency | 7 AM |
+| 8 | `8-auction-alerts.json` | Auction countdown | 6 AM |
+| 9 | `9-voice-ai-caller.json` | AI phone calls | 9 AM & 2 PM |
+| 10 | `10-full-sales-pipeline.json` | Complete email drip | Every hour |
 
 ---
 

@@ -1,0 +1,249 @@
+{
+  "name": "Voice AI Lead Caller (Vapi)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9,14 * * 1-5"
+            }
+          ]
+        }
+      },
+      "name": "Weekdays 9AM & 2PM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-800, 80],
+      "notes": "Calls leads at optimal times: 9 AM and 2 PM on weekdays"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-580, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\nconst callableLeads = [];\n\nleads.forEach(item => {\n  const lead = item.json;\n  \n  // Must have phone number\n  const phone = (lead.phone || '').replace(/[^0-9]/g, '');\n  if (phone.length < 10) return;\n  \n  // Format phone for Vapi (E.164)\n  let formattedPhone = phone;\n  if (phone.length === 10) formattedPhone = '+1' + phone;\n  else if (phone.length === 11 && phone[0] === '1') formattedPhone = '+' + phone;\n  else if (!phone.startsWith('+')) formattedPhone = '+' + phone;\n  \n  // Check status - only call New or Processing leads\n  const status = (lead.status || '').toLowerCase();\n  if (!['new', 'processing', 'email sent'].includes(status)) return;\n  \n  // Check if already called today\n  const lastCall = lead.last_call_date ? new Date(lead.last_call_date) : null;\n  const today = new Date();\n  if (lastCall && lastCall.toDateString() === today.toDateString()) return;\n  \n  // Calculate priority score if not set\n  let score = parseInt(lead.lead_score) || 0;\n  const equity = parseFloat(String(lead.equity || '0').replace(/[^0-9.-]/g, '')) || 0;\n  if (score === 0 && equity > 50000) score = 60;\n  \n  callableLeads.push({\n    json: {\n      ...lead,\n      formatted_phone: formattedPhone,\n      lead_score: score,\n      first_name: (lead.owner_name || 'there').split(' ')[0]\n    }\n  });\n});\n\n// Sort by score (highest first) and limit to 10 calls per run\ncallableLeads.sort((a, b) => b.json.lead_score - a.json.lead_score);\nreturn callableLeads.slice(0, 10);"
+      },
+      "name": "Filter Callable Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-360, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-leads",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has Callable Leads?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [-140, 80]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/call/phone",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"phoneNumberId\": \"YOUR_VAPI_PHONE_NUMBER_ID\",\n  \"assistantId\": \"YOUR_VAPI_ASSISTANT_ID\",\n  \"customer\": {\n    \"number\": \"{{ $json.formatted_phone }}\",\n    \"name\": \"{{ $json.owner_name }}\"\n  },\n  \"assistantOverrides\": {\n    \"variableValues\": {\n      \"customerName\": \"{{ $json.first_name }}\",\n      \"propertyAddress\": \"{{ $json.property_address }}\",\n      \"agentName\": \"Sarah\",\n      \"companyName\": \"My Foreclosure Solution\",\n      \"callbackNumber\": \"9495655285\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "name": "Call Lead via Vapi",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [80, 80],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Vapi API Key"
+        }
+      },
+      "notes": "Replace YOUR_VAPI_PHONE_NUMBER_ID and YOUR_VAPI_ASSISTANT_ID with your actual Vapi IDs"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first();\nconst callResponse = input.json;\nconst leadData = $('Filter Callable Leads').first().json;\n\nconst now = new Date().toISOString();\n\nreturn [{\n  json: {\n    ...leadData,\n    call_id: callResponse.id || 'unknown',\n    call_status: callResponse.status || 'initiated',\n    last_call_date: now.split('T')[0],\n    last_contact: now,\n    status: 'Call Initiated',\n    notes: (leadData.notes || '') + `\\nAI Call initiated: ${now}`\n  }\n}];"
+      },
+      "name": "Format Call Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [300, 80]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "={{ $json.status }}",
+            "last_contact": "={{ $json.last_contact }}",
+            "notes": "={{ $json.notes }}"
+          }
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "name": "Update Lead Status",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [520, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "=AI Call Initiated: {{ $json.owner_name }} - {{ $json.property_address }}",
+        "emailType": "html",
+        "message": "=<h2>AI Voice Call Initiated</h2><p><strong>Lead:</strong> {{ $json.owner_name }}</p><p><strong>Property:</strong> {{ $json.property_address }}</p><p><strong>Phone:</strong> {{ $json.formatted_phone }}</p><p><strong>Lead Score:</strong> {{ $json.lead_score }}</p><p><strong>Call ID:</strong> {{ $json.call_id }}</p><p><em>Check Vapi dashboard for call recording and transcript.</em></p><p><a href='https://dashboard.vapi.ai/calls' style='background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px;'>View in Vapi Dashboard</a></p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Notify Call Made",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [740, 80]
+    }
+  ],
+  "connections": {
+    "Weekdays 9AM & 2PM": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Filter Callable Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Callable Leads": {
+      "main": [
+        [
+          {
+            "node": "Has Callable Leads?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Callable Leads?": {
+      "main": [
+        [
+          {
+            "node": "Call Lead via Vapi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Lead via Vapi": {
+      "main": [
+        [
+          {
+            "node": "Format Call Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Call Result": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Status": {
+      "main": [
+        [
+          {
+            "node": "Notify Call Made",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

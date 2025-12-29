@@ -1,0 +1,443 @@
+{
+  "name": "Full Sales Pipeline Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "name": "Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-1000, 300]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-780, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\nconst now = new Date();\n\nconst categorized = {\n  new_leads: [],\n  need_email_2: [],\n  need_email_3: [],\n  need_email_4: [],\n  need_call_followup: [],\n  hot_leads: []\n};\n\nleads.forEach((item, index) => {\n  const lead = item.json;\n  lead.row_index = index + 2; // Account for header row\n  \n  const status = (lead.status || '').toLowerCase();\n  const emailSentDate = lead.email_sent_date ? new Date(lead.email_sent_date) : null;\n  const lastContact = lead.last_contact ? new Date(lead.last_contact) : null;\n  const daysSinceEmail = emailSentDate ? Math.floor((now - emailSentDate) / (1000 * 60 * 60 * 24)) : 999;\n  const daysSinceContact = lastContact ? Math.floor((now - lastContact) / (1000 * 60 * 60 * 24)) : 999;\n  const score = parseInt(lead.lead_score) || 0;\n  \n  // HOT leads always flagged\n  if (score >= 70) {\n    categorized.hot_leads.push({ json: { ...lead, category: 'hot' } });\n  }\n  \n  // New leads - send first email\n  if (status === 'new') {\n    categorized.new_leads.push({ json: { ...lead, category: 'new' } });\n  }\n  \n  // Email sent - check for follow-ups\n  else if (status === 'email sent' || status === 'processing') {\n    if (daysSinceEmail >= 2 && daysSinceEmail < 5) {\n      categorized.need_email_2.push({ json: { ...lead, category: 'email_2', days_since: daysSinceEmail } });\n    }\n    else if (daysSinceEmail >= 5 && daysSinceEmail < 10) {\n      categorized.need_email_3.push({ json: { ...lead, category: 'email_3', days_since: daysSinceEmail } });\n    }\n    else if (daysSinceEmail >= 10 && daysSinceEmail < 20) {\n      categorized.need_email_4.push({ json: { ...lead, category: 'email_4', days_since: daysSinceEmail } });\n    }\n  }\n  \n  // Call initiated - need follow-up\n  else if (status === 'call initiated' && daysSinceContact >= 1) {\n    categorized.need_call_followup.push({ json: { ...lead, category: 'call_followup' } });\n  }\n});\n\nreturn [{ json: categorized }];"
+      },
+      "name": "Categorize Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-560, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cats = $input.first().json;\nreturn cats.new_leads || [];"
+      },
+      "name": "Get New Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-340, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cats = $input.first().json;\nreturn cats.need_email_2 || [];"
+      },
+      "name": "Get Email 2 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-340, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cats = $input.first().json;\nreturn cats.need_email_3 || [];"
+      },
+      "name": "Get Email 3 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-340, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cats = $input.first().json;\nreturn cats.need_email_4 || [];"
+      },
+      "name": "Get Email 4 Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-340, 560]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-email",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [-120, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "={{ $json.first_name || 'Hi' }}, I Can Help Stop Your Foreclosure",
+        "emailType": "html",
+        "message": "=<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'><h2 style='color: #1f2937;'>Hi {{ $json.first_name || 'there' }},</h2><p>I noticed your property at <strong>{{ $json.property_address }}</strong> may be going through the foreclosure process.</p><p>I'm reaching out because <strong>I help California homeowners like you every day</strong>. You have more options than you might think:</p><ul><li>Negotiate with your lender to keep your home</li><li>Sell quickly to preserve your equity</li><li>Explore loan modification options</li></ul><p><strong>I offer a free, no-obligation consultation</strong> to explain your options. No judgment, just honest answers.</p><p style='margin: 30px 0;'><a href='https://calendar.app.google/ZXXVRabrMJoT5GYA9' style='background: #ea580c; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;'>Schedule Your Free Call</a></p><p>Or call me directly: <strong>(949) 565-5285</strong></p><p>Time matters in foreclosure situations. The sooner we talk, the more options you'll have.</p><p>Here to help,<br><strong>My Foreclosure Solution</strong><br>CA DRE #02076038</p></div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Email 1 - Introduction",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [100, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Quick follow-up about {{ $json.property_address }}",
+        "emailType": "html",
+        "message": "=<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'><h2 style='color: #1f2937;'>{{ $json.first_name || 'Hi' }}, just checking in</h2><p>I wanted to follow up on my previous email about your property at {{ $json.property_address }}.</p><p><strong>I know dealing with foreclosure is stressful.</strong> That's exactly why I'm here - to take some of that weight off your shoulders.</p><p>In just one phone call, I can:</p><ul><li>Review your current situation</li><li>Explain ALL your options (keep or sell)</li><li>Answer any questions you have</li></ul><p><strong>It costs nothing to talk.</strong> And you might be surprised by what options are available.</p><p style='margin: 30px 0;'><a href='tel:+19495655285' style='background: #dc2626; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;'>Call Now: (949) 565-5285</a></p><p>I'm available evenings and weekends too.</p><p>Best,<br><strong>My Foreclosure Solution</strong></p></div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Email 2 - Follow Up",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [100, 240]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Time-sensitive: Your foreclosure options",
+        "emailType": "html",
+        "message": "=<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'><h2 style='color: #dc2626;'>{{ $json.first_name || 'Hi' }}, time is critical</h2><p>I've been trying to reach you about {{ $json.property_address }}.</p><p><strong>Here's what I need you to understand:</strong> In California foreclosure, every day that passes means fewer options. I've seen homeowners lose tens of thousands of dollars in equity simply because they waited too long.</p><p style='background: #fef2f2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626;'><strong>Even if you're behind on payments, you likely still have equity.</strong> That's YOUR money - don't let the bank take it.</p><p>I can help you either:</p><ol><li>Keep your home through lender negotiation</li><li>Sell quickly and walk away with cash</li></ol><p><strong>But I can only help if we talk.</strong></p><p style='margin: 30px 0;'><a href='https://calendar.app.google/ZXXVRabrMJoT5GYA9' style='background: #dc2626; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;'>Book Emergency Consultation</a></p><p>Please call me: <strong>(949) 565-5285</strong></p><p>I'm on your side,<br><strong>My Foreclosure Solution</strong></p></div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Email 3 - Urgency",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [100, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Final outreach: {{ $json.property_address }}",
+        "emailType": "html",
+        "message": "=<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'><h2 style='color: #1f2937;'>{{ $json.first_name || 'Hi' }}, this is my last email</h2><p>I've reached out a few times about your property at {{ $json.property_address }}.</p><p>I understand - maybe you're working with someone else, or maybe now isn't the right time. That's completely okay.</p><p><strong>But if your situation changes</strong>, please know I'm still here to help. No judgment, no pressure.</p><p>Keep my number saved: <strong>(949) 565-5285</strong></p><p>Wishing you the best,<br><strong>My Foreclosure Solution</strong><br>CA DRE #02076038</p><p style='font-size: 12px; color: #6b7280; margin-top: 30px;'>P.S. - If you ever need a free consultation, my door is always open. Just reply to this email or call anytime.</p></div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Email 4 - Final",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [100, 560]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Email Sent",
+            "email_sent_date": "={{ new Date().toISOString().split('T')[0] }}",
+            "last_contact": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Update Status - Email 1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [320, 80]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Follow-up Sent",
+            "last_contact": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Update Status - Email 2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [320, 240]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Urgent Follow-up",
+            "last_contact": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Update Status - Email 3",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [320, 400]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Nurture",
+            "last_contact": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Update Status - Email 4",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [320, 560]
+    }
+  ],
+  "connections": {
+    "Every Hour": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Categorize Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Categorize Leads": {
+      "main": [
+        [
+          {
+            "node": "Get New Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Email 2 Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Email 3 Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Email 4 Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get New Leads": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Email 2 Leads": {
+      "main": [
+        [
+          {
+            "node": "Send Email 2 - Follow Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Email 3 Leads": {
+      "main": [
+        [
+          {
+            "node": "Send Email 3 - Urgency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Email 4 Leads": {
+      "main": [
+        [
+          {
+            "node": "Send Email 4 - Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Send Email 1 - Introduction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email 1 - Introduction": {
+      "main": [
+        [
+          {
+            "node": "Update Status - Email 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email 2 - Follow Up": {
+      "main": [
+        [
+          {
+            "node": "Update Status - Email 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email 3 - Urgency": {
+      "main": [
+        [
+          {
+            "node": "Update Status - Email 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email 4 - Final": {
+      "main": [
+        [
+          {
+            "node": "Update Status - Email 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
