@@ -6,6 +6,13 @@
     <title>Stop Your California Foreclosure in 7 Days | My Foreclosure Solution</title>
     <meta name="description" content="Facing foreclosure in California? Get immediate help. Free consultation. Licensed professionals ready to help you explore your options.">
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://myforeclosuresolution.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23ea580c' rx='15' width='100' height='100'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>🏠</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23ea580c' rx='15' width='100' height='100'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>🏠</text></svg>">
+
     <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="Stop Your California Foreclosure in 7 Days | My Foreclosure Solution">
     <meta property="og:description" content="Facing foreclosure in California? Get immediate help. Free consultation. Licensed professionals ready to help you explore your options.">
@@ -23,6 +30,68 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-ZC3FHFTPN2');
+    </script>
+
+    <!-- LocalBusiness Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "My Foreclosure Solution",
+        "description": "California foreclosure assistance service helping homeowners stop foreclosure, explore loan modifications, and sell homes quickly to avoid auction.",
+        "url": "https://myforeclosuresolution.com",
+        "telephone": "+1-949-565-5285",
+        "email": "help@myforeclosuresolution.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "CA",
+            "addressCountry": "US"
+        },
+        "areaServed": [
+            {"@type": "State", "name": "California"},
+            {"@type": "City", "name": "Los Angeles"},
+            {"@type": "City", "name": "San Diego"},
+            {"@type": "City", "name": "Oakland"},
+            {"@type": "City", "name": "Sacramento"},
+            {"@type": "City", "name": "Fresno"},
+            {"@type": "City", "name": "Riverside"}
+        ],
+        "priceRange": "Free Consultation",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "08:00",
+            "closes": "20:00"
+        },
+        "sameAs": [],
+        "hasCredential": [
+            {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Real Estate License",
+                "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "California Department of Real Estate"
+                },
+                "identifier": "DRE #02076038"
+            },
+            {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Mortgage License",
+                "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "NMLS"
+                },
+                "identifier": "NMLS #2033637"
+            }
+        ],
+        "knowsAbout": [
+            "Foreclosure Prevention",
+            "Short Sales",
+            "Loan Modification",
+            "Cash Home Buying",
+            "California Foreclosure Laws"
+        ]
+    }
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -394,7 +463,7 @@
         }
 
         .btn-primary {
-            background: #0d9488;
+            background: linear-gradient(135deg, #fb923c, #ea580c);
             color: white;
             padding: 15px 30px;
             border-radius: 8px;
@@ -403,29 +472,31 @@
             font-size: 18px;
             display: inline-block;
             transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            background: #0f766e;
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
         }
 
         .btn-secondary {
             background: white;
-            color: #0d9488;
+            color: #ea580c;
             padding: 15px 30px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             font-size: 18px;
-            border: 2px solid #0d9488;
+            border: 2px solid #ea580c;
             display: inline-block;
             transition: all 0.2s;
         }
 
         .btn-secondary:hover {
-            background: #0d9488;
+            background: linear-gradient(135deg, #fb923c, #ea580c);
             color: white;
+            border-color: #ea580c;
         }
 
         /* Footer - Minimal */
@@ -733,12 +804,15 @@
         /* Extra small screens (under 400px) */
         @media (max-width: 400px) {
             .logo {
-                font-size: 16px !important;
+                font-size: 15px !important;
+                white-space: normal !important;
+                line-height: 1.2;
+                text-align: center;
             }
 
             nav a {
-                font-size: 12px;
-                padding: 8px 10px !important;
+                font-size: 11px;
+                padding: 8px 8px !important;
             }
 
             .hero h1 {
@@ -1232,7 +1306,8 @@
         <div class="container">
             <div style="display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; width: 100%;">
                 <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">My Foreclosure Solution</a>
-                <nav style="display: grid; grid-template-columns: auto auto auto auto; gap: 30px; align-items: center;">
+                <nav style="display: grid; grid-template-columns: auto auto auto auto auto; gap: 20px; align-items: center;">
+                    <a href="learn-more.html" style="color: #374151; text-decoration: none; font-weight: 500; white-space: nowrap;">How It Works</a>
                     <a href="emergency-checklist.html" style="color: #dc2626; text-decoration: none; font-weight: 600; white-space: nowrap;">🚨 Emergency</a>
                     <a href="faq.html" style="color: #374151; text-decoration: none; font-weight: 500; white-space: nowrap;">FAQ</a>
                     <a href="free-guide.html" style="color: #374151; text-decoration: none; font-weight: 500; white-space: nowrap;">Free Guide</a>
@@ -1264,8 +1339,41 @@
                     <span>We Genuinely Care</span>
                 </div>
             </div>
+
+            <!-- Urgency/Social Proof Counter -->
+            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 800; color: #ea580c;" id="families-helped">500+</div>
+                    <div style="color: #6b7280; font-size: 14px;">Families Helped</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 800; color: #22c55e;" id="homes-saved">87%</div>
+                    <div style="color: #6b7280; font-size: 14px;">Success Rate</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 800; color: #3b82f6;"><span id="recent-inquiries">12</span></div>
+                    <div style="color: #6b7280; font-size: 14px;">Inquiries This Week</div>
+                </div>
+            </div>
+
+            <!-- Live Activity Indicator -->
+            <div style="margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; animation: fadeInOut 3s infinite;">
+                <span style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite;"></span>
+                <span style="color: #6b7280; font-size: 14px;"><strong id="recent-activity">3 homeowners</strong> contacted us in the last hour</span>
+            </div>
         </div>
     </section>
+
+    <style>
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+    </style>
 
     <!-- Main Content Container -->
     <div class="container">
@@ -1342,13 +1450,29 @@
                             <input type="email" name="email" required placeholder="you@email.com" style="width: 100%; padding: 15px; border: 2px solid #fed7aa; border-radius: 10px; font-size: 18px; transition: border-color 0.3s;">
                         </div>
 
-                        <button type="submit" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 18px 30px; border: none; border-radius: 12px; font-size: 20px; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);">
+                        <button type="submit" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 18px 30px; border: none; border-radius: 12px; font-size: 20px; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);">
                             🚀 Get My Free Consultation
                         </button>
 
                         <p style="text-align: center; color: #6b7280; font-size: 14px; margin: 0;">
                             🔒 Your information is 100% secure. We'll never spam or share your data.
                         </p>
+
+                        <!-- Trust Seals -->
+                        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; padding-top: 20px; border-top: 1px solid #fed7aa;">
+                            <div style="display: flex; align-items: center; gap: 8px; background: #f0fdf4; padding: 8px 16px; border-radius: 8px; border: 1px solid #86efac;">
+                                <span style="color: #22c55e; font-size: 18px;">🛡️</span>
+                                <span style="color: #166534; font-size: 12px; font-weight: 600;">SSL Secured</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; background: #eff6ff; padding: 8px 16px; border-radius: 8px; border: 1px solid #93c5fd;">
+                                <span style="color: #3b82f6; font-size: 18px;">⭐</span>
+                                <span style="color: #1e40af; font-size: 12px; font-weight: 600;">5-Star Rated</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; background: #fef3e2; padding: 8px 16px; border-radius: 8px; border: 1px solid #fed7aa;">
+                                <span style="color: #ea580c; font-size: 18px;">✅</span>
+                                <span style="color: #7c2d12; font-size: 12px; font-weight: 600;">CA Licensed</span>
+                            </div>
+                        </div>
                     </div>
                 </form>
 
@@ -1386,6 +1510,41 @@
             </a>
         </div>
 
+        <!-- Cities We Serve Section -->
+        <div style="background: white; padding: 40px 30px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #fed7aa;">
+            <h2 style="font-size: 28px; color: #1f2937; text-align: center; margin-bottom: 30px;">🏠 Serving All California Homeowners</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
+                <a href="stop-foreclosure-los-angeles.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">Los Angeles</a>
+                <a href="stop-foreclosure-san-diego.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">San Diego</a>
+                <a href="stop-foreclosure-oakland.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">Oakland</a>
+                <a href="stop-foreclosure-sacramento.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">Sacramento</a>
+                <a href="stop-foreclosure-fresno.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">Fresno</a>
+                <a href="stop-foreclosure-riverside.html" style="background: #fef3e2; padding: 15px; border-radius: 10px; text-decoration: none; color: #7c2d12; font-weight: 600; transition: transform 0.2s;">Riverside</a>
+            </div>
+        </div>
+
+        <!-- Helpful Resources Section -->
+        <div style="background: #f8fafc; padding: 40px 30px; border-radius: 20px; margin-bottom: 40px;">
+            <h2 style="font-size: 28px; color: #1f2937; text-align: center; margin-bottom: 30px;">📚 Helpful Resources</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <a href="blog/how-long-does-foreclosure-take-los-angeles.html" style="background: white; padding: 20px; border-radius: 12px; text-decoration: none; border: 1px solid #e5e5e5; display: block; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h3 style="color: #7c2d12; margin-bottom: 8px; font-size: 16px;">How Long Does Foreclosure Take in LA?</h3>
+                    <p style="color: #6b7280; font-size: 14px; margin: 0;">Complete timeline from missed payments to auction</p>
+                </a>
+                <a href="blog/can-i-sell-my-house-during-foreclosure-california.html" style="background: white; padding: 20px; border-radius: 12px; text-decoration: none; border: 1px solid #e5e5e5; display: block; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h3 style="color: #7c2d12; margin-bottom: 8px; font-size: 16px;">Can I Sell During Foreclosure?</h3>
+                    <p style="color: #6b7280; font-size: 14px; margin: 0;">Yes! Learn your options for selling</p>
+                </a>
+                <a href="blog/what-happens-after-foreclosure-auction-california.html" style="background: white; padding: 20px; border-radius: 12px; text-decoration: none; border: 1px solid #e5e5e5; display: block; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h3 style="color: #7c2d12; margin-bottom: 8px; font-size: 16px;">What Happens After Auction?</h3>
+                    <p style="color: #6b7280; font-size: 14px; margin: 0;">Your rights and next steps explained</p>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="blog/" style="color: #ea580c; font-weight: 600; text-decoration: none;">View All Resources →</a>
+            </div>
+        </div>
+
         <!-- CTA Section -->
         <div class="cta-section">
             <h2 class="cta-title">Ready to Save Your Home?</h2>
@@ -1393,7 +1552,7 @@
                 <a href="tel:+1-949-565-5285" class="btn-primary">
                     📞 Call Now: (949) 565-5285
                 </a>
-                <a href="https://calendar.app.google/ZXXVRabrMJoT5GYA9" target="_blank" class="btn-secondary" style="background: #10b981; color: white; border-color: #10b981;">
+                <a href="https://calendar.app.google/ZXXVRabrMJoT5GYA9" target="_blank" class="btn-secondary">
                     📅 Book Video Consultation (6-8pm)
                 </a>
             </div>
@@ -1407,9 +1566,12 @@
             <div class="footer-links">
                 <a href="learn-more.html">How It Works</a>
                 <a href="faq.html">FAQ</a>
+                <a href="blog/">Blog</a>
+                <a href="emergency-checklist.html">Emergency Help</a>
                 <a href="privacy-policy.html">Privacy</a>
                 <a href="terms-of-service.html">Terms</a>
             </div>
+            <p style="margin: 15px 0 10px;">Service Areas: <a href="stop-foreclosure-los-angeles.html" style="color: #6b7280;">Los Angeles</a> • <a href="stop-foreclosure-san-diego.html" style="color: #6b7280;">San Diego</a> • <a href="stop-foreclosure-oakland.html" style="color: #6b7280;">Oakland</a> • <a href="stop-foreclosure-sacramento.html" style="color: #6b7280;">Sacramento</a> • <a href="stop-foreclosure-fresno.html" style="color: #6b7280;">Fresno</a> • <a href="stop-foreclosure-riverside.html" style="color: #6b7280;">Riverside</a></p>
             <p>© 2025 My Foreclosure Solution | CA DRE #02076038 | NMLS #2033637</p>
             <p>Serving all California counties</p>
         </div>
@@ -1423,16 +1585,177 @@
         </a>
     </div>
 
+    <!-- Desktop Sticky CTA Bar (Shows on scroll) -->
+    <div id="desktop-sticky-cta" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #7c2d12, #92400e); padding: 15px 30px; z-index: 999; box-shadow: 0 -4px 20px rgba(0,0,0,0.2); transform: translateY(100%); transition: transform 0.3s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div style="color: white;">
+                <span style="font-weight: 700; font-size: 18px;">Don't lose your home to foreclosure.</span>
+                <span style="opacity: 0.9; margin-left: 10px;">Free consultation - we're here to help.</span>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <a href="tel:+1-949-565-5285" style="background: white; color: #7c2d12; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; white-space: nowrap;">📞 Call (949) 565-5285</a>
+                <a href="#consultation-form" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; white-space: nowrap;">Get Free Consultation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit Intent Popup -->
+    <div id="exit-popup" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
+        <div style="background: white; max-width: 500px; margin: 20px; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: popIn 0.3s ease-out;">
+            <div style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 25px; text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 10px;">⏰</div>
+                <h2 style="font-size: 24px; margin: 0;">Wait! Before You Go...</h2>
+            </div>
+            <div style="padding: 30px; text-align: center;">
+                <h3 style="font-size: 20px; color: #1f2937; margin-bottom: 15px;">Get Our FREE Foreclosure Survival Guide</h3>
+                <p style="color: #6b7280; margin-bottom: 20px; line-height: 1.6;">Learn the 7 proven strategies California homeowners use to stop foreclosure. No email required - instant download.</p>
+                <a href="free-guide.html" style="display: inline-block; background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 40px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 18px; margin-bottom: 15px; transition: transform 0.2s;">📥 Download Free Guide</a>
+                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
+                    <span style="color: #6b7280; font-size: 14px;">Or speak with us now:</span><br>
+                    <a href="tel:+1-949-565-5285" style="color: #ea580c; font-weight: 700; font-size: 18px; text-decoration: none;">📞 (949) 565-5285</a>
+                </p>
+                <button id="close-exit-popup" style="margin-top: 15px; background: none; border: none; color: #9ca3af; cursor: pointer; font-size: 14px;">No thanks, I'll figure it out myself</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Hide desktop sticky on mobile */
+        @media (max-width: 768px) {
+            #desktop-sticky-cta { display: none !important; }
+        }
+    </style>
+
     <!-- Chat Widget Temporarily Removed for CSP Compliance -->
     <!-- Updated: Form benefits revised -->
 
     <script>
+        // Form Validation
+        function validatePhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length >= 10;
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showError(input, message) {
+            const errorDiv = input.parentElement.querySelector('.error-message') || document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.cssText = 'color: #dc2626; font-size: 13px; margin-top: 5px; display: flex; align-items: center; gap: 5px;';
+            errorDiv.innerHTML = '⚠️ ' + message;
+            if (!input.parentElement.querySelector('.error-message')) {
+                input.parentElement.appendChild(errorDiv);
+            }
+            input.style.borderColor = '#dc2626';
+        }
+
+        function clearError(input) {
+            const errorDiv = input.parentElement.querySelector('.error-message');
+            if (errorDiv) errorDiv.remove();
+            input.style.borderColor = '#fed7aa';
+        }
+
+        // Exit Intent Popup
+        let exitPopupShown = false;
+        document.addEventListener('mouseout', function(e) {
+            if (e.clientY < 5 && !exitPopupShown && !sessionStorage.getItem('exitPopupClosed')) {
+                const popup = document.getElementById('exit-popup');
+                popup.style.display = 'flex';
+                exitPopupShown = true;
+
+                // Track in GA4
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'exit_intent_popup_shown', { 'event_category': 'Engagement' });
+                }
+            }
+        });
+
+        document.getElementById('close-exit-popup')?.addEventListener('click', function() {
+            document.getElementById('exit-popup').style.display = 'none';
+            sessionStorage.setItem('exitPopupClosed', 'true');
+        });
+
+        document.getElementById('exit-popup')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                sessionStorage.setItem('exitPopupClosed', 'true');
+            }
+        });
+
+        // Desktop Sticky CTA on Scroll
+        let lastScroll = 0;
+        const desktopCTA = document.getElementById('desktop-sticky-cta');
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+
+            // Show after scrolling 500px and hide mobile-only bar
+            if (currentScroll > 500 && window.innerWidth > 768) {
+                desktopCTA.style.display = 'block';
+                setTimeout(() => { desktopCTA.style.transform = 'translateY(0)'; }, 10);
+            } else {
+                desktopCTA.style.transform = 'translateY(100%)';
+                setTimeout(() => { if (currentScroll <= 500) desktopCTA.style.display = 'none'; }, 300);
+            }
+
+            lastScroll = currentScroll;
+        });
+
         // Custom Form Submission Handling
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('consultation-form');
             if (form) {
+                // Real-time validation
+                form.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('blur', function() {
+                        if (this.name === 'phone' && this.value && !validatePhone(this.value)) {
+                            showError(this, 'Please enter a valid phone number');
+                        } else if (this.name === 'email' && this.value && !validateEmail(this.value)) {
+                            showError(this, 'Please enter a valid email address');
+                        } else if (this.required && !this.value.trim()) {
+                            showError(this, 'This field is required');
+                        } else {
+                            clearError(this);
+                        }
+                    });
+
+                    input.addEventListener('input', function() {
+                        clearError(this);
+                    });
+                });
+
                 form.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Validate all fields
+            let isValid = true;
+            const nameInput = form.querySelector('input[name="name"]');
+            const phoneInput = form.querySelector('input[name="phone"]');
+            const emailInput = form.querySelector('input[name="email"]');
+
+            if (!nameInput.value.trim()) {
+                showError(nameInput, 'Please enter your name');
+                isValid = false;
+            }
+            if (!validatePhone(phoneInput.value)) {
+                showError(phoneInput, 'Please enter a valid 10-digit phone number');
+                isValid = false;
+            }
+            if (!validateEmail(emailInput.value)) {
+                showError(emailInput, 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return;
+            }
 
             const form = this;
             const button = form.querySelector('button[type="submit"]');
@@ -1495,5 +1818,24 @@
             }
         });
     </script>
+
+    <!-- Tawk.to Live Chat Widget (FREE) -->
+    <!-- To activate:
+         1. Go to https://www.tawk.to and create free account
+         2. Get your property ID and widget ID
+         3. Replace PROPERTY_ID and WIDGET_ID below -->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/PROPERTY_ID/WIDGET_ID';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

@@ -1,0 +1,25 @@
+SMS REVIEW REQUEST TEMPLATES
+=============================
+
+TEMPLATE 1: Standard Review Request (Send 3-5 days after consultation)
+-----------------------------------------------------------------------
+Hi {{FIRST_NAME}}, this is {{YOUR_NAME}} from My Foreclosure Solution. Thank you for trusting us with your foreclosure situation. Would you mind leaving a quick Google review? It helps other CA homeowners find help. Here's the link: {{GOOGLE_REVIEW_LINK}} - Thank you!
+
+
+TEMPLATE 2: Short Version
+-------------------------
+Hi {{FIRST_NAME}}! Thanks for working with My Foreclosure Solution. If you have 60 seconds, a Google review would really help us: {{GOOGLE_REVIEW_LINK}} - Thank you!
+
+
+TEMPLATE 3: After Successful Outcome
+------------------------------------
+Hi {{FIRST_NAME}}, so glad we could help with your foreclosure situation! If you'd share your experience on Google, it would mean the world to us: {{GOOGLE_REVIEW_LINK}} - Thank you for trusting us!
+
+
+USAGE NOTES:
+- Replace {{FIRST_NAME}} with client's name
+- Replace {{YOUR_NAME}} with your name
+- Replace {{GOOGLE_REVIEW_LINK}} with your Google Business review link
+- Only send to clients who had a positive experience
+- Include "Reply STOP to opt out" for compliance
+- Best times to send: Weekday mornings or early afternoons

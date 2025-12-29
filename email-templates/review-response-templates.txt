@@ -1,0 +1,40 @@
+GOOGLE REVIEW RESPONSE TEMPLATES
+==================================
+
+POSITIVE REVIEW RESPONSE (5 stars)
+----------------------------------
+Thank you so much, {{REVIEWER_NAME}}! We're honored that you trusted us during such a challenging time. Helping California homeowners navigate foreclosure is our passion, and reviews like yours remind us why we do this work. We wish you all the best in your new chapter!
+
+- The My Foreclosure Solution Team
+
+
+POSITIVE REVIEW RESPONSE - SHORT
+--------------------------------
+Thank you, {{REVIEWER_NAME}}! We're so glad we could help. Wishing you all the best!
+
+
+POSITIVE REVIEW RESPONSE - WITH REFERRAL
+----------------------------------------
+Thank you for the kind words, {{REVIEWER_NAME}}! It was our pleasure to help you through this difficult time. If you know anyone else facing foreclosure in California, we're always here to help. Wishing you continued success!
+
+
+NEUTRAL REVIEW RESPONSE (3-4 stars)
+-----------------------------------
+Thank you for your feedback, {{REVIEWER_NAME}}. We appreciate you taking the time to share your experience. We're always looking to improve our service to California homeowners. If there's anything more we can do, please don't hesitate to reach out to us at (949) 565-5285 or help@myforeclosuresolution.com.
+
+
+NEGATIVE REVIEW RESPONSE (1-2 stars)
+------------------------------------
+We're sorry to hear about your experience, {{REVIEWER_NAME}}. This isn't the level of service we strive to provide. We'd like to understand what went wrong and make it right. Please contact us directly at (949) 565-5285 or help@myforeclosuresolution.com so we can discuss your concerns.
+
+
+RESPONSE BEST PRACTICES:
+========================
+1. Respond within 24-48 hours
+2. Always be professional and empathetic
+3. Thank them for their feedback (even if negative)
+4. Don't get defensive with negative reviews
+5. Take negative discussions offline when possible
+6. Personalize responses - don't copy/paste exactly
+7. Include your business name for SEO
+8. Keep responses concise but genuine

@@ -7,6 +7,10 @@ Allow: /cash-offer-calculator.html
 Allow: /foreclosure-faq.html
 Allow: /stop-foreclosure-los-angeles.html
 Allow: /stop-foreclosure-san-diego.html
+Allow: /stop-foreclosure-oakland.html
+Allow: /stop-foreclosure-sacramento.html
+Allow: /stop-foreclosure-fresno.html
+Allow: /stop-foreclosure-riverside.html
 Allow: /blog/
 Allow: /privacy-policy.html
 Allow: /terms-of-service.html
