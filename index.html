@@ -600,29 +600,96 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 15px 20px;
+                padding: 15px 16px;
             }
+
+            .emergency-bar {
+                font-size: 13px;
+                padding: 12px 16px;
+            }
+
             header .container > div {
                 grid-template-columns: 1fr !important;
-                gap: 15px;
+                gap: 12px;
                 text-align: center;
             }
 
             .logo {
-                font-size: 20px !important;
+                font-size: 18px !important;
                 white-space: nowrap;
                 overflow: visible;
             }
 
             nav {
-                grid-template-columns: 1fr 1fr !important;
-                gap: 15px;
-                justify-items: center;
+                display: flex !important;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
 
             nav a {
+                font-size: 13px;
+                padding: 10px 14px !important;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            /* Testimonials mobile */
+            .testimonials-section {
+                padding: 30px 16px;
+            }
+
+            .testimonials-title {
+                font-size: 22px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .testimonial-card {
+                padding: 20px;
+            }
+
+            .testimonial-text {
                 font-size: 14px;
-                padding: 8px 16px !important;
+            }
+
+            /* Form mobile */
+            #consultation-form {
+                padding: 20px !important;
+            }
+
+            #consultation-form input {
+                font-size: 16px !important;
+                padding: 14px !important;
+            }
+
+            #consultation-form button {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+
+            /* CTA section mobile */
+            .cta-section {
+                padding: 30px 16px;
+            }
+
+            .cta-title {
+                font-size: 22px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+                padding: 16px 20px !important;
             }
 
             #lead-magnet-form > div {
@@ -736,6 +803,47 @@
             /* Add padding to body to account for sticky bar */
             body {
                 padding-bottom: 70px;
+            }
+        }
+
+        /* Extra small screens (under 400px) */
+        @media (max-width: 400px) {
+            .logo {
+                font-size: 16px !important;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 8px 10px !important;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero .subheadline {
+                font-size: 16px;
+            }
+
+            .form-section {
+                padding: 30px 12px;
+            }
+
+            .form-title {
+                font-size: 22px;
+            }
+
+            .emergency-bar {
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+
+            .testimonials-title {
+                font-size: 20px;
+            }
+
+            .testimonial-card {
+                padding: 16px;
             }
         }
 
