@@ -1,0 +1,177 @@
+{
+  "name": "Lead Scoring Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every Day at 7 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-800, 80]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-580, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\nconst scoredLeads = [];\n\nleads.forEach(item => {\n  const lead = item.json;\n  let score = 0;\n  let reasons = [];\n  \n  // Parse values\n  const equity = parseFloat(String(lead.equity || '0').replace(/[^0-9.-]/g, '')) || 0;\n  const value = parseFloat(String(lead.estimated_value || '0').replace(/[^0-9.-]/g, '')) || 0;\n  const auctionDate = lead.auction_date ? new Date(lead.auction_date) : null;\n  const daysToAuction = auctionDate ? Math.ceil((auctionDate - new Date()) / (1000 * 60 * 60 * 24)) : 999;\n  \n  // EQUITY SCORING (0-40 points)\n  if (equity >= 100000) {\n    score += 40;\n    reasons.push('High equity ($100K+)');\n  } else if (equity >= 50000) {\n    score += 30;\n    reasons.push('Good equity ($50K+)');\n  } else if (equity >= 25000) {\n    score += 20;\n    reasons.push('Moderate equity ($25K+)');\n  } else if (equity > 0) {\n    score += 10;\n    reasons.push('Some equity');\n  }\n  \n  // URGENCY SCORING (0-30 points)\n  if (daysToAuction <= 7) {\n    score += 30;\n    reasons.push('URGENT: Auction in 7 days or less!');\n  } else if (daysToAuction <= 14) {\n    score += 25;\n    reasons.push('Auction in 2 weeks');\n  } else if (daysToAuction <= 30) {\n    score += 20;\n    reasons.push('Auction in 1 month');\n  } else if (daysToAuction <= 60) {\n    score += 10;\n    reasons.push('Auction in 2 months');\n  }\n  \n  // PROPERTY VALUE SCORING (0-20 points)\n  if (value >= 1000000) {\n    score += 20;\n    reasons.push('High-value property ($1M+)');\n  } else if (value >= 500000) {\n    score += 15;\n    reasons.push('Mid-value property ($500K+)');\n  } else if (value >= 300000) {\n    score += 10;\n    reasons.push('Standard value property');\n  }\n  \n  // CONTACT INFO (0-10 points)\n  if (lead.phone && lead.phone.length >= 10) {\n    score += 5;\n    reasons.push('Has phone number');\n  }\n  if (lead.email && lead.email.includes('@')) {\n    score += 5;\n    reasons.push('Has email');\n  }\n  \n  // Determine priority\n  let priority = 'Low';\n  if (score >= 70) priority = 'HOT';\n  else if (score >= 50) priority = 'High';\n  else if (score >= 30) priority = 'Medium';\n  \n  scoredLeads.push({\n    json: {\n      ...lead,\n      lead_score: score,\n      priority: priority,\n      score_reasons: reasons.join('; '),\n      days_to_auction: daysToAuction === 999 ? 'N/A' : daysToAuction,\n      row_number: item.json.row_number || 0\n    }\n  });\n});\n\n// Sort by score descending\nscoredLeads.sort((a, b) => b.json.lead_score - a.json.lead_score);\n\nreturn scoredLeads;"
+      },
+      "name": "Calculate Lead Scores",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-360, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "hot-leads",
+              "leftValue": "={{ $json.priority }}",
+              "rightValue": "HOT",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Filter HOT Leads",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [-140, -60]
+    },
+    {
+      "parameters": {
+        "jsCode": "const hotLeads = $input.all();\n\nif (hotLeads.length === 0) {\n  return [];\n}\n\nlet summary = `HOT LEADS REQUIRING IMMEDIATE ACTION: ${hotLeads.length}\\n\\n`;\n\nhotLeads.forEach((item, i) => {\n  const lead = item.json;\n  summary += `=== HOT LEAD ${i + 1} (Score: ${lead.lead_score}) ===\\n`;\n  summary += `Property: ${lead.property_address}\\n`;\n  summary += `Owner: ${lead.owner_name || 'Unknown'}\\n`;\n  summary += `Phone: ${lead.phone || 'N/A'} | Email: ${lead.email || 'N/A'}\\n`;\n  summary += `Value: ${lead.estimated_value} | Equity: ${lead.equity}\\n`;\n  summary += `Days to Auction: ${lead.days_to_auction}\\n`;\n  summary += `Why Hot: ${lead.score_reasons}\\n\\n`;\n});\n\nreturn [{\n  json: {\n    count: hotLeads.length,\n    summary: summary\n  }\n}];"
+      },
+      "name": "Format HOT Lead Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [80, -60]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "=HOT LEADS: {{ $json.count }} high-priority leads need action!",
+        "emailType": "html",
+        "message": "=<h2 style='color: #dc2626;'>HOT LEADS ALERT</h2><p><strong>{{ $json.count }}</strong> leads scored 70+ and need immediate attention!</p><pre style='background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 4px solid #dc2626;'>{{ $json.summary }}</pre><p><a href='https://docs.google.com/spreadsheets/d/1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw' style='background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;'>CALL THESE LEADS NOW</a></p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send HOT Lead Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [300, -60]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\n\n// Create summary stats\nlet hot = 0, high = 0, medium = 0, low = 0;\n\nleads.forEach(item => {\n  const p = item.json.priority;\n  if (p === 'HOT') hot++;\n  else if (p === 'High') high++;\n  else if (p === 'Medium') medium++;\n  else low++;\n});\n\nreturn [{\n  json: {\n    total: leads.length,\n    hot: hot,\n    high: high,\n    medium: medium,\n    low: low,\n    summary: `Lead Scoring Complete:\\n- HOT: ${hot}\\n- High: ${high}\\n- Medium: ${medium}\\n- Low: ${low}`\n  }\n}];"
+      },
+      "name": "Scoring Stats",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 200]
+    }
+  ],
+  "connections": {
+    "Every Day at 7 AM": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Calculate Lead Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Lead Scores": {
+      "main": [
+        [
+          {
+            "node": "Filter HOT Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Scoring Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter HOT Leads": {
+      "main": [
+        [
+          {
+            "node": "Format HOT Lead Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format HOT Lead Alert": {
+      "main": [
+        [
+          {
+            "node": "Send HOT Lead Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

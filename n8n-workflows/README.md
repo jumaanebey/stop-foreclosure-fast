@@ -97,6 +97,72 @@ High-equity leads = bigger commissions. This ensures you never miss a $20k+ deal
 
 ---
 
+### 6. New Lead Processor
+**File:** `6-new-lead-processor.json`
+
+**What it does:**
+- Runs every 15 minutes
+- Checks for leads with status "New"
+- Sends instant notification email with lead details
+- Marks leads as "Processing"
+
+**Requirements:**
+- Google Sheets OAuth2 credentials
+- SMTP credentials
+
+---
+
+### 7. Lead Scoring Automation
+**File:** `7-lead-scoring.json`
+
+**What it does:**
+- Runs daily at 7 AM
+- Calculates lead score (0-100) based on:
+  - **Equity (0-40 pts):** $100K+ = 40, $50K+ = 30, $25K+ = 20
+  - **Urgency (0-30 pts):** 7 days to auction = 30, 14 days = 25, 30 days = 20
+  - **Property Value (0-20 pts):** $1M+ = 20, $500K+ = 15
+  - **Contact Info (0-10 pts):** Has phone/email
+- Assigns priority: HOT (70+), High (50+), Medium (30+), Low
+- Sends alert email for all HOT leads
+
+**Requirements:**
+- Google Sheets OAuth2 credentials
+- SMTP credentials
+
+---
+
+### 8. Auction Countdown Alerts
+**File:** `8-auction-alerts.json`
+
+**What it does:**
+- Runs daily at 6 AM
+- Finds all leads with auctions in next 14 days
+- Categorizes by urgency:
+  - **CRITICAL:** 0-3 days
+  - **URGENT:** 4-7 days
+  - **MODERATE:** 8-14 days
+- Sends formatted email with auction countdown
+
+**Requirements:**
+- Google Sheets OAuth2 credentials
+- SMTP credentials
+
+---
+
+## Daily Automation Schedule
+
+| Time | Automation |
+|------|------------|
+| 6:00 AM | Python scraper collects new NOD leads |
+| 6:00 AM | Auction countdown alert |
+| 7:00 AM | Lead scoring runs |
+| 8:00 AM | Daily pipeline report |
+| Every 15 min | New lead notifications |
+| Every 15 min | First email follow-up |
+| 48 hours | Second email follow-up |
+
+---
+
 ## Setup Instructions
 
 ### Step 1: Install n8n

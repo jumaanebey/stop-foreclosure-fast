@@ -1,0 +1,163 @@
+{
+  "name": "Auction Countdown Alerts",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every Day at 6 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-800, 80]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-580, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\nconst urgentLeads = [];\n\nleads.forEach(item => {\n  const lead = item.json;\n  const auctionDate = lead.auction_date ? new Date(lead.auction_date) : null;\n  \n  if (!auctionDate || isNaN(auctionDate.getTime())) {\n    return; // Skip if no valid auction date\n  }\n  \n  const today = new Date();\n  today.setHours(0, 0, 0, 0);\n  const daysToAuction = Math.ceil((auctionDate - today) / (1000 * 60 * 60 * 24));\n  \n  // Only include auctions within next 14 days\n  if (daysToAuction >= 0 && daysToAuction <= 14) {\n    let urgency = 'MODERATE';\n    if (daysToAuction <= 3) urgency = 'CRITICAL';\n    else if (daysToAuction <= 7) urgency = 'URGENT';\n    \n    urgentLeads.push({\n      json: {\n        ...lead,\n        days_to_auction: daysToAuction,\n        urgency: urgency,\n        auction_date_formatted: auctionDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })\n      }\n    });\n  }\n});\n\n// Sort by days to auction (most urgent first)\nurgentLeads.sort((a, b) => a.json.days_to_auction - b.json.days_to_auction);\n\nreturn urgentLeads;"
+      },
+      "name": "Find Upcoming Auctions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-360, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-urgent",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has Urgent Auctions?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [-140, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const urgentLeads = $input.all();\n\nlet critical = [];\nlet urgent = [];\nlet moderate = [];\n\nurgentLeads.forEach(item => {\n  const lead = item.json;\n  const line = `${lead.property_address} - ${lead.days_to_auction} days (${lead.auction_date_formatted})`;\n  \n  if (lead.urgency === 'CRITICAL') critical.push(line);\n  else if (lead.urgency === 'URGENT') urgent.push(line);\n  else moderate.push(line);\n});\n\nlet html = '<h2>Auction Countdown Alert</h2>';\n\nif (critical.length > 0) {\n  html += '<h3 style=\"color: #dc2626;\">CRITICAL (0-3 days)</h3><ul>';\n  critical.forEach(l => html += `<li><strong>${l}</strong></li>`);\n  html += '</ul>';\n}\n\nif (urgent.length > 0) {\n  html += '<h3 style=\"color: #ea580c;\">URGENT (4-7 days)</h3><ul>';\n  urgent.forEach(l => html += `<li>${l}</li>`);\n  html += '</ul>';\n}\n\nif (moderate.length > 0) {\n  html += '<h3 style=\"color: #f59e0b;\">Coming Up (8-14 days)</h3><ul>';\n  moderate.forEach(l => html += `<li>${l}</li>`);\n  html += '</ul>';\n}\n\nhtml += `<p><a href='https://docs.google.com/spreadsheets/d/1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw' style='background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;'>Open Lead Sheet</a></p>`;\n\nconst subject = critical.length > 0 \n  ? `CRITICAL: ${critical.length} auctions in 3 days or less!`\n  : `Auction Alert: ${urgentLeads.length} properties selling soon`;\n\nreturn [{\n  json: {\n    subject: subject,\n    html: html,\n    total: urgentLeads.length,\n    critical: critical.length,\n    urgent: urgent.length,\n    moderate: moderate.length\n  }\n}];"
+      },
+      "name": "Format Alert Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [80, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Auction Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [300, 80]
+    }
+  ],
+  "connections": {
+    "Every Day at 6 AM": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Find Upcoming Auctions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Upcoming Auctions": {
+      "main": [
+        [
+          {
+            "node": "Has Urgent Auctions?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Urgent Auctions?": {
+      "main": [
+        [
+          {
+            "node": "Format Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Alert Email": {
+      "main": [
+        [
+          {
+            "node": "Send Auction Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

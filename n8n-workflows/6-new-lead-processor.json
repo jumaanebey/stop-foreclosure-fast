@@ -1,0 +1,231 @@
+{
+  "name": "New Lead Processor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [-800, 80]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "name": "Get All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [-580, 80],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "new-lead-filter",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "New",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Filter New Leads",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [-360, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const leads = $input.all();\n\nif (leads.length === 0) {\n  return [];\n}\n\n// Create summary\nlet summary = `New NOD Leads Found: ${leads.length}\\n\\n`;\n\nleads.forEach((item, i) => {\n  const lead = item.json;\n  summary += `--- Lead ${i + 1} ---\\n`;\n  summary += `Property: ${lead.property_address || 'N/A'}\\n`;\n  summary += `City: ${lead.city || 'N/A'} | County: ${lead.county || 'N/A'}\\n`;\n  summary += `Owner: ${lead.owner_name || 'N/A'}\\n`;\n  summary += `Est. Value: ${lead.estimated_value || 'N/A'}\\n`;\n  summary += `Equity: ${lead.equity || 'N/A'}\\n`;\n  summary += `Auction Date: ${lead.auction_date || 'Not set'}\\n\\n`;\n});\n\nreturn [{\n  json: {\n    count: leads.length,\n    summary: summary,\n    leads: leads.map(l => l.json)\n  }\n}];"
+      },
+      "name": "Format Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-leads",
+              "leftValue": "={{ $json.count }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has New Leads?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [80, 80]
+    },
+    {
+      "parameters": {
+        "fromEmail": "help@myforeclosuresolution.com",
+        "toEmail": "help@myforeclosuresolution.com",
+        "subject": "=NEW NOD LEADS: {{ $json.count }} found!",
+        "emailType": "html",
+        "message": "=<h2>New NOD Leads Found</h2><p><strong>{{ $json.count }}</strong> new leads were just added to your sheet.</p><pre style='background: #f5f5f5; padding: 15px; border-radius: 8px;'>{{ $json.summary }}</pre><p><a href='https://docs.google.com/spreadsheets/d/1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw' style='background: #ea580c; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;'>Open Google Sheet</a></p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "name": "Send Notification Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [300, 80]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Processing"
+          }
+        },
+        "options": {}
+      },
+      "name": "Mark as Processing",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [520, 80],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Leads": {
+      "main": [
+        [
+          {
+            "node": "Filter New Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter New Leads": {
+      "main": [
+        [
+          {
+            "node": "Format Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Summary": {
+      "main": [
+        [
+          {
+            "node": "Has New Leads?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has New Leads?": {
+      "main": [
+        [
+          {
+            "node": "Send Notification Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Notification Email": {
+      "main": [
+        [
+          {
+            "node": "Mark as Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
