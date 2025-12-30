@@ -197,7 +197,7 @@ function sendConsultationConfirmation(data) {
         <div style="background: #fff7ed; border: 2px solid #ea580c; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
           <h3 style="color: #ea580c; margin-top: 0;">📅 Schedule Your Free Consultation</h3>
           <p>Pick a time that works for you:</p>
-          <a href="https://myforeclosuresolution.com/schedule" style="background: #ea580c; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Schedule Now</a>
+          <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ11saPKXhTtJ5jLw6q9XASJXT6whF2LSN7MgXGzcT9PIlyRhXWXVVIDKqsIojgwkJo76HPcFLSz" style="background: #ea580c; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Schedule Now</a>
         </div>
 
         ${isEmergency ? `
