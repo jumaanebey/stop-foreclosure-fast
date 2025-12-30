@@ -23,7 +23,7 @@
         "authentication": "oAuth2",
         "documentId": {
           "__rl": true,
-          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
           "mode": "id"
         },
         "sheetName": {
@@ -105,9 +105,9 @@
     },
     {
       "parameters": {
-        "fromPhoneNumber": "+1YOUR_TWILIO_NUMBER",
+        "fromPhoneNumber": "+19516218874",
         "toPhoneNumber": "={{ $json['Phone Number'] }}",
-        "message": "Hi {{ $json['Owner Name'] }}, this is [YOUR NAME] with My Foreclosure Solution. I sent you an email about {{ $json['Property Address'] }}. I help CA homeowners stop foreclosure. Free consultation: (949) 565-5285. Text STOP to opt out.",
+        "message": "Hi {{ $json['Owner Name'] }}, this is My Foreclosure Solution following up about {{ $json['Property Address'] }}. Schedule your free consultation: https://myforeclosuresolution.com/schedule or call (949) 565-5285. Reply STOP to opt out.",
         "options": {}
       },
       "id": "c9d0e1f2-a3b4-5c6d-7e8f-9a0b1c2d3e4f",
@@ -127,7 +127,7 @@
         "authentication": "oAuth2",
         "documentId": {
           "__rl": true,
-          "value": "1GrfyUDVS_Z66X80kVrXSGRHnbV1XOPp06uxF8lmbbiw",
+          "value": "1me4hbzialZs06LGaG3U2P3CjixSakH46GSM_ZOwSApw",
           "mode": "id"
         },
         "sheetName": {
