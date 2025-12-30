@@ -111,17 +111,19 @@ function sendSMSConfirmation(data) {
   if (!phone) return;
 
   const urgencyMessages = {
-    'emergency': "🚨 URGENT: We see your sale is within 7 days. We're treating this as a priority case. Expect our call within 15 minutes!",
-    'urgent': "⚠️ We received your request and understand time is limited. We'll call you within 30 minutes.",
-    'soon': "📅 Thanks for reaching out! We'll call you within 30 minutes to discuss your options.",
-    'exploring': "Thanks for contacting us! We'll call you within 30 minutes for a no-pressure consultation."
+    'emergency': "🚨 URGENT: We see your sale is within 7 days. We're treating this as a priority case and will contact you ASAP. Please schedule a time that works for you so we can help immediately.",
+    'urgent': "⚠️ We received your request and understand time is limited. Please schedule your free consultation so we can review your options right away.",
+    'soon': "📅 Thanks for reaching out! Please schedule your free consultation so we can discuss your options and create a plan.",
+    'exploring': "Thanks for contacting us! Please schedule a free consultation - no pressure, just information to help you make the best decision."
   };
 
   const urgencyText = urgencyMessages[data.urgency] || urgencyMessages['exploring'];
 
   const message = `Hi ${data.name || 'there'}! This is My Foreclosure Solution. ${urgencyText}
 
-If you need immediate help, call us: (949) 565-5285
+📅 Schedule now: https://myforeclosuresolution.com/schedule
+
+Questions? Call or text: (949) 565-5285
 
 Reply STOP to opt out.`;
 
@@ -190,25 +192,27 @@ function sendConsultationConfirmation(data) {
       </div>
       <div style="padding: 30px; background: white;">
         <p>Hi ${data.name},</p>
-        <p><strong>${isEmergency ? "We see your situation is urgent. We're treating this as a priority case and will call you within 15 minutes." : "We received your request and will call you within 30 minutes."}</strong></p>
+        <p><strong>${isEmergency ? "We see your situation is urgent. We're treating this as a priority case and will contact you ASAP." : "We received your request and want to help."}</strong></p>
+
+        <div style="background: #fff7ed; border: 2px solid #ea580c; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
+          <h3 style="color: #ea580c; margin-top: 0;">📅 Schedule Your Free Consultation</h3>
+          <p>Pick a time that works for you:</p>
+          <a href="https://myforeclosuresolution.com/schedule" style="background: #ea580c; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Schedule Now</a>
+        </div>
 
         ${isEmergency ? `
         <div style="background: #fef2f2; border: 2px solid #dc2626; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <h3 style="color: #dc2626; margin-top: 0;">🚨 EMERGENCY PRIORITY</h3>
-          <p>Can't wait? Call us now: <a href="tel:+1-949-565-5285" style="color: #dc2626; font-weight: bold;">(949) 565-5285</a></p>
+          <h3 style="color: #dc2626; margin-top: 0;">🚨 EMERGENCY? Can't wait?</h3>
+          <p>Contact us now: <a href="tel:+1-949-565-5285" style="color: #dc2626; font-weight: bold;">(949) 565-5285</a></p>
         </div>
         ` : ''}
 
-        <p><strong>While you wait:</strong></p>
+        <p><strong>Before your consultation:</strong></p>
         <ul>
           <li>Gather any foreclosure notices you've received</li>
           <li>Have your mortgage statement ready</li>
           <li>Don't stress - you took the right step by reaching out</li>
         </ul>
-
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="tel:+1-949-565-5285" style="background: #dc2626; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">📞 Call Now: (949) 565-5285</a>
-        </div>
 
         <p>You're not alone in this.</p>
         <p>Best regards,<br><strong>My Foreclosure Solution Team</strong><br>CA DRE #02076038 | NMLS #2033637</p>
@@ -242,7 +246,7 @@ Urgency: ${data.urgency || 'Not specified'}
 Source: ${data.source || 'Website'}
 Time: ${new Date().toLocaleString()}
 
-${isEmergency ? '⚠️ EMERGENCY - CALL WITHIN 15 MINUTES!' : 'Follow up within 30 minutes.'}
+${isEmergency ? '⚠️ EMERGENCY - CONTACT ASAP!' : 'Contact soon to schedule consultation.'}
 
 Google Sheet: https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}
   `;
