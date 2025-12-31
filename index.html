@@ -1441,8 +1441,8 @@
                             <input type="email" name="email" required placeholder="you@email.com" style="width: 100%; padding: 15px; border: 2px solid #fed7aa; border-radius: 10px; font-size: 18px; transition: border-color 0.3s;">
                         </div>
                         <div>
-                            <label style="display: block; color: #7c2d12; font-weight: 600; margin-bottom: 8px; font-size: 16px;">Property Address</label>
-                            <input type="text" name="property_address" id="property-address" placeholder="Start typing address..." autocomplete="off" style="width: 100%; padding: 15px; border: 2px solid #fed7aa; border-radius: 10px; font-size: 18px; transition: border-color 0.3s;">
+                            <label style="display: block; color: #7c2d12; font-weight: 600; margin-bottom: 8px; font-size: 16px;">Property Address *</label>
+                            <input type="text" name="property_address" id="property-address" required placeholder="Start typing address..." autocomplete="nope" data-lpignore="true" data-form-type="other" style="width: 100%; padding: 15px; border: 2px solid #fed7aa; border-radius: 10px; font-size: 18px; transition: border-color 0.3s;">
                         </div>
                         <div>
                             <label style="display: block; color: #7c2d12; font-weight: 600; margin-bottom: 8px; font-size: 16px;">How urgent is your situation? *</label>
@@ -1744,6 +1744,7 @@
             const nameInput = form.querySelector('input[name="name"]');
             const phoneInput = form.querySelector('input[name="phone"]');
             const emailInput = form.querySelector('input[name="email"]');
+            const addressInput = form.querySelector('input[name="property_address"]');
 
             if (!nameInput.value.trim()) {
                 showError(nameInput, 'Please enter your name');
@@ -1755,6 +1756,10 @@
             }
             if (!validateEmail(emailInput.value)) {
                 showError(emailInput, 'Please enter a valid email address');
+                isValid = false;
+            }
+            if (!addressInput.value.trim()) {
+                showError(addressInput, 'Please enter the property address');
                 isValid = false;
             }
 
