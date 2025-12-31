@@ -4,55 +4,76 @@
 
 ---
 
-## December 30, 2024
+## December 30, 2025
 
 ### The Story
-Today was about fixing broken things and preparing for scale. The form submission button wasn't working - turns out a single line of JavaScript (`const form = this;`) was breaking everything. Classic. One line of code = zero leads captured.
+A marathon debugging session. What started as "the form button doesn't work" turned into uncovering a chain of issues: wrong Sheet ID, wrong Twilio credentials, missing permissions, and 10DLC compliance blocking SMS.
 
-Also discovered last week that my form was sending leads to a DIFFERENT Google Sheet than n8n was reading from. Leads were going into a black hole. Fixed that. How many did I lose? Unknown. Lesson: test the full flow, not just individual pieces.
+The real lesson today: **production is different from testing**. Everything worked in isolation. But when a real user submits a form on the live site? Completely different story. Permissions that worked in the editor didn't work from a web app. Twilio credentials that I *thought* were right were from a different account.
 
-### What I Built Today
-- Fixed form submission (was broken due to JS scoping issue)
-- Added address autocomplete (pending API key)
-- Set up Twilio SMS confirmations (+19516218874, A2P registered)
-- Configured Tawk.to live chat
-- Activated 7 n8n automation workflows
-- Submitted Google My Business appeal (profile was flagged)
+Claude Code + Claude Chrome tag-teaming the debugging was powerful. Claude Code handled the code, Claude Chrome navigated Twilio/Google consoles. Took hours, but we got there.
+
+### What I Built/Fixed Today
+- Fixed form submission bug (JS scoping issue)
+- Added Google Places autocomplete for address (API key configured)
+- Set up Google Calendar scheduling (6-8pm appointments)
+- Created schedule.html redirect page
+- Fixed Google Apps Script permissions (sheet wasn't shared with correct account)
+- Fixed Twilio Account SID (was using wrong account entirely)
+- Made property address required + disabled autofill
+- Updated all messaging to push scheduling instead of "call in 15 mins"
+- Updated success message ("contact you shortly" + "text for urgent")
+- Created this journal format
 
 ### AI Prompts That Worked
 | Prompt | Result |
 |--------|--------|
-| "How is my lead capture process?" | Claude audited full flow, found Sheet ID mismatch - critical fix |
-| "Give me explicit instructions for Twilio" | Step-by-step setup I could follow exactly |
-| "submission button not working" | Found the bug in 30 seconds, fixed immediately |
+| "How is my lead capture process?" | Found Sheet ID mismatch - critical |
+| "Your memory is terrible right now" | Made Claude audit everything properly |
+| "Give claude chrome instructions" | Effective delegation - Claude Chrome debugged Twilio/GCP while Claude Code handled code |
+| "Think business, personal, PM, portfolio" | Transformed journal from task list to founder's narrative |
 
 ### Decisions Made
-- **Removed social proof stats** ("500+ families helped") - felt dishonest before having real numbers
-- **Hid About page** - not ready to show team/faces yet
-- **Chose Twilio over other SMS** - A2P 10DLC compliance matters for deliverability
-- **Skipped Yelp for now** - focusing on driving traffic first, automation later
+- **Push scheduling over calls** - Every touchpoint now asks users to schedule, not wait for a call
+- **Made property address required** - Need to know where the property is
+- **Using two Google accounts** - Apps Script runs as jumaanebey@gmail.com, business email is help@myforeclosuresolution.com
+- **10DLC compliance** - Started registration, 1-7 days for approval
+
+### What's Working
+| Feature | Status |
+|---------|--------|
+| Form submission | ✅ Working |
+| Lead to Google Sheet | ✅ Working |
+| Email to lead (confirmation) | ✅ Working |
+| Email to me (notification) | ✅ Working |
+| Address autocomplete | ✅ Working |
+| Scheduling link | ✅ Working |
+
+### What's Blocked
+| Feature | Blocker |
+|---------|---------|
+| SMS confirmations | 10DLC registration pending (1-7 days) |
+| Google My Business | Appeal pending |
+| Traffic | Haven't started marketing yet |
 
 ### Metrics
 | Metric | Value |
 |--------|-------|
-| Website visitors | ? (check GA4) |
-| Form submissions | 0 confirmed working |
-| Leads in Sheet | ? |
-| Response time | N/A |
-| Deals closed | 0 |
-
-### Blockers
-- GMB profile flagged - appeal submitted, waiting
-- No Google Places API key yet - address autocomplete disabled
-- No traffic yet - need to start marketing
+| Test form submissions | 3 |
+| Real leads | 0 |
+| SMS delivered | 1 (test only) |
+| Deals | 0 |
 
 ### Reflections
-The hardest part isn't building - it's knowing what to build. I keep wanting to automate everything before I have a single customer. Claude keeps pulling me back: "drive traffic first, automate once you have customers." That's the right call.
+Debugging is humbling. I had the wrong Twilio Account SID the whole time. The sheet wasn't shared with the right account. Permissions weren't granted. Every "it should work" assumption was wrong.
+
+But: the system is now actually tested end-to-end. When 10DLC approves, SMS will just work. The foundation is solid now.
 
 ### Tomorrow's Focus
-- Get Google Places API key
-- Start driving traffic (how?)
-- Check if GMB appeal approved
+- Complete 10DLC registration
+- Tone down Tawk.to chat
+- Start driving traffic (this keeps getting pushed)
+- Check GMB appeal
 
 ---
 
@@ -103,19 +124,22 @@ The hardest part isn't building - it's knowing what to build. I keep wanting to 
 |--------|--------|---------|
 | Website (GitHub Pages) | Live | Landing page, lead capture |
 | Google Sheets | Live | Lead database |
-| Google Apps Script | Live | Form handler, email sender |
-| Twilio | Live | SMS confirmations |
+| Google Apps Script | Live | Form handler, email sender, SMS |
+| Twilio | Pending 10DLC | SMS confirmations (blocked by carriers) |
 | n8n | Live | Workflow automation |
-| Tawk.to | Live | Live chat |
+| Tawk.to | Live | Live chat (needs toning down) |
 | Google Analytics | Live | Traffic tracking |
-| GMB | Pending | Local SEO |
+| Google Places API | Live | Address autocomplete |
+| Google Calendar | Live | Appointment scheduling (6-8pm) |
+| GMB | Pending Appeal | Local SEO |
 
 ---
 
 ## Future Plans
 
 ### Near Term
-- [ ] Google Places API for address autocomplete
+- [x] Google Places API for address autocomplete
+- [ ] Complete 10DLC registration
 - [ ] Drive traffic (Google Ads? SEO? Social?)
 - [ ] First real lead
 - [ ] First consultation call
@@ -140,6 +164,9 @@ The hardest part isn't building - it's knowing what to build. I keep wanting to 
 3. **Don't automate before you have customers** - Build the machine, but focus on fuel first
 4. **AI is a force multiplier** - What would take days takes minutes with the right prompts
 5. **Document everything** - Future you will thank present you
+6. **Production is different from testing** - Permissions, credentials, and edge cases only show up in production
+7. **Check your credentials** - Wrong Account SID cost hours of debugging
+8. **Two AI agents > one** - Claude Code + Claude Chrome delegation = faster debugging
 
 ---
 
