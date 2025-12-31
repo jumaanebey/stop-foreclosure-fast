@@ -1783,7 +1783,7 @@
                 status: 'New'
             };
 
-            // Send to Google Apps Script
+            // Send to Google Apps Script (handles sheet, SMS, and emails)
             fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
                 method: 'POST',
                 mode: 'no-cors',
@@ -1791,23 +1791,13 @@
                 body: JSON.stringify(data)
             });
 
-            // Send SMS confirmation via Twilio (serverless function)
-            const smsData = {
-                to: formData.get('phone'),
-                name: formData.get('name'),
-                urgency: formData.get('urgency')
-            };
-            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ type: 'sms_confirmation', ...smsData })
-            });
-
             // Show success message
             setTimeout(function() {
+                form.innerHTML = '';
                 form.style.display = 'none';
-                document.getElementById('consultation-success').style.display = 'block';
+                const successMsg = document.getElementById('consultation-success');
+                successMsg.style.display = 'block';
+                successMsg.style.minHeight = '200px';
 
                 // Track conversion events in GA4
                 if (typeof gtag !== 'undefined') {
