@@ -1,0 +1,172 @@
+# DIALOGFLOW CX CONFIGURATION FOR FORECLOSURE VOICE ASSISTANT
+# Deploy this to create a 24/7 phone support bot
+
+agent:
+  displayName: "Foreclosure Help Assistant"
+  defaultLanguageCode: "en-US"
+  supportedLanguageCodes: ["es-ES"]
+  timeZone: "America/Los_Angeles"
+  description: "24/7 voice assistant for foreclosure help"
+
+# Main conversation flows
+flows:
+  - name: "Default Start Flow"
+    displayName: "Welcome"
+    transitionRoutes:
+      - intent: "urgent.help"
+        targetPage: "urgent_assistance"
+      - intent: "general.inquiry"
+        targetPage: "general_help"
+      - intent: "spanish.request"
+        targetPage: "spanish_support"
+
+# Pages (conversation states)
+pages:
+  - name: "urgent_assistance"
+    displayName: "Urgent Help"
+    entryFulfillment:
+      messages:
+        - text: "I understand this is urgent. Let me connect you with a specialist immediately."
+        - text: "First, can you tell me how many days until your foreclosure sale date?"
+    parameters:
+      - name: "days_until_sale"
+        entityType: "@sys.number"
+        required: true
+
+  - name: "general_help"
+    displayName: "General Assistance"
+    entryFulfillment:
+      messages:
+        - text: "I'm here to help with your foreclosure situation. What's your main concern today?"
+
+  - name: "spanish_support"
+    displayName: "Spanish Support"
+    languageCode: "es-ES"
+    entryFulfillment:
+      messages:
+        - text: "Hola, estoy aquí para ayudarle con su situación de ejecución hipotecaria."
+
+# Intents
+intents:
+  - displayName: "urgent.help"
+    trainingPhrases:
+      - "I need urgent help"
+      - "My house is being sold tomorrow"
+      - "Emergency foreclosure help"
+      - "Sale is next week"
+      - "I'm about to lose my home"
+    priority: 1000000  # Highest priority
+
+  - displayName: "general.inquiry"
+    trainingPhrases:
+      - "I need help with foreclosure"
+      - "Can you help me save my home"
+      - "What are my options"
+      - "I'm behind on payments"
+      - "Got a notice of default"
+
+  - displayName: "spanish.request"
+    trainingPhrases:
+      - "Habla español"
+      - "Spanish please"
+      - "Necesito ayuda en español"
+      - "Puedo hablar en español"
+
+  - displayName: "provide.timeline"
+    trainingPhrases:
+      - "Sale is in {days} days"
+      - "I have {days} days left"
+      - "{days} days until auction"
+      - "Next {day_of_week}"
+    parameters:
+      - name: "days"
+        entityType: "@sys.number"
+      - name: "day_of_week"
+        entityType: "@sys.date"
+
+  - displayName: "provide.amount.owed"
+    trainingPhrases:
+      - "I owe {amount}"
+      - "About {amount} dollars"
+      - "Behind {amount}"
+      - "{months} months behind"
+    parameters:
+      - name: "amount"
+        entityType: "@sys.currency"
+      - name: "months"
+        entityType: "@sys.number"
+
+# Entity Types (custom data types)
+entityTypes:
+  - displayName: "foreclosure_stage"
+    entities:
+      - value: "notice_of_default"
+        synonyms: ["NOD", "default notice", "first notice"]
+      - value: "notice_of_sale"
+        synonyms: ["NOS", "sale notice", "auction notice"]
+      - value: "post_sale"
+        synonyms: ["after sale", "already sold", "eviction"]
+
+  - displayName: "california_county"
+    entities:
+      - value: "los_angeles"
+        synonyms: ["LA", "Los Angeles County"]
+      - value: "san_diego"
+        synonyms: ["SD", "San Diego County"]
+      - value: "orange"
+        synonyms: ["OC", "Orange County"]
+      # Add all 58 CA counties...
+
+# Fulfillment webhooks
+webhooks:
+  - displayName: "main-webhook"
+    genericWebService:
+      uri: "https://us-central1-foreclosure-ai-assistant.cloudfunctions.net/dialogflowWebhook"
+
+# System entities to use
+systemEntities:
+  - "@sys.number"
+  - "@sys.currency"
+  - "@sys.date"
+  - "@sys.time"
+  - "@sys.location"
+  - "@sys.person"
+  - "@sys.phone-number"
+
+# Voice configuration
+speechSettings:
+  voiceSelection:
+    name: "en-US-Neural2-F"  # Natural female voice
+    ssmlGender: "FEMALE"
+  synthesizeSpeech:
+    speakingRate: 0.95  # Slightly slower for clarity
+    pitch: 0  # Natural pitch
+    volumeGainDb: 0
+
+# Advanced NLU settings
+nlpSettings:
+  modelType: "STANDARD"
+  classificationThreshold: 0.3
+  enableSpellCorrection: true
+  enableSentimentAnalysis: true
+
+# Integration with Telephony
+telephonySettings:
+  enabled: true
+  phoneNumbers:
+    - displayName: "Main Support Line"
+      phoneNumber: "+1-949-565-5285"
+  audioEncoding: "AUDIO_ENCODING_MULAW_8000HZ"
+
+# Transfer to human agent
+transferConfig:
+  transferCallMessage: "Let me connect you with a specialist right away."
+  transferPhoneNumber: "+1-949-565-5285"
+  businessHours:
+    monday: "8:00-18:00"
+    tuesday: "8:00-18:00"
+    wednesday: "8:00-18:00"
+    thursday: "8:00-18:00"
+    friday: "8:00-18:00"
+    saturday: "9:00-15:00"
+    sunday: "closed"

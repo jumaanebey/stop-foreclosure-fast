@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Button Test</title>
+    <style>
+        .ai-modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .ai-modal-content { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            max-width: 500px;
+        }
+        .ai-assistant-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Button Test</h1>
+    <button class="ai-assistant-btn" onclick="openAIAssistant()">🤖 AI Assistant</button>
+    
+    <div id="ai-assistant-modal" class="ai-modal">
+        <div class="ai-modal-content">
+            <h3>🤖 AI Assistant Working!</h3>
+            <p>The button is functioning correctly.</p>
+            <button onclick="closeAIAssistant()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openAIAssistant() {
+            console.log('openAIAssistant called');
+            document.getElementById('ai-assistant-modal').style.display = 'flex';
+        }
+
+        function closeAIAssistant() {
+            console.log('closeAIAssistant called');
+            document.getElementById('ai-assistant-modal').style.display = 'none';
+        }
+        
+        // Make functions globally available
+        window.openAIAssistant = openAIAssistant;
+        window.closeAIAssistant = closeAIAssistant;
+        
+        // Test that the function is available
+        console.log('Functions defined:', typeof window.openAIAssistant, typeof window.closeAIAssistant);
+    </script>
+</body>
+</html>

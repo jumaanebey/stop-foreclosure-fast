@@ -1,0 +1,15 @@
+exclude:
+  - node_modules
+  - google-ai-setup/node_modules
+  - "*.json"
+  - "*.js"
+  - .env
+  - .env.*
+  - README.md
+  - ARCHIVE
+  - "*.py"
+  - "*.sh"
+  - email-sequences
+  - n8n-workflows
+  - python-enhancements
+  - downloads

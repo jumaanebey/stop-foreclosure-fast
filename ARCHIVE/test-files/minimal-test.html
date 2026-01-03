@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minimal Test</title>
+</head>
+<body>
+    <button onclick="openAIAssistant()">Test Button</button>
+    
+    <script>
+        console.log("Script starting...");
+        
+        function openAIAssistant() {
+            console.log("Function called!");
+            alert("It works!");
+        }
+        
+        window.openAIAssistant = openAIAssistant;
+        console.log("Function defined successfully");
+    </script>
+</body>
+</html>
