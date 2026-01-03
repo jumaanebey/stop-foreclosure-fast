@@ -1593,26 +1593,15 @@
     </footer>
 
     <!-- Mobile Sticky CTA Bar -->
+    <!-- Sticky CTAs hidden for cleaner experience -->
+    <!--
     <div class="mobile-cta-bar">
         <a href="tel:+1-949-565-5285">
             <span>📞</span>
             <span>Call Now - Free Consultation</span>
         </a>
     </div>
-
-    <!-- Desktop Sticky CTA Bar (Shows on scroll) -->
-    <div id="desktop-sticky-cta" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #7c2d12, #92400e); padding: 15px 30px; z-index: 999; box-shadow: 0 -4px 20px rgba(0,0,0,0.2); transform: translateY(100%); transition: transform 0.3s ease;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <div style="color: white;">
-                <span style="font-weight: 700; font-size: 18px;">Don't lose your home to foreclosure.</span>
-                <span style="opacity: 0.9; margin-left: 10px;">Free consultation - we're here to help.</span>
-            </div>
-            <div style="display: flex; gap: 15px;">
-                <a href="tel:+1-949-565-5285" style="background: white; color: #7c2d12; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; white-space: nowrap;">📞 Call (949) 565-5285</a>
-                <a href="schedule.html" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; white-space: nowrap;">Schedule Free Consultation</a>
-            </div>
-        </div>
-    </div>
+    -->
 
     <!-- Exit Intent Popup -->
     <div id="exit-popup" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
@@ -1704,24 +1693,7 @@
             }
         });
 
-        // Desktop Sticky CTA on Scroll
-        let lastScroll = 0;
-        const desktopCTA = document.getElementById('desktop-sticky-cta');
-
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-
-            // Show after scrolling 500px and hide mobile-only bar
-            if (currentScroll > 500 && window.innerWidth > 768) {
-                desktopCTA.style.display = 'block';
-                setTimeout(() => { desktopCTA.style.transform = 'translateY(0)'; }, 10);
-            } else {
-                desktopCTA.style.transform = 'translateY(100%)';
-                setTimeout(() => { if (currentScroll <= 500) desktopCTA.style.display = 'none'; }, 300);
-            }
-
-            lastScroll = currentScroll;
-        });
+        // Desktop Sticky CTA removed for cleaner experience
 
         // Custom Form Submission Handling
         document.addEventListener('DOMContentLoaded', function() {
