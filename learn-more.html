@@ -141,9 +141,40 @@
         /* Process Steps */
         .process-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .process-step {
+                padding: 20px 15px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .step-title {
+                font-size: 16px;
+            }
+
+            .process-step p {
+                font-size: 13px;
+            }
         }
 
         .process-step {
@@ -432,7 +463,6 @@
                 <a href="#process" class="nav-pill">Our Process</a>
                 <a href="#options" class="nav-pill">Your Options</a>
                 <a href="#faq" class="nav-pill">FAQ</a>
-                <a href="#testimonials" class="nav-pill">Success Stories</a>
             </div>
         </div>
     </section>
@@ -606,51 +636,14 @@
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="content-section">
-            <h2>Real Success Stories</h2>
-            <p style="font-size: 18px; color: #6b7280;">
-                These are actual clients we've helped save from foreclosure.
-            </p>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "My auction was in 5 days. They stopped it, negotiated with my lender, and I kept my home with lower payments. Miracle workers!"
-                    </p>
-                    <div class="testimonial-author">Robert M.</div>
-                    <div class="testimonial-location">San Diego County</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Lost my job, fell behind 8 months. They got me a cash offer in 48 hours, I walked away with $45,000 instead of losing everything."
-                    </p>
-                    <div class="testimonial-author">Jennifer K.</div>
-                    <div class="testimonial-location">Los Angeles County</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Professional, honest, and they actually cared. No pressure, just real solutions. Saved our family home when we thought it was impossible."
-                    </p>
-                    <div class="testimonial-author">Carlos & Maria T.</div>
-                    <div class="testimonial-location">Orange County</div>
-                </div>
-            </div>
-        </section>
-
+        
         <!-- About Section -->
         <section class="content-section">
             <h2>Why Trust Us?</h2>
             <div style="background: #f9fafb; padding: 30px; border-radius: 12px;">
                 <ul style="font-size: 18px; line-height: 2;">
                     <li><strong>Licensed Professionals:</strong> CA DRE License #02076038, NMLS #2033637</li>
-                    <li><strong>10+ Years Experience:</strong> We've seen every situation and know what works</li>
-                    <li><strong>Licensed Professionals:</strong> California DRE licensed real estate experts</li>
+                    <li><strong>Experienced Team:</strong> We've seen every situation and know what works</li>
                     <li><strong>No Upfront Fees:</strong> You pay nothing for our consultation or services</li>
                     <li><strong>All California Counties:</strong> We serve homeowners statewide</li>
                     <li><strong>Bilingual Support:</strong> English and Spanish speaking team</li>
