@@ -3,485 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FREE: 7-Day Foreclosure Survival Guide | Stop Your Foreclosure Fast</title>
+    <title>FREE: 7-Day Foreclosure Survival Guide | My Foreclosure Solution</title>
     <meta name="description" content="Download your FREE guide: Stop foreclosure in 7 days or less. Learn emergency strategies, legal rights, and proven solutions. Instant download.">
+    <link rel="canonical" href="https://myforeclosuresolution.com/free-guide.html">
 
-    <!-- Open Graph for Social/Ads -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e293b' rx='12' width='100' height='100'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23d97706'>M</text></svg>">
+
     <meta property="og:title" content="FREE: 7-Day Foreclosure Survival Guide">
     <meta property="og:description" content="Stop your foreclosure in 7 days or less. Download our free emergency action guide.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumaanebey.github.io/stop-foreclosure-fast/free-guide.html">
+    <meta property="og:url" content="https://myforeclosuresolution.com/free-guide.html">
 
-    <!-- Google Analytics 4 (Replace GA_MEASUREMENT_ID with your actual ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-
-    <!-- Google Ads Conversion Tracking (Replace AW-XXXXXXXXX with your conversion ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-XXXXXXXXX');
+        gtag('config', 'G-ZC3FHFTPN2');
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Fraunces:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="css/theme.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .guide-hero {
+            padding: 60px 0 80px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
         }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #1f2937;
-            background: linear-gradient(135deg, #fff8f3 0%, #fef3e2 100%);
-            min-height: 100vh;
-        }
-
-        /* Minimal Header for Landing Page */
-        .header {
-            background: white;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ea580c, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .emergency-phone {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #dc2626;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+        .guide-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
         }
-
-        .hero-content h1 {
-            font-size: clamp(36px, 5vw, 48px);
-            font-weight: 900;
-            color: #1f2937;
+        .guide-content h1 {
+            font-size: clamp(32px, 5vw, 48px);
             margin-bottom: 20px;
-            line-height: 1.1;
         }
-
-        .hero-content h1 span {
-            color: #dc2626;
+        .guide-content h1 span {
+            color: var(--accent-600);
         }
-
-        .subheadline {
-            font-size: 20px;
-            color: #6b7280;
-            margin-bottom: 30px;
-        }
-
-        .urgency-badge {
+        .guide-badge {
             display: inline-block;
-            background: #dc2626;
-            color: white;
+            background: var(--red-600);
+            color: var(--white);
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 600;
+            font-size: 14px;
             margin-bottom: 20px;
-            animation: pulse 2s infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Benefits List */
-        .benefits {
+        .benefits-list {
             list-style: none;
-            margin-bottom: 30px;
+            margin: 24px 0;
         }
-
-        .benefits li {
+        .benefits-list li {
             display: flex;
-            align-items: start;
+            align-items: flex-start;
             gap: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+        .benefits-list li::before {
+            content: "\\2713";
+            color: var(--green-600);
+            font-weight: bold;
             font-size: 18px;
         }
-
-        .benefits li::before {
-            content: "✅";
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        /* Form Card */
         .form-card {
-            background: white;
+            background: var(--white);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            border: 3px solid #dc2626;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent-500);
             position: relative;
         }
-
+        body.variant-b .form-card {
+            border-radius: 30px;
+        }
         .form-card::before {
-            content: "🎁 FREE GUIDE";
+            content: "FREE GUIDE";
             position: absolute;
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: #dc2626;
-            color: white;
-            padding: 5px 20px;
+            background: var(--accent-600);
+            color: var(--white);
+            padding: 6px 20px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
         }
-
-        .form-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #1f2937;
-            margin-bottom: 15px;
+        .form-card h2 {
             text-align: center;
+            margin-bottom: 8px;
         }
-
-        .form-subtitle {
+        .form-card .subtitle {
             text-align: center;
-            color: #6b7280;
-            margin-bottom: 30px;
+            color: var(--gray-500);
+            margin-bottom: 24px;
         }
-
-        .form-group {
-            margin-bottom: 20px;
+        .guide-form .form-group input {
+            margin-bottom: 16px;
         }
-
-        .form-group input {
+        .guide-form .btn {
             width: 100%;
+            font-size: 18px;
             padding: 18px;
-            font-size: 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            transition: all 0.3s;
         }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #dc2626;
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #dc2626, #991b1b);
-            color: white;
-            padding: 20px;
-            font-size: 20px;
-            font-weight: 700;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
-        }
-
         .privacy-note {
             text-align: center;
             font-size: 14px;
-            color: #6b7280;
-            margin-top: 20px;
+            color: var(--gray-500);
+            margin-top: 16px;
         }
-
         .privacy-note span {
-            color: #10b981;
+            color: var(--green-600);
             font-weight: 600;
         }
-
-        /* Success Message */
         #success-message {
             display: none;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
+            background: var(--green-600);
+            color: var(--white);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
         }
-
         #success-message h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        /* What's Inside Section */
-        .whats-inside {
-            background: white;
-            padding: 60px 20px;
-            margin-top: 80px;
-        }
-
-        .whats-inside-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .whats-inside h2 {
-            font-size: 36px;
-            color: #1f2937;
-            margin-bottom: 40px;
-        }
-
-        .guide-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .feature-card {
-            background: #fef3e2;
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid #fb923c;
-        }
-
-        .feature-card h3 {
-            color: #7c2d12;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .feature-card p {
-            color: #92400e;
-        }
-
-        /* Testimonial */
-        .testimonial {
-            background: linear-gradient(135deg, #7c2d12, #92400e);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 800px;
-            margin: 40px auto;
-            text-align: center;
-        }
-
-        .testimonial-text {
-            font-size: 20px;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-        }
-
-        /* CTA Bottom */
-        .cta-bottom {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #fff8f3, #fef3e2);
-        }
-
-        .cta-bottom h2 {
-            font-size: 32px;
-            color: #1f2937;
-            margin-bottom: 20px;
-        }
-
-        .countdown {
+            color: var(--white);
             font-size: 24px;
-            color: #dc2626;
-            font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 12px;
         }
-
-        /* Mobile Responsive */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            text-align: center;
+        }
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
         @media (max-width: 768px) {
-            .hero {
+            .guide-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
-                margin: 40px auto;
             }
-
             .form-card {
                 padding: 30px 20px;
-            }
-
-            .hero-content h1 {
-                font-size: 32px;
-            }
-
-            .guide-features {
-                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header with Navigation -->
-    <header class="header">
-        <div class="header-content">
-            <a href="index.html" class="logo" style="text-decoration: none;">My Foreclosure Solution</a>
-            <nav style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                <a href="index.html" style="color: #374151; text-decoration: none; font-weight: 500;">Home</a>
-                <a href="learn-more.html" style="color: #374151; text-decoration: none; font-weight: 500;">How It Works</a>
-                <a href="emergency-checklist.html" style="color: #dc2626; text-decoration: none; font-weight: 600;">🚨 Emergency</a>
-                <a href="faq.html" style="color: #374151; text-decoration: none; font-weight: 500;">FAQ</a>
-                <a href="schedule.html" style="background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">📅 Schedule</a>
-            </nav>
+    <div class="emergency-bar">
+        Sale within 7 days? <a href="tel:+19495655285">Call now: (949) 565-5285</a>
+    </div>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html" style="color: var(--primary-900); font-weight: 600;">Free Guide</a>
+                    <a href="schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="urgency-badge">⚡ Limited Time: FREE Download</div>
-            <h1>Stop Your Foreclosure in <span>7 Days or Less</span></h1>
-            <p class="subheadline">Get our proven step-by-step guide that's helped 500+ California homeowners save their homes</p>
+    <section class="guide-hero">
+        <div class="container">
+            <div class="guide-grid">
+                <div class="guide-content">
+                    <span class="guide-badge">Limited Time: FREE Download</span>
+                    <h1>Stop Your Foreclosure in <span>7 Days or Less</span></h1>
+                    <p style="font-size: 18px; color: var(--gray-500); margin-bottom: 24px;">Get our proven step-by-step guide that's helped 500+ California homeowners save their homes</p>
 
-            <ul class="benefits">
-                <li>Emergency strategies that work in 24 hours</li>
-                <li>Exact scripts for talking to your lender</li>
-                <li>Legal loopholes banks don't want you to know</li>
-                <li>How to keep your home equity (don't lose it!)</li>
-                <li>Mistakes that could cost you everything</li>
-            </ul>
+                    <ul class="benefits-list">
+                        <li>Emergency strategies that work in 24 hours</li>
+                        <li>Exact scripts for talking to your lender</li>
+                        <li>Legal loopholes banks don't want you to know</li>
+                        <li>How to keep your home equity (don't lose it!)</li>
+                        <li>Mistakes that could cost you everything</li>
+                    </ul>
 
-            <p style="font-size: 18px; color: #dc2626; font-weight: 600;">
-                ⏰ Reading time: 15 minutes | 💰 Value: Priceless | 📄 Pages: 12
-            </p>
-        </div>
-
-        <div class="form-card">
-            <h2 class="form-title">Get Instant Access</h2>
-            <p class="form-subtitle">Enter your email below for immediate download</p>
-
-            <form id="lead-magnet-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <p style="font-size: 15px; color: var(--accent-600); font-weight: 600;">
+                        Reading time: 15 minutes | Value: Priceless | Pages: 12
+                    </p>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Email Address" required>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Download FREE Guide Now →
-                </button>
-            </form>
 
-            <div id="success-message">
-                <h3>✅ Success! Check Your Email</h3>
-                <p>Your guide has been sent to your inbox. Check spam if you don't see it in 2 minutes.</p>
-                <p style="margin-top: 20px;">Need immediate help? Call (949) 565-5285</p>
-            </div>
+                <div class="form-card">
+                    <h2>Get Instant Access</h2>
+                    <p class="subtitle">Enter your email below for immediate download</p>
 
-            <p class="privacy-note">
-                🔒 <span>100% Secure</span> • No spam, ever • Instant download
-            </p>
-        </div>
-    </section>
+                    <form id="lead-magnet-form" class="guide-form">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <button type="submit" class="btn btn-accent">
+                            Download FREE Guide Now
+                        </button>
+                    </form>
 
-    <!-- What's Inside Section -->
-    <section class="whats-inside">
-        <div class="whats-inside-content">
-            <h2>What's Inside Your FREE Guide:</h2>
+                    <div id="success-message">
+                        <h3>Success! Check Your Email</h3>
+                        <p>Your guide has been sent to your inbox. Check spam if you don't see it in 2 minutes.</p>
+                        <p style="margin-top: 16px;">Need immediate help? Call (949) 565-5285</p>
+                    </div>
 
-            <div class="guide-features">
-                <div class="feature-card">
-                    <h3>📋 Day 1-3 Action Plan</h3>
-                    <p>Critical first steps to stop the foreclosure process immediately</p>
+                    <p class="privacy-note">
+                        <span>100% Secure</span> - No spam, ever - Instant download
+                    </p>
                 </div>
-                <div class="feature-card">
-                    <h3>📞 Lender Scripts</h3>
-                    <p>Exact words to say when calling your bank for best results</p>
-                </div>
-                <div class="feature-card">
-                    <h3>⚖️ Legal Rights</h3>
-                    <p>California laws that protect you (most people don't know these)</p>
-                </div>
-                <div class="feature-card">
-                    <h3>💰 5 Ways to Keep Equity</h3>
-                    <p>Don't let the bank take everything - get what's yours</p>
-                </div>
-                <div class="feature-card">
-                    <h3>❌ Costly Mistakes</h3>
-                    <p>7 mistakes that guarantee foreclosure (avoid these!)</p>
-                </div>
-                <div class="feature-card">
-                    <h3>✅ Success Checklist</h3>
-                    <p>Step-by-step checklist to save your home</p>
-                </div>
-            </div>
-
-            <div class="testimonial">
-                <p class="testimonial-text">
-                    "This guide saved my home! The Day 1 action plan stopped my auction that was 4 days away. I can't thank you enough!"
-                </p>
-                <p class="testimonial-author">- Maria S., Los Angeles</p>
             </div>
         </div>
     </section>
 
-    <!-- Bottom CTA -->
-    <section class="cta-bottom">
-        <h2>Don't Wait - Every Day Counts!</h2>
-        <p class="countdown">⏰ Your foreclosure clock is ticking...</p>
-        <a href="#lead-magnet-form" class="submit-btn" style="max-width: 400px; margin: 0 auto; display: block; text-decoration: none;">
-            GET YOUR FREE GUIDE NOW
-        </a>
+    <section class="content-section alt-bg">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">What's Inside Your FREE Guide</h2>
+
+            <div class="features-grid">
+                <div class="card feature-card">
+                    <div class="icon">&#128203;</div>
+                    <h3>Day 1-3 Action Plan</h3>
+                    <p style="color: var(--gray-500);">Critical first steps to stop the foreclosure process immediately</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon">&#128222;</div>
+                    <h3>Lender Scripts</h3>
+                    <p style="color: var(--gray-500);">Exact words to say when calling your bank for best results</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon">&#9878;</div>
+                    <h3>Legal Rights</h3>
+                    <p style="color: var(--gray-500);">California laws that protect you (most people don't know these)</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon">&#128176;</div>
+                    <h3>5 Ways to Keep Equity</h3>
+                    <p style="color: var(--gray-500);">Don't let the bank take everything - get what's yours</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon">&#10060;</div>
+                    <h3>Costly Mistakes</h3>
+                    <p style="color: var(--gray-500);">7 mistakes that guarantee foreclosure (avoid these!)</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon">&#9989;</div>
+                    <h3>Success Checklist</h3>
+                    <p style="color: var(--gray-500);">Step-by-step checklist to save your home</p>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <section class="cta-section">
+        <div class="container">
+            <h2>Don't Wait - Every Day Counts!</h2>
+            <p>Your foreclosure clock is ticking. Get the information you need right now.</p>
+            <div class="cta-buttons">
+                <a href="#lead-magnet-form" class="btn btn-white" onclick="document.querySelector('.form-card').scrollIntoView({behavior: 'smooth'}); return false;">Get Your Free Guide Now</a>
+                <a href="tel:+19495655285" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">Or Call (949) 565-5285</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                    <a href="schedule.html">Schedule Call</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="blog/">Blog</a>
+                    <a href="emergency-checklist.html">Emergency Help</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">&#128222; Call Now - Free Consultation</a>
+    </div>
+
+    <script src="js/theme.js"></script>
     <script>
         document.getElementById('lead-magnet-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const form = this;
-            const button = form.querySelector('.submit-btn');
+            const button = form.querySelector('.btn');
             const originalText = button.textContent;
 
-            // Show loading state
             button.textContent = 'Processing...';
             button.disabled = true;
 
-            // Get form data
             const formData = new FormData(form);
             const data = {
                 type: 'lead_magnet',
@@ -491,7 +345,6 @@
                 timestamp: new Date().toISOString()
             };
 
-            // Send to Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
                 method: 'POST',
                 mode: 'no-cors',
@@ -499,40 +352,18 @@
                 body: JSON.stringify(data)
             });
 
-            // Show success message
             setTimeout(function() {
                 form.style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
 
-                // Track conversion events
                 if (typeof gtag !== 'undefined') {
-                    // Google Analytics conversion event
-                    gtag('event', 'conversion', {
+                    gtag('event', 'generate_lead', {
                         'event_category': 'Lead Generation',
                         'event_label': 'PDF Guide Download',
                         'value': 1
                     });
-
-                    // Google Ads conversion (replace 'CONVERSION_LABEL' with your actual label)
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-XXXXXXXXX/CONVERSION_LABEL'
-                    });
                 }
-
-                // Smooth scroll to form
-                document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
             }, 1000);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
         });
     </script>
 </body>

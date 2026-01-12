@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You - My Foreclosure Solution</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Google tag (gtag.js) -->
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e293b' rx='12' width='100' height='100'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23d97706'>M</text></svg>">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-ZC3FHFTPN2');
-        
-        // Track conversion with GA4 recommended event
+
         gtag('event', 'generate_lead', {
             'form_name': 'consultation_form',
             'form_location': 'thank_you_page',
@@ -27,67 +21,185 @@
             'currency': 'USD'
         });
     </script>
-    
-    <!-- Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-        fbq('track', 'CompleteRegistration');
-    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Fraunces:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        .thank-you-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+        }
+        .thank-you-hero h1 {
+            color: var(--green-600);
+            font-size: clamp(36px, 5vw, 52px);
+            margin-bottom: 16px;
+        }
+        .thank-you-hero h2 {
+            font-size: 24px;
+            color: var(--primary-900);
+            margin-bottom: 40px;
+        }
+        .steps-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            text-align: left;
+        }
+        body.variant-b .steps-card {
+            border-radius: 24px;
+        }
+        .steps-card h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        .steps-card ol {
+            margin: 0;
+            padding-left: 24px;
+        }
+        .steps-card li {
+            margin-bottom: 12px;
+            color: var(--gray-700);
+        }
+        .urgent-card {
+            background: var(--red-600);
+            color: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+        body.variant-b .urgent-card {
+            border-radius: 24px;
+        }
+        .urgent-card h3 {
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .urgent-card .btn {
+            background: var(--white);
+            color: var(--red-600);
+            margin-top: 16px;
+        }
+        .video-card {
+            background: var(--green-600);
+            color: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+        body.variant-b .video-card {
+            border-radius: 24px;
+        }
+        .video-card h3 {
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .video-card .btn {
+            background: var(--white);
+            color: var(--green-600);
+            margin-top: 16px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container" style="padding: 100px 20px; text-align: center; max-width: 800px;">
-        <h1 class="hero-title" style="color: #27ae60;">Thank You!</h1>
-        <h2 class="hero-subtitle" style="color: #2c3e50;">We'll Contact You Within 2 Hours</h2>
-        
-        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
-            <p style="margin-bottom: 1rem;">
-                <strong>What happens next:</strong>
-            </p>
-            <ol style="text-align: left; line-height: 1.8;">
-                <li>One of our foreclosure specialists will call you within 2 hours</li>
-                <li>We'll discuss your situation and explain all your options</li>
-                <li>If you choose to work with us, we'll make you a fair cash offer within 24 hours</li>
-                <li>We can close and stop your foreclosure in as little as 7 days</li>
-            </ol>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                    <a href="schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+            </div>
         </div>
-        
-        <div style="background: #e74c3c; color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Need to Talk Right Now?</h3>
-            <p style="margin-bottom: 1rem;">
-                Don't wait for us to call you. Time is critical when facing foreclosure.
+    </header>
+
+    <section class="thank-you-hero">
+        <div class="container">
+            <h1>Thank You!</h1>
+            <h2>We'll Contact You Within 2 Hours</h2>
+
+            <div class="steps-card">
+                <h3>What happens next:</h3>
+                <ol>
+                    <li>One of our foreclosure specialists will call you within 2 hours</li>
+                    <li>We'll discuss your situation and explain all your options</li>
+                    <li>If you choose to work with us, we'll make you a fair cash offer within 24 hours</li>
+                    <li>We can close and stop your foreclosure in as little as 7 days</li>
+                </ol>
+            </div>
+
+            <div class="urgent-card">
+                <h3>Need to Talk Right Now?</h3>
+                <p>Don't wait for us to call you. Time is critical when facing foreclosure.</p>
+                <a href="tel:+19495655285" class="btn">Call Now: (949) 565-5285</a>
+            </div>
+
+            <div class="video-card">
+                <h3>Prefer a Video Consultation?</h3>
+                <p>Schedule a free 30-minute video call at a time that works for you.</p>
+                <a href="https://calendar.app.google/ZXXVRabrMJoT5GYA9" target="_blank" class="btn">Book Video Consultation (6-8pm)</a>
+            </div>
+
+            <p style="color: var(--gray-500); margin-top: 24px;">
+                Keep an eye on your phone and email. We'll be in touch very soon!
             </p>
-            <a href="tel:+1-949-565-5285" class="cta-button-large" style="background: white; color: #e74c3c; display: inline-block; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-bottom: 10px;">
-                📞 Call Now: (949) 565-5285
+
+            <a href="index.html" style="display: inline-block; margin-top: 24px; color: var(--accent-600);">
+                &larr; Return to Home Page
             </a>
         </div>
+    </section>
 
-        <!-- Book a Video Consultation -->
-        <div style="background: #10b981; color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Prefer a Video Consultation?</h3>
-            <p style="margin-bottom: 1rem;">
-                Schedule a free 30-minute video call at a time that works for you.
-            </p>
-            <a href="https://calendar.app.google/ZXXVRabrMJoT5GYA9" target="_blank" style="background: white; color: #10b981; display: inline-block; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600;">
-                📅 Book Video Consultation (6-8pm)
-            </a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                    <a href="schedule.html">Schedule Call</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="blog/">Blog</a>
+                    <a href="emergency-checklist.html">Emergency Help</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
+            </div>
         </div>
+    </footer>
 
-        <p style="color: #666;">
-            Keep an eye on your phone and email. We'll be in touch very soon!
-        </p>
-        
-        <a href="index.html" style="display: inline-block; margin-top: 2rem; color: #3498db; text-decoration: none;">
-            ← Return to Home Page
-        </a>
-    </div>
+    <script src="js/theme.js"></script>
 </body>
 </html>
