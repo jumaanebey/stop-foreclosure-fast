@@ -2,7 +2,6 @@ exclude:
   - node_modules
   - google-ai-setup/node_modules
   - "*.json"
-  - "*.js"
   - .env
   - .env.*
   - README.md
@@ -13,3 +12,13 @@ exclude:
   - n8n-workflows
   - python-enhancements
   - downloads
+  - api
+  - scrapers
+  - outreach
+  - video-tools
+  - youtube-scripts
+  - social-media
+
+include:
+  - js
+  - css
