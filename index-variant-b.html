@@ -878,6 +878,70 @@
                 padding-bottom: 90px;
             }
         }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--brown-900);
+            margin: 6px 0;
+            transition: all 0.3s;
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Mobile Nav Overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--cream);
+            z-index: 999;
+            padding: 120px 24px 40px;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        .mobile-nav a {
+            font-size: 20px;
+            color: var(--brown-900);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .mobile-nav .nav-cta {
+            background: linear-gradient(135deg, var(--sage-500), var(--sage-700));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -898,9 +962,22 @@
                     <a href="free-guide.html">Free Guide</a>
                     <a href="schedule.html" class="nav-cta">Free Consultation</a>
                 </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <nav class="mobile-nav">
+        <a href="learn-more.html">How It Works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="free-guide.html">Free Guide</a>
+        <a href="blog/">Blog</a>
+        <a href="schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
 
     <section class="hero">
         <div class="blob blob-1"></div>
@@ -1191,6 +1268,24 @@
                 document.getElementById('form-success').classList.add('active');
             }, 800);
         });
+
+        // Mobile Menu Toggle
+        var menuToggle = document.querySelector('.menu-toggle');
+        var mobileNav = document.querySelector('.mobile-nav');
+        if (menuToggle && mobileNav) {
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                document.body.classList.toggle('mobile-nav-open');
+            });
+            mobileNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
+                });
+            });
+        }
     </script>
 </body>
 </html>

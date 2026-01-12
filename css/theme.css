@@ -540,10 +540,213 @@ body.variant-b .mobile-cta a {
     border-radius: 50px;
 }
 
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--primary-900);
+    margin: 6px 0;
+    transition: all 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--cream);
+    z-index: 999;
+    padding: 100px 24px 24px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-nav.active {
+    display: flex;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray-700);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.mobile-nav a:hover {
+    background: var(--gray-100);
+    color: var(--primary-900);
+}
+
+.mobile-nav a.nav-cta {
+    background: var(--primary-900);
+    color: var(--white);
+    text-align: center;
+    margin-top: 16px;
+}
+
+body.variant-b .mobile-nav a.nav-cta {
+    background: var(--primary-600);
+    border-radius: 50px;
+}
+
+/* Sticky Phone Bar (Desktop) */
+.sticky-phone {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent-600);
+    color: var(--white);
+    padding: 16px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(217, 119, 6, 0.4);
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.sticky-phone.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sticky-phone:hover {
+    background: var(--accent-500);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(217, 119, 6, 0.5);
+    color: var(--white);
+}
+
+/* Exit Intent Popup */
+.exit-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.exit-popup-overlay.active {
+    display: flex;
+}
+
+.exit-popup {
+    background: var(--white);
+    border-radius: 24px;
+    max-width: 500px;
+    width: 100%;
+    padding: 48px 40px;
+    text-align: center;
+    position: relative;
+    animation: popupIn 0.3s ease;
+}
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+body.variant-b .exit-popup {
+    border-radius: 32px;
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--gray-500);
+    line-height: 1;
+    padding: 8px;
+}
+
+.exit-popup-close:hover {
+    color: var(--gray-700);
+}
+
+.exit-popup h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.exit-popup p {
+    color: var(--gray-500);
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+.exit-popup .btn {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.exit-popup .skip-link {
+    font-size: 14px;
+    color: var(--gray-500);
+    cursor: pointer;
+}
+
+.exit-popup .skip-link:hover {
+    color: var(--gray-700);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .footer-grid {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .sticky-phone {
+        display: none;
     }
 }
 
@@ -552,12 +755,20 @@ body.variant-b .mobile-cta a {
         display: none;
     }
 
+    .menu-toggle {
+        display: block;
+    }
+
     .mobile-cta {
         display: block;
     }
 
     body {
         padding-bottom: 90px;
+    }
+
+    body.mobile-nav-open {
+        overflow: hidden;
     }
 
     .page-header {
@@ -580,5 +791,13 @@ body.variant-b .mobile-cta a {
 
     .cta-buttons {
         flex-direction: column;
+    }
+
+    .exit-popup {
+        padding: 32px 24px;
+    }
+
+    .exit-popup h3 {
+        font-size: 24px;
     }
 }

@@ -3,18 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>California Foreclosure Help Blog - Expert Advice to Stop Foreclosure | My Foreclosure Solution</title>
+    <title>California Foreclosure Help Blog - Expert Advice | My Foreclosure Solution</title>
     <meta name="description" content="Expert advice on stopping foreclosure in California. Learn about foreclosure laws, timelines, and alternatives. Free resources for California homeowners.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../css/styles.css">
-    <!-- Tailwind CSS for UI/UX Optimization -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google tag (gtag.js) -->
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e293b' rx='12' width='100' height='100'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23d97706'>M</text></svg>">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -22,159 +15,415 @@
         gtag('js', new Date());
         gtag('config', 'G-ZC3FHFTPN2');
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Fraunces:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/theme.css">
+    <style>
+        .blog-hero {
+            padding: 60px 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+        }
+        .blog-hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+        }
+        .blog-hero p {
+            font-size: 18px;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 60px 0;
+        }
+        .blog-card {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        body.variant-b .blog-card {
+            border-radius: 24px;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+        .blog-card-content {
+            padding: 24px;
+        }
+        .blog-card h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .blog-card h2 a {
+            color: var(--primary-900);
+            text-decoration: none;
+        }
+        .blog-card h2 a:hover {
+            color: var(--accent-600);
+        }
+        .blog-card p {
+            color: var(--gray-500);
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .blog-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent-50);
+            color: var(--accent-700);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .blog-tag.urgent {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+        .blog-tag.legal {
+            background: var(--blue-100);
+            color: var(--blue-700);
+        }
+        .blog-tag.timeline {
+            background: var(--purple-100);
+            color: var(--purple-700);
+        }
+        .read-more {
+            color: var(--accent-600);
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        .city-section {
+            padding: 60px 0;
+            background: var(--gray-100);
+        }
+        .city-section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .city-card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary-900);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        body.variant-b .city-card {
+            border-radius: 16px;
+        }
+        .city-card:hover {
+            border-color: var(--accent-500);
+            transform: translateY(-2px);
+        }
+        .city-card .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .city-card h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .city-card span {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
+    <div class="emergency-bar">
+        Need help now? <a href="tel:+19495655285">Call: (949) 565-5285</a>
+    </div>
+
+    <header class="site-header">
         <div class="container">
-            <h1 class="logo"><a href="../index.html">My Foreclosure Solution</a></h1>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <a href="../index.html#how-it-works">How It Works</a>
-                <a href="../index.html#about">About Us</a>
-                <a href="../index.html#contact" class="cta-button">Get Help Now</a>
-            </nav>
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <main class="container" style="padding: 2rem 0;">
-        <h1>California Foreclosure Help & Resources</h1>
-        <p class="lead">Expert guidance on stopping foreclosure in California. Get the knowledge you need to save your home.</p>
+    <nav class="mobile-nav">
+        <a href="../learn-more.html">How It Works</a>
+        <a href="../faq.html">FAQ</a>
+        <a href="../free-guide.html">Free Guide</a>
+        <a href="./">Blog</a>
+        <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
 
-        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
-            
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="california-foreclosure-timeline.html" style="text-decoration: none; color: #2c3e50;">California Foreclosure Timeline: What to Expect in 2025</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Understanding California's foreclosure process and how long you have to act. Key deadlines and your rights as a homeowner.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #27ae60; font-weight: bold;">Essential Reading</span>
-                        <a href="california-foreclosure-timeline.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="stop-foreclosure-los-angeles.html" style="text-decoration: none; color: #2c3e50;">How to Stop Foreclosure in Los Angeles: 7 Proven Options</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Specific strategies for LA homeowners facing foreclosure. Local resources and immediate action steps you can take today.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #e74c3c; font-weight: bold;">Urgent Help</span>
-                        <a href="stop-foreclosure-los-angeles.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="california-foreclosure-laws.html" style="text-decoration: none; color: #2c3e50;">California Foreclosure Laws 2025: Your Rights & Protections</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Complete guide to California foreclosure laws, homeowner rights, and legal protections available to you.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #3498db; font-weight: bold;">Legal Guide</span>
-                        <a href="california-foreclosure-laws.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="how-long-does-foreclosure-take-los-angeles.html" style="text-decoration: none; color: #2c3e50;">How Long Does Foreclosure Take in Los Angeles?</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Complete LA foreclosure timeline from missed payments to auction. Understand each stage and how much time you have.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #f39c12; font-weight: bold;">Timeline Guide</span>
-                        <a href="how-long-does-foreclosure-take-los-angeles.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="can-i-sell-my-house-during-foreclosure-california.html" style="text-decoration: none; color: #2c3e50;">Can I Sell My House During Foreclosure in California?</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Yes! Learn about your selling options including traditional sales, short sales, and fast cash offers.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #27ae60; font-weight: bold;">Selling Options</span>
-                        <a href="can-i-sell-my-house-during-foreclosure-california.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="blog-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
-                <div style="padding: 2rem;">
-                    <h2><a href="what-happens-after-foreclosure-auction-california.html" style="text-decoration: none; color: #2c3e50;">What Happens After a Foreclosure Auction in California?</a></h2>
-                    <p style="color: #666; margin: 1rem 0;">Understand your rights, eviction timeline, deficiency judgments, and options for moving forward after auction.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
-                        <span style="color: #9b59b6; font-weight: bold;">Post-Auction</span>
-                        <a href="what-happens-after-foreclosure-auction-california.html" style="color: #3498db; text-decoration: none;">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
+    <section class="blog-hero">
+        <div class="container">
+            <h1>California Foreclosure Help & Resources</h1>
+            <p>Expert guidance on stopping foreclosure in California. Get the knowledge you need to save your home or walk away with cash.</p>
         </div>
+    </section>
 
-        <div style="margin: 3rem 0;">
-            <h2>City-Specific Help</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                <div style="background: #e74c3c; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🏙️ Los Angeles</h3>
-                    <p style="margin-bottom: 1.5rem;">Specialized help for LA County homeowners facing foreclosure.</p>
-                    <a href="../los-angeles.html" style="background: white; color: #e74c3c; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">LA Services</a>
+    <main class="container">
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></h2>
+                    <p>The complete guide to stopping foreclosure in California. Learn your options, rights, and immediate steps you can take today.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag urgent">Urgent Help</span>
+                        <a href="how-to-stop-foreclosure-california-2025.html" class="read-more">Read More &rarr;</a>
+                    </div>
                 </div>
-                
-                <div style="background: #3498db; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🌊 San Diego</h3>
-                    <p style="margin-bottom: 1.5rem;">Expert foreclosure assistance for San Diego County residents.</p>
-                    <a href="../stop-foreclosure-san-diego.html" style="background: white; color: #3498db; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">SD Services</a>
-                </div>
+            </article>
 
-                <div style="background: #27ae60; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🌉 Oakland / Bay Area</h3>
-                    <p style="margin-bottom: 1.5rem;">Foreclosure help for Alameda County and the Bay Area.</p>
-                    <a href="../stop-foreclosure-oakland.html" style="background: white; color: #27ae60; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">Oakland Services</a>
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="california-foreclosure-timeline.html">California Foreclosure Timeline: What to Expect in 2025</a></h2>
+                    <p>Understanding California's foreclosure process and how long you have to act. Key deadlines and your rights as a homeowner.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag timeline">Timeline</span>
+                        <a href="california-foreclosure-timeline.html" class="read-more">Read More &rarr;</a>
+                    </div>
                 </div>
+            </article>
 
-                <div style="background: #9b59b6; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🏛️ Sacramento</h3>
-                    <p style="margin-bottom: 1.5rem;">Foreclosure assistance for Sacramento County homeowners.</p>
-                    <a href="../stop-foreclosure-sacramento.html" style="background: white; color: #9b59b6; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">Sacramento Services</a>
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="california-foreclosure-laws.html">California Foreclosure Laws 2025: Your Rights & Protections</a></h2>
+                    <p>Complete guide to California foreclosure laws, homeowner rights, and legal protections available to you.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag legal">Legal Guide</span>
+                        <a href="california-foreclosure-laws.html" class="read-more">Read More &rarr;</a>
+                    </div>
                 </div>
+            </article>
 
-                <div style="background: #f39c12; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🌾 Fresno</h3>
-                    <p style="margin-bottom: 1.5rem;">Central Valley foreclosure help for Fresno County.</p>
-                    <a href="../stop-foreclosure-fresno.html" style="background: white; color: #f39c12; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">Fresno Services</a>
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="notice-of-default-california.html">Notice of Default in California: What It Means & What to Do</a></h2>
+                    <p>Received a Notice of Default? Learn what this document means and the critical steps you must take immediately.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag urgent">Urgent Help</span>
+                        <a href="notice-of-default-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
                 </div>
+            </article>
 
-                <div style="background: #1abc9c; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin-bottom: 1rem;">🏜️ Riverside</h3>
-                    <p style="margin-bottom: 1.5rem;">Inland Empire foreclosure assistance for Riverside County.</p>
-                    <a href="../stop-foreclosure-riverside.html" style="background: white; color: #1abc9c; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">Riverside Services</a>
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="can-i-sell-my-house-during-foreclosure-california.html">Can I Sell My House During Foreclosure in California?</a></h2>
+                    <p>Yes! Learn about your selling options including traditional sales, short sales, and fast cash offers during foreclosure.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag">Selling Options</span>
+                        <a href="can-i-sell-my-house-during-foreclosure-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
                 </div>
-            </div>
+            </article>
 
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="what-happens-after-foreclosure-auction-california.html">What Happens After a Foreclosure Auction in California?</a></h2>
+                    <p>Understand your rights, eviction timeline, deficiency judgments, and options for moving forward after auction.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag timeline">Post-Auction</span>
+                        <a href="what-happens-after-foreclosure-auction-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="stop-foreclosure-los-angeles.html">How to Stop Foreclosure in Los Angeles: 7 Proven Options</a></h2>
+                    <p>Specific strategies for LA homeowners facing foreclosure. Local resources and immediate action steps.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag urgent">LA Guide</span>
+                        <a href="stop-foreclosure-los-angeles.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="how-long-does-foreclosure-take-los-angeles.html">How Long Does Foreclosure Take in Los Angeles?</a></h2>
+                    <p>Complete LA foreclosure timeline from missed payments to auction. Understand each stage and how much time you have.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag timeline">Timeline</span>
+                        <a href="how-long-does-foreclosure-take-los-angeles.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="loan-modification-california.html">Loan Modification in California: How to Apply & Qualify</a></h2>
+                    <p>Everything you need to know about getting a loan modification in California to avoid foreclosure.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag">Options</span>
+                        <a href="loan-modification-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="short-sale-california.html">Short Sale in California: Complete Guide for Homeowners</a></h2>
+                    <p>Learn how a short sale works, when it makes sense, and how to negotiate with your lender.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag">Selling Options</span>
+                        <a href="short-sale-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="deed-in-lieu-foreclosure-california.html">Deed in Lieu of Foreclosure: Is It Right for You?</a></h2>
+                    <p>Understand the pros and cons of a deed in lieu of foreclosure and when this option makes sense.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag">Options</span>
+                        <a href="deed-in-lieu-foreclosure-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2><a href="bankruptcy-stop-foreclosure-california.html">Can Bankruptcy Stop Foreclosure in California?</a></h2>
+                    <p>Learn how Chapter 7 and Chapter 13 bankruptcy can temporarily or permanently stop foreclosure proceedings.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-tag legal">Legal Guide</span>
+                        <a href="bankruptcy-stop-foreclosure-california.html" class="read-more">Read More &rarr;</a>
+                    </div>
+                </div>
+            </article>
         </div>
-
-        <section class="urgency">
-            <div class="container">
-                <h2>Need Immediate Help?</h2>
-                <p class="urgency-text">Don't wait - every day matters when facing foreclosure in California.</p>
-                <div class="urgency-cta">
-                    <a href="../index.html#contact" class="cta-button-large">Get Your Free Cash Offer Now</a>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <footer class="footer">
+    <section class="city-section">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>My Foreclosure Solution</h3>
-                    <p>Helping California homeowners since 2014</p>
-                    <p>📞 (949) 565-5285</p>
-                    <p>📧 help@myforeclosuresolution.com</p>
+            <h2>City-Specific Foreclosure Help</h2>
+            <div class="city-grid">
+                <a href="../stop-foreclosure-los-angeles.html" class="city-card">
+                    <div class="icon">&#127961;</div>
+                    <h3>Los Angeles</h3>
+                    <span>LA County Help</span>
+                </a>
+                <a href="../stop-foreclosure-san-diego.html" class="city-card">
+                    <div class="icon">&#127754;</div>
+                    <h3>San Diego</h3>
+                    <span>SD County Help</span>
+                </a>
+                <a href="../stop-foreclosure-oakland.html" class="city-card">
+                    <div class="icon">&#127753;</div>
+                    <h3>Oakland</h3>
+                    <span>Bay Area Help</span>
+                </a>
+                <a href="../stop-foreclosure-sacramento.html" class="city-card">
+                    <div class="icon">&#127963;</div>
+                    <h3>Sacramento</h3>
+                    <span>Capital Region</span>
+                </a>
+                <a href="../stop-foreclosure-fresno.html" class="city-card">
+                    <div class="icon">&#127806;</div>
+                    <h3>Fresno</h3>
+                    <span>Central Valley</span>
+                </a>
+                <a href="../stop-foreclosure-riverside.html" class="city-card">
+                    <div class="icon">&#127964;</div>
+                    <h3>Riverside</h3>
+                    <span>Inland Empire</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need Immediate Help?</h2>
+            <p>Don't wait - every day matters when facing foreclosure in California.</p>
+            <div class="cta-buttons">
+                <a href="tel:+19495655285" class="btn btn-white">Call (949) 565-5285</a>
+                <a href="../schedule.html" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
                 </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html">Schedule Call</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="./">Blog</a>
+                    <a href="../emergency-checklist.html">Emergency Help</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms-of-service.html">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">&#128222; Call Now - Free Consultation</a>
+    </div>
+
+    <script src="../js/theme.js"></script>
 </body>
 </html>
