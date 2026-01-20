@@ -250,6 +250,35 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Life Event / Crisis Content -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/divorce-and-mortgage-california.html</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/lost-job-cant-pay-mortgage-california.html</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/medical-bills-mortgage-california.html</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-stress-anxiety-california.html</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Lead Magnets & Downloads -->
   <url>
     <loc>https://myforeclosuresolution.com/checklist-download.html</loc>
