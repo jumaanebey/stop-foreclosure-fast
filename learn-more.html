@@ -87,117 +87,165 @@
     </script>
 
     <style>
-        /* Situation Cards Grid */
-        .situations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+        /* Situation Selector - Compact Pills */
+        .situation-selector {
+            background: var(--cream);
+            padding: 32px 0 40px;
+            border-bottom: 1px solid var(--gray-200);
         }
 
-        .situation-card {
-            background: var(--white);
-            border-radius: 20px;
-            border: 2px solid var(--gray-200);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .selector-header {
+            text-align: center;
+            margin-bottom: 24px;
         }
 
-        .situation-card:hover {
-            border-color: var(--accent-500);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            transform: translateY(-4px);
-        }
-
-        .situation-card.expanded {
-            border-color: var(--accent-500);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-        }
-
-        .situation-header {
-            padding: 28px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .situation-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent-100), var(--accent-100));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            flex-shrink: 0;
-        }
-
-        .situation-card.expanded .situation-icon {
-            background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
-        }
-
-        .situation-card.expanded .situation-icon span {
-            filter: brightness(0) invert(1);
-        }
-
-        .situation-title h3 {
-            font-size: 20px;
-            margin-bottom: 6px;
+        .selector-header h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 8px;
             color: var(--primary-900);
         }
 
-        .situation-title p {
-            font-size: 14px;
+        .selector-header p {
             color: var(--gray-500);
-            line-height: 1.5;
+            font-size: 16px;
         }
 
-        .situation-toggle {
-            margin-left: auto;
-            width: 32px;
-            height: 32px;
-            background: var(--gray-100);
-            border-radius: 50%;
+        .situation-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .situation-pill {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--gray-500);
-            transition: all 0.3s;
-            flex-shrink: 0;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
         }
 
-        .situation-card.expanded .situation-toggle {
-            background: var(--accent-500);
+        .situation-pill:hover {
+            border-color: var(--accent-400);
+            background: var(--white);
+        }
+
+        .situation-pill.active {
+            background: var(--primary-900);
+            border-color: var(--primary-900);
             color: white;
-            transform: rotate(180deg);
         }
 
-        .situation-content {
+        .situation-pill .pill-icon {
+            font-size: 18px;
+        }
+
+        .situation-pill.active .pill-icon {
+            filter: grayscale(1) brightness(10);
+        }
+
+        /* Content Panel */
+        .situation-content-wrapper {
+            padding: 48px 0;
+        }
+
+        .situation-panel {
             display: none;
-            padding: 0 28px 28px;
-            border-top: 1px solid var(--gray-200);
+            animation: fadeIn 0.3s ease;
         }
 
-        .situation-card.expanded .situation-content {
+        .situation-panel.active {
             display: block;
         }
 
-        .process-steps {
-            padding-top: 24px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .panel-header .panel-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent-100), var(--accent-200));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+        }
+
+        .panel-header h2 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 12px;
+        }
+
+        .panel-header p {
+            font-size: 17px;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* Two Column Layout */
+        .panel-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .panel-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* Process Steps */
+        .process-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .process-card h3 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: var(--primary-900);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
         }
 
         .process-step {
             display: flex;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .process-step:last-child {
+            margin-bottom: 0;
         }
 
         .step-number {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background: var(--primary-900);
             color: white;
             border-radius: 50%;
@@ -210,7 +258,7 @@
         }
 
         .step-content h4 {
-            font-size: 16px;
+            font-size: 15px;
             font-family: 'DM Sans', sans-serif;
             font-weight: 600;
             margin-bottom: 4px;
@@ -223,97 +271,66 @@
             line-height: 1.6;
         }
 
-        .situation-options {
-            background: var(--cream);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
+        /* Options Card */
+        .options-card {
+            background: linear-gradient(135deg, var(--primary-900), var(--primary-800));
+            border-radius: 20px;
+            padding: 32px;
+            color: white;
         }
 
-        .situation-options h4 {
-            font-size: 14px;
+        .options-card h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: white;
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-600);
-            margin-bottom: 12px;
         }
 
         .options-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 28px 0;
         }
 
         .options-list li {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            padding: 8px 0;
+            gap: 12px;
+            padding: 10px 0;
             font-size: 15px;
-            color: var(--gray-700);
+            color: var(--primary-200);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .options-list li:last-child {
+            border-bottom: none;
         }
 
         .options-list li::before {
             content: "\2713";
-            color: var(--green-600);
+            color: var(--accent-400);
             font-weight: bold;
             flex-shrink: 0;
         }
 
-        .situation-cta {
+        .panel-cta {
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            margin-top: 24px;
-            flex-wrap: wrap;
         }
 
-        .situation-cta .btn {
-            flex: 1;
-            min-width: 140px;
+        .panel-cta .btn {
             text-align: center;
-            padding: 14px 20px;
+            padding: 16px 24px;
             font-size: 15px;
-        }
-
-        /* Not Sure Section */
-        .not-sure-section {
-            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
-            border-radius: 24px;
-            padding: 48px;
-            text-align: center;
-            color: white;
-            margin-top: 48px;
-        }
-
-        .not-sure-section h2 {
-            color: white;
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .not-sure-section p {
-            color: var(--primary-400);
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 32px;
-        }
-
-        .not-sure-cta {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
+            border-radius: 12px;
         }
 
         .btn-amber {
             background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
             color: white;
-            padding: 18px 36px;
-            border-radius: 14px;
             font-weight: 700;
-            font-size: 17px;
             box-shadow: 0 4px 20px rgba(217, 119, 6, 0.35);
         }
 
@@ -327,10 +344,7 @@
             background: transparent;
             border: 2px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 18px 36px;
-            border-radius: 14px;
             font-weight: 600;
-            font-size: 17px;
         }
 
         .btn-outline-light:hover {
@@ -339,35 +353,32 @@
             border-color: white;
         }
 
-        /* Section header */
-        .section-intro {
+        /* Not Sure Section */
+        .not-sure-banner {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 32px;
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 48px;
+            margin-top: 48px;
+            border: 2px dashed var(--gray-300);
         }
 
-        .section-intro .eyebrow {
-            display: inline-block;
-            color: var(--accent-600);
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+        .not-sure-banner h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
         }
 
-        .section-intro h2 {
-            font-size: clamp(28px, 4vw, 40px);
-            margin-bottom: 16px;
-        }
-
-        .section-intro p {
-            font-size: 18px;
+        .not-sure-banner p {
             color: var(--gray-500);
-            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 15px;
         }
 
-        /* Trust indicators */
+        .not-sure-banner .btn {
+            padding: 14px 28px;
+        }
+
+        /* Trust Row */
         .trust-row {
             display: flex;
             justify-content: center;
@@ -375,7 +386,7 @@
             flex-wrap: wrap;
             padding: 32px 0;
             border-top: 1px solid var(--gray-200);
-            margin-top: 32px;
+            margin-top: 48px;
         }
 
         .trust-item {
@@ -399,67 +410,37 @@
             font-weight: bold;
         }
 
-        /* Why choose us mini section */
-        .why-mini {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin-top: 48px;
-            padding-top: 48px;
-            border-top: 1px solid var(--gray-200);
+        /* Mobile Pills */
+        @media (max-width: 600px) {
+            .situation-pills {
+                gap: 8px;
+            }
+
+            .situation-pill {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+
+            .situation-pill .pill-label {
+                display: none;
+            }
+
+            .situation-pill .pill-short {
+                display: inline;
+            }
+
+            .panel-content {
+                padding: 0 16px;
+            }
+
+            .process-card, .options-card {
+                padding: 24px;
+            }
         }
 
-        .why-mini-card {
-            text-align: center;
-            padding: 24px;
-        }
-
-        .why-mini-card .icon {
-            font-size: 40px;
-            margin-bottom: 16px;
-        }
-
-        .why-mini-card h4 {
-            font-size: 17px;
-            margin-bottom: 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-        }
-
-        .why-mini-card p {
-            font-size: 14px;
-            color: var(--gray-500);
-            line-height: 1.6;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .situations-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .situation-header {
-                padding: 20px;
-            }
-
-            .situation-content {
-                padding: 0 20px 20px;
-            }
-
-            .not-sure-section {
-                padding: 32px 24px;
-            }
-
-            .not-sure-cta {
-                flex-direction: column;
-            }
-
-            .situation-cta {
-                flex-direction: column;
-            }
-
-            .situation-cta .btn {
-                width: 100%;
+        @media (min-width: 601px) {
+            .situation-pill .pill-short {
+                display: none;
             }
         }
     </style>
@@ -499,355 +480,346 @@
         <a href="schedule.html" class="nav-cta">Free Consultation</a>
     </nav>
 
-    <section class="page-header">
+    <!-- Situation Selector at Top -->
+    <section class="situation-selector">
         <div class="container">
-            <h1>Find Your Path Forward</h1>
-            <p class="subtitle">Every foreclosure situation is different. Click your situation below to see the specific steps and options available to you.</p>
+            <div class="selector-header">
+                <h1>What's Causing Your Foreclosure?</h1>
+                <p>Select your situation to see your specific options</p>
+            </div>
+
+            <div class="situation-pills">
+                <button class="situation-pill active" data-target="divorce">
+                    <span class="pill-icon">&#128148;</span>
+                    <span class="pill-label">Divorce</span>
+                    <span class="pill-short">Divorce</span>
+                </button>
+                <button class="situation-pill" data-target="job-loss">
+                    <span class="pill-icon">&#128188;</span>
+                    <span class="pill-label">Job Loss</span>
+                    <span class="pill-short">Job</span>
+                </button>
+                <button class="situation-pill" data-target="medical">
+                    <span class="pill-icon">&#127973;</span>
+                    <span class="pill-label">Medical Bills</span>
+                    <span class="pill-short">Medical</span>
+                </button>
+                <button class="situation-pill" data-target="senior">
+                    <span class="pill-icon">&#127968;</span>
+                    <span class="pill-label">Senior/Retired</span>
+                    <span class="pill-short">Senior</span>
+                </button>
+                <button class="situation-pill" data-target="inherited">
+                    <span class="pill-icon">&#128220;</span>
+                    <span class="pill-label">Inherited</span>
+                    <span class="pill-short">Inherit</span>
+                </button>
+                <button class="situation-pill" data-target="hoa-tax">
+                    <span class="pill-icon">&#128176;</span>
+                    <span class="pill-label">HOA/Tax Lien</span>
+                    <span class="pill-short">HOA</span>
+                </button>
+            </div>
         </div>
     </section>
 
-    <section class="content-section">
+    <!-- Dynamic Content Area -->
+    <section class="situation-content-wrapper">
         <div class="container">
-            <div class="section-intro">
-                <span class="eyebrow">Your Situation</span>
-                <h2>What's Causing Your Foreclosure?</h2>
-                <p>We've helped hundreds of California homeowners in situations just like yours. Select the one that best describes your circumstances.</p>
-            </div>
 
-            <div class="situations-grid">
-                <!-- Situation 1: Facing Divorce -->
-                <div class="situation-card" data-situation="divorce">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#128148;</span></div>
-                        <div class="situation-title">
-                            <h3>Facing Divorce</h3>
-                            <p>Separating and need to figure out what to do with the house</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Assess the Timeline</h4>
-                                    <p>We review your divorce proceedings timeline and how it affects foreclosure deadlines. Acting before the decree is finalized gives you more options.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Calculate Equity Split Options</h4>
-                                    <p>We help you understand your home's current value, existing liens, and how different exit strategies affect each spouse's share.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Execute Your Best Option</h4>
-                                    <p>Whether selling, one spouse buying out the other, or negotiating with the lender, we guide you through every step.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Sell the home quickly and split the equity fairly</li>
-                                <li>One spouse buys out the other with refinancing</li>
-                                <li>Negotiate forbearance during divorce proceedings</li>
-                                <li>Loan modification under one spouse's income</li>
-                            </ul>
-                        </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
-                        </div>
-                    </div>
+            <!-- Divorce Panel -->
+            <div class="situation-panel active" id="divorce">
+                <div class="panel-header">
+                    <div class="panel-icon">&#128148;</div>
+                    <h2>Facing Divorce</h2>
+                    <p>Separating and need to figure out what to do with the house? We help divorcing couples navigate foreclosure while protecting both parties' interests.</p>
                 </div>
-
-                <!-- Situation 2: Lost Your Job -->
-                <div class="situation-card" data-situation="job-loss">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#128188;</span></div>
-                        <div class="situation-title">
-                            <h3>Lost Your Job</h3>
-                            <p>Unemployed or income significantly reduced</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Document Your Hardship</h4>
-                                    <p>We help you gather the right documentation to prove unemployment hardship to your lender, which unlocks special programs.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Apply for Assistance Programs</h4>
-                                    <p>California has specific unemployment mortgage assistance programs. We identify which ones you qualify for and help you apply.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Negotiate with Your Lender</h4>
-                                    <p>We contact your lender on your behalf to negotiate forbearance, modification, or other solutions while you find new employment.</p>
-                                </div>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Assess the Timeline</h4>
+                                <p>We review your divorce proceedings timeline and how it affects foreclosure deadlines. Acting before the decree is finalized gives you more options.</p>
                             </div>
                         </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Forbearance (temporary payment pause or reduction)</li>
-                                <li>Unemployment hardship loan modification</li>
-                                <li>California Mortgage Relief Program assistance</li>
-                                <li>Income-based repayment plans</li>
-                            </ul>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Calculate Equity Split Options</h4>
+                                <p>We help you understand your home's current value, existing liens, and how different exit strategies affect each spouse's share.</p>
+                            </div>
                         </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Execute Your Best Option</h4>
+                                <p>Whether selling, one spouse buying out the other, or negotiating with the lender, we guide you through every step.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Situation 3: Medical Bills -->
-                <div class="situation-card" data-situation="medical">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#127973;</span></div>
-                        <div class="situation-title">
-                            <h3>Medical Bills Overwhelming</h3>
-                            <p>Healthcare costs making mortgage payments impossible</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Review Your Full Financial Picture</h4>
-                                    <p>We look at all your debts - medical, mortgage, and others - to understand the complete situation and find the best path forward.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Apply for Medical Hardship Programs</h4>
-                                    <p>Medical hardship is a recognized reason for mortgage assistance. We help you qualify for special programs designed for your situation.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Protect Your Home & Health</h4>
-                                    <p>We create a sustainable plan that keeps you in your home while managing your financial recovery, so you can focus on getting better.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Medical hardship forbearance programs</li>
-                                <li>Loan modification with extended term (lower payments)</li>
-                                <li>Debt consolidation strategies</li>
-                                <li>Programs to help you stay in your home during recovery</li>
-                            </ul>
-                        </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Situation 4: Senior/Retired -->
-                <div class="situation-card" data-situation="senior">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#127968;</span></div>
-                        <div class="situation-title">
-                            <h3>Senior / Retired</h3>
-                            <p>On a fixed income and struggling to keep up with payments</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Evaluate Age-Specific Options</h4>
-                                    <p>Seniors have unique programs available, including reverse mortgages. We explain all options in plain terms so you can make the best choice.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Calculate Fixed Income Solutions</h4>
-                                    <p>We analyze your Social Security, pension, and other income to find a payment solution that works with your fixed budget.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Help You Age in Place</h4>
-                                    <p>Our goal is to keep you in your home where you're comfortable. We explore every option to make that possible.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Reverse mortgage (for homeowners 62+)</li>
-                                <li>Senior-specific mortgage assistance programs</li>
-                                <li>Loan modification based on fixed income</li>
-                                <li>Property tax exemptions and relief programs</li>
-                            </ul>
-                        </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Situation 5: Inherited Property -->
-                <div class="situation-card" data-situation="inherited">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#128220;</span></div>
-                        <div class="situation-title">
-                            <h3>Inherited Property in Foreclosure</h3>
-                            <p>Received a home through inheritance that has mortgage problems</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Understand the Probate Timeline</h4>
-                                    <p>Probate proceedings can actually help delay foreclosure. We coordinate with probate attorneys to protect the property during this process.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Assess Your Options</h4>
-                                    <p>You have choices: assume the mortgage, negotiate new terms, sell the property, or let it go (without affecting your personal credit).</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Execute the Best Strategy</h4>
-                                    <p>Whether you want to keep the property or extract the equity, we guide you through the specific legal and financial steps required.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Assume the existing mortgage (often at below-market rates)</li>
-                                <li>Quick sale to capture equity before auction</li>
-                                <li>Negotiate with lender for modification or reinstatement</li>
-                                <li>Use probate timeline to delay and negotiate</li>
-                            </ul>
-                        </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Situation 6: HOA or Tax Lien -->
-                <div class="situation-card" data-situation="hoa-tax">
-                    <div class="situation-header">
-                        <div class="situation-icon"><span>&#128176;</span></div>
-                        <div class="situation-title">
-                            <h3>HOA or Tax Lien Foreclosure</h3>
-                            <p>Facing foreclosure from unpaid HOA dues or property taxes</p>
-                        </div>
-                        <div class="situation-toggle">&#8964;</div>
-                    </div>
-                    <div class="situation-content">
-                        <div class="process-steps">
-                            <div class="process-step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Understand the Different Process</h4>
-                                    <p>HOA and tax lien foreclosures follow different rules than mortgage foreclosures - often faster timelines but smaller amounts owed.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Calculate the True Amount Owed</h4>
-                                    <p>We verify the actual amount including fees and penalties, and identify any improper charges that can be disputed.</p>
-                                </div>
-                            </div>
-                            <div class="process-step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Negotiate a Resolution</h4>
-                                    <p>These are often smaller amounts that can be negotiated. We work to set up payment plans or settlements that stop the foreclosure.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="situation-options">
-                            <h4>Your Options Include</h4>
-                            <ul class="options-list">
-                                <li>Payment plan negotiation with HOA or tax authority</li>
-                                <li>Lump-sum settlement (often at a discount)</li>
-                                <li>Disputing improper fees or assessments</li>
-                                <li>Using equity to pay off the lien</li>
-                            </ul>
-                        </div>
-                        <div class="situation-cta">
-                            <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
-                            <a href="schedule.html" class="btn btn-secondary">Schedule Consultation</a>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Sell the home quickly and split the equity fairly</li>
+                            <li>One spouse buys out the other with refinancing</li>
+                            <li>Negotiate forbearance during divorce proceedings</li>
+                            <li>Loan modification under one spouse's income</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Not Sure Section -->
-            <div class="not-sure-section">
-                <h2>Not Sure Which Applies to You?</h2>
-                <p>Your situation might be a combination of factors, or something else entirely. That's okay - we've seen it all. Let's talk and figure out the best path forward together.</p>
-                <div class="not-sure-cta">
-                    <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
-                    <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+            <!-- Job Loss Panel -->
+            <div class="situation-panel" id="job-loss">
+                <div class="panel-header">
+                    <div class="panel-icon">&#128188;</div>
+                    <h2>Lost Your Job</h2>
+                    <p>Unemployed or income significantly reduced? Job loss is one of the most common reasons for foreclosure - and one with the most assistance options available.</p>
+                </div>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Document Your Hardship</h4>
+                                <p>We help you gather the right documentation to prove unemployment hardship to your lender, which unlocks special programs.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Apply for Assistance Programs</h4>
+                                <p>California has specific unemployment mortgage assistance programs. We identify which ones you qualify for and help you apply.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Negotiate with Your Lender</h4>
+                                <p>We contact your lender on your behalf to negotiate forbearance, modification, or other solutions while you find new employment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Forbearance (temporary payment pause or reduction)</li>
+                            <li>Unemployment hardship loan modification</li>
+                            <li>California Mortgage Relief Program assistance</li>
+                            <li>Income-based repayment plans</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Why Choose Us -->
-            <div class="why-mini">
-                <div class="why-mini-card">
-                    <div class="icon">&#128274;</div>
-                    <h4>Licensed Professionals</h4>
-                    <p>CA DRE #02076038 and NMLS #2033637. We're legally authorized and accountable.</p>
+            <!-- Medical Bills Panel -->
+            <div class="situation-panel" id="medical">
+                <div class="panel-header">
+                    <div class="panel-icon">&#127973;</div>
+                    <h2>Medical Bills Overwhelming</h2>
+                    <p>Healthcare costs making mortgage payments impossible? Medical hardship is a recognized reason for mortgage assistance with special programs available.</p>
                 </div>
-                <div class="why-mini-card">
-                    <div class="icon">&#128176;</div>
-                    <h4>No Upfront Fees</h4>
-                    <p>We don't charge until we've found a solution. Free consultation, always.</p>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Review Your Full Financial Picture</h4>
+                                <p>We look at all your debts - medical, mortgage, and others - to understand the complete situation and find the best path forward.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Apply for Medical Hardship Programs</h4>
+                                <p>Medical hardship is a recognized reason for mortgage assistance. We help you qualify for special programs designed for your situation.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Protect Your Home & Health</h4>
+                                <p>We create a sustainable plan that keeps you in your home while managing your financial recovery, so you can focus on getting better.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Medical hardship forbearance programs</li>
+                            <li>Loan modification with extended term (lower payments)</li>
+                            <li>Debt consolidation strategies</li>
+                            <li>Programs to help you stay in your home during recovery</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="why-mini-card">
-                    <div class="icon">&#9203;</div>
-                    <h4>Fast Response</h4>
-                    <p>We respond within 30 minutes during business hours. Urgent cases get priority.</p>
+            </div>
+
+            <!-- Senior/Retired Panel -->
+            <div class="situation-panel" id="senior">
+                <div class="panel-header">
+                    <div class="panel-icon">&#127968;</div>
+                    <h2>Senior / Retired</h2>
+                    <p>On a fixed income and struggling to keep up with payments? Seniors have unique programs and options that can help you stay in your home.</p>
                 </div>
-                <div class="why-mini-card">
-                    <div class="icon">&#128274;</div>
-                    <h4>100% Confidential</h4>
-                    <p>Your situation stays private. We never share your information.</p>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Evaluate Age-Specific Options</h4>
+                                <p>Seniors have unique programs available, including reverse mortgages. We explain all options in plain terms so you can make the best choice.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Calculate Fixed Income Solutions</h4>
+                                <p>We analyze your Social Security, pension, and other income to find a payment solution that works with your fixed budget.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Help You Age in Place</h4>
+                                <p>Our goal is to keep you in your home where you're comfortable. We explore every option to make that possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Reverse mortgage (for homeowners 62+)</li>
+                            <li>Senior-specific mortgage assistance programs</li>
+                            <li>Loan modification based on fixed income</li>
+                            <li>Property tax exemptions and relief programs</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Inherited Property Panel -->
+            <div class="situation-panel" id="inherited">
+                <div class="panel-header">
+                    <div class="panel-icon">&#128220;</div>
+                    <h2>Inherited Property in Foreclosure</h2>
+                    <p>Received a home through inheritance that has mortgage problems? You have options that won't affect your personal credit.</p>
+                </div>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Understand the Probate Timeline</h4>
+                                <p>Probate proceedings can actually help delay foreclosure. We coordinate with probate attorneys to protect the property during this process.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Assess Your Options</h4>
+                                <p>You have choices: assume the mortgage, negotiate new terms, sell the property, or let it go (without affecting your personal credit).</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Execute the Best Strategy</h4>
+                                <p>Whether you want to keep the property or extract the equity, we guide you through the specific legal and financial steps required.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Assume the existing mortgage (often at below-market rates)</li>
+                            <li>Quick sale to capture equity before auction</li>
+                            <li>Negotiate with lender for modification or reinstatement</li>
+                            <li>Use probate timeline to delay and negotiate</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOA/Tax Lien Panel -->
+            <div class="situation-panel" id="hoa-tax">
+                <div class="panel-header">
+                    <div class="panel-icon">&#128176;</div>
+                    <h2>HOA or Tax Lien Foreclosure</h2>
+                    <p>Facing foreclosure from unpaid HOA dues or property taxes? These follow different rules - but are often easier to resolve than mortgage foreclosures.</p>
+                </div>
+                <div class="panel-content">
+                    <div class="process-card">
+                        <h3>How We Help</h3>
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Understand the Different Process</h4>
+                                <p>HOA and tax lien foreclosures follow different rules than mortgage foreclosures - often faster timelines but smaller amounts owed.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Calculate the True Amount Owed</h4>
+                                <p>We verify the actual amount including fees and penalties, and identify any improper charges that can be disputed.</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Negotiate a Resolution</h4>
+                                <p>These are often smaller amounts that can be negotiated. We work to set up payment plans or settlements that stop the foreclosure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-card">
+                        <h3>Your Options</h3>
+                        <ul class="options-list">
+                            <li>Payment plan negotiation with HOA or tax authority</li>
+                            <li>Lump-sum settlement (often at a discount)</li>
+                            <li>Disputing improper fees or assessments</li>
+                            <li>Using equity to pay off the lien</li>
+                        </ul>
+                        <div class="panel-cta">
+                            <a href="tel:+19495655285" class="btn btn-amber">Call (949) 565-5285</a>
+                            <a href="schedule.html" class="btn btn-outline-light">Schedule Free Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Not Sure Banner -->
+            <div class="not-sure-banner">
+                <h3>Not Sure Which Applies?</h3>
+                <p>Your situation might be a combination of factors. That's okay - let's talk and figure out the best path forward together.</p>
+                <a href="tel:+19495655285" class="btn btn-accent">Call (949) 565-5285</a>
             </div>
 
             <!-- Trust Row -->
@@ -923,51 +895,49 @@
 
     <script src="js/theme.js"></script>
     <script>
-        // Situation card expand/collapse functionality
+        // Situation tab switching
         document.addEventListener('DOMContentLoaded', function() {
-            const situationCards = document.querySelectorAll('.situation-card');
+            const pills = document.querySelectorAll('.situation-pill');
+            const panels = document.querySelectorAll('.situation-panel');
 
-            situationCards.forEach(card => {
-                const header = card.querySelector('.situation-header');
+            pills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    const target = this.dataset.target;
 
-                header.addEventListener('click', function() {
-                    // Check if this card is already expanded
-                    const isExpanded = card.classList.contains('expanded');
+                    // Update active pill
+                    pills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
 
-                    // Close all cards
-                    situationCards.forEach(c => c.classList.remove('expanded'));
-
-                    // If it wasn't expanded, expand it
-                    if (!isExpanded) {
-                        card.classList.add('expanded');
-
-                        // Scroll to the card if it's not fully visible
-                        setTimeout(() => {
-                            const cardRect = card.getBoundingClientRect();
-                            const headerHeight = 80; // Account for sticky header
-                            if (cardRect.top < headerHeight) {
-                                window.scrollBy({
-                                    top: cardRect.top - headerHeight - 20,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        }, 100);
-
-                        // Track card expansion in GA
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'situation_card_expanded', {
-                                'situation': card.dataset.situation
-                            });
+                    // Update active panel
+                    panels.forEach(panel => {
+                        panel.classList.remove('active');
+                        if (panel.id === target) {
+                            panel.classList.add('active');
                         }
+                    });
+
+                    // Scroll to content on mobile
+                    if (window.innerWidth < 768) {
+                        const contentSection = document.querySelector('.situation-content-wrapper');
+                        setTimeout(() => {
+                            contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+
+                    // Track in GA
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'situation_selected', {
+                            'situation': target
+                        });
                     }
                 });
             });
 
-            // Track CTA clicks within situation cards
-            document.querySelectorAll('.situation-cta a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const card = this.closest('.situation-card');
-                    const situation = card ? card.dataset.situation : 'unknown';
+            // Track CTA clicks
+            document.querySelectorAll('.panel-cta a').forEach(link => {
+                link.addEventListener('click', function() {
+                    const panel = this.closest('.situation-panel');
+                    const situation = panel ? panel.id : 'unknown';
                     const action = this.href.includes('tel:') ? 'call' : 'schedule';
 
                     if (typeof gtag !== 'undefined') {
