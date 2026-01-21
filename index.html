@@ -62,49 +62,21 @@
 
     <script>
         (function() {
-            // A/B Test Configuration
-            const EXPERIMENT_ID = 'homepage_redesign_2026';
-            const STORAGE_KEY = 'mfs_ab_variant';
-            const VARIANTS = {
-                'A': 'index-variant-a.html',  // Editorial Luxury (navy + amber)
-                'B': 'index-variant-b.html'   // Warm Organic (sage + terracotta)
-            };
-            const SPLIT = 0.5; // 50% to each variant
+            // Homepage Configuration
+            // A/B testing disabled - now serving the redesigned homepage (Variant A) to all visitors
+            // To re-enable A/B testing, restore the split logic from git history
 
-            // Get or assign variant
-            function getVariant() {
-                // Check if already assigned
-                let variant = localStorage.getItem(STORAGE_KEY);
+            const targetPage = 'index-variant-a.html';
 
-                if (!variant || !VARIANTS[variant]) {
-                    // Randomly assign based on split
-                    variant = Math.random() < SPLIT ? 'A' : 'B';
-
-                    try {
-                        localStorage.setItem(STORAGE_KEY, variant);
-                    } catch (e) {
-                        // localStorage not available, continue with random assignment
-                        console.log('localStorage not available');
-                    }
-
-                    // Track new assignment in GA4
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'experiment_assignment', {
-                            'experiment_id': EXPERIMENT_ID,
-                            'variant_id': variant,
-                            'is_new_assignment': true
-                        });
-                    }
-                }
-
-                return variant;
+            // Track page view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'homepage_view', {
+                    'variant': 'A',
+                    'version': 'redesign_2026'
+                });
             }
 
-            // Get variant and redirect
-            const variant = getVariant();
-            const targetPage = VARIANTS[variant];
-
-            // Small delay to ensure GA tracking fires, then redirect
+            // Redirect to new homepage
             setTimeout(function() {
                 window.location.replace(targetPage);
             }, 50);
