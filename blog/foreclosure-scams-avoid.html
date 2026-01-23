@@ -16,9 +16,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/theme.css">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
@@ -51,367 +51,536 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #374151; background: #fffbf7; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { background: white; border-bottom: 2px solid #fed7aa; padding: 15px 0; }
-        .header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
-        .logo a { font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #ea580c, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .nav { display: flex; gap: 20px; align-items: center; }
-        .nav a { color: #374151; text-decoration: none; font-weight: 500; }
-        .cta-button { background: linear-gradient(135deg, #fb923c, #ea580c); color: white !important; padding: 10px 20px; border-radius: 8px; }
-        .blog-article { padding: 40px 0; }
-        .blog-header { margin-bottom: 30px; }
-        .blog-header h1 { font-size: 36px; color: #1f2937; margin-bottom: 15px; line-height: 1.2; }
-        .blog-meta { color: #6b7280; margin-bottom: 20px; }
-        .blog-meta a { color: #ea580c; }
-        .blog-content h2 { font-size: 26px; color: #7c2d12; margin: 35px 0 15px; }
-        .blog-content h3 { font-size: 20px; color: #92400e; margin: 25px 0 12px; }
-        .blog-content p { margin-bottom: 18px; }
-        .blog-content ul, .blog-content ol { margin: 15px 0 20px 25px; }
-        .blog-content li { margin-bottom: 10px; }
-        .alert-box { background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; padding: 25px; border-radius: 12px; margin: 25px 0; }
-        .alert-box h3 { color: white; margin-bottom: 10px; }
-        .info-box { background: #fef3e2; border-left: 4px solid #ea580c; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .success-box { background: #d1fae5; border-left: 4px solid #10b981; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .cta-box { background: linear-gradient(135deg, #7c2d12, #92400e); color: white; padding: 35px; border-radius: 16px; margin: 35px 0; text-align: center; }
-        .cta-box h3 { color: white; margin-bottom: 15px; font-size: 24px; }
-        .cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; }
-        .cta-box a { display: inline-block; background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; margin: 5px; }
-        .scam-card { background: #fef2f2; border: 2px solid #dc2626; border-radius: 12px; padding: 25px; margin: 20px 0; }
-        .scam-card h3 { color: #dc2626; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .scam-card h3::before { content: ''; width: 24px; height: 24px; background: #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .red-flag { display: inline-flex; align-items: center; gap: 8px; background: #fef2f2; padding: 8px 15px; border-radius: 20px; margin: 5px; font-size: 14px; color: #991b1b; border: 1px solid #fecaca; }
-        .legit-sign { display: inline-flex; align-items: center; gap: 8px; background: #d1fae5; padding: 8px 15px; border-radius: 20px; margin: 5px; font-size: 14px; color: #065f46; border: 1px solid #a7f3d0; }
-        .footer { background: #1f2937; color: white; padding: 40px 0; margin-top: 50px; }
-        .footer .container { max-width: 1200px; }
-        .footer a { color: #fb923c; text-decoration: none; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-section h4 { color: #fb923c; margin-bottom: 15px; }
-        @media (max-width: 768px) {
-            .header .container { flex-direction: column; gap: 15px; }
-            .nav { flex-wrap: wrap; justify-content: center; }
-            .blog-header h1 { font-size: 28px; }
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .blog-header {
+            margin-bottom: 40px;
+        }
+        .blog-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .blog-meta {
+            color: var(--gray-500);
+            font-size: 15px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .blog-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .blog-content h2 {
+            font-size: 28px;
+            margin: 48px 0 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .blog-content h3 {
+            font-size: 22px;
+            margin: 32px 0 16px;
+        }
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        .blog-content li {
+            margin-bottom: 12px;
+        }
+        .alert-box {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 32px 0;
+        }
+        .alert-box h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        .info-box {
+            background: var(--accent-50);
+            border-left: 4px solid var(--accent-600);
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .info-box h3 {
+            color: var(--accent-700);
+            margin-bottom: 12px;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .warning-box h3 {
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .success-box h3 {
+            color: #065f46;
+            margin-bottom: 12px;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 48px 0;
+        }
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 16px;
+        }
+        .cta-box p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 24px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-white {
+            background: white;
+            color: var(--primary-900);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .scam-card {
+            background: #fef2f2;
+            border: 2px solid #dc2626;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        .scam-card h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .scam-card h3::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .red-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fef2f2;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .legit-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #d1fae5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <div class="emergency-bar">
+        Foreclosure sale soon? <a href="tel:+19495655285">Call now: (949) 565-5285</a> for emergency help
+    </div>
+
+    <header class="site-header">
         <div class="container">
-            <div class="logo"><a href="../index.html">My Foreclosure Solution</a></div>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <a href="index.html">Blog</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="tel:+1-949-565-5285" class="cta-button">Call (949) 565-5285</a>
-            </nav>
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <nav class="mobile-nav">
+        <a href="../learn-more.html">How It Works</a>
+        <a href="../faq.html">FAQ</a>
+        <a href="../free-guide.html">Free Guide</a>
+        <a href="./">Blog</a>
+        <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
+
     <article class="blog-article">
-        <div class="container">
-            <div class="blog-header">
-                <h1>Foreclosure Scams to Avoid: Protect Yourself</h1>
-                <p class="blog-meta">Updated January 2025 | <a href="../schedule.html">Get Legitimate Help</a></p>
+        <header class="blog-header">
+            <h1>Foreclosure Scams to Avoid: Protect Yourself</h1>
+            <div class="blog-meta">
+                <span>Updated January 2025</span>
+                <span>|</span>
+                <a href="../schedule.html">Get Legitimate Help</a>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <p><strong>When you're facing foreclosure, you're vulnerable - and scammers know it.</strong> Fraudsters specifically target desperate homeowners with promises they can't keep, taking your money and leaving you in an even worse situation. Understanding these scams is your first line of defense.</p>
+
+            <p>This guide will help you identify common foreclosure scams, recognize red flags, and find legitimate help.</p>
+
+            <div class="alert-box">
+                <h3>The #1 Rule: Never Pay Upfront Fees</h3>
+                <p>In California, it is <strong>illegal</strong> for foreclosure consultants to charge fees before services are fully performed. Anyone demanding upfront payment for foreclosure help is likely breaking the law. Report them immediately.</p>
             </div>
 
-            <div class="blog-content">
-                <p><strong>When you're facing foreclosure, you're vulnerable - and scammers know it.</strong> Fraudsters specifically target desperate homeowners with promises they can't keep, taking your money and leaving you in an even worse situation. Understanding these scams is your first line of defense.</p>
+            <h2>Common Foreclosure Scams</h2>
 
-                <p>This guide will help you identify common foreclosure scams, recognize red flags, and find legitimate help.</p>
-
-                <div class="alert-box">
-                    <h3>The #1 Rule: Never Pay Upfront Fees</h3>
-                    <p>In California, it is <strong>illegal</strong> for foreclosure consultants to charge fees before services are fully performed. Anyone demanding upfront payment for foreclosure help is likely breaking the law. Report them immediately.</p>
-                </div>
-
-                <h2>Common Foreclosure Scams</h2>
-
-                <div class="scam-card">
-                    <h3>Phantom Help / Foreclosure Rescue</h3>
-                    <p><strong>How it works:</strong> A company promises to negotiate with your lender to save your home. They charge upfront fees, collect your payments, but do little or nothing. Meanwhile, your foreclosure continues while you think you're protected.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Demands payment before providing any services</li>
-                        <li>Tells you not to contact your lender directly</li>
-                        <li>Guarantees they can stop foreclosure</li>
-                        <li>Pressures you to act immediately</li>
-                        <li>Asks you to redirect mortgage payments to them</li>
-                    </ul>
-                    <p><strong>The reality:</strong> No one can guarantee a loan modification. Legitimate professionals work with you and encourage lender communication.</p>
-                </div>
-
-                <div class="scam-card">
-                    <h3>Equity Stripping / Bait and Switch</h3>
-                    <p><strong>How it works:</strong> A "rescuer" offers to pay off your mortgage or buy your home and let you stay as a renter. In reality, they steal your equity by having you sign over the deed, then either evict you or sell the home.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Offers to take over your mortgage payments</li>
-                        <li>Asks you to sign over the deed to your home</li>
-                        <li>Promises you can stay as a tenant and buy the house back later</li>
-                        <li>Presents complicated documents with little explanation</li>
-                        <li>Rushes you to sign without time to review</li>
-                    </ul>
-                    <p><strong>The reality:</strong> Once you sign over your deed, you lose all rights to your home. They take your equity and leave you with nothing.</p>
-                </div>
-
-                <div class="scam-card">
-                    <h3>Fake Government Assistance</h3>
-                    <p><strong>How it works:</strong> Scammers claim to be from a government program or affiliated with HUD, offering special access to programs that can save your home - for a fee.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Claims to be from a government agency but asks for money</li>
-                        <li>Offers "special access" to government programs</li>
-                        <li>Uses official-looking but fake documentation</li>
-                        <li>Claims to have insider connections</li>
-                    </ul>
-                    <p><strong>The reality:</strong> Government programs don't charge fees. HUD-approved counselors provide free help. Real government agencies never demand payment.</p>
-                </div>
-
-                <div class="scam-card">
-                    <h3>Rent-to-Buy / Leaseback Scam</h3>
-                    <p><strong>How it works:</strong> You're convinced to transfer your deed with a promise to rent the home and buy it back later. But the terms are impossible to meet, and you lose both your home and your equity.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Promises you can buy back your home in the future</li>
-                        <li>Requires you to transfer ownership first</li>
-                        <li>Sets unrealistic repurchase terms</li>
-                        <li>High "rent" payments that build no equity</li>
-                    </ul>
-                    <p><strong>The reality:</strong> The buyback terms are designed to be impossible. You lose your home and any chance of keeping your equity.</p>
-                </div>
-
-                <div class="scam-card">
-                    <h3>Bankruptcy Mills</h3>
-                    <p><strong>How it works:</strong> A company files bankruptcy on your behalf without proper legal representation, often without your full understanding. This temporarily delays foreclosure but doesn't solve the problem, and often makes things worse.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Non-attorney files bankruptcy paperwork for you</li>
-                        <li>Promises bankruptcy will solve everything</li>
-                        <li>Files without thorough review of your situation</li>
-                        <li>Multiple bankruptcies filed in quick succession</li>
-                    </ul>
-                    <p><strong>The reality:</strong> Improper bankruptcy filings can be dismissed, leaving you with court costs and a damaged bankruptcy record that affects future options.</p>
-                </div>
-
-                <div class="scam-card">
-                    <h3>Fake Loan Modification Companies</h3>
-                    <p><strong>How it works:</strong> Companies claim they can modify your loan and charge fees upfront. They may submit incomplete applications, make false promises, or simply disappear with your money.</p>
-                    <p><strong>Warning signs:</strong></p>
-                    <ul>
-                        <li>Charges fees before modification is approved</li>
-                        <li>Guarantees modification approval</li>
-                        <li>Tells you to stop communicating with your lender</li>
-                        <li>No verifiable license or address</li>
-                        <li>High-pressure sales tactics</li>
-                    </ul>
-                    <p><strong>The reality:</strong> You can apply for loan modification yourself for free, or work with HUD-approved counselors at no cost.</p>
-                </div>
-
-                <h2>Red Flags: How to Spot a Scam</h2>
-
-                <div class="warning-box">
-                    <h3>Major Warning Signs</h3>
-                    <div style="margin-top: 15px;">
-                        <span class="red-flag">Demands upfront payment</span>
-                        <span class="red-flag">Guarantees results</span>
-                        <span class="red-flag">Pressures you to sign now</span>
-                        <span class="red-flag">Tells you not to call your lender</span>
-                        <span class="red-flag">Asks you to sign over your deed</span>
-                        <span class="red-flag">No written contract</span>
-                        <span class="red-flag">Asks for mortgage payments to them</span>
-                        <span class="red-flag">No verifiable license or credentials</span>
-                        <span class="red-flag">Found you through unsolicited contact</span>
-                        <span class="red-flag">Vague about their actual services</span>
-                    </div>
-                </div>
-
-                <h2>Signs of Legitimate Help</h2>
-
-                <div class="success-box">
-                    <h3>Trustworthy Professionals Will:</h3>
-                    <div style="margin-top: 15px;">
-                        <span class="legit-sign">Never charge before services rendered</span>
-                        <span class="legit-sign">Provide verifiable credentials/licenses</span>
-                        <span class="legit-sign">Explain all options clearly</span>
-                        <span class="legit-sign">Encourage you to talk to your lender</span>
-                        <span class="legit-sign">Give you time to review documents</span>
-                        <span class="legit-sign">Provide everything in writing</span>
-                        <span class="legit-sign">Never ask you to sign over your deed</span>
-                        <span class="legit-sign">Never make guarantees</span>
-                        <span class="legit-sign">Have a physical address and verifiable history</span>
-                        <span class="legit-sign">Be transparent about costs</span>
-                    </div>
-                </div>
-
-                <h2>How to Verify Legitimacy</h2>
-
-                <h3>1. Check Licenses and Credentials</h3>
-                <p>In California, verify licenses through:</p>
+            <div class="scam-card">
+                <h3>Phantom Help / Foreclosure Rescue</h3>
+                <p><strong>How it works:</strong> A company promises to negotiate with your lender to save your home. They charge upfront fees, collect your payments, but do little or nothing. Meanwhile, your foreclosure continues while you think you're protected.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li><strong>Real Estate Agents:</strong> California DRE (dre.ca.gov)</li>
-                    <li><strong>Attorneys:</strong> State Bar of California (calbar.ca.gov)</li>
-                    <li><strong>Mortgage Professionals:</strong> NMLS Consumer Access (nmlsconsumeraccess.org)</li>
+                    <li>Demands payment before providing any services</li>
+                    <li>Tells you not to contact your lender directly</li>
+                    <li>Guarantees they can stop foreclosure</li>
+                    <li>Pressures you to act immediately</li>
+                    <li>Asks you to redirect mortgage payments to them</li>
                 </ul>
+                <p><strong>The reality:</strong> No one can guarantee a loan modification. Legitimate professionals work with you and encourage lender communication.</p>
+            </div>
 
-                <h3>2. Research the Company</h3>
+            <div class="scam-card">
+                <h3>Equity Stripping / Bait and Switch</h3>
+                <p><strong>How it works:</strong> A "rescuer" offers to pay off your mortgage or buy your home and let you stay as a renter. In reality, they steal your equity by having you sign over the deed, then either evict you or sell the home.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li>Search for reviews online (but be aware reviews can be faked)</li>
-                    <li>Check the Better Business Bureau (bbb.org)</li>
-                    <li>Search for complaints with the California Attorney General</li>
-                    <li>Look for news articles or legal actions</li>
+                    <li>Offers to take over your mortgage payments</li>
+                    <li>Asks you to sign over the deed to your home</li>
+                    <li>Promises you can stay as a tenant and buy the house back later</li>
+                    <li>Presents complicated documents with little explanation</li>
+                    <li>Rushes you to sign without time to review</li>
                 </ul>
+                <p><strong>The reality:</strong> Once you sign over your deed, you lose all rights to your home. They take your equity and leave you with nothing.</p>
+            </div>
 
-                <h3>3. Verify Physical Presence</h3>
+            <div class="scam-card">
+                <h3>Fake Government Assistance</h3>
+                <p><strong>How it works:</strong> Scammers claim to be from a government program or affiliated with HUD, offering special access to programs that can save your home - for a fee.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li>Get a physical address (not just a P.O. Box)</li>
-                    <li>Visit their office if possible</li>
-                    <li>Search the address online</li>
+                    <li>Claims to be from a government agency but asks for money</li>
+                    <li>Offers "special access" to government programs</li>
+                    <li>Uses official-looking but fake documentation</li>
+                    <li>Claims to have insider connections</li>
                 </ul>
+                <p><strong>The reality:</strong> Government programs don't charge fees. HUD-approved counselors provide free help. Real government agencies never demand payment.</p>
+            </div>
 
-                <h3>4. Get Everything in Writing</h3>
+            <div class="scam-card">
+                <h3>Rent-to-Buy / Leaseback Scam</h3>
+                <p><strong>How it works:</strong> You're convinced to transfer your deed with a promise to rent the home and buy it back later. But the terms are impossible to meet, and you lose both your home and your equity.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li>All promises should be in a written contract</li>
-                    <li>Review contracts carefully before signing</li>
-                    <li>Have an attorney review if possible</li>
+                    <li>Promises you can buy back your home in the future</li>
+                    <li>Requires you to transfer ownership first</li>
+                    <li>Sets unrealistic repurchase terms</li>
+                    <li>High "rent" payments that build no equity</li>
                 </ul>
+                <p><strong>The reality:</strong> The buyback terms are designed to be impossible. You lose your home and any chance of keeping your equity.</p>
+            </div>
 
-                <div class="cta-box">
-                    <h3>Get Legitimate, Licensed Help</h3>
-                    <p>We are licensed California real estate professionals (DRE #02076038 | NMLS #2033637). Verify our licenses and get a free consultation with no upfront fees.</p>
-                    <a href="../schedule.html">Schedule Free Consultation</a>
-                    <a href="tel:+1-949-565-5285" style="background: rgba(255,255,255,0.2);">Call (949) 565-5285</a>
-                </div>
-
-                <h2>Free, Legitimate Resources</h2>
-
-                <p>These resources provide free foreclosure help - no payment required:</p>
-
-                <div class="info-box">
-                    <h3>HUD-Approved Housing Counselors</h3>
-                    <p>Free, government-approved foreclosure prevention counseling:</p>
-                    <ul>
-                        <li>Call HUD: 1-800-569-4287</li>
-                        <li>Find local counselors: hud.gov/counseling</li>
-                    </ul>
-                </div>
-
-                <div class="info-box">
-                    <h3>Your Lender's Loss Mitigation Department</h3>
-                    <p>You can apply for <a href="loan-modification-california.html">loan modification</a> directly with your lender for free. Don't pay someone to do what you can do yourself.</p>
-                </div>
-
-                <div class="info-box">
-                    <h3>Legal Aid Organizations</h3>
-                    <p>If you qualify based on income, legal aid can provide free legal help:</p>
-                    <ul>
-                        <li>Find legal aid: lawhelpcalifornia.org</li>
-                        <li>California Courts Self-Help Center: selfhelp.courts.ca.gov</li>
-                    </ul>
-                </div>
-
-                <h2>What to Do If You've Been Scammed</h2>
-
-                <ol>
-                    <li><strong>Stop all payments</strong> to the scammer immediately</li>
-                    <li><strong>Contact your lender</strong> directly to understand your current status</li>
-                    <li><strong>Document everything</strong> - save all communications, contracts, receipts</li>
-                    <li><strong>Report the scam:</strong>
-                        <ul>
-                            <li>Federal Trade Commission (FTC): ftc.gov/complaint</li>
-                            <li>California Attorney General: oag.ca.gov</li>
-                            <li>Consumer Financial Protection Bureau: consumerfinance.gov</li>
-                            <li>Local police for fraud report</li>
-                        </ul>
-                    </li>
-                    <li><strong>Consult a legitimate attorney</strong> about your options</li>
-                    <li><strong>Act quickly</strong> on your foreclosure - time may be limited</li>
-                </ol>
-
-                <h2>Protecting Yourself</h2>
-
-                <h3>Before Signing Anything:</h3>
+            <div class="scam-card">
+                <h3>Bankruptcy Mills</h3>
+                <p><strong>How it works:</strong> A company files bankruptcy on your behalf without proper legal representation, often without your full understanding. This temporarily delays foreclosure but doesn't solve the problem, and often makes things worse.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li>Take time to read every document carefully</li>
-                    <li>Never sign blank or incomplete documents</li>
-                    <li>Get copies of everything you sign</li>
-                    <li>Have documents reviewed by an attorney if possible</li>
-                    <li>Don't be rushed - legitimate help will give you time</li>
+                    <li>Non-attorney files bankruptcy paperwork for you</li>
+                    <li>Promises bankruptcy will solve everything</li>
+                    <li>Files without thorough review of your situation</li>
+                    <li>Multiple bankruptcies filed in quick succession</li>
                 </ul>
+                <p><strong>The reality:</strong> Improper bankruptcy filings can be dismissed, leaving you with court costs and a damaged bankruptcy record that affects future options.</p>
+            </div>
 
-                <h3>During Foreclosure:</h3>
+            <div class="scam-card">
+                <h3>Fake Loan Modification Companies</h3>
+                <p><strong>How it works:</strong> Companies claim they can modify your loan and charge fees upfront. They may submit incomplete applications, make false promises, or simply disappear with your money.</p>
+                <p><strong>Warning signs:</strong></p>
                 <ul>
-                    <li>Stay in direct communication with your lender</li>
-                    <li>Open all mail and respond to notices</li>
-                    <li>Keep records of all communications</li>
-                    <li>Be skeptical of unsolicited offers</li>
-                    <li>Verify credentials before working with anyone</li>
+                    <li>Charges fees before modification is approved</li>
+                    <li>Guarantees modification approval</li>
+                    <li>Tells you to stop communicating with your lender</li>
+                    <li>No verifiable license or address</li>
+                    <li>High-pressure sales tactics</li>
                 </ul>
+                <p><strong>The reality:</strong> You can apply for loan modification yourself for free, or work with HUD-approved counselors at no cost.</p>
+            </div>
 
-                <h2>Frequently Asked Questions</h2>
+            <h2>Red Flags: How to Spot a Scam</h2>
 
-                <h3>Is it legal to charge for foreclosure help?</h3>
-                <p>In California, foreclosure consultants cannot charge fees until services are fully performed. Charging upfront fees is illegal. Real estate agents and attorneys have different rules but must be licensed and transparent about fees.</p>
-
-                <h3>How do scammers find me?</h3>
-                <p>Foreclosure notices are public record. Scammers monitor these filings and contact homeowners through mail, phone, or even door-to-door visits.</p>
-
-                <h3>What if I already paid a scammer?</h3>
-                <p>Stop payment if possible. Report the scam to authorities. Consult with an attorney about recovery options. Focus on addressing your foreclosure with legitimate help.</p>
-
-                <h3>Can anyone guarantee to stop my foreclosure?</h3>
-                <p>No. No one can guarantee a loan modification, sale, or any specific outcome. Anyone making guarantees is likely a scammer or lying.</p>
-
-                <div class="cta-box">
-                    <h3>Get Help You Can Trust</h3>
-                    <p>As licensed California professionals, we're committed to honest, transparent foreclosure help. Verify our licenses and get a free, no-obligation consultation.</p>
-                    <a href="../schedule.html">Schedule Free Consultation</a>
-                    <a href="tel:+1-949-565-5285" style="background: rgba(255,255,255,0.2);">Call (949) 565-5285</a>
-                    <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637</p>
+            <div class="warning-box">
+                <h3>Major Warning Signs</h3>
+                <div style="margin-top: 15px;">
+                    <span class="red-flag">Demands upfront payment</span>
+                    <span class="red-flag">Guarantees results</span>
+                    <span class="red-flag">Pressures you to sign now</span>
+                    <span class="red-flag">Tells you not to call your lender</span>
+                    <span class="red-flag">Asks you to sign over your deed</span>
+                    <span class="red-flag">No written contract</span>
+                    <span class="red-flag">Asks for mortgage payments to them</span>
+                    <span class="red-flag">No verifiable license or credentials</span>
+                    <span class="red-flag">Found you through unsolicited contact</span>
+                    <span class="red-flag">Vague about their actual services</span>
                 </div>
+            </div>
 
-                <h2>Related Resources</h2>
+            <h2>Signs of Legitimate Help</h2>
+
+            <div class="success-box">
+                <h3>Trustworthy Professionals Will:</h3>
+                <div style="margin-top: 15px;">
+                    <span class="legit-sign">Never charge before services rendered</span>
+                    <span class="legit-sign">Provide verifiable credentials/licenses</span>
+                    <span class="legit-sign">Explain all options clearly</span>
+                    <span class="legit-sign">Encourage you to talk to your lender</span>
+                    <span class="legit-sign">Give you time to review documents</span>
+                    <span class="legit-sign">Provide everything in writing</span>
+                    <span class="legit-sign">Never ask you to sign over your deed</span>
+                    <span class="legit-sign">Never make guarantees</span>
+                    <span class="legit-sign">Have a physical address and verifiable history</span>
+                    <span class="legit-sign">Be transparent about costs</span>
+                </div>
+            </div>
+
+            <h2>How to Verify Legitimacy</h2>
+
+            <h3>1. Check Licenses and Credentials</h3>
+            <p>In California, verify licenses through:</p>
+            <ul>
+                <li><strong>Real Estate Agents:</strong> California DRE (dre.ca.gov)</li>
+                <li><strong>Attorneys:</strong> State Bar of California (calbar.ca.gov)</li>
+                <li><strong>Mortgage Professionals:</strong> NMLS Consumer Access (nmlsconsumeraccess.org)</li>
+            </ul>
+
+            <h3>2. Research the Company</h3>
+            <ul>
+                <li>Search for reviews online (but be aware reviews can be faked)</li>
+                <li>Check the Better Business Bureau (bbb.org)</li>
+                <li>Search for complaints with the California Attorney General</li>
+                <li>Look for news articles or legal actions</li>
+            </ul>
+
+            <h3>3. Verify Physical Presence</h3>
+            <ul>
+                <li>Get a physical address (not just a P.O. Box)</li>
+                <li>Visit their office if possible</li>
+                <li>Search the address online</li>
+            </ul>
+
+            <h3>4. Get Everything in Writing</h3>
+            <ul>
+                <li>All promises should be in a written contract</li>
+                <li>Review contracts carefully before signing</li>
+                <li>Have an attorney review if possible</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Get Legitimate, Licensed Help</h3>
+                <p>We are licensed California real estate professionals (DRE #02076038 | NMLS #2033637). Verify our licenses and get a free consultation with no upfront fees.</p>
+                <div class="cta-buttons">
+                    <a href="../schedule.html" class="btn-white">Schedule Free Consultation</a>
+                    <a href="tel:+19495655285" class="btn-outline">Call (949) 565-5285</a>
+                </div>
+            </div>
+
+            <h2>Free, Legitimate Resources</h2>
+
+            <p>These resources provide free foreclosure help - no payment required:</p>
+
+            <div class="info-box">
+                <h3>HUD-Approved Housing Counselors</h3>
+                <p>Free, government-approved foreclosure prevention counseling:</p>
                 <ul>
-                    <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
-                    <li><a href="loan-modification-california.html">Loan Modification in California: Complete Guide</a></li>
-                    <li><a href="foreclosure-rights-california.html">Your Rights During Foreclosure in California</a></li>
-                    <li><a href="sell-house-before-foreclosure.html">Can I Sell My House Before Foreclosure?</a></li>
-                    <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
+                    <li>Call HUD: 1-800-569-4287</li>
+                    <li>Find local counselors: hud.gov/counseling</li>
                 </ul>
             </div>
+
+            <div class="info-box">
+                <h3>Your Lender's Loss Mitigation Department</h3>
+                <p>You can apply for <a href="loan-modification-california.html">loan modification</a> directly with your lender for free. Don't pay someone to do what you can do yourself.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Legal Aid Organizations</h3>
+                <p>If you qualify based on income, legal aid can provide free legal help:</p>
+                <ul>
+                    <li>Find legal aid: lawhelpcalifornia.org</li>
+                    <li>California Courts Self-Help Center: selfhelp.courts.ca.gov</li>
+                </ul>
+            </div>
+
+            <h2>What to Do If You've Been Scammed</h2>
+
+            <ol>
+                <li><strong>Stop all payments</strong> to the scammer immediately</li>
+                <li><strong>Contact your lender</strong> directly to understand your current status</li>
+                <li><strong>Document everything</strong> - save all communications, contracts, receipts</li>
+                <li><strong>Report the scam:</strong>
+                    <ul>
+                        <li>Federal Trade Commission (FTC): ftc.gov/complaint</li>
+                        <li>California Attorney General: oag.ca.gov</li>
+                        <li>Consumer Financial Protection Bureau: consumerfinance.gov</li>
+                        <li>Local police for fraud report</li>
+                    </ul>
+                </li>
+                <li><strong>Consult a legitimate attorney</strong> about your options</li>
+                <li><strong>Act quickly</strong> on your foreclosure - time may be limited</li>
+            </ol>
+
+            <h2>Protecting Yourself</h2>
+
+            <h3>Before Signing Anything:</h3>
+            <ul>
+                <li>Take time to read every document carefully</li>
+                <li>Never sign blank or incomplete documents</li>
+                <li>Get copies of everything you sign</li>
+                <li>Have documents reviewed by an attorney if possible</li>
+                <li>Don't be rushed - legitimate help will give you time</li>
+            </ul>
+
+            <h3>During Foreclosure:</h3>
+            <ul>
+                <li>Stay in direct communication with your lender</li>
+                <li>Open all mail and respond to notices</li>
+                <li>Keep records of all communications</li>
+                <li>Be skeptical of unsolicited offers</li>
+                <li>Verify credentials before working with anyone</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Is it legal to charge for foreclosure help?</h3>
+            <p>In California, foreclosure consultants cannot charge fees until services are fully performed. Charging upfront fees is illegal. Real estate agents and attorneys have different rules but must be licensed and transparent about fees.</p>
+
+            <h3>How do scammers find me?</h3>
+            <p>Foreclosure notices are public record. Scammers monitor these filings and contact homeowners through mail, phone, or even door-to-door visits.</p>
+
+            <h3>What if I already paid a scammer?</h3>
+            <p>Stop payment if possible. Report the scam to authorities. Consult with an attorney about recovery options. Focus on addressing your foreclosure with legitimate help.</p>
+
+            <h3>Can anyone guarantee to stop my foreclosure?</h3>
+            <p>No. No one can guarantee a loan modification, sale, or any specific outcome. Anyone making guarantees is likely a scammer or lying.</p>
+
+            <div class="cta-box">
+                <h3>Get Help You Can Trust</h3>
+                <p>As licensed California professionals, we're committed to honest, transparent foreclosure help. Verify our licenses and get a free, no-obligation consultation.</p>
+                <div class="cta-buttons">
+                    <a href="../schedule.html" class="btn-white">Schedule Free Consultation</a>
+                    <a href="tel:+19495655285" class="btn-outline">Call (949) 565-5285</a>
+                </div>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637</p>
+            </div>
+
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
+                <li><a href="loan-modification-california.html">Loan Modification in California: Complete Guide</a></li>
+                <li><a href="foreclosure-rights-california.html">Your Rights During Foreclosure in California</a></li>
+                <li><a href="sell-house-before-foreclosure.html">Can I Sell My House Before Foreclosure?</a></li>
+                <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
+            </ul>
         </div>
     </article>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>My Foreclosure Solution</h4>
-                    <p>Licensed California Real Estate Professionals</p>
-                    <p>DRE #02076038 | NMLS #2033637</p>
-                    <p>Phone: <a href="tel:+1-949-565-5285">(949) 565-5285</a></p>
-                    <p>Email: help@myforeclosuresolution.com</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
                 </div>
-                <div class="footer-section">
+                <div class="footer-col">
                     <h4>Resources</h4>
-                    <a href="index.html">Blog Home</a><br>
-                    <a href="../faq.html">FAQ</a><br>
-                    <a href="../free-guide.html">Free Guide</a><br>
-                    <a href="../schedule.html">Schedule Consultation</a>
+                    <a href="./">All Articles</a>
+                    <a href="california-foreclosure-laws.html">CA Foreclosure Laws</a>
+                    <a href="california-foreclosure-timeline.html">Timeline Guide</a>
+                    <a href="../emergency-checklist.html">Emergency Help</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Service Areas</h4>
-                    <a href="../stop-foreclosure-los-angeles.html">Los Angeles</a><br>
-                    <a href="../stop-foreclosure-san-diego.html">San Diego</a><br>
-                    <a href="../stop-foreclosure-oakland.html">Oakland</a><br>
-                    <a href="../stop-foreclosure-sacramento.html">Sacramento</a>
+                <div class="footer-col">
+                    <h4>Options</h4>
+                    <a href="loan-modification-california.html">Loan Modification</a>
+                    <a href="short-sale-california.html">Short Sale</a>
+                    <a href="can-i-sell-my-house-during-foreclosure-california.html">Sell During Foreclosure</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="../privacy-policy.html">Privacy Policy</a>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #374151;">
-                <p>&copy; 2025 My Foreclosure Solution. All rights reserved.</p>
-                <p style="font-size: 14px; opacity: 0.8;">DRE #02076038 | NMLS #2033637 | Equal Housing Opportunity</p>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Consultation</a>
+    </div>
+
+    <script src="../js/theme.js"></script>
 </body>
 </html>

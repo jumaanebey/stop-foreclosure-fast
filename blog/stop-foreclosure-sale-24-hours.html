@@ -16,9 +16,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/theme.css">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
@@ -51,311 +51,462 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #374151; background: #fffbf7; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { background: white; border-bottom: 2px solid #fed7aa; padding: 15px 0; }
-        .header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
-        .logo a { font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #ea580c, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .nav { display: flex; gap: 20px; align-items: center; }
-        .nav a { color: #374151; text-decoration: none; font-weight: 500; }
-        .cta-button { background: linear-gradient(135deg, #fb923c, #ea580c); color: white !important; padding: 10px 20px; border-radius: 8px; }
-        .blog-article { padding: 40px 0; }
-        .blog-header { margin-bottom: 30px; }
-        .blog-header h1 { font-size: 36px; color: #1f2937; margin-bottom: 15px; line-height: 1.2; }
-        .blog-meta { color: #6b7280; margin-bottom: 20px; }
-        .blog-meta a { color: #ea580c; }
-        .blog-content h2 { font-size: 26px; color: #7c2d12; margin: 35px 0 15px; }
-        .blog-content h3 { font-size: 20px; color: #92400e; margin: 25px 0 12px; }
-        .blog-content p { margin-bottom: 18px; }
-        .blog-content ul, .blog-content ol { margin: 15px 0 20px 25px; }
-        .blog-content li { margin-bottom: 10px; }
-        .emergency-box { background: linear-gradient(135deg, #dc2626, #991b1b); color: white; padding: 30px; border-radius: 16px; margin: 25px 0; text-align: center; }
-        .emergency-box h3 { color: white; margin-bottom: 15px; font-size: 24px; }
-        .emergency-box p { color: rgba(255,255,255,0.95); margin-bottom: 15px; }
-        .emergency-box a { display: inline-block; background: white; color: #dc2626; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 18px; }
-        .info-box { background: #fef3e2; border-left: 4px solid #ea580c; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .success-box { background: #d1fae5; border-left: 4px solid #10b981; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .cta-box { background: linear-gradient(135deg, #7c2d12, #92400e); color: white; padding: 35px; border-radius: 16px; margin: 35px 0; text-align: center; }
-        .cta-box h3 { color: white; margin-bottom: 15px; font-size: 24px; }
-        .cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; }
-        .cta-box a { display: inline-block; background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; margin: 5px; }
-        .option-card { background: white; border: 2px solid #dc2626; border-radius: 12px; padding: 25px; margin: 20px 0; }
-        .option-card h3 { color: #dc2626; margin-bottom: 15px; }
-        .option-card .timeline { background: #fef2f2; padding: 8px 15px; border-radius: 20px; display: inline-block; font-size: 14px; color: #991b1b; margin-bottom: 15px; font-weight: 600; }
-        .step-urgent { background: white; border-left: 4px solid #dc2626; padding: 20px; margin: 15px 0; }
-        .step-urgent h4 { color: #dc2626; margin-bottom: 10px; }
-        .footer { background: #1f2937; color: white; padding: 40px 0; margin-top: 50px; }
-        .footer .container { max-width: 1200px; }
-        .footer a { color: #fb923c; text-decoration: none; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-section h4 { color: #fb923c; margin-bottom: 15px; }
-        @media (max-width: 768px) {
-            .header .container { flex-direction: column; gap: 15px; }
-            .nav { flex-wrap: wrap; justify-content: center; }
-            .blog-header h1 { font-size: 28px; }
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .blog-header {
+            margin-bottom: 40px;
+        }
+        .blog-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .blog-meta {
+            color: var(--gray-500);
+            font-size: 15px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .blog-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .blog-content h2 {
+            font-size: 28px;
+            margin: 48px 0 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .blog-content h3 {
+            font-size: 22px;
+            margin: 32px 0 16px;
+        }
+        .blog-content h4 {
+            font-size: 18px;
+            margin: 20px 0 12px;
+        }
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        .blog-content li {
+            margin-bottom: 12px;
+        }
+        .emergency-box {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 32px;
+            border-radius: 20px;
+            margin: 32px 0;
+            text-align: center;
+        }
+        .emergency-box h3 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        .emergency-box p {
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 20px;
+        }
+        .emergency-box a {
+            display: inline-block;
+            background: white;
+            color: #dc2626;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .info-box {
+            background: var(--accent-50);
+            border-left: 4px solid var(--accent-600);
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .warning-box {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .warning-box h3, .warning-box h4 {
+            color: #dc2626;
+            margin-bottom: 12px;
+        }
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .success-box h3 {
+            color: #047857;
+            margin-bottom: 12px;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 48px 0;
+        }
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        .cta-box p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 24px;
+        }
+        .cta-box a {
+            display: inline-block;
+            background: white;
+            color: var(--primary-900);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .option-card {
+            background: white;
+            border: 2px solid #dc2626;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        .option-card h3 {
+            color: #dc2626;
+            margin-bottom: 16px;
+        }
+        .option-card .timeline {
+            background: #fef2f2;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            color: #991b1b;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .step-urgent {
+            background: white;
+            border-left: 4px solid #dc2626;
+            padding: 24px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .step-urgent h4 {
+            color: #dc2626;
+            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <div class="emergency-bar">
+        Foreclosure sale soon? <a href="tel:+19495655285">Call now: (949) 565-5285</a> for emergency help
+    </div>
+
+    <header class="site-header">
         <div class="container">
-            <div class="logo"><a href="../index.html">My Foreclosure Solution</a></div>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <a href="index.html">Blog</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="tel:+1-949-565-5285" class="cta-button">Call (949) 565-5285</a>
-            </nav>
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <nav class="mobile-nav">
+        <a href="../learn-more.html">How It Works</a>
+        <a href="../faq.html">FAQ</a>
+        <a href="../free-guide.html">Free Guide</a>
+        <a href="./">Blog</a>
+        <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
+
     <article class="blog-article">
-        <div class="container">
-            <div class="blog-header">
-                <h1>How to Stop a Foreclosure Sale in 24 Hours</h1>
-                <p class="blog-meta">Emergency Guide | <a href="../schedule.html">Get Immediate Help</a></p>
+        <header class="blog-header">
+            <h1>How to Stop a Foreclosure Sale in 24 Hours</h1>
+            <div class="blog-meta">
+                <span>Emergency Guide</span>
+                <span>|</span>
+                <a href="../schedule.html">Get Immediate Help</a>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <div class="emergency-box">
+                <h3>Is Your Auction Within Days?</h3>
+                <p>If your foreclosure sale is scheduled for tomorrow or within the next few days, don't read - CALL NOW. Time is critical and every minute counts.</p>
+                <a href="tel:+1-949-565-5285">Call (949) 565-5285 Now</a>
             </div>
 
-            <div class="blog-content">
-                <div class="emergency-box">
-                    <h3>Is Your Auction Within Days?</h3>
-                    <p>If your foreclosure sale is scheduled for tomorrow or within the next few days, don't read - CALL NOW. Time is critical and every minute counts.</p>
-                    <a href="tel:+1-949-565-5285">Call (949) 565-5285 Now</a>
-                </div>
+            <p><strong>Your foreclosure sale is approaching fast and you need options NOW.</strong> We understand the panic you're feeling. But even at the last minute, there are still actions you can take to stop or postpone the sale. This guide covers every emergency option available to California homeowners.</p>
 
-                <p><strong>Your foreclosure sale is approaching fast and you need options NOW.</strong> We understand the panic you're feeling. But even at the last minute, there are still actions you can take to stop or postpone the sale. This guide covers every emergency option available to California homeowners.</p>
+            <p>The key is acting immediately. Some of these options require same-day action, and delays of even hours can eliminate your choices.</p>
 
-                <p>The key is acting immediately. Some of these options require same-day action, and delays of even hours can eliminate your choices.</p>
+            <h2>Your Emergency Options</h2>
 
-                <h2>Your Emergency Options</h2>
+            <div class="option-card">
+                <span class="timeline">Can Stop Sale: Same Day</span>
+                <h3>Option 1: Emergency Reinstatement</h3>
+                <p>In California, you have the right to reinstate your loan by paying all past-due amounts up until <strong>5 business days before the sale</strong>.</p>
+                <h4>How to Do It:</h4>
+                <ol>
+                    <li>Call your lender's reinstatement department immediately</li>
+                    <li>Request an exact reinstatement quote (valid for limited time)</li>
+                    <li>Arrange certified funds (cashier's check or wire transfer)</li>
+                    <li>Get confirmation that sale will be cancelled once payment received</li>
+                </ol>
+                <p><strong>Cost:</strong> All past-due payments + late fees + attorney fees + trustee fees (typically $5,000-$50,000+)</p>
+                <p><strong>Where to get funds:</strong> 401(k) withdrawal, family loan, personal loan, life insurance loan, asset sale</p>
+            </div>
 
-                <div class="option-card">
-                    <span class="timeline">Can Stop Sale: Same Day</span>
-                    <h3>Option 1: Emergency Reinstatement</h3>
-                    <p>In California, you have the right to reinstate your loan by paying all past-due amounts up until <strong>5 business days before the sale</strong>.</p>
-                    <h4>How to Do It:</h4>
-                    <ol>
-                        <li>Call your lender's reinstatement department immediately</li>
-                        <li>Request an exact reinstatement quote (valid for limited time)</li>
-                        <li>Arrange certified funds (cashier's check or wire transfer)</li>
-                        <li>Get confirmation that sale will be cancelled once payment received</li>
-                    </ol>
-                    <p><strong>Cost:</strong> All past-due payments + late fees + attorney fees + trustee fees (typically $5,000-$50,000+)</p>
-                    <p><strong>Where to get funds:</strong> 401(k) withdrawal, family loan, personal loan, life insurance loan, asset sale</p>
-                </div>
+            <div class="option-card">
+                <span class="timeline">Can Stop Sale: Same Day</span>
+                <h3>Option 2: Bankruptcy Filing (Automatic Stay)</h3>
+                <p>Filing for bankruptcy creates an "automatic stay" that immediately stops the foreclosure sale. This works even if filed hours before the auction.</p>
+                <h4>How to Do It:</h4>
+                <ol>
+                    <li>Contact a bankruptcy attorney immediately (many offer emergency filings)</li>
+                    <li>Complete required paperwork (can be done same day in emergencies)</li>
+                    <li>File with the bankruptcy court</li>
+                    <li>The automatic stay takes effect immediately upon filing</li>
+                </ol>
+                <p><strong>Important:</strong> This is a serious decision with long-term consequences. Only use bankruptcy if it makes sense for your overall financial situation. Consult with an attorney.</p>
+                <p><strong>Cost:</strong> Filing fees ($300-$350) plus attorney fees ($1,500-$5,000+)</p>
+            </div>
 
-                <div class="option-card">
-                    <span class="timeline">Can Stop Sale: Same Day</span>
-                    <h3>Option 2: Bankruptcy Filing (Automatic Stay)</h3>
-                    <p>Filing for bankruptcy creates an "automatic stay" that immediately stops the foreclosure sale. This works even if filed hours before the auction.</p>
-                    <h4>How to Do It:</h4>
-                    <ol>
-                        <li>Contact a bankruptcy attorney immediately (many offer emergency filings)</li>
-                        <li>Complete required paperwork (can be done same day in emergencies)</li>
-                        <li>File with the bankruptcy court</li>
-                        <li>The automatic stay takes effect immediately upon filing</li>
-                    </ol>
-                    <p><strong>Important:</strong> This is a serious decision with long-term consequences. Only use bankruptcy if it makes sense for your overall financial situation. Consult with an attorney.</p>
-                    <p><strong>Cost:</strong> Filing fees ($300-$350) plus attorney fees ($1,500-$5,000+)</p>
-                </div>
+            <div class="option-card">
+                <span class="timeline">Can Stop Sale: 24-72 Hours</span>
+                <h3>Option 3: Emergency Cash Sale</h3>
+                <p>Selling your home to a cash buyer can stop foreclosure even with very little time remaining. Some investors can close in as little as 3-7 days.</p>
+                <h4>How to Do It:</h4>
+                <ol>
+                    <li>Contact cash home buyers immediately</li>
+                    <li>Provide property information for quick evaluation</li>
+                    <li>Receive cash offer (often same day)</li>
+                    <li>Accept offer and begin expedited closing</li>
+                    <li>Request sale postponement from lender while closing completes</li>
+                </ol>
+                <p><strong>Benefit:</strong> You may walk away with equity instead of losing everything to foreclosure</p>
+                <p><strong>Note:</strong> This requires cooperation from your lender to postpone the sale. Many lenders will postpone if a legitimate sale is in progress.</p>
+            </div>
 
-                <div class="option-card">
-                    <span class="timeline">Can Stop Sale: 24-72 Hours</span>
-                    <h3>Option 3: Emergency Cash Sale</h3>
-                    <p>Selling your home to a cash buyer can stop foreclosure even with very little time remaining. Some investors can close in as little as 3-7 days.</p>
-                    <h4>How to Do It:</h4>
-                    <ol>
-                        <li>Contact cash home buyers immediately</li>
-                        <li>Provide property information for quick evaluation</li>
-                        <li>Receive cash offer (often same day)</li>
-                        <li>Accept offer and begin expedited closing</li>
-                        <li>Request sale postponement from lender while closing completes</li>
-                    </ol>
-                    <p><strong>Benefit:</strong> You may walk away with equity instead of losing everything to foreclosure</p>
-                    <p><strong>Note:</strong> This requires cooperation from your lender to postpone the sale. Many lenders will postpone if a legitimate sale is in progress.</p>
-                </div>
-
-                <div class="option-card">
-                    <span class="timeline">Can Delay Sale: 24-48 Hours</span>
-                    <h3>Option 4: Request Sale Postponement</h3>
-                    <p>Your lender can postpone the trustee sale. While not guaranteed, lenders often agree if there's a legitimate reason.</p>
-                    <h4>Reasons Lenders May Postpone:</h4>
-                    <ul>
-                        <li>You're in the process of selling the property</li>
-                        <li>You have funds coming (documented proof required)</li>
-                        <li>You've submitted a loan modification application</li>
-                        <li>There's a pending short sale with a buyer</li>
-                        <li>Administrative or procedural issues</li>
-                    </ul>
-                    <p><strong>How to request:</strong> Call your lender's loss mitigation department and the trustee company directly. Be persistent and document all conversations.</p>
-                </div>
-
-                <div class="option-card">
-                    <span class="timeline">Can Stop Sale: Day Of (Rare)</span>
-                    <h3>Option 5: Legal Challenge (TRO)</h3>
-                    <p>If your lender violated California foreclosure law, an attorney may be able to obtain a Temporary Restraining Order (TRO) to stop the sale.</p>
-                    <h4>Potential Grounds:</h4>
-                    <ul>
-                        <li>Dual tracking violation (foreclosed while modification pending)</li>
-                        <li>Improper notice procedures</li>
-                        <li>RESPA violations</li>
-                        <li>Robo-signing or document fraud</li>
-                        <li>Failure to provide single point of contact</li>
-                    </ul>
-                    <p><strong>Important:</strong> This requires an attorney and valid legal grounds. It's not a guaranteed solution and requires quick legal action.</p>
-                </div>
-
-                <h2>Step-by-Step: What to Do Right Now</h2>
-
-                <div class="step-urgent">
-                    <h4>Step 1: Verify Your Sale Date and Time (Next 5 Minutes)</h4>
-                    <p>Confirm exactly when your sale is scheduled. Check your Notice of Trustee Sale for date, time, and location. Know exactly how much time you have.</p>
-                </div>
-
-                <div class="step-urgent">
-                    <h4>Step 2: Calculate Your Options (Next 10 Minutes)</h4>
-                    <p>Based on your timeline:</p>
-                    <ul>
-                        <li><strong>5+ business days:</strong> Reinstatement, bankruptcy, or sale are all possible</li>
-                        <li><strong>1-5 business days:</strong> Bankruptcy or sale postponement request</li>
-                        <li><strong>Tomorrow:</strong> Bankruptcy filing (need attorney NOW)</li>
-                        <li><strong>Today:</strong> Emergency bankruptcy or legal TRO only</li>
-                    </ul>
-                </div>
-
-                <div class="step-urgent">
-                    <h4>Step 3: Make Calls Immediately</h4>
-                    <p>Call in this order:</p>
-                    <ol>
-                        <li><strong>Your lender's reinstatement department</strong> - Get exact payoff amount</li>
-                        <li><strong>The trustee company</strong> - Ask about postponement options</li>
-                        <li><strong>A foreclosure professional</strong> - We can help assess all options: <a href="tel:+1-949-565-5285">(949) 565-5285</a></li>
-                        <li><strong>A bankruptcy attorney</strong> - If bankruptcy is an option you're considering</li>
-                    </ol>
-                </div>
-
-                <div class="step-urgent">
-                    <h4>Step 4: Gather Documentation</h4>
-                    <p>Have these ready:</p>
-                    <ul>
-                        <li>Notice of Trustee Sale</li>
-                        <li>Loan account number</li>
-                        <li>Recent mortgage statements</li>
-                        <li>Proof of any pending funds or sales</li>
-                        <li>ID for any urgent transactions</li>
-                    </ul>
-                </div>
-
-                <div class="emergency-box">
-                    <h3>Need Help Right Now?</h3>
-                    <p>We've helped homeowners stop foreclosure sales at the last minute. Call us immediately and we'll help you understand your options.</p>
-                    <a href="tel:+1-949-565-5285">Call (949) 565-5285</a>
-                </div>
-
-                <h2>What NOT to Do</h2>
-
-                <div class="warning-box">
-                    <h3>Avoid These Mistakes</h3>
-                    <ul>
-                        <li><strong>Don't give up.</strong> Options exist even at the last minute.</li>
-                        <li><strong>Don't pay anyone who promises to stop foreclosure for upfront fees.</strong> This is often a scam. See our guide on <a href="foreclosure-scams-avoid.html">foreclosure scams to avoid</a>.</li>
-                        <li><strong>Don't sign anything without reading it carefully.</strong> Scammers target desperate homeowners.</li>
-                        <li><strong>Don't wait until the sale date to act.</strong> Start now, even if it's 2 AM.</li>
-                        <li><strong>Don't assume the sale will be postponed.</strong> Act as if it will proceed on schedule.</li>
-                    </ul>
-                </div>
-
-                <h2>After You Stop the Sale</h2>
-
-                <p>If you successfully stop or postpone the sale, you've bought yourself time - but you need to use it wisely:</p>
-
-                <div class="success-box">
-                    <h3>Next Steps</h3>
-                    <ul>
-                        <li><strong>If you reinstated:</strong> Make every payment on time going forward. Consider <a href="loan-modification-california.html">loan modification</a> if payments are unaffordable.</li>
-                        <li><strong>If you filed bankruptcy:</strong> Work with your attorney on a Chapter 13 repayment plan.</li>
-                        <li><strong>If you're selling:</strong> Complete the sale as quickly as possible before the rescheduled sale date.</li>
-                        <li><strong>If you got a postponement:</strong> Use the time to pursue permanent solutions - don't just wait for the next sale date.</li>
-                    </ul>
-                </div>
-
-                <h2>Can the Sale Really Be Stopped in 24 Hours?</h2>
-
-                <p>Yes, but it depends on your situation:</p>
-
+            <div class="option-card">
+                <span class="timeline">Can Delay Sale: 24-48 Hours</span>
+                <h3>Option 4: Request Sale Postponement</h3>
+                <p>Your lender can postpone the trustee sale. While not guaranteed, lenders often agree if there's a legitimate reason.</p>
+                <h4>Reasons Lenders May Postpone:</h4>
                 <ul>
-                    <li><strong>Reinstatement:</strong> Yes, if you have 5+ business days and can get certified funds</li>
-                    <li><strong>Bankruptcy:</strong> Yes, can be filed same day with an attorney</li>
-                    <li><strong>Cash sale:</strong> Can stop sale if lender agrees to postpone while closing</li>
-                    <li><strong>Legal TRO:</strong> Possible but requires valid grounds and an attorney</li>
+                    <li>You're in the process of selling the property</li>
+                    <li>You have funds coming (documented proof required)</li>
+                    <li>You've submitted a loan modification application</li>
+                    <li>There's a pending short sale with a buyer</li>
+                    <li>Administrative or procedural issues</li>
                 </ul>
+                <p><strong>How to request:</strong> Call your lender's loss mitigation department and the trustee company directly. Be persistent and document all conversations.</p>
+            </div>
 
-                <p>The most reliable last-minute options are reinstatement (if you have funds) or bankruptcy (if you have an attorney). Both can be executed within 24 hours in emergency situations.</p>
-
-                <h2>Frequently Asked Questions</h2>
-
-                <h3>Can I stop foreclosure the day of the sale?</h3>
-                <p>It's very difficult but not impossible. Bankruptcy can be filed even on the day of sale. In some cases, sales have been stopped minutes before the auction. But don't count on this - act as early as possible.</p>
-
-                <h3>What if I can't afford an attorney for bankruptcy?</h3>
-                <p>Some bankruptcy attorneys offer payment plans or reduced fees for emergency filings. Many also offer free initial consultations. Call several attorneys immediately.</p>
-
-                <h3>Will the lender really postpone the sale?</h3>
-                <p>There's no guarantee, but lenders often prefer alternatives to foreclosure. If you have a legitimate buyer or funds coming, they may postpone. Document everything and be persistent.</p>
-
-                <h3>What happens if the sale goes through?</h3>
-                <p>If the sale completes, you'll need to vacate the property. See our guide on <a href="after-foreclosure-california.html">what happens after foreclosure in California</a>.</p>
-
-                <div class="cta-box">
-                    <h3>Don't Wait Another Minute</h3>
-                    <p>Every hour counts when facing an imminent foreclosure sale. Call us now and we'll help you understand your options and take immediate action.</p>
-                    <a href="tel:+1-949-565-5285">Call (949) 565-5285 Now</a>
-                    <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637 | Available 7 days a week</p>
-                </div>
-
-                <h2>Related Resources</h2>
+            <div class="option-card">
+                <span class="timeline">Can Stop Sale: Day Of (Rare)</span>
+                <h3>Option 5: Legal Challenge (TRO)</h3>
+                <p>If your lender violated California foreclosure law, an attorney may be able to obtain a Temporary Restraining Order (TRO) to stop the sale.</p>
+                <h4>Potential Grounds:</h4>
                 <ul>
-                    <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
-                    <li><a href="foreclosure-timeline-california-2025.html">California Foreclosure Timeline 2025</a></li>
-                    <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
-                    <li><a href="sell-house-before-foreclosure.html">Can I Sell My House Before Foreclosure?</a></li>
-                    <li><a href="foreclosure-scams-avoid.html">Foreclosure Scams to Avoid</a></li>
+                    <li>Dual tracking violation (foreclosed while modification pending)</li>
+                    <li>Improper notice procedures</li>
+                    <li>RESPA violations</li>
+                    <li>Robo-signing or document fraud</li>
+                    <li>Failure to provide single point of contact</li>
+                </ul>
+                <p><strong>Important:</strong> This requires an attorney and valid legal grounds. It's not a guaranteed solution and requires quick legal action.</p>
+            </div>
+
+            <h2>Step-by-Step: What to Do Right Now</h2>
+
+            <div class="step-urgent">
+                <h4>Step 1: Verify Your Sale Date and Time (Next 5 Minutes)</h4>
+                <p>Confirm exactly when your sale is scheduled. Check your Notice of Trustee Sale for date, time, and location. Know exactly how much time you have.</p>
+            </div>
+
+            <div class="step-urgent">
+                <h4>Step 2: Calculate Your Options (Next 10 Minutes)</h4>
+                <p>Based on your timeline:</p>
+                <ul>
+                    <li><strong>5+ business days:</strong> Reinstatement, bankruptcy, or sale are all possible</li>
+                    <li><strong>1-5 business days:</strong> Bankruptcy or sale postponement request</li>
+                    <li><strong>Tomorrow:</strong> Bankruptcy filing (need attorney NOW)</li>
+                    <li><strong>Today:</strong> Emergency bankruptcy or legal TRO only</li>
                 </ul>
             </div>
+
+            <div class="step-urgent">
+                <h4>Step 3: Make Calls Immediately</h4>
+                <p>Call in this order:</p>
+                <ol>
+                    <li><strong>Your lender's reinstatement department</strong> - Get exact payoff amount</li>
+                    <li><strong>The trustee company</strong> - Ask about postponement options</li>
+                    <li><strong>A foreclosure professional</strong> - We can help assess all options: <a href="tel:+1-949-565-5285">(949) 565-5285</a></li>
+                    <li><strong>A bankruptcy attorney</strong> - If bankruptcy is an option you're considering</li>
+                </ol>
+            </div>
+
+            <div class="step-urgent">
+                <h4>Step 4: Gather Documentation</h4>
+                <p>Have these ready:</p>
+                <ul>
+                    <li>Notice of Trustee Sale</li>
+                    <li>Loan account number</li>
+                    <li>Recent mortgage statements</li>
+                    <li>Proof of any pending funds or sales</li>
+                    <li>ID for any urgent transactions</li>
+                </ul>
+            </div>
+
+            <div class="emergency-box">
+                <h3>Need Help Right Now?</h3>
+                <p>We've helped homeowners stop foreclosure sales at the last minute. Call us immediately and we'll help you understand your options.</p>
+                <a href="tel:+1-949-565-5285">Call (949) 565-5285</a>
+            </div>
+
+            <h2>What NOT to Do</h2>
+
+            <div class="warning-box">
+                <h3>Avoid These Mistakes</h3>
+                <ul>
+                    <li><strong>Don't give up.</strong> Options exist even at the last minute.</li>
+                    <li><strong>Don't pay anyone who promises to stop foreclosure for upfront fees.</strong> This is often a scam. See our guide on <a href="foreclosure-scams-avoid.html">foreclosure scams to avoid</a>.</li>
+                    <li><strong>Don't sign anything without reading it carefully.</strong> Scammers target desperate homeowners.</li>
+                    <li><strong>Don't wait until the sale date to act.</strong> Start now, even if it's 2 AM.</li>
+                    <li><strong>Don't assume the sale will be postponed.</strong> Act as if it will proceed on schedule.</li>
+                </ul>
+            </div>
+
+            <h2>After You Stop the Sale</h2>
+
+            <p>If you successfully stop or postpone the sale, you've bought yourself time - but you need to use it wisely:</p>
+
+            <div class="success-box">
+                <h3>Next Steps</h3>
+                <ul>
+                    <li><strong>If you reinstated:</strong> Make every payment on time going forward. Consider <a href="loan-modification-california.html">loan modification</a> if payments are unaffordable.</li>
+                    <li><strong>If you filed bankruptcy:</strong> Work with your attorney on a Chapter 13 repayment plan.</li>
+                    <li><strong>If you're selling:</strong> Complete the sale as quickly as possible before the rescheduled sale date.</li>
+                    <li><strong>If you got a postponement:</strong> Use the time to pursue permanent solutions - don't just wait for the next sale date.</li>
+                </ul>
+            </div>
+
+            <h2>Can the Sale Really Be Stopped in 24 Hours?</h2>
+
+            <p>Yes, but it depends on your situation:</p>
+
+            <ul>
+                <li><strong>Reinstatement:</strong> Yes, if you have 5+ business days and can get certified funds</li>
+                <li><strong>Bankruptcy:</strong> Yes, can be filed same day with an attorney</li>
+                <li><strong>Cash sale:</strong> Can stop sale if lender agrees to postpone while closing</li>
+                <li><strong>Legal TRO:</strong> Possible but requires valid grounds and an attorney</li>
+            </ul>
+
+            <p>The most reliable last-minute options are reinstatement (if you have funds) or bankruptcy (if you have an attorney). Both can be executed within 24 hours in emergency situations.</p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Can I stop foreclosure the day of the sale?</h3>
+            <p>It's very difficult but not impossible. Bankruptcy can be filed even on the day of sale. In some cases, sales have been stopped minutes before the auction. But don't count on this - act as early as possible.</p>
+
+            <h3>What if I can't afford an attorney for bankruptcy?</h3>
+            <p>Some bankruptcy attorneys offer payment plans or reduced fees for emergency filings. Many also offer free initial consultations. Call several attorneys immediately.</p>
+
+            <h3>Will the lender really postpone the sale?</h3>
+            <p>There's no guarantee, but lenders often prefer alternatives to foreclosure. If you have a legitimate buyer or funds coming, they may postpone. Document everything and be persistent.</p>
+
+            <h3>What happens if the sale goes through?</h3>
+            <p>If the sale completes, you'll need to vacate the property. See our guide on <a href="after-foreclosure-california.html">what happens after foreclosure in California</a>.</p>
+
+            <div class="cta-box">
+                <h3>Don't Wait Another Minute</h3>
+                <p>Every hour counts when facing an imminent foreclosure sale. Call us now and we'll help you understand your options and take immediate action.</p>
+                <a href="tel:+1-949-565-5285">Call (949) 565-5285 Now</a>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637 | Available 7 days a week</p>
+            </div>
+
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
+                <li><a href="foreclosure-timeline-california-2025.html">California Foreclosure Timeline 2025</a></li>
+                <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
+                <li><a href="sell-house-before-foreclosure.html">Can I Sell My House Before Foreclosure?</a></li>
+                <li><a href="foreclosure-scams-avoid.html">Foreclosure Scams to Avoid</a></li>
+            </ul>
         </div>
     </article>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>My Foreclosure Solution</h4>
-                    <p>Licensed California Real Estate Professionals</p>
-                    <p>DRE #02076038 | NMLS #2033637</p>
-                    <p>Phone: <a href="tel:+1-949-565-5285">(949) 565-5285</a></p>
-                    <p>Email: help@myforeclosuresolution.com</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
                 </div>
-                <div class="footer-section">
+                <div class="footer-col">
                     <h4>Resources</h4>
-                    <a href="index.html">Blog Home</a><br>
-                    <a href="../faq.html">FAQ</a><br>
-                    <a href="../free-guide.html">Free Guide</a><br>
-                    <a href="../schedule.html">Schedule Consultation</a>
+                    <a href="./">All Articles</a>
+                    <a href="california-foreclosure-laws.html">CA Foreclosure Laws</a>
+                    <a href="california-foreclosure-timeline.html">Timeline Guide</a>
+                    <a href="../emergency-checklist.html">Emergency Help</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Service Areas</h4>
-                    <a href="../stop-foreclosure-los-angeles.html">Los Angeles</a><br>
-                    <a href="../stop-foreclosure-san-diego.html">San Diego</a><br>
-                    <a href="../stop-foreclosure-oakland.html">Oakland</a><br>
-                    <a href="../stop-foreclosure-sacramento.html">Sacramento</a>
+                <div class="footer-col">
+                    <h4>Options</h4>
+                    <a href="loan-modification-california.html">Loan Modification</a>
+                    <a href="short-sale-california.html">Short Sale</a>
+                    <a href="can-i-sell-my-house-during-foreclosure-california.html">Sell During Foreclosure</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="../privacy-policy.html">Privacy Policy</a>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #374151;">
-                <p>&copy; 2025 My Foreclosure Solution. All rights reserved.</p>
-                <p style="font-size: 14px; opacity: 0.8;">DRE #02076038 | NMLS #2033637 | Equal Housing Opportunity</p>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Consultation</a>
+    </div>
+
+    <script src="../js/theme.js"></script>
 </body>
 </html>

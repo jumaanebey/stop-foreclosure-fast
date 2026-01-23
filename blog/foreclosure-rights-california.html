@@ -16,9 +16,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/theme.css">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
@@ -51,339 +51,481 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #374151; background: #fffbf7; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { background: white; border-bottom: 2px solid #fed7aa; padding: 15px 0; }
-        .header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
-        .logo a { font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #ea580c, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .nav { display: flex; gap: 20px; align-items: center; }
-        .nav a { color: #374151; text-decoration: none; font-weight: 500; }
-        .cta-button { background: linear-gradient(135deg, #fb923c, #ea580c); color: white !important; padding: 10px 20px; border-radius: 8px; }
-        .blog-article { padding: 40px 0; }
-        .blog-header { margin-bottom: 30px; }
-        .blog-header h1 { font-size: 36px; color: #1f2937; margin-bottom: 15px; line-height: 1.2; }
-        .blog-meta { color: #6b7280; margin-bottom: 20px; }
-        .blog-meta a { color: #ea580c; }
-        .blog-content h2 { font-size: 26px; color: #7c2d12; margin: 35px 0 15px; }
-        .blog-content h3 { font-size: 20px; color: #92400e; margin: 25px 0 12px; }
-        .blog-content p { margin-bottom: 18px; }
-        .blog-content ul, .blog-content ol { margin: 15px 0 20px 25px; }
-        .blog-content li { margin-bottom: 10px; }
-        .info-box { background: #fef3e2; border-left: 4px solid #ea580c; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .success-box { background: #d1fae5; border-left: 4px solid #10b981; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .cta-box { background: linear-gradient(135deg, #7c2d12, #92400e); color: white; padding: 35px; border-radius: 16px; margin: 35px 0; text-align: center; }
-        .cta-box h3 { color: white; margin-bottom: 15px; font-size: 24px; }
-        .cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; }
-        .cta-box a { display: inline-block; background: linear-gradient(135deg, #fb923c, #ea580c); color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; margin: 5px; }
-        .right-card { background: white; border: 2px solid #10b981; border-radius: 12px; padding: 25px; margin: 20px 0; }
-        .right-card h3 { color: #059669; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .right-card h3::before { content: ''; width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
-        .violation-card { background: #fef2f2; border: 2px solid #dc2626; border-radius: 12px; padding: 25px; margin: 20px 0; }
-        .violation-card h3 { color: #dc2626; margin-bottom: 15px; }
-        .footer { background: #1f2937; color: white; padding: 40px 0; margin-top: 50px; }
-        .footer .container { max-width: 1200px; }
-        .footer a { color: #fb923c; text-decoration: none; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-section h4 { color: #fb923c; margin-bottom: 15px; }
-        @media (max-width: 768px) {
-            .header .container { flex-direction: column; gap: 15px; }
-            .nav { flex-wrap: wrap; justify-content: center; }
-            .blog-header h1 { font-size: 28px; }
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .blog-header {
+            margin-bottom: 40px;
+        }
+        .blog-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .blog-meta {
+            color: var(--gray-500);
+            font-size: 15px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .blog-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .blog-content h2 {
+            font-size: 28px;
+            margin: 48px 0 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .blog-content h3 {
+            font-size: 22px;
+            margin: 32px 0 16px;
+        }
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        .blog-content li {
+            margin-bottom: 12px;
+        }
+        .info-box {
+            background: var(--accent-50);
+            border-left: 4px solid var(--accent-600);
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .info-box h3 {
+            color: var(--accent-700);
+            margin-bottom: 12px;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .warning-box h3 {
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .success-box h3 {
+            color: #059669;
+            margin-bottom: 12px;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 48px 0;
+        }
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 16px;
+        }
+        .cta-box p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 24px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-white {
+            background: white;
+            color: var(--primary-900);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .right-card {
+            background: white;
+            border: 2px solid #10b981;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+        .right-card h3 {
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .right-card h3::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+        .violation-card {
+            background: #fef2f2;
+            border: 2px solid #dc2626;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+        .violation-card h3 {
+            color: #dc2626;
+            margin-bottom: 16px;
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <div class="emergency-bar">
+        Foreclosure sale soon? <a href="tel:+19495655285">Call now: (949) 565-5285</a> for emergency help
+    </div>
+
+    <header class="site-header">
         <div class="container">
-            <div class="logo"><a href="../index.html">My Foreclosure Solution</a></div>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <a href="index.html">Blog</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="tel:+1-949-565-5285" class="cta-button">Call (949) 565-5285</a>
-            </nav>
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <nav class="mobile-nav">
+        <a href="../learn-more.html">How It Works</a>
+        <a href="../faq.html">FAQ</a>
+        <a href="../free-guide.html">Free Guide</a>
+        <a href="./">Blog</a>
+        <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
+
     <article class="blog-article">
-        <div class="container">
-            <div class="blog-header">
-                <h1>Your Rights During Foreclosure in California</h1>
-                <p class="blog-meta">Updated January 2025 | <a href="../schedule.html">Get Free Consultation</a></p>
+        <header class="blog-header">
+            <h1>Your Rights During Foreclosure in California</h1>
+            <div class="blog-meta">
+                <span>Updated January 2025</span>
+                <span>|</span>
+                <a href="../schedule.html">Get Free Consultation</a>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <p><strong>Facing foreclosure is frightening, but you have more power than you might think.</strong> California has some of the strongest homeowner protection laws in the nation. Understanding your rights can help you fight back, delay the process, and potentially save your home.</p>
+
+            <p>This guide covers every right you have as a California homeowner facing foreclosure, from initial notices through the sale and beyond.</p>
+
+            <div class="success-box">
+                <h3>You Have Rights - Know Them</h3>
+                <p>California's Homeowner Bill of Rights and other laws provide significant protections. Lenders must follow specific procedures, and violations can be grounds to challenge the foreclosure.</p>
             </div>
 
-            <div class="blog-content">
-                <p><strong>Facing foreclosure is frightening, but you have more power than you might think.</strong> California has some of the strongest homeowner protection laws in the nation. Understanding your rights can help you fight back, delay the process, and potentially save your home.</p>
+            <h2>California Homeowner Bill of Rights</h2>
 
-                <p>This guide covers every right you have as a California homeowner facing foreclosure, from initial notices through the sale and beyond.</p>
+            <p>The California Homeowner Bill of Rights (HBOR) provides crucial protections for homeowners facing foreclosure. Here are your key rights:</p>
 
-                <div class="success-box">
-                    <h3>You Have Rights - Know Them</h3>
-                    <p>California's Homeowner Bill of Rights and other laws provide significant protections. Lenders must follow specific procedures, and violations can be grounds to challenge the foreclosure.</p>
-                </div>
-
-                <h2>California Homeowner Bill of Rights</h2>
-
-                <p>The California Homeowner Bill of Rights (HBOR) provides crucial protections for homeowners facing foreclosure. Here are your key rights:</p>
-
-                <div class="right-card">
-                    <h3>Single Point of Contact</h3>
-                    <p>Your lender must provide you with one person (or team) who:</p>
-                    <ul>
-                        <li>Has access to your complete loan file</li>
-                        <li>Can communicate with you about your options</li>
-                        <li>Ensures you receive timely information</li>
-                        <li>Coordinates with other departments on your behalf</li>
-                    </ul>
-                    <p><strong>Why it matters:</strong> You're not bounced between departments. One contact is accountable for your case.</p>
-                </div>
-
-                <div class="right-card">
-                    <h3>No Dual Tracking</h3>
-                    <p>Your lender cannot:</p>
-                    <ul>
-                        <li>Proceed with foreclosure while reviewing your loan modification application</li>
-                        <li>File a Notice of Default if you've submitted a complete application before the NOD</li>
-                        <li>Record a Notice of Sale while your application is pending</li>
-                        <li>Conduct a foreclosure sale until they make a written decision on your application</li>
-                    </ul>
-                    <p><strong>Why it matters:</strong> You have time to explore alternatives without the clock running.</p>
-                </div>
-
-                <div class="right-card">
-                    <h3>Written Decision on Modification</h3>
-                    <p>If your <a href="loan-modification-california.html">loan modification</a> is denied, your lender must provide:</p>
-                    <ul>
-                        <li>Written explanation of the reasons for denial</li>
-                        <li>Description of other foreclosure alternatives</li>
-                        <li>Information about your right to appeal</li>
-                        <li>Deadline for appealing the decision</li>
-                    </ul>
-                    <p><strong>Why it matters:</strong> You understand why you were denied and can address the issues or appeal.</p>
-                </div>
-
-                <div class="right-card">
-                    <h3>Right to Appeal</h3>
-                    <p>If your loan modification is denied, you can:</p>
-                    <ul>
-                        <li>Request an appeal within 30 days of denial</li>
-                        <li>Provide additional documentation</li>
-                        <li>Have your application reviewed by different personnel</li>
-                        <li>Receive a written decision on your appeal</li>
-                    </ul>
-                    <p><strong>Why it matters:</strong> Initial denials aren't final - you get a second chance.</p>
-                </div>
-
-                <div class="right-card">
-                    <h3>Accurate Foreclosure Documents</h3>
-                    <p>Before recording a Notice of Default or Notice of Sale, the lender must:</p>
-                    <ul>
-                        <li>Verify the accuracy of all information</li>
-                        <li>Ensure a competent person has reviewed the documents</li>
-                        <li>Confirm the borrower is actually in default</li>
-                        <li>Ensure proper chain of title</li>
-                    </ul>
-                    <p><strong>Why it matters:</strong> Errors in documentation can be grounds to challenge the foreclosure.</p>
-                </div>
-
-                <h2>Additional California Foreclosure Rights</h2>
-
-                <div class="right-card">
-                    <h3>Right to Reinstate Your Loan</h3>
-                    <p>You can reinstate your loan by paying all past-due amounts:</p>
-                    <ul>
-                        <li>Available up to 5 business days before the foreclosure sale</li>
-                        <li>Stops the foreclosure process completely</li>
-                        <li>Returns your loan to current status</li>
-                        <li>Lender must provide accurate reinstatement quote on request</li>
-                    </ul>
-                </div>
-
-                <div class="right-card">
-                    <h3>Right to Proper Notice</h3>
-                    <p>Your lender must provide proper notice at every stage:</p>
-                    <ul>
-                        <li><strong>30 days before NOD:</strong> Contact attempt to discuss options</li>
-                        <li><strong><a href="notice-of-default-california.html">Notice of Default</a>:</strong> Mailed within 10 days of recording</li>
-                        <li><strong>Notice of Sale:</strong> Mailed 20+ days before sale, posted 20+ days before sale</li>
-                        <li>All notices must be in writing and contain required information</li>
-                    </ul>
-                </div>
-
-                <div class="right-card">
-                    <h3>Right to Stay in Your Home</h3>
-                    <p>You have the right to remain in your home until:</p>
-                    <ul>
-                        <li>The foreclosure sale is complete</li>
-                        <li>A new owner takes possession</li>
-                        <li>You are legally evicted (requires court process)</li>
-                    </ul>
-                    <p><strong>Important:</strong> Do not move out early. You have legal rights to remain until the proper process is complete.</p>
-                </div>
-
-                <div class="right-card">
-                    <h3>Right to Sell Your Home</h3>
-                    <p>You can <a href="sell-house-before-foreclosure.html">sell your home</a> at any time before the foreclosure sale:</p>
-                    <ul>
-                        <li>Traditional market sale</li>
-                        <li>Cash buyer sale (faster)</li>
-                        <li><a href="short-sale-vs-foreclosure.html">Short sale</a> (if underwater)</li>
-                    </ul>
-                </div>
-
-                <h2>When Your Rights Are Violated</h2>
-
-                <p>If your lender violates California foreclosure law, you may have remedies:</p>
-
-                <div class="violation-card">
-                    <h3>Dual Tracking Violation</h3>
-                    <p><strong>Example:</strong> Lender proceeds with foreclosure while your complete modification application is pending.</p>
-                    <p><strong>Your recourse:</strong> You can seek an injunction to stop the sale and may be entitled to damages.</p>
-                </div>
-
-                <div class="violation-card">
-                    <h3>Improper Notice</h3>
-                    <p><strong>Example:</strong> You didn't receive proper notice of default or sale.</p>
-                    <p><strong>Your recourse:</strong> The foreclosure may be voidable. Consult an attorney.</p>
-                </div>
-
-                <div class="violation-card">
-                    <h3>Robo-Signing</h3>
-                    <p><strong>Example:</strong> Foreclosure documents were signed without proper review or by someone without authority.</p>
-                    <p><strong>Your recourse:</strong> May be grounds to challenge the validity of the foreclosure.</p>
-                </div>
-
-                <div class="violation-card">
-                    <h3>No Single Point of Contact</h3>
-                    <p><strong>Example:</strong> You're bounced between multiple contacts with no one taking responsibility.</p>
-                    <p><strong>Your recourse:</strong> Document the violation and report to your lender and regulators.</p>
-                </div>
-
-                <div class="warning-box">
-                    <h3>If You Believe Your Rights Were Violated</h3>
-                    <ol>
-                        <li>Document everything - dates, names, what was said</li>
-                        <li>Save all correspondence and notices</li>
-                        <li>File a complaint with the lender's complaint department</li>
-                        <li>Report to the Consumer Financial Protection Bureau (CFPB)</li>
-                        <li>Consult with a foreclosure defense attorney</li>
-                    </ol>
-                </div>
-
-                <h2>Rights Regarding Deficiency Judgments</h2>
-
-                <p>California has important protections against deficiency judgments (when you're sued for the difference between what you owe and what the home sells for):</p>
-
-                <div class="info-box">
-                    <h3>California Anti-Deficiency Protections</h3>
-                    <ul>
-                        <li><strong>Purchase Money Loans:</strong> No deficiency allowed on loans used to buy your home</li>
-                        <li><strong>Non-Judicial Foreclosure:</strong> Generally no deficiency after non-judicial foreclosure</li>
-                        <li><strong>One-to-Four Units:</strong> Protected if owner-occupied during origination</li>
-                    </ul>
-                    <p><strong>Note:</strong> Refinanced loans, HELOCs, and investment properties may have different rules. Consult a professional.</p>
-                </div>
-
-                <h2>Your Rights After Foreclosure</h2>
-
-                <p>Even after a foreclosure sale, you have rights:</p>
-
+            <div class="right-card">
+                <h3>Single Point of Contact</h3>
+                <p>Your lender must provide you with one person (or team) who:</p>
                 <ul>
-                    <li><strong>Right to formal eviction process:</strong> The new owner must go through proper legal channels to remove you</li>
-                    <li><strong>Right to claim surplus funds:</strong> If the sale exceeds what you owe, you're entitled to the excess</li>
-                    <li><strong>Right to proper accounting:</strong> You can request an accounting of what was owed and what was collected</li>
-                    <li><strong>Protection from harassment:</strong> New owners cannot intimidate or harass you to leave</li>
+                    <li>Has access to your complete loan file</li>
+                    <li>Can communicate with you about your options</li>
+                    <li>Ensures you receive timely information</li>
+                    <li>Coordinates with other departments on your behalf</li>
                 </ul>
+                <p><strong>Why it matters:</strong> You're not bounced between departments. One contact is accountable for your case.</p>
+            </div>
 
-                <h2>Resources to Protect Your Rights</h2>
-
-                <h3>Free Housing Counseling</h3>
-                <p>HUD-approved housing counselors can help you understand your rights for free:</p>
+            <div class="right-card">
+                <h3>No Dual Tracking</h3>
+                <p>Your lender cannot:</p>
                 <ul>
-                    <li>Call HUD at 1-800-569-4287</li>
-                    <li>Visit the HUD website to find local counselors</li>
+                    <li>Proceed with foreclosure while reviewing your loan modification application</li>
+                    <li>File a Notice of Default if you've submitted a complete application before the NOD</li>
+                    <li>Record a Notice of Sale while your application is pending</li>
+                    <li>Conduct a foreclosure sale until they make a written decision on your application</li>
                 </ul>
+                <p><strong>Why it matters:</strong> You have time to explore alternatives without the clock running.</p>
+            </div>
 
-                <h3>Legal Help</h3>
-                <p>If you believe your rights were violated:</p>
+            <div class="right-card">
+                <h3>Written Decision on Modification</h3>
+                <p>If your <a href="loan-modification-california.html">loan modification</a> is denied, your lender must provide:</p>
                 <ul>
-                    <li>Contact a foreclosure defense attorney for consultation</li>
-                    <li>Reach out to legal aid organizations if you qualify</li>
-                    <li>Contact your local bar association for referrals</li>
+                    <li>Written explanation of the reasons for denial</li>
+                    <li>Description of other foreclosure alternatives</li>
+                    <li>Information about your right to appeal</li>
+                    <li>Deadline for appealing the decision</li>
                 </ul>
+                <p><strong>Why it matters:</strong> You understand why you were denied and can address the issues or appeal.</p>
+            </div>
 
-                <h3>File Complaints</h3>
+            <div class="right-card">
+                <h3>Right to Appeal</h3>
+                <p>If your loan modification is denied, you can:</p>
                 <ul>
-                    <li><strong>Consumer Financial Protection Bureau (CFPB):</strong> consumerfinance.gov</li>
-                    <li><strong>California Department of Real Estate:</strong> dre.ca.gov</li>
-                    <li><strong>California Attorney General:</strong> oag.ca.gov</li>
+                    <li>Request an appeal within 30 days of denial</li>
+                    <li>Provide additional documentation</li>
+                    <li>Have your application reviewed by different personnel</li>
+                    <li>Receive a written decision on your appeal</li>
                 </ul>
+                <p><strong>Why it matters:</strong> Initial denials aren't final - you get a second chance.</p>
+            </div>
 
-                <div class="cta-box">
-                    <h3>Need Help Understanding Your Rights?</h3>
-                    <p>As licensed California real estate professionals, we can help you understand your options and connect you with the right resources. Schedule a free consultation.</p>
-                    <a href="../schedule.html">Schedule Free Consultation</a>
-                    <a href="tel:+1-949-565-5285" style="background: rgba(255,255,255,0.2);">Call (949) 565-5285</a>
-                    <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637</p>
-                </div>
-
-                <h2>Frequently Asked Questions</h2>
-
-                <h3>Can my lender foreclose while I'm applying for loan modification?</h3>
-                <p>No. Under California law (no dual tracking), your lender cannot proceed with foreclosure while reviewing a complete loan modification application.</p>
-
-                <h3>Do I have to leave my home immediately after foreclosure?</h3>
-                <p>No. The new owner must go through a formal eviction process. You cannot be locked out or removed without proper legal proceedings.</p>
-
-                <h3>Can I sue if my lender violated the law?</h3>
-                <p>Yes. Depending on the violation, you may be able to seek an injunction to stop foreclosure, actual damages, and possibly statutory damages. Consult an attorney.</p>
-
-                <h3>What if I never received a Notice of Default?</h3>
-                <p>Proper notice is required by law. If you didn't receive proper notice, this may be grounds to challenge the foreclosure. Document the lack of notice and consult an attorney.</p>
-
-                <h2>Related Resources</h2>
+            <div class="right-card">
+                <h3>Accurate Foreclosure Documents</h3>
+                <p>Before recording a Notice of Default or Notice of Sale, the lender must:</p>
                 <ul>
-                    <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
-                    <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
-                    <li><a href="foreclosure-timeline-california-2025.html">California Foreclosure Timeline 2025</a></li>
-                    <li><a href="loan-modification-california.html">Loan Modification in California: Complete Guide</a></li>
-                    <li><a href="foreclosure-scams-avoid.html">Foreclosure Scams to Avoid</a></li>
+                    <li>Verify the accuracy of all information</li>
+                    <li>Ensure a competent person has reviewed the documents</li>
+                    <li>Confirm the borrower is actually in default</li>
+                    <li>Ensure proper chain of title</li>
+                </ul>
+                <p><strong>Why it matters:</strong> Errors in documentation can be grounds to challenge the foreclosure.</p>
+            </div>
+
+            <h2>Additional California Foreclosure Rights</h2>
+
+            <div class="right-card">
+                <h3>Right to Reinstate Your Loan</h3>
+                <p>You can reinstate your loan by paying all past-due amounts:</p>
+                <ul>
+                    <li>Available up to 5 business days before the foreclosure sale</li>
+                    <li>Stops the foreclosure process completely</li>
+                    <li>Returns your loan to current status</li>
+                    <li>Lender must provide accurate reinstatement quote on request</li>
                 </ul>
             </div>
+
+            <div class="right-card">
+                <h3>Right to Proper Notice</h3>
+                <p>Your lender must provide proper notice at every stage:</p>
+                <ul>
+                    <li><strong>30 days before NOD:</strong> Contact attempt to discuss options</li>
+                    <li><strong><a href="notice-of-default-california.html">Notice of Default</a>:</strong> Mailed within 10 days of recording</li>
+                    <li><strong>Notice of Sale:</strong> Mailed 20+ days before sale, posted 20+ days before sale</li>
+                    <li>All notices must be in writing and contain required information</li>
+                </ul>
+            </div>
+
+            <div class="right-card">
+                <h3>Right to Stay in Your Home</h3>
+                <p>You have the right to remain in your home until:</p>
+                <ul>
+                    <li>The foreclosure sale is complete</li>
+                    <li>A new owner takes possession</li>
+                    <li>You are legally evicted (requires court process)</li>
+                </ul>
+                <p><strong>Important:</strong> Do not move out early. You have legal rights to remain until the proper process is complete.</p>
+            </div>
+
+            <div class="right-card">
+                <h3>Right to Sell Your Home</h3>
+                <p>You can <a href="sell-house-before-foreclosure.html">sell your home</a> at any time before the foreclosure sale:</p>
+                <ul>
+                    <li>Traditional market sale</li>
+                    <li>Cash buyer sale (faster)</li>
+                    <li><a href="short-sale-vs-foreclosure.html">Short sale</a> (if underwater)</li>
+                </ul>
+            </div>
+
+            <h2>When Your Rights Are Violated</h2>
+
+            <p>If your lender violates California foreclosure law, you may have remedies:</p>
+
+            <div class="violation-card">
+                <h3>Dual Tracking Violation</h3>
+                <p><strong>Example:</strong> Lender proceeds with foreclosure while your complete modification application is pending.</p>
+                <p><strong>Your recourse:</strong> You can seek an injunction to stop the sale and may be entitled to damages.</p>
+            </div>
+
+            <div class="violation-card">
+                <h3>Improper Notice</h3>
+                <p><strong>Example:</strong> You didn't receive proper notice of default or sale.</p>
+                <p><strong>Your recourse:</strong> The foreclosure may be voidable. Consult an attorney.</p>
+            </div>
+
+            <div class="violation-card">
+                <h3>Robo-Signing</h3>
+                <p><strong>Example:</strong> Foreclosure documents were signed without proper review or by someone without authority.</p>
+                <p><strong>Your recourse:</strong> May be grounds to challenge the validity of the foreclosure.</p>
+            </div>
+
+            <div class="violation-card">
+                <h3>No Single Point of Contact</h3>
+                <p><strong>Example:</strong> You're bounced between multiple contacts with no one taking responsibility.</p>
+                <p><strong>Your recourse:</strong> Document the violation and report to your lender and regulators.</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>If You Believe Your Rights Were Violated</h3>
+                <ol>
+                    <li>Document everything - dates, names, what was said</li>
+                    <li>Save all correspondence and notices</li>
+                    <li>File a complaint with the lender's complaint department</li>
+                    <li>Report to the Consumer Financial Protection Bureau (CFPB)</li>
+                    <li>Consult with a foreclosure defense attorney</li>
+                </ol>
+            </div>
+
+            <h2>Rights Regarding Deficiency Judgments</h2>
+
+            <p>California has important protections against deficiency judgments (when you're sued for the difference between what you owe and what the home sells for):</p>
+
+            <div class="info-box">
+                <h3>California Anti-Deficiency Protections</h3>
+                <ul>
+                    <li><strong>Purchase Money Loans:</strong> No deficiency allowed on loans used to buy your home</li>
+                    <li><strong>Non-Judicial Foreclosure:</strong> Generally no deficiency after non-judicial foreclosure</li>
+                    <li><strong>One-to-Four Units:</strong> Protected if owner-occupied during origination</li>
+                </ul>
+                <p><strong>Note:</strong> Refinanced loans, HELOCs, and investment properties may have different rules. Consult a professional.</p>
+            </div>
+
+            <h2>Your Rights After Foreclosure</h2>
+
+            <p>Even after a foreclosure sale, you have rights:</p>
+
+            <ul>
+                <li><strong>Right to formal eviction process:</strong> The new owner must go through proper legal channels to remove you</li>
+                <li><strong>Right to claim surplus funds:</strong> If the sale exceeds what you owe, you're entitled to the excess</li>
+                <li><strong>Right to proper accounting:</strong> You can request an accounting of what was owed and what was collected</li>
+                <li><strong>Protection from harassment:</strong> New owners cannot intimidate or harass you to leave</li>
+            </ul>
+
+            <h2>Resources to Protect Your Rights</h2>
+
+            <h3>Free Housing Counseling</h3>
+            <p>HUD-approved housing counselors can help you understand your rights for free:</p>
+            <ul>
+                <li>Call HUD at 1-800-569-4287</li>
+                <li>Visit the HUD website to find local counselors</li>
+            </ul>
+
+            <h3>Legal Help</h3>
+            <p>If you believe your rights were violated:</p>
+            <ul>
+                <li>Contact a foreclosure defense attorney for consultation</li>
+                <li>Reach out to legal aid organizations if you qualify</li>
+                <li>Contact your local bar association for referrals</li>
+            </ul>
+
+            <h3>File Complaints</h3>
+            <ul>
+                <li><strong>Consumer Financial Protection Bureau (CFPB):</strong> consumerfinance.gov</li>
+                <li><strong>California Department of Real Estate:</strong> dre.ca.gov</li>
+                <li><strong>California Attorney General:</strong> oag.ca.gov</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Need Help Understanding Your Rights?</h3>
+                <p>As licensed California real estate professionals, we can help you understand your options and connect you with the right resources. Schedule a free consultation.</p>
+                <div class="cta-buttons">
+                    <a href="../schedule.html" class="btn-white">Schedule Free Consultation</a>
+                    <a href="tel:+19495655285" class="btn-outline">Call (949) 565-5285</a>
+                </div>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">Licensed: DRE #02076038 | NMLS #2033637</p>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Can my lender foreclose while I'm applying for loan modification?</h3>
+            <p>No. Under California law (no dual tracking), your lender cannot proceed with foreclosure while reviewing a complete loan modification application.</p>
+
+            <h3>Do I have to leave my home immediately after foreclosure?</h3>
+            <p>No. The new owner must go through a formal eviction process. You cannot be locked out or removed without proper legal proceedings.</p>
+
+            <h3>Can I sue if my lender violated the law?</h3>
+            <p>Yes. Depending on the violation, you may be able to seek an injunction to stop foreclosure, actual damages, and possibly statutory damages. Consult an attorney.</p>
+
+            <h3>What if I never received a Notice of Default?</h3>
+            <p>Proper notice is required by law. If you didn't receive proper notice, this may be grounds to challenge the foreclosure. Document the lack of notice and consult an attorney.</p>
+
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California (2025 Guide)</a></li>
+                <li><a href="notice-of-default-california.html">Notice of Default in California: What It Means</a></li>
+                <li><a href="foreclosure-timeline-california-2025.html">California Foreclosure Timeline 2025</a></li>
+                <li><a href="loan-modification-california.html">Loan Modification in California: Complete Guide</a></li>
+                <li><a href="foreclosure-scams-avoid.html">Foreclosure Scams to Avoid</a></li>
+            </ul>
         </div>
     </article>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>My Foreclosure Solution</h4>
-                    <p>Licensed California Real Estate Professionals</p>
-                    <p>DRE #02076038 | NMLS #2033637</p>
-                    <p>Phone: <a href="tel:+1-949-565-5285">(949) 565-5285</a></p>
-                    <p>Email: help@myforeclosuresolution.com</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
                 </div>
-                <div class="footer-section">
+                <div class="footer-col">
                     <h4>Resources</h4>
-                    <a href="index.html">Blog Home</a><br>
-                    <a href="../faq.html">FAQ</a><br>
-                    <a href="../free-guide.html">Free Guide</a><br>
-                    <a href="../schedule.html">Schedule Consultation</a>
+                    <a href="./">All Articles</a>
+                    <a href="california-foreclosure-laws.html">CA Foreclosure Laws</a>
+                    <a href="california-foreclosure-timeline.html">Timeline Guide</a>
+                    <a href="../emergency-checklist.html">Emergency Help</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Service Areas</h4>
-                    <a href="../stop-foreclosure-los-angeles.html">Los Angeles</a><br>
-                    <a href="../stop-foreclosure-san-diego.html">San Diego</a><br>
-                    <a href="../stop-foreclosure-oakland.html">Oakland</a><br>
-                    <a href="../stop-foreclosure-sacramento.html">Sacramento</a>
+                <div class="footer-col">
+                    <h4>Options</h4>
+                    <a href="loan-modification-california.html">Loan Modification</a>
+                    <a href="short-sale-california.html">Short Sale</a>
+                    <a href="can-i-sell-my-house-during-foreclosure-california.html">Sell During Foreclosure</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="../privacy-policy.html">Privacy Policy</a>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #374151;">
-                <p>&copy; 2025 My Foreclosure Solution. All rights reserved.</p>
-                <p style="font-size: 14px; opacity: 0.8;">DRE #02076038 | NMLS #2033637 | Equal Housing Opportunity</p>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Consultation</a>
+    </div>
+
+    <script src="../js/theme.js"></script>
 </body>
 </html>
