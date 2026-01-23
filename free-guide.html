@@ -236,9 +236,10 @@
                     </form>
 
                     <div id="success-message">
-                        <h3>Success! Check Your Email</h3>
-                        <p>Your guide has been sent to your inbox. Check spam if you don't see it in 2 minutes.</p>
-                        <p style="margin-top: 16px;">Need immediate help? Call (949) 565-5285</p>
+                        <h3>Your Guide is Ready!</h3>
+                        <p>Click below to access your guide. Bookmark it or print it for future reference.</p>
+                        <a href="downloads/foreclosure-survival-guide.html" class="btn btn-accent" style="display: inline-block; margin-top: 16px; text-decoration: none;">Open My Guide Now</a>
+                        <p style="margin-top: 16px; font-size: 14px; color: var(--gray-500);">Need immediate help? Call (949) 565-5285</p>
                     </div>
 
                     <p class="privacy-note">
@@ -376,6 +377,11 @@
                         'value': 1
                     });
                 }
+
+                // Auto-open guide after 2 seconds
+                setTimeout(function() {
+                    window.open('downloads/foreclosure-survival-guide.html', '_blank');
+                }, 2000);
             }, 1000);
         });
     </script>
