@@ -202,23 +202,39 @@
     </section>
 
     <main class="container">
-        <div class="blog-grid">
-            <!-- Featured/Pillar Content -->
-            <article class="blog-card" style="grid-column: span 2;">
-                <div class="blog-card-content">
-                    <h2><a href="how-to-stop-foreclosure-california-2025.html">How to Stop Foreclosure in California 2025: Complete Guide</a></h2>
-                    <p>The ultimate guide to stopping foreclosure in California. 7 proven methods, your legal rights under the Homeowner Bill of Rights, timeline, and step-by-step action plans. Updated January 2025.</p>
-                    <div class="blog-card-footer">
-                        <span class="blog-tag urgent">Complete Guide</span>
-                        <a href="how-to-stop-foreclosure-california-2025.html" class="read-more">Read More &rarr;</a>
-                    </div>
+        <!-- Featured Complete Guide Hero -->
+        <div class="featured-guide" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; padding: 40px; margin-bottom: 40px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 16px; left: 16px; background: #d97706; color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;">&#x2605; Start Here</div>
+            <div style="max-width: 700px;">
+                <h2 style="color: white; font-size: clamp(24px, 4vw, 32px); margin-bottom: 16px; margin-top: 20px;">How to Stop Foreclosure in California 2025: Complete Guide</h2>
+                <p style="color: #94a3b8; font-size: 16px; line-height: 1.6; margin-bottom: 20px;">The ultimate guide covering 7 proven methods, your legal rights under the Homeowner Bill of Rights, California foreclosure timeline, and step-by-step action plans.</p>
+                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
+                    <span style="color: #d97706; font-size: 14px;">&#128337; 15 min read</span>
+                    <span style="color: #64748b; font-size: 14px;">Updated January 2025</span>
                 </div>
-            </article>
+                <a href="how-to-stop-foreclosure-california-2025.html" style="display: inline-block; background: #d97706; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s;">Read Complete Guide &rarr;</a>
+            </div>
+        </div>
 
-            <article class="blog-card">
+        <!-- Situation Filter -->
+        <div class="situation-filter" style="margin-bottom: 32px;">
+            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px; font-weight: 500;">What's your situation?</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <button onclick="filterArticles('all')" class="filter-btn active" style="padding: 8px 16px; border: 2px solid #e2e8f0; background: #1e293b; color: white; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;">All Articles</button>
+                <button onclick="filterArticles('early')" class="filter-btn" style="padding: 8px 16px; border: 2px solid #e2e8f0; background: white; color: #334155; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;">Just Missed Payment</button>
+                <button onclick="filterArticles('nod')" class="filter-btn" style="padding: 8px 16px; border: 2px solid #e2e8f0; background: white; color: #334155; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;">Received NOD</button>
+                <button onclick="filterArticles('auction')" class="filter-btn" style="padding: 8px 16px; border: 2px solid #e2e8f0; background: white; color: #334155; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;">Auction Scheduled</button>
+                <button onclick="filterArticles('life')" class="filter-btn" style="padding: 8px 16px; border: 2px solid #e2e8f0; background: white; color: #334155; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;">Life Event</button>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+
+            <article class="blog-card" data-stage="all early nod">
                 <div class="blog-card-content">
                     <h2><a href="california-foreclosure-statistics-2025.html">California Foreclosure Statistics 2025</a></h2>
                     <p>Latest foreclosure data: rates by county, trends, timeline statistics. 56,000 filings in 2024, county rankings, and market analysis.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 6 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Data & Stats</span>
                         <a href="california-foreclosure-statistics-2025.html" class="read-more">Read More &rarr;</a>
@@ -226,10 +242,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod auction">
                 <div class="blog-card-content">
                     <h2><a href="foreclosure-options-comparison-california.html">Foreclosure Options Comparison Guide</a></h2>
                     <p>Loan modification vs short sale vs bankruptcy: side-by-side comparison of credit impact, timeline, and eligibility for each option.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 10 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Comparison</span>
                         <a href="foreclosure-options-comparison-california.html" class="read-more">Read More &rarr;</a>
@@ -237,10 +254,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all nod">
                 <div class="blog-card-content">
                     <h2><a href="notice-of-default-california.html">Notice of Default in California: What It Means & What to Do</a></h2>
                     <p>Received a Notice of Default? Learn what this document means, your 90-day rights, and critical steps to take immediately.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 8 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag urgent">Urgent Help</span>
                         <a href="notice-of-default-california.html" class="read-more">Read More &rarr;</a>
@@ -248,10 +266,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod">
                 <div class="blog-card-content">
                     <h2><a href="california-foreclosure-timeline.html">California Foreclosure Timeline: What to Expect in 2025</a></h2>
                     <p>Understanding California's foreclosure process and how long you have to act. Key deadlines and your rights as a homeowner.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 7 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag timeline">Timeline</span>
                         <a href="california-foreclosure-timeline.html" class="read-more">Read More &rarr;</a>
@@ -259,10 +278,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod auction">
                 <div class="blog-card-content">
                     <h2><a href="california-foreclosure-laws.html">California Foreclosure Laws 2025: Your Rights & Protections</a></h2>
                     <p>Complete guide to California foreclosure laws, homeowner rights, and legal protections available to you.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 12 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag legal">Legal Guide</span>
                         <a href="california-foreclosure-laws.html" class="read-more">Read More &rarr;</a>
@@ -270,10 +290,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod auction">
                 <div class="blog-card-content">
                     <h2><a href="can-i-sell-my-house-during-foreclosure-california.html">Can I Sell My House During Foreclosure in California?</a></h2>
                     <p>Yes! Learn about your selling options including traditional sales, short sales, and fast cash offers during foreclosure.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 8 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Selling Options</span>
                         <a href="can-i-sell-my-house-during-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -281,10 +302,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all auction">
                 <div class="blog-card-content">
                     <h2><a href="what-happens-after-foreclosure-auction-california.html">What Happens After a Foreclosure Auction in California?</a></h2>
                     <p>Understand your rights, eviction timeline, deficiency judgments, and options for moving forward after auction.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 9 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag timeline">Post-Auction</span>
                         <a href="what-happens-after-foreclosure-auction-california.html" class="read-more">Read More &rarr;</a>
@@ -292,10 +314,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod auction">
                 <div class="blog-card-content">
                     <h2><a href="stop-foreclosure-los-angeles.html">How to Stop Foreclosure in Los Angeles: 7 Proven Options</a></h2>
                     <p>Specific strategies for LA homeowners facing foreclosure. Local resources and immediate action steps.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 10 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag urgent">LA Guide</span>
                         <a href="stop-foreclosure-los-angeles.html" class="read-more">Read More &rarr;</a>
@@ -303,10 +326,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod">
                 <div class="blog-card-content">
                     <h2><a href="how-long-does-foreclosure-take-los-angeles.html">How Long Does Foreclosure Take in Los Angeles?</a></h2>
                     <p>Complete LA foreclosure timeline from missed payments to auction. Understand each stage and how much time you have.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 6 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag timeline">Timeline</span>
                         <a href="how-long-does-foreclosure-take-los-angeles.html" class="read-more">Read More &rarr;</a>
@@ -314,10 +338,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #dc2626;">
+            <article class="blog-card" data-stage="all auction" style="border: 2px solid #dc2626;">
                 <div class="blog-card-content">
                     <h2><a href="foreclosure-sale-in-7-days-california.html">Foreclosure Sale in 7 Days? Emergency Help</a></h2>
                     <p>Auction days away? You still have options. Emergency bankruptcy, reinstatement, cash sale. Call (949) 565-5285 NOW.</p>
+                    <div style="font-size: 12px; color: #dc2626; margin-bottom: 12px;">&#128337; 5 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag urgent" style="background:#dc2626;color:white;">EMERGENCY</span>
                         <a href="foreclosure-sale-in-7-days-california.html" class="read-more">Get Help Now &rarr;</a>
@@ -325,10 +350,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all early nod">
                 <div class="blog-card-content">
                     <h2><a href="loan-modification-california-2025.html">Loan Modification California 2025: How to Apply & Get Approved</a></h2>
                     <p>Complete guide to loan modification eligibility, required documents, application process, and tips to get approved.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 12 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Complete Guide</span>
                         <a href="loan-modification-california-2025.html" class="read-more">Read More &rarr;</a>
@@ -336,10 +362,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all nod auction">
                 <div class="blog-card-content">
                     <h2><a href="short-sale-california.html">Short Sale in California: Complete Guide for Homeowners</a></h2>
                     <p>Learn how a short sale works, when it makes sense, and how to negotiate with your lender.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 9 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Selling Options</span>
                         <a href="short-sale-california.html" class="read-more">Read More &rarr;</a>
@@ -348,10 +375,11 @@
             </article>
 
             <!-- Life Event / Crisis Content -->
-            <article class="blog-card" style="border: 2px solid #7c3aed;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #7c3aed;">
                 <div class="blog-card-content">
                     <h2><a href="divorce-and-mortgage-california.html">Going Through Divorce? Your Mortgage Options in California</a></h2>
                     <p>Navigating your mortgage during divorce. Buyouts, refinancing, selling, and protecting yourself from your ex's missed payments.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 11 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#f3e8ff;color:#7c3aed;">Life Events</span>
                         <a href="divorce-and-mortgage-california.html" class="read-more">Read More &rarr;</a>
@@ -359,10 +387,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #2563eb;">
+            <article class="blog-card" data-stage="all life early" style="border: 2px solid #2563eb;">
                 <div class="blog-card-content">
                     <h2><a href="lost-job-cant-pay-mortgage-california.html">Lost Your Job? How to Save Your Home in California</a></h2>
                     <p>Just lost your job? Your first 48 hours action plan, forbearance options, unemployment resources, and how to keep your home.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 9 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#dbeafe;color:#2563eb;">Job Loss</span>
                         <a href="lost-job-cant-pay-mortgage-california.html" class="read-more">Read More &rarr;</a>
@@ -370,10 +399,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #059669;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #059669;">
                 <div class="blog-card-content">
                     <h2><a href="medical-bills-mortgage-california.html">Drowning in Medical Bills? Protect Your California Home</a></h2>
                     <p>Medical debt vs mortgage: which to pay first, your legal protections, California Mortgage Relief Program, and bankruptcy options.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 10 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#d1fae5;color:#059669;">Medical Crisis</span>
                         <a href="medical-bills-mortgage-california.html" class="read-more">Read More &rarr;</a>
@@ -381,10 +411,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #db2777;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #db2777;">
                 <div class="blog-card-content">
                     <h2><a href="foreclosure-stress-anxiety-california.html">Coping with Foreclosure Stress and Anxiety</a></h2>
                     <p>Facing foreclosure is terrifying. Mental health resources, coping strategies, and why there's more hope than you realize.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 7 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#fce7f3;color:#db2777;">Support</span>
                         <a href="foreclosure-stress-anxiety-california.html" class="read-more">Read More &rarr;</a>
@@ -393,10 +424,11 @@
             </article>
 
             <!-- Community-Specific Content -->
-            <article class="blog-card" style="border: 2px solid #1e3a5f;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #1e3a5f;">
                 <div class="blog-card-content">
                     <h2><a href="va-loan-foreclosure-california.html">VA Loan Foreclosure: Help for California Veterans</a></h2>
                     <p>Veteran facing VA loan trouble? Your unique protections, VA-specific programs, and who to call for help. You served - let us help you.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 10 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#1e3a5f;color:white;">Veterans</span>
                         <a href="va-loan-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -404,10 +436,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #16a34a;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #16a34a;">
                 <div class="blog-card-content">
                     <h2><a href="senior-foreclosure-california.html">Senior Foreclosure Help: Protecting Elderly Homeowners</a></h2>
                     <p>California senior facing foreclosure? Special protections, reverse mortgage issues, fixed income solutions, and free resources.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 11 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#dcfce7;color:#166534;">Seniors</span>
                         <a href="senior-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -415,10 +448,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #7c3aed;">
+            <article class="blog-card" data-stage="all life" style="border: 2px solid #7c3aed;">
                 <div class="blog-card-content">
                     <h2><a href="inherited-house-foreclosure-california.html">Inherited a House with a Mortgage You Can't Afford?</a></h2>
                     <p>California inheritance guide: assume the loan, sell, or walk away. Your options when you inherit a property with a mortgage.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 8 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#f3e8ff;color:#7c3aed;">Inherited</span>
                         <a href="inherited-house-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -427,10 +461,11 @@
             </article>
 
             <!-- Property Crisis Content -->
-            <article class="blog-card" style="border: 2px solid #f59e0b;">
+            <article class="blog-card" data-stage="all early nod" style="border: 2px solid #f59e0b;">
                 <div class="blog-card-content">
                     <h2><a href="property-tax-lien-foreclosure-california.html">Behind on Property Taxes? Avoid Tax Sale</a></h2>
                     <p>California can sell your home for unpaid property taxes - even if your mortgage is paid. Your 5-year timeline and options to save your home.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 7 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#fef3c7;color:#92400e;">Tax Lien</span>
                         <a href="property-tax-lien-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -438,10 +473,11 @@
                 </div>
             </article>
 
-            <article class="blog-card" style="border: 2px solid #f87171;">
+            <article class="blog-card" data-stage="all early nod" style="border: 2px solid #f87171;">
                 <div class="blog-card-content">
                     <h2><a href="hoa-foreclosure-california.html">Can Your HOA Really Take Your Home?</a></h2>
                     <p>Yes, HOAs can foreclose in California. But you have strong rights. Learn the process, your protections, and how to stop it.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 8 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag" style="background:#fef2f2;color:#991b1b;">HOA</span>
                         <a href="hoa-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -449,10 +485,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all nod auction">
                 <div class="blog-card-content">
                     <h2><a href="deed-in-lieu-foreclosure-california.html">Deed in Lieu of Foreclosure: Is It Right for You?</a></h2>
                     <p>Understand the pros and cons of a deed in lieu of foreclosure and when this option makes sense.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 6 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag">Options</span>
                         <a href="deed-in-lieu-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -460,10 +497,11 @@
                 </div>
             </article>
 
-            <article class="blog-card">
+            <article class="blog-card" data-stage="all nod auction">
                 <div class="blog-card-content">
                     <h2><a href="bankruptcy-stop-foreclosure-california.html">Can Bankruptcy Stop Foreclosure in California?</a></h2>
                     <p>Learn how Chapter 7 and Chapter 13 bankruptcy can temporarily or permanently stop foreclosure proceedings.</p>
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">&#128337; 10 min &middot; Updated Jan 2025</div>
                     <div class="blog-card-footer">
                         <span class="blog-tag legal">Legal Guide</span>
                         <a href="bankruptcy-stop-foreclosure-california.html" class="read-more">Read More &rarr;</a>
@@ -517,7 +555,7 @@
             <p>Don't wait - every day matters when facing foreclosure in California.</p>
             <div class="cta-buttons">
                 <a href="tel:+19495655285" class="btn btn-white">Call (949) 565-5285</a>
-                <a href="../schedule.html" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">Schedule Consultation</a>
+                <a href="../schedule.html" class="btn" style="border: 2px solid white; background: transparent; color: white;">Schedule Consultation</a>
             </div>
         </div>
     </section>
@@ -561,5 +599,32 @@
     </div>
 
     <script src="../js/theme.js"></script>
+    <script>
+        // Blog filter functionality
+        function filterArticles(stage) {
+            const cards = document.querySelectorAll('.blog-card[data-stage]');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update button styles
+            buttons.forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.color = '#334155';
+                btn.classList.remove('active');
+            });
+            event.target.style.background = '#1e293b';
+            event.target.style.color = 'white';
+            event.target.classList.add('active');
+
+            // Filter cards
+            cards.forEach(card => {
+                const stages = card.dataset.stage.split(' ');
+                if (stages.includes(stage) || stage === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

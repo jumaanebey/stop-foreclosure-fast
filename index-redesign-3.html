@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Not Alone | My Foreclosure Solution</title>
+    <meta name="description" content="Facing foreclosure? We're here to help. Compassionate California professionals guiding you through every step.">
+    <link rel="canonical" href="https://myforeclosuresolution.com/">
+
+    <!-- Fonts: Fraunces + Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZC3FHFTPN2');
+    </script>
+
+    <style>
+        :root {
+            --sage-900: #1a3329;
+            --sage-700: #2d5a47;
+            --sage-600: #3d7a5f;
+            --sage-500: #4a9a73;
+            --sage-100: #e8f3ed;
+            --sage-50: #f4f9f6;
+            --terracotta: #c4704b;
+            --terracotta-light: #e8a685;
+            --cream: #faf8f5;
+            --cream-dark: #f5f0e8;
+            --brown-900: #3d2f24;
+            --brown-700: #5c4a3d;
+            --brown-500: #8b7355;
+            --brown-300: #c4b5a3;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--brown-700);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fraunces', Georgia, serif;
+            color: var(--sage-900);
+            line-height: 1.25;
+            font-weight: 600;
+        }
+
+        /* Soft shapes */
+        .blob {
+            position: absolute;
+            border-radius: 50% 40% 60% 50%;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Emergency - softer */
+        .emergency {
+            background: var(--terracotta);
+            color: var(--white);
+            text-align: center;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .emergency a {
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Header */
+        header {
+            background: var(--cream);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--brown-300);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--sage-500), var(--sage-700));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            color: var(--sage-900);
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--brown-700);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 18px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: var(--sage-100);
+            color: var(--sage-700);
+        }
+
+        nav a.nav-cta {
+            background: var(--sage-600);
+            color: var(--white);
+        }
+
+        nav a.nav-cta:hover {
+            background: var(--sage-700);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--sage-500);
+            top: -200px;
+            right: -200px;
+        }
+
+        .hero .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--terracotta);
+            bottom: -100px;
+            left: -100px;
+            opacity: 0.1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--sage-100);
+            color: var(--sage-700);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 5vw, 56px);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--sage-600);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: var(--terracotta-light);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--brown-500);
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--sage-600);
+            color: var(--white);
+            padding: 18px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 17px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(77, 154, 115, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--sage-700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(77, 154, 115, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: var(--sage-700);
+            padding: 18px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 17px;
+            border: 2px solid var(--sage-500);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--sage-100);
+        }
+
+        .hero-trust {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--brown-500);
+        }
+
+        .trust-check {
+            width: 24px;
+            height: 24px;
+            background: var(--sage-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sage-600);
+            font-size: 14px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--white);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(61, 47, 36, 0.1);
+            border: 1px solid var(--brown-300);
+            animation: fadeIn 1s ease-out 0.2s backwards;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--brown-500);
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--sage-900);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--brown-300);
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--cream);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--sage-500);
+            background: var(--white);
+            box-shadow: 0 0 0 4px var(--sage-100);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sage-500), var(--sage-700));
+            color: var(--white);
+            padding: 18px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(77, 154, 115, 0.4);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--brown-500);
+        }
+
+        .form-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .form-badge {
+            font-size: 12px;
+            color: var(--brown-500);
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            color: var(--terracotta);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 44px);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--brown-500);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: var(--cream);
+            border-radius: 24px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--sage-100), var(--white));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 24px;
+            border: 2px solid var(--sage-500);
+        }
+
+        .step-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--brown-500);
+            font-size: 16px;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 100px 0;
+            background: var(--sage-900);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits .blob {
+            background: var(--sage-700);
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            left: -200px;
+            opacity: 0.3;
+        }
+
+        .benefits .section-header h2 {
+            color: var(--white);
+        }
+
+        .benefits .section-header p {
+            color: var(--sage-100);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            gap: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--terracotta);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            color: var(--white);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .benefit-content p {
+            color: var(--sage-100);
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* Credentials */
+        .credentials {
+            padding: 60px 0;
+            background: var(--cream-dark);
+        }
+
+        .credentials-grid {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .credential-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .credential-text strong {
+            display: block;
+            color: var(--sage-900);
+            font-size: 15px;
+        }
+
+        .credential-text span {
+            font-size: 13px;
+            color: var(--brown-500);
+        }
+
+        /* Cities */
+        .cities {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+
+        .city-card {
+            background: var(--cream);
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--sage-900);
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .city-card:hover {
+            border-color: var(--sage-500);
+            background: var(--sage-100);
+            transform: translateY(-4px);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--sage-600), var(--sage-900));
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta h2 {
+            color: var(--white);
+            font-size: clamp(36px, 5vw, 52px);
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            color: var(--sage-100);
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--sage-900);
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid rgba(255,255,255,0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-outline-light:hover {
+            background: var(--white);
+            color: var(--sage-900);
+            border-color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--sage-900);
+            color: var(--sage-100);
+            padding: 60px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 15px;
+            opacity: 0.8;
+        }
+
+        .footer-logo {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--sage-100);
+            text-decoration: none;
+            font-size: 15px;
+            padding: 6px 0;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-col a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Success */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--sage-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+            color: var(--sage-600);
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cities-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 48px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .form-card {
+                padding: 32px 24px;
+            }
+
+            .cities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        /* Mobile CTA */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 16px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobile-cta a {
+            display: block;
+            background: linear-gradient(135deg, var(--sage-500), var(--sage-700));
+            color: var(--white);
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 17px;
+            border-radius: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            body {
+                padding-bottom: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency">
+        Need help urgently? <a href="tel:+19495655285">Call us now: (949) 565-5285</a>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&#127968;</span>
+                    <span class="logo-text">My Foreclosure Solution</span>
+                </a>
+                <nav>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                    <a href="schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        &#128155; Licensed California Professionals
+                    </div>
+                    <h1>You're Not Alone. <span class="highlight">We Can Help.</span></h1>
+                    <p class="hero-subtitle">Facing foreclosure is scary. We've helped hundreds of California families find a way forward. Let us guide you through your options with compassion and expertise.</p>
+
+                    <div class="hero-ctas">
+                        <a href="tel:+19495655285" class="btn-primary">
+                            &#128222; Call (949) 565-5285
+                        </a>
+                        <a href="schedule.html" class="btn-secondary">
+                            Schedule a Call
+                        </a>
+                    </div>
+
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <span class="trust-check">&#10003;</span>
+                            <span>100% Confidential</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-check">&#10003;</span>
+                            <span>No Judgment</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-check">&#10003;</span>
+                            <span>Free Help</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <div class="form-header">
+                        <h2>Let's Talk</h2>
+                        <p>We'll call you within 30 minutes</p>
+                    </div>
+
+                    <form id="consultation-form">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="you@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>How can we help?</label>
+                            <select name="urgency" required>
+                                <option value="">Tell us your situation...</option>
+                                <option value="emergency">Sale is very soon (7 days)</option>
+                                <option value="urgent">Sale coming up (2-4 weeks)</option>
+                                <option value="soon">Have some time (1-3 months)</option>
+                                <option value="exploring">Just want to understand options</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-submit">Get Free Help</button>
+                        <p class="form-footer">Your information stays private with us.</p>
+                    </form>
+
+                    <div class="form-success" id="form-success">
+                        <div class="success-icon">&#10003;</div>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; color: var(--sage-900);">Thank You!</h3>
+                        <p style="color: var(--brown-500);">We'll call you within 30 minutes.</p>
+                    </div>
+
+                    <div class="form-badges">
+                        <span class="form-badge">NMLS #2033637</span>
+                        <span class="form-badge">CA DRE #02076038</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">How We Help</span>
+                <h2>Three Simple Steps</h2>
+                <p>We make it easy to get the help you need.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">&#128172;</div>
+                    <h3>Share Your Story</h3>
+                    <p>Tell us what's happening. We listen without judgment and understand your unique situation.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">&#128270;</div>
+                    <h3>Explore Options</h3>
+                    <p>We'll explain every path available to you clearly and honestly.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">&#127919;</div>
+                    <h3>Move Forward</h3>
+                    <p>Choose what's best for your family. We'll handle the details and guide you through.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="blob"></div>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow" style="color: var(--terracotta-light);">What We Offer</span>
+                <h2>Real Solutions for Real People</h2>
+                <p>Every situation is different. Here's how we can help yours.</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#9203;</div>
+                    <div class="benefit-content">
+                        <h3>Stop the Sale</h3>
+                        <p>Legal options to postpone or stop your foreclosure auction, buying you precious time.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128176;</div>
+                    <div class="benefit-content">
+                        <h3>Protect Your Equity</h3>
+                        <p>You've worked hard for your home. We help you keep what you've built.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128200;</div>
+                    <div class="benefit-content">
+                        <h3>Loan Modification</h3>
+                        <p>We negotiate with your lender to find a payment plan that works for you.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#127968;</div>
+                    <div class="benefit-content">
+                        <h3>Graceful Exit</h3>
+                        <p>If selling is best, we connect you with fair cash buyers. Walk away with dignity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="credentials">
+        <div class="container">
+            <div class="credentials-grid">
+                <div class="credential">
+                    <div class="credential-icon">&#128274;</div>
+                    <div class="credential-text">
+                        <strong>NMLS #2033637</strong>
+                        <span>Licensed Mortgage Pro</span>
+                    </div>
+                </div>
+                <div class="credential">
+                    <div class="credential-icon">&#127968;</div>
+                    <div class="credential-text">
+                        <strong>CA DRE #02076038</strong>
+                        <span>Real Estate Licensed</span>
+                    </div>
+                </div>
+                <div class="credential">
+                    <div class="credential-icon">&#128155;</div>
+                    <div class="credential-text">
+                        <strong>Compassionate Care</strong>
+                        <span>No Judgment, Ever</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cities">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Where We Help</span>
+                <h2>Serving All of California</h2>
+            </div>
+
+            <div class="cities-grid">
+                <a href="stop-foreclosure-los-angeles.html" class="city-card">Los Angeles</a>
+                <a href="stop-foreclosure-san-diego.html" class="city-card">San Diego</a>
+                <a href="stop-foreclosure-oakland.html" class="city-card">Oakland</a>
+                <a href="stop-foreclosure-sacramento.html" class="city-card">Sacramento</a>
+                <a href="stop-foreclosure-fresno.html" class="city-card">Fresno</a>
+                <a href="stop-foreclosure-riverside.html" class="city-card">Riverside</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Take the First Step?</h2>
+            <p>You don't have to face this alone. We're here to help you find the best path forward for your family.</p>
+            <div class="cta-buttons">
+                <a href="tel:+19495655285" class="btn-white">
+                    Call (949) 565-5285
+                </a>
+                <a href="schedule.html" class="btn-outline-light">
+                    Schedule a Call
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Compassionate California professionals helping homeowners navigate difficult times with dignity.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="blog/">Blog</a>
+                    <a href="emergency-checklist.html">Emergency Help</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">&#128222; Call Now - We're Here to Help</a>
+    </div>
+
+    <script>
+        document.getElementById('consultation-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    type: 'consultation',
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    urgency: formData.get('urgency'),
+                    source: 'warm-organic-design',
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            setTimeout(() => {
+                this.style.display = 'none';
+                document.getElementById('form-success').classList.add('active');
+            }, 800);
+        });
+    </script>
+</body>
+</html>
