@@ -393,102 +393,96 @@
     <!-- Visual Roadmap -->
     <div class="roadmap-page page-break">
         <h2 style="text-align: center; border-bottom: none; margin-bottom: 10px;">Your 7-Day Action Roadmap</h2>
-        <p style="text-align: center; color: var(--gray); margin-bottom: 40px;">Follow this path to protect your home and equity</p>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 30px;">Follow these 4 steps to protect your home and equity</p>
 
-        <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 700px; display: block; margin: 0 auto;">
-            <!-- Background path/road -->
-            <path d="M 100 100 L 350 100 L 350 210 L 600 210 L 600 320 L 350 320"
-                  stroke="#e2e8f0" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Clean 4-column grid layout -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 30px 0; position: relative;">
 
-            <!-- Progress path (amber) -->
-            <path d="M 100 100 L 350 100 L 350 210 L 600 210 L 600 320 L 350 320"
-                  stroke="#d97706" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-dasharray="8,8"/>
+            <!-- Connecting line behind cards -->
+            <div style="position: absolute; top: 50px; left: 12%; right: 12%; height: 4px; background: linear-gradient(90deg, #d97706 0%, #d97706 100%); z-index: 0;"></div>
 
-            <!-- STEP 1: Assess -->
-            <g>
-                <circle cx="100" cy="100" r="45" fill="#1e293b"/>
-                <circle cx="100" cy="100" r="38" fill="none" stroke="#d97706" stroke-width="3"/>
-                <text x="100" y="92" text-anchor="middle" fill="white" font-size="28" font-weight="bold">1</text>
-                <text x="100" y="112" text-anchor="middle" fill="#d97706" font-size="10" font-weight="600">DAY 1</text>
-            </g>
-            <g>
-                <text x="100" y="170" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="700">ASSESS</text>
-                <text x="100" y="190" text-anchor="middle" fill="#64748b" font-size="11">Open all mail</text>
-                <text x="100" y="205" text-anchor="middle" fill="#64748b" font-size="11">Find loan details</text>
-                <text x="100" y="220" text-anchor="middle" fill="#64748b" font-size="11">Check home value</text>
-            </g>
-
-            <!-- STEP 2: Call -->
-            <g>
-                <circle cx="350" cy="100" r="45" fill="#1e293b"/>
-                <circle cx="350" cy="100" r="38" fill="none" stroke="#d97706" stroke-width="3"/>
-                <text x="350" y="92" text-anchor="middle" fill="white" font-size="28" font-weight="bold">2</text>
-                <text x="350" y="112" text-anchor="middle" fill="#d97706" font-size="10" font-weight="600">DAY 2</text>
-            </g>
-            <g>
-                <text x="350" y="170" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="700">CALL LENDER</text>
-                <text x="350" y="190" text-anchor="middle" fill="#64748b" font-size="11">Loss Mitigation dept</text>
-                <text x="350" y="205" text-anchor="middle" fill="#64748b" font-size="11">Request options</text>
-                <text x="350" y="220" text-anchor="middle" fill="#64748b" font-size="11">Document everything</text>
-            </g>
-
-            <!-- STEP 3: Explore -->
-            <g>
-                <circle cx="600" cy="210" r="45" fill="#1e293b"/>
-                <circle cx="600" cy="210" r="38" fill="none" stroke="#d97706" stroke-width="3"/>
-                <text x="600" y="202" text-anchor="middle" fill="white" font-size="28" font-weight="bold">3</text>
-                <text x="600" y="222" text-anchor="middle" fill="#d97706" font-size="10" font-weight="600">DAY 3-4</text>
-            </g>
-            <g>
-                <text x="600" y="280" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="700">EXPLORE</text>
-                <text x="600" y="300" text-anchor="middle" fill="#64748b" font-size="11">CA Mortgage Relief</text>
-                <text x="600" y="315" text-anchor="middle" fill="#64748b" font-size="11">HUD counselor</text>
-                <text x="600" y="330" text-anchor="middle" fill="#64748b" font-size="11">Get pro valuation</text>
-            </g>
-
-            <!-- STEP 4: Execute -->
-            <g>
-                <circle cx="350" cy="320" r="45" fill="#d97706"/>
-                <circle cx="350" cy="320" r="38" fill="none" stroke="#1e293b" stroke-width="3"/>
-                <text x="350" y="312" text-anchor="middle" fill="white" font-size="28" font-weight="bold">4</text>
-                <text x="350" y="332" text-anchor="middle" fill="#1e293b" font-size="10" font-weight="600">DAY 5-7</text>
-            </g>
-            <g>
-                <text x="350" y="390" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="700">EXECUTE</text>
-                <text x="350" y="410" text-anchor="middle" fill="#64748b" font-size="11">Submit applications • Choose your path • Take action</text>
-            </g>
-
-            <!-- Arrows on path -->
-            <polygon points="220,95 230,100 220,105" fill="#d97706"/>
-            <polygon points="345,140 350,150 355,140" fill="#d97706"/>
-            <polygon points="480,205 490,210 480,215" fill="#d97706"/>
-            <polygon points="595,250 600,260 605,250" fill="#d97706"/>
-            <polygon points="470,325 460,320 470,315" fill="#d97706"/>
-        </svg>
-
-        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap;">
-            <div style="text-align: center;">
-                <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 15px 25px;">
-                    <div style="font-size: 24px; font-weight: 700; color: #16a34a;">200+</div>
-                    <div style="font-size: 12px; color: #64748b;">Days to Act</div>
+            <!-- Step 1 -->
+            <div style="text-align: center; position: relative; z-index: 1;">
+                <div style="width: 70px; height: 70px; background: #1e293b; border: 4px solid #d97706; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <span style="color: white; font-size: 24px; font-weight: 700; line-height: 1;">1</span>
+                    <span style="color: #d97706; font-size: 9px; font-weight: 600;">DAY 1</span>
+                </div>
+                <div style="background: var(--gray-light); border-radius: 8px; padding: 15px 10px; min-height: 140px;">
+                    <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 10px;">ASSESS</div>
+                    <div style="font-size: 12px; color: #64748b; line-height: 1.6;">
+                        Open all mail<br>
+                        Find loan details<br>
+                        Check home value
+                    </div>
                 </div>
             </div>
-            <div style="text-align: center;">
-                <div style="background: var(--cream); border: 2px solid var(--amber); border-radius: 8px; padding: 15px 25px;">
-                    <div style="font-size: 24px; font-weight: 700; color: var(--amber);">$80K</div>
-                    <div style="font-size: 12px; color: #64748b;">CA Relief Available</div>
+
+            <!-- Step 2 -->
+            <div style="text-align: center; position: relative; z-index: 1;">
+                <div style="width: 70px; height: 70px; background: #1e293b; border: 4px solid #d97706; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <span style="color: white; font-size: 24px; font-weight: 700; line-height: 1;">2</span>
+                    <span style="color: #d97706; font-size: 9px; font-weight: 600;">DAY 2</span>
+                </div>
+                <div style="background: var(--gray-light); border-radius: 8px; padding: 15px 10px; min-height: 140px;">
+                    <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 10px;">CALL LENDER</div>
+                    <div style="font-size: 12px; color: #64748b; line-height: 1.6;">
+                        Loss Mitigation dept<br>
+                        Request all options<br>
+                        Document everything
+                    </div>
                 </div>
             </div>
-            <div style="text-align: center;">
-                <div style="background: #eff6ff; border: 2px solid #2563eb; border-radius: 8px; padding: 15px 25px;">
-                    <div style="font-size: 24px; font-weight: 700; color: #2563eb;">FREE</div>
-                    <div style="font-size: 12px; color: #64748b;">HUD Counseling</div>
+
+            <!-- Step 3 -->
+            <div style="text-align: center; position: relative; z-index: 1;">
+                <div style="width: 70px; height: 70px; background: #1e293b; border: 4px solid #d97706; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <span style="color: white; font-size: 24px; font-weight: 700; line-height: 1;">3</span>
+                    <span style="color: #d97706; font-size: 9px; font-weight: 600;">DAY 3-4</span>
+                </div>
+                <div style="background: var(--gray-light); border-radius: 8px; padding: 15px 10px; min-height: 140px;">
+                    <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 10px;">EXPLORE</div>
+                    <div style="font-size: 12px; color: #64748b; line-height: 1.6;">
+                        CA Mortgage Relief<br>
+                        HUD counselor<br>
+                        Get pro valuation
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div style="text-align: center; position: relative; z-index: 1;">
+                <div style="width: 70px; height: 70px; background: #d97706; border: 4px solid #1e293b; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <span style="color: white; font-size: 24px; font-weight: 700; line-height: 1;">4</span>
+                    <span style="color: #1e293b; font-size: 9px; font-weight: 600;">DAY 5-7</span>
+                </div>
+                <div style="background: var(--cream); border: 2px solid #d97706; border-radius: 8px; padding: 15px 10px; min-height: 140px;">
+                    <div style="font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 10px;">EXECUTE</div>
+                    <div style="font-size: 12px; color: #64748b; line-height: 1.6;">
+                        Submit applications<br>
+                        Choose your path<br>
+                        Take action
+                    </div>
                 </div>
             </div>
         </div>
 
-        <p style="text-align: center; margin-top: 35px; font-size: 14px; color: var(--gray); font-style: italic;">
+        <!-- Stats row -->
+        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap;">
+            <div style="background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 15px 25px; text-align: center;">
+                <div style="font-size: 24px; font-weight: 700; color: #16a34a;">200+</div>
+                <div style="font-size: 12px; color: #64748b;">Days to Act</div>
+            </div>
+            <div style="background: var(--cream); border: 2px solid var(--amber); border-radius: 8px; padding: 15px 25px; text-align: center;">
+                <div style="font-size: 24px; font-weight: 700; color: var(--amber);">$80K</div>
+                <div style="font-size: 12px; color: #64748b;">CA Relief Available</div>
+            </div>
+            <div style="background: #eff6ff; border: 2px solid #2563eb; border-radius: 8px; padding: 15px 25px; text-align: center;">
+                <div style="font-size: 24px; font-weight: 700; color: #2563eb;">FREE</div>
+                <div style="font-size: 12px; color: #64748b;">HUD Counseling</div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px; font-size: 14px; color: var(--gray); font-style: italic;">
             The sooner you start, the more options you have. Turn the page to begin.
         </p>
     </div>
