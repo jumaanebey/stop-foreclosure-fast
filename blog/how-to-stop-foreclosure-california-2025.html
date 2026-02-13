@@ -311,6 +311,167 @@
             color: var(--gray-600);
             line-height: 1.7;
         }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        .animate-on-scroll.animated {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Styled Number Badges */
+        .method-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+        }
+        .method-header h3 {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Section Dividers */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-500) 0%, transparent 100%);
+            margin: 60px 0;
+            border-radius: 2px;
+        }
+
+        /* Enhanced Card Hover States */
+        .method-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .method-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-color: var(--accent-200);
+        }
+
+        /* Alternating Section Backgrounds */
+        .section-cream {
+            background: var(--cream, #fefbf3);
+            padding: 48px 0;
+            margin: 0 -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+            border-radius: 20px;
+        }
+
+        /* Enhanced Timeline Animation */
+        .timeline-item {
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover {
+            transform: translateX(8px);
+        }
+        .timeline-item:hover .timeline-days {
+            background: var(--accent-600);
+        }
+
+        /* Enhanced Key Takeaway */
+        .key-takeaway {
+            transition: all 0.3s ease;
+        }
+        .key-takeaway:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        /* FAQ Item Hover */
+        .faq-item {
+            transition: all 0.3s ease;
+            padding-left: 0;
+            border-left: 3px solid transparent;
+        }
+        .faq-item:hover {
+            padding-left: 16px;
+            border-left-color: var(--accent-500);
+            background: linear-gradient(90deg, var(--accent-50), transparent);
+        }
+
+        /* TOC Animation */
+        .toc {
+            transition: all 0.3s ease;
+        }
+        .toc:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .toc a {
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .toc a:hover {
+            transform: translateX(6px);
+        }
+
+        /* CTA Box Enhancement */
+        .cta-box {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .cta-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+        }
+
+        /* Button Enhancements */
+        .btn-white, .btn-outline {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Method Stats Badge Animation */
+        .method-stat {
+            transition: all 0.3s ease;
+        }
+        .method-card:hover .method-stat {
+            background: var(--accent-100);
+            color: var(--accent-700);
+        }
+
+        /* Warning Box Enhancement */
+        .warning-box {
+            transition: all 0.3s ease;
+        }
+        .warning-box:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -361,7 +522,7 @@
         </header>
 
         <div class="blog-content">
-            <div class="key-takeaway">
+            <div class="key-takeaway animate-on-scroll">
                 <h4>Key Takeaway</h4>
                 <p><strong>You can stop foreclosure in California using 7 proven methods:</strong> loan modification, reinstatement, forbearance, short sale, deed in lieu, Chapter 13 bankruptcy, or quick cash sale. California's non-judicial foreclosure process typically takes 120-200+ days, giving you time to act. The California Homeowner Bill of Rights provides additional protections, including prohibition of dual tracking during loan modification review.</p>
             </div>
@@ -370,7 +531,7 @@
 
             <p>This comprehensive guide covers everything you need to know about stopping foreclosure in California in 2025, including your legal rights, the foreclosure timeline, and the 7 most effective methods to save your home or exit with dignity.</p>
 
-            <nav class="toc">
+            <nav class="toc animate-on-scroll">
                 <h3>Table of Contents</h3>
                 <ol>
                     <li><a href="#understanding">Understanding California Foreclosure</a></li>
@@ -383,7 +544,9 @@
                 </ol>
             </nav>
 
-            <h2 id="understanding">Understanding California Foreclosure</h2>
+            <div class="section-divider"></div>
+
+            <h2 id="understanding" class="animate-on-scroll">Understanding California Foreclosure</h2>
 
             <p>California primarily uses <strong>non-judicial foreclosure</strong>, which means the foreclosure process happens outside of court. This process is faster than judicial foreclosure (used in some other states) but still provides homeowners with significant time and legal protections.</p>
 
@@ -396,16 +559,18 @@
                 <li><strong>Redemption Period:</strong> No post-sale redemption right in non-judicial foreclosure</li>
             </ul>
 
-            <div class="warning-box">
+            <div class="warning-box animate-on-scroll">
                 <h4>Important: Act Early</h4>
                 <p>The earlier you take action, the more options you have. Once a Notice of Sale is recorded, your timeline becomes much shorter. Don't wait until the last minute - many effective solutions take weeks or months to implement.</p>
             </div>
 
-            <h2 id="timeline">California Foreclosure Timeline 2025</h2>
+            <div class="section-divider"></div>
+
+            <h2 id="timeline" class="animate-on-scroll">California Foreclosure Timeline 2025</h2>
 
             <p>Understanding the foreclosure timeline helps you know how much time you have and when to act. Here's the typical timeline in California:</p>
 
-            <div class="timeline-box">
+            <div class="timeline-box animate-on-scroll">
                 <div class="timeline-item">
                     <span class="timeline-days">Day 1-30</span>
                     <div>
@@ -443,7 +608,10 @@
                 </div>
             </div>
 
-            <h2 id="rights">Your Rights Under California Law</h2>
+            <div class="section-divider"></div>
+
+            <div class="section-cream">
+            <h2 id="rights" class="animate-on-scroll">Your Rights Under California Law</h2>
 
             <h3>California Homeowner Bill of Rights (HBOR)</h3>
 
@@ -468,11 +636,15 @@
                 <li><strong>Short Sales:</strong> Lenders who approve short sales generally waive deficiency rights</li>
             </ul>
 
-            <h2 id="methods">7 Methods to Stop Foreclosure in California</h2>
+            </div>
 
-            <div class="method-card" id="method-1">
+            <div class="section-divider"></div>
+
+            <h2 id="methods" class="animate-on-scroll">7 Methods to Stop Foreclosure in California</h2>
+
+            <div class="method-card animate-on-scroll" id="method-1">
                 <div class="method-header">
-                    <h3>Method 1: Loan Modification</h3>
+                    <h3><span class="method-number">1</span>Loan Modification</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 60-70%</span>
                         <span class="method-stat">Timeline: 60-120 days</span>
@@ -491,9 +663,9 @@
                 <p><strong>How to Apply:</strong> Contact your loan servicer's loss mitigation department. You'll need to submit a complete application including income documentation, hardship letter, and financial statements. Under HBOR, the lender cannot foreclose while reviewing a complete application.</p>
             </div>
 
-            <div class="method-card" id="method-2">
+            <div class="method-card animate-on-scroll" id="method-2">
                 <div class="method-header">
-                    <h3>Method 2: Loan Reinstatement</h3>
+                    <h3><span class="method-number">2</span>Loan Reinstatement</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 95%+</span>
                         <span class="method-stat">Timeline: Immediate</span>
@@ -515,9 +687,9 @@
                 <p><strong>Funding Sources:</strong> 401(k) withdrawal or loan, home equity, family assistance, personal loan, sale of other assets.</p>
             </div>
 
-            <div class="method-card" id="method-3">
+            <div class="method-card animate-on-scroll" id="method-3">
                 <div class="method-header">
-                    <h3>Method 3: Forbearance Agreement</h3>
+                    <h3><span class="method-number">3</span>Forbearance Agreement</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 80%</span>
                         <span class="method-stat">Timeline: 30-60 days</span>
@@ -534,9 +706,9 @@
                 </ul>
             </div>
 
-            <div class="method-card" id="method-4">
+            <div class="method-card animate-on-scroll" id="method-4">
                 <div class="method-header">
-                    <h3>Method 4: Short Sale</h3>
+                    <h3><span class="method-number">4</span>Short Sale</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 70%</span>
                         <span class="method-stat">Timeline: 60-120 days</span>
@@ -554,9 +726,9 @@
                 </ul>
             </div>
 
-            <div class="method-card" id="method-5">
+            <div class="method-card animate-on-scroll" id="method-5">
                 <div class="method-header">
-                    <h3>Method 5: Deed in Lieu of Foreclosure</h3>
+                    <h3><span class="method-number">5</span>Deed in Lieu of Foreclosure</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 85%</span>
                         <span class="method-stat">Timeline: 30-90 days</span>
@@ -573,9 +745,9 @@
                 </ul>
             </div>
 
-            <div class="method-card" id="method-6">
+            <div class="method-card animate-on-scroll" id="method-6">
                 <div class="method-header">
-                    <h3>Method 6: Chapter 13 Bankruptcy</h3>
+                    <h3><span class="method-number">6</span>Chapter 13 Bankruptcy</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 60%</span>
                         <span class="method-stat">Timeline: Immediate stop</span>
@@ -594,9 +766,9 @@
                 <p><strong>Important:</strong> This is a legal proceeding that should be discussed with a bankruptcy attorney. It has significant credit and financial implications.</p>
             </div>
 
-            <div class="method-card" id="method-7">
+            <div class="method-card animate-on-scroll" id="method-7">
                 <div class="method-header">
-                    <h3>Method 7: Quick Cash Sale</h3>
+                    <h3><span class="method-number">7</span>Quick Cash Sale</h3>
                     <div class="method-stats">
                         <span class="method-stat">Success Rate: 95%</span>
                         <span class="method-stat">Timeline: 7-21 days</span>
@@ -616,7 +788,7 @@
                 <p>This option works best if you have equity in your home. Even with little equity, a quick sale often provides a better outcome than foreclosure auction.</p>
             </div>
 
-            <div class="cta-box">
+            <div class="cta-box animate-on-scroll">
                 <h3>Not Sure Which Option is Right for You?</h3>
                 <p>Our licensed California professionals can review your situation and help you understand all your options - at no cost or obligation.</p>
                 <div class="cta-buttons">
@@ -625,7 +797,10 @@
                 </div>
             </div>
 
-            <h2 id="which-method">Choosing the Right Method to Stop Foreclosure</h2>
+            <div class="section-divider"></div>
+
+            <div class="section-cream">
+            <h2 id="which-method" class="animate-on-scroll">Choosing the Right Method to Stop Foreclosure</h2>
 
             <p>The best method depends on your specific situation. Consider these factors:</p>
 
@@ -644,9 +819,13 @@
                 <li><strong>No equity, no junior liens?</strong> Deed in lieu is cleanest</li>
             </ul>
 
-            <h2 id="faq">Frequently Asked Questions</h2>
+            </div>
 
-            <div class="faq-section">
+            <div class="section-divider"></div>
+
+            <h2 id="faq" class="animate-on-scroll">Frequently Asked Questions</h2>
+
+            <div class="faq-section animate-on-scroll">
                 <div class="faq-item">
                     <div class="faq-question">How do I stop foreclosure in California?</div>
                     <div class="faq-answer">To stop foreclosure in California, you have 7 main options: (1) Loan modification to reduce payments, (2) Reinstatement by paying all past-due amounts, (3) Forbearance agreement for temporary relief, (4) Short sale with lender approval, (5) Deed in lieu of foreclosure, (6) Chapter 13 bankruptcy for automatic stay, (7) Quick cash sale before auction. The best option depends on your financial situation, timeline, and whether you want to keep your home.</div>
@@ -683,7 +862,9 @@
                 </div>
             </div>
 
-            <h2 id="next-steps">Next Steps: Get Help Today</h2>
+            <div class="section-divider"></div>
+
+            <h2 id="next-steps" class="animate-on-scroll">Next Steps: Get Help Today</h2>
 
             <p>If you're facing foreclosure in California, time is critical. Here's what to do right now:</p>
 
@@ -694,7 +875,7 @@
                 <li><strong>Get professional help</strong> - Talk to a licensed professional who can review your specific situation</li>
             </ol>
 
-            <div class="cta-box">
+            <div class="cta-box animate-on-scroll">
                 <h3>Get Free Foreclosure Help Now</h3>
                 <p>Our licensed California team (DRE #02076038 | NMLS #2033637) has helped hundreds of homeowners stop foreclosure. We'll review your situation and explain all your options - no cost, no obligation.</p>
                 <div class="cta-buttons">
@@ -756,5 +937,41 @@
     </div>
 
     <script src="../js/theme.js"></script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // IntersectionObserver for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry, index) {
+                    if (entry.isIntersecting) {
+                        // Add staggered delay for multiple elements
+                        const delay = entry.target.dataset.delay || 0;
+                        setTimeout(function() {
+                            entry.target.classList.add('animated');
+                        }, delay);
+                        // Unobserve after animation to prevent re-triggering
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animate-on-scroll class
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(function(element, index) {
+                // Add staggered delay for method cards
+                if (element.classList.contains('method-card')) {
+                    element.dataset.delay = index * 100;
+                }
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>

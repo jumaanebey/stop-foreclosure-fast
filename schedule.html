@@ -72,69 +72,279 @@
 
     <link rel="stylesheet" href="css/theme.css">
     <style>
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+
+        /* Schedule Hero with Animation */
         .schedule-hero {
             padding: 60px 0 40px;
             text-align: center;
             background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Animated background elements */
+        .schedule-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.06) 0%, transparent 60%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .schedule-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        .schedule-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
         .schedule-hero h1 {
             font-size: clamp(32px, 5vw, 48px);
             margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out backwards;
         }
-        .schedule-hero p {
+
+        .schedule-hero > .container > p {
             font-size: 18px;
             color: var(--gray-500);
             max-width: 600px;
             margin: 0 auto 32px;
+            animation: fadeInUp 0.8s ease-out 0.15s backwards;
         }
+
+        /* Trust Badges Section */
+        .trust-badges {
+            padding: 24px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--gray-100) 100%);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .badge-grid {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--white);
+            border-radius: 50px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .trust-badge:nth-child(1) { animation-delay: 0.1s; }
+        .trust-badge:nth-child(2) { animation-delay: 0.2s; }
+        .trust-badge:nth-child(3) { animation-delay: 0.3s; }
+
+        .trust-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-300);
+        }
+
+        .badge-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .badge-text {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        /* Schedule Options with Hover Effects */
         .schedule-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
         }
+
         .schedule-option {
             background: var(--white);
             padding: 32px;
             border-radius: 16px;
             border: 2px solid var(--gray-200);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .schedule-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-400), var(--accent-500), var(--accent-600));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
         body.variant-b .schedule-option {
             border-radius: 24px;
         }
+
         .schedule-option:hover {
             border-color: var(--accent-500);
-            transform: translateY(-4px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
         }
+
+        .schedule-option:hover::before {
+            transform: scaleX(1);
+        }
+
         .schedule-option.featured {
             border-color: var(--accent-500);
             background: linear-gradient(180deg, var(--accent-50) 0%, var(--white) 100%);
         }
+
+        .schedule-option.featured::before {
+            transform: scaleX(1);
+        }
+
         .schedule-option .icon {
             font-size: 48px;
             margin-bottom: 16px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
         }
+
+        .schedule-option.featured .icon {
+            animation-delay: 0s;
+        }
+
+        .schedule-option:not(.featured) .icon {
+            animation-delay: 0.5s;
+        }
+
         .schedule-option h3 {
             font-size: 22px;
             margin-bottom: 12px;
         }
+
         .schedule-option p {
             color: var(--gray-500);
             margin-bottom: 24px;
             font-size: 15px;
         }
+
+        /* Section Divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray-300), transparent);
+        }
+
+        .divider-content {
+            background: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Calendar Section */
         .calendar-embed {
             padding: 60px 0;
             background: var(--gray-100);
         }
+
         .calendar-embed h2 {
             text-align: center;
             font-size: 28px;
             margin-bottom: 32px;
         }
+
         .calendar-wrapper {
             max-width: 800px;
             margin: 0 auto;
@@ -142,54 +352,175 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
         }
+
+        .calendar-wrapper:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
         body.variant-b .calendar-wrapper {
             border-radius: 24px;
         }
+
         .calendar-wrapper iframe {
             width: 100%;
             height: 600px;
             border: none;
         }
+
+        /* What to Expect Section */
         .what-to-expect {
-            padding: 60px 0;
+            padding: 80px 0;
+            background: var(--white);
         }
+
         .what-to-expect h2 {
             text-align: center;
             font-size: 28px;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
         }
+
         .expect-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
             margin: 0 auto;
         }
+
         .expect-item {
-            text-align: center;
-            padding: 24px;
-        }
-        .expect-item .number {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-500);
-            color: var(--white);
-            border-radius: 50%;
+            text-align: left;
+            padding: 32px;
+            background: var(--gray-50);
+            border-radius: 20px;
             display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .expect-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--gray-200);
+            background: var(--white);
+        }
+
+        /* Color-coded Step Numbers */
+        .step-number {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             font-weight: 700;
-            font-size: 20px;
-            margin: 0 auto 16px;
-        }
-        .expect-item h3 {
+            color: white;
+            flex-shrink: 0;
             font-size: 18px;
-            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
-        .expect-item p {
+
+        .expect-item:hover .step-number {
+            transform: scale(1.1);
+        }
+
+        .step-1 .step-number {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .step-2 .step-number {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+        }
+
+        .step-3 .step-number {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .expect-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--gray-900);
+        }
+
+        .expect-content p {
             color: var(--gray-500);
             font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section Enhancement */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons .btn {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-buttons .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Mobile Responsiveness for New Elements */
+        @media (max-width: 768px) {
+            .badge-grid {
+                gap: 12px;
+            }
+
+            .trust-badge {
+                padding: 10px 16px;
+            }
+
+            .badge-text {
+                font-size: 13px;
+            }
+
+            .expect-item {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .section-divider {
+                padding: 32px 0;
+            }
+
+            .divider-content {
+                font-size: 12px;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
@@ -250,7 +581,32 @@
         </div>
     </section>
 
-    <section id="calendar" class="calendar-embed">
+    <!-- Trust Badges Section -->
+    <div class="trust-badges">
+        <div class="container">
+            <div class="badge-grid">
+                <div class="trust-badge">
+                    <span class="badge-icon">&#9889;</span>
+                    <span class="badge-text">15-Min Response</span>
+                </div>
+                <div class="trust-badge">
+                    <span class="badge-icon">&#128274;</span>
+                    <span class="badge-text">100% Confidential</span>
+                </div>
+                <div class="trust-badge">
+                    <span class="badge-icon">&#128176;</span>
+                    <span class="badge-text">No Cost to You</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <span class="divider-content">Or Schedule Online</span>
+    </div>
+
+    <section id="calendar" class="calendar-embed animate-on-scroll">
         <div class="container">
             <h2>Choose a Time That Works for You</h2>
             <div class="calendar-wrapper">
@@ -259,30 +615,41 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <span class="divider-content">What Happens Next</span>
+    </div>
+
     <section class="what-to-expect">
         <div class="container">
-            <h2>What to Expect on Your Call</h2>
+            <h2 class="animate-on-scroll">What to Expect on Your Call</h2>
             <div class="expect-grid">
-                <div class="expect-item">
-                    <div class="number">1</div>
-                    <h3>Share Your Situation</h3>
-                    <p>Tell us about your property, mortgage, and foreclosure timeline. Everything is confidential.</p>
+                <div class="expect-item step-1 animate-on-scroll delay-1">
+                    <span class="step-number">1</span>
+                    <div class="expect-content">
+                        <h3>Share Your Situation</h3>
+                        <p>Tell us about your property, mortgage, and foreclosure timeline. Everything is confidential.</p>
+                    </div>
                 </div>
-                <div class="expect-item">
-                    <div class="number">2</div>
-                    <h3>Learn Your Options</h3>
-                    <p>We'll explain all possible solutions: loan modification, short sale, cash offer, and more.</p>
+                <div class="expect-item step-2 animate-on-scroll delay-2">
+                    <span class="step-number">2</span>
+                    <div class="expect-content">
+                        <h3>Learn Your Options</h3>
+                        <p>We'll explain all possible solutions: loan modification, short sale, cash offer, and more.</p>
+                    </div>
                 </div>
-                <div class="expect-item">
-                    <div class="number">3</div>
-                    <h3>Get a Cash Offer</h3>
-                    <p>If selling is right for you, we'll provide a fair, no-obligation cash offer within 24 hours.</p>
+                <div class="expect-item step-3 animate-on-scroll delay-3">
+                    <span class="step-number">3</span>
+                    <div class="expect-content">
+                        <h3>Get a Cash Offer</h3>
+                        <p>If selling is right for you, we'll provide a fair, no-obligation cash offer within 24 hours.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
+    <section class="cta-section animate-on-scroll">
         <div class="container">
             <h2>Don't Wait - Time Is Critical</h2>
             <p>The sooner you reach out, the more options you'll have to stop foreclosure.</p>
@@ -332,5 +699,67 @@
     </div>
 
     <script src="js/theme.js"></script>
+    <script>
+        // Scroll Animation with IntersectionObserver
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // Optionally stop observing after animation
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(function(el) {
+                observer.observe(el);
+            });
+
+            // Add subtle parallax effect to hero background
+            const hero = document.querySelector('.schedule-hero');
+            if (hero) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * 0.3;
+                    hero.style.backgroundPosition = 'center ' + rate + 'px';
+                });
+            }
+
+            // Add hover sound effect simulation with visual feedback
+            const scheduleOptions = document.querySelectorAll('.schedule-option');
+            scheduleOptions.forEach(function(option) {
+                option.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+
+            // Animate trust badges on scroll into view
+            const trustBadges = document.querySelector('.trust-badges');
+            if (trustBadges) {
+                const badgeObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const badges = entry.target.querySelectorAll('.trust-badge');
+                            badges.forEach(function(badge, index) {
+                                badge.style.animationDelay = (index * 0.15) + 's';
+                                badge.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                            });
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                badgeObserver.observe(trustBadges);
+            }
+        });
+    </script>
 </body>
 </html>

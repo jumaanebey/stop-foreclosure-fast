@@ -96,75 +96,298 @@
 
     <link rel="stylesheet" href="css/theme.css">
     <style>
+        /* Animation Keyframes */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+        .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+        .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
+        .animate-on-scroll.delay-6 { transition-delay: 0.6s; }
+
+        /* Hero Section with Gradient Animation */
         .city-hero {
-            padding: 60px 0;
-            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 50%, var(--accent-600) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
         }
+
+        .city-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .city-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
         .city-hero h1 {
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(36px, 5vw, 52px);
             margin-bottom: 16px;
+            color: var(--white);
+            animation: fadeInUp 0.8s ease-out;
         }
+
         .city-hero h2 {
             font-size: 22px;
-            color: var(--accent-600);
+            color: var(--accent-300);
             margin-bottom: 24px;
             font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.1s backwards;
         }
+
         .city-hero p {
             font-size: 18px;
-            color: var(--gray-500);
+            color: rgba(255,255,255,0.9);
             max-width: 700px;
             margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
+
+        .city-hero .btn {
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        /* Local Stats with Gradient Numbers */
         .local-stats {
             display: flex;
-            gap: 32px;
+            gap: 40px;
             flex-wrap: wrap;
-            margin-top: 32px;
+            margin-top: 40px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
         }
+
         .local-stat {
             text-align: center;
         }
+
         .local-stat strong {
             display: block;
-            font-size: 28px;
-            color: var(--accent-600);
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-400), var(--accent-300));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 4px;
         }
+
         .local-stat span {
             font-size: 14px;
-            color: var(--gray-500);
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
         }
+
+        /* Social Proof Bar */
+        .social-proof-bar {
+            background: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .proof-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .proof-items span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-800);
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--accent-100), var(--cream));
+            border-radius: 50px;
+            border: 1px solid var(--accent-200);
+            transition: all 0.3s ease;
+        }
+
+        .proof-items span:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+        }
+
+        /* Section Backgrounds */
+        .content-section {
+            background: var(--white);
+        }
+
+        .content-section.alt-bg {
+            background: var(--cream);
+        }
+
+        .content-section.dark-bg {
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+            color: var(--white);
+        }
+
+        /* Neighborhoods Grid */
         .neighborhoods-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
+
+        .neighborhood {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .neighborhood:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
         .neighborhood h3 {
             font-size: 18px;
             margin-bottom: 8px;
+            transition: color 0.3s ease;
         }
+
+        .neighborhood:hover h3 {
+            color: var(--accent-600);
+        }
+
         .neighborhood p {
             color: var(--gray-500);
             font-size: 15px;
         }
+
+        /* Benefits Grid */
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 24px;
         }
-        .benefit-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
+
+        .benefits-grid .card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-200);
         }
+
+        .benefits-grid .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+            border-color: var(--accent-500);
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .benefits-grid .card:hover .benefit-icon {
+            transform: scale(1.15);
+        }
+
+        /* Timeline Grid */
         .timeline-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
-        .timeline-item .icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+
+        .timeline-grid .card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .timeline-grid .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-500), var(--accent-600));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-grid .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .timeline-grid .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .timeline-grid .card .icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-grid .card:hover .icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* City Form */
         .city-form {
             background: var(--white);
             padding: 40px;
@@ -172,9 +395,68 @@
             border: 2px solid var(--accent-500);
             max-width: 600px;
             margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
         }
+
+        .city-form:hover {
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+
         body.variant-b .city-form {
             border-radius: 30px;
+        }
+
+        /* Section Titles Animation */
+        .content-section h2 {
+            position: relative;
+        }
+
+        /* Card Base Styles */
+        .card {
+            border-radius: 16px;
+            padding: 28px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        /* CTA Section Enhancement */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .proof-items {
+                gap: 16px;
+            }
+
+            .proof-items span {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+
+            .local-stats {
+                gap: 24px;
+                justify-content: center;
+            }
+
+            .local-stat strong {
+                font-size: 36px;
+            }
         }
     </style>
 
@@ -235,9 +517,9 @@
             <h1>Stop Foreclosure in Los Angeles Today</h1>
             <h2>We Buy LA Houses in ANY Condition - Cash Offer in 24 Hours</h2>
             <p>Facing foreclosure in Los Angeles? You have options. We've helped LA families avoid foreclosure and keep their equity. Get a fair cash offer today and stop the foreclosure process immediately.</p>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                <a href="tel:+19495655285" class="btn btn-primary">Call (949) 565-5285</a>
-                <a href="#contact-form" class="btn btn-accent">Get Cash Offer</a>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.3s backwards;">
+                <a href="tel:+19495655285" class="btn btn-white" style="background: var(--white); color: var(--primary-900); font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.3s ease;">Call (949) 565-5285</a>
+                <a href="#contact-form" class="btn btn-accent" style="box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4); transition: all 0.3s ease;">Get Cash Offer</a>
             </div>
             <div class="local-stats">
                 <div class="local-stat">
@@ -256,31 +538,41 @@
         </div>
     </section>
 
+    <div class="social-proof-bar">
+        <div class="container">
+            <div class="proof-items">
+                <span>&#10003; 1,250+ LA Homeowners Helped</span>
+                <span>&#10003; $50M+ in Homes Saved</span>
+                <span>&#10003; 15-Minute Response Time</span>
+            </div>
+        </div>
+    </div>
+
     <section class="content-section alt-bg">
         <div class="container">
-            <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">We Help Homeowners Throughout Los Angeles County</h2>
+            <h2 class="animate-on-scroll" style="text-align: center; font-size: 32px; margin-bottom: 40px;">We Help Homeowners Throughout Los Angeles County</h2>
             <div class="neighborhoods-grid">
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-1">
                     <h3>Downtown LA</h3>
                     <p>Arts District, Financial District, Little Tokyo, Chinatown</p>
                 </div>
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-2">
                     <h3>Hollywood</h3>
                     <p>Hollywood Hills, West Hollywood, Los Feliz, Silver Lake</p>
                 </div>
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-3">
                     <h3>Westside</h3>
                     <p>Santa Monica, Venice, Westwood, Brentwood, Pacific Palisades</p>
                 </div>
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-4">
                     <h3>South Bay</h3>
                     <p>Manhattan Beach, Redondo Beach, Torrance, El Segundo</p>
                 </div>
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-5">
                     <h3>San Fernando Valley</h3>
                     <p>Burbank, Glendale, North Hollywood, Sherman Oaks, Encino</p>
                 </div>
-                <div class="card neighborhood">
+                <div class="card neighborhood animate-on-scroll delay-6">
                     <h3>East LA</h3>
                     <p>Pasadena, Alhambra, Monterey Park, East Los Angeles</p>
                 </div>
@@ -294,24 +586,24 @@
 
     <section class="content-section">
         <div class="container">
-            <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">Why Los Angeles Homeowners Choose Us</h2>
+            <h2 class="animate-on-scroll" style="text-align: center; font-size: 32px; margin-bottom: 40px;">Why Los Angeles Homeowners Choose Us</h2>
             <div class="benefits-grid">
-                <div class="card">
+                <div class="card animate-on-scroll delay-1">
                     <div class="benefit-icon">&#128663;</div>
                     <h3 style="font-size: 20px; margin-bottom: 12px;">Local LA Knowledge</h3>
                     <p style="color: var(--gray-500);">We understand LA's unique housing market, from Venice Beach condos to Hollywood Hills homes. Local expertise you can trust.</p>
                 </div>
-                <div class="card">
+                <div class="card animate-on-scroll delay-2">
                     <div class="benefit-icon">&#9889;</div>
                     <h3 style="font-size: 20px; margin-bottom: 12px;">Fast Solutions</h3>
                     <p style="color: var(--gray-500);">We'll come to you or handle everything remotely. No need to drive across the city during rush hour.</p>
                 </div>
-                <div class="card">
+                <div class="card animate-on-scroll delay-3">
                     <div class="benefit-icon">&#127968;</div>
                     <h3 style="font-size: 20px; margin-bottom: 12px;">All Property Types</h3>
                     <p style="color: var(--gray-500);">Condos, single-family homes, multi-units, even fixer-uppers in any LA neighborhood. We buy them all, as-is.</p>
                 </div>
-                <div class="card">
+                <div class="card animate-on-scroll delay-4">
                     <div class="benefit-icon">&#128176;</div>
                     <h3 style="font-size: 20px; margin-bottom: 12px;">Fair Market Prices</h3>
                     <p style="color: var(--gray-500);">We understand LA property values from every neighborhood. Get a fair offer based on your specific location.</p>
@@ -322,20 +614,20 @@
 
     <section class="content-section alt-bg">
         <div class="container">
-            <h2 style="text-align: center; font-size: 32px; margin-bottom: 16px;">Los Angeles Foreclosure Timeline is Fast</h2>
-            <p style="text-align: center; color: var(--gray-500); max-width: 700px; margin: 0 auto 40px;">California foreclosure laws move quickly. Don't let bureaucracy cost you your home when you have other options.</p>
+            <h2 class="animate-on-scroll" style="text-align: center; font-size: 32px; margin-bottom: 16px;">Los Angeles Foreclosure Timeline is Fast</h2>
+            <p class="animate-on-scroll" style="text-align: center; color: var(--gray-500); max-width: 700px; margin: 0 auto 40px;">California foreclosure laws move quickly. Don't let bureaucracy cost you your home when you have other options.</p>
             <div class="timeline-grid">
-                <div class="card" style="text-align: center;">
+                <div class="card animate-on-scroll delay-1" style="text-align: center;">
                     <div class="icon">&#128196;</div>
                     <h3 style="font-size: 18px; margin-bottom: 8px;">Notice of Default</h3>
                     <p style="color: var(--gray-500); font-size: 15px;">After 90+ days of missed payments, foreclosure process officially starts.</p>
                 </div>
-                <div class="card" style="text-align: center;">
+                <div class="card animate-on-scroll delay-2" style="text-align: center;">
                     <div class="icon">&#127963;</div>
                     <h3 style="font-size: 18px; margin-bottom: 8px;">Notice of Sale</h3>
                     <p style="color: var(--gray-500); font-size: 15px;">90+ days later, your home gets scheduled for auction at the courthouse.</p>
                 </div>
-                <div class="card" style="text-align: center;">
+                <div class="card animate-on-scroll delay-3" style="text-align: center;">
                     <div class="icon">&#9203;</div>
                     <h3 style="font-size: 18px; margin-bottom: 8px;">Auction Day</h3>
                     <p style="color: var(--gray-500); font-size: 15px;">21+ days later, your home is sold to the highest bidder.</p>
@@ -346,10 +638,10 @@
 
     <section id="contact-form" class="content-section">
         <div class="container">
-            <h2 style="text-align: center; font-size: 32px; margin-bottom: 16px;">Get Your Free LA Cash Offer Today</h2>
-            <p style="text-align: center; color: var(--gray-500); margin-bottom: 40px;">Fill out the form below and we'll contact you within 2 hours with a cash offer for your Los Angeles home.</p>
+            <h2 class="animate-on-scroll" style="text-align: center; font-size: 32px; margin-bottom: 16px;">Get Your Free LA Cash Offer Today</h2>
+            <p class="animate-on-scroll" style="text-align: center; color: var(--gray-500); margin-bottom: 40px;">Fill out the form below and we'll contact you within 2 hours with a cash offer for your Los Angeles home.</p>
 
-            <form class="city-form" id="la-contact-form">
+            <form class="city-form animate-on-scroll delay-1" id="la-contact-form">
                 <div class="form-group">
                     <label for="la-name">Full Name *</label>
                     <input type="text" id="la-name" name="name" required>
@@ -426,5 +718,58 @@
     </div>
 
     <script src="js/theme.js"></script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // IntersectionObserver for scroll animations
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // Optional: stop observing after animation
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(function(element) {
+                observer.observe(element);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add parallax effect to hero on scroll
+            const heroSection = document.querySelector('.city-hero');
+            if (heroSection) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    if (scrolled < 600) {
+                        heroSection.style.backgroundPosition = '0% ' + (50 + scrolled * 0.02) + '%';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
