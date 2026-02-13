@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FREE: 7-Day Foreclosure Survival Guide | My Foreclosure Solution</title>
-    <meta name="description" content="Download your FREE guide: Stop foreclosure in 7 days or less. Learn emergency strategies, legal rights, and proven solutions. Instant download.">
+    <title>Free 12-Page Foreclosure Survival Guide | My Foreclosure Solution</title>
+    <meta name="description" content="Download the free 7-Day Foreclosure Survival Guide: emergency action plan, lender scripts, California legal rights, and equity protection strategies. Instant PDF delivery.">
     <link rel="canonical" href="https://myforeclosuresolution.com/free-guide.html">
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e293b' rx='12' width='100' height='100'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23d97706'>M</text></svg>">
 
-    <meta property="og:title" content="FREE: 7-Day Foreclosure Survival Guide">
-    <meta property="og:description" content="Stop your foreclosure in 7 days or less. Download our free emergency action guide.">
+    <meta property="og:title" content="Free 12-Page Foreclosure Survival Guide">
+    <meta property="og:description" content="Emergency action plan, lender scripts, California legal rights, and equity protection strategies. Free instant PDF download.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://myforeclosuresolution.com/free-guide.html">
 
@@ -22,15 +22,92 @@
         gtag('config', 'G-ZC3FHFTPN2');
     </script>
 
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is included in the free foreclosure guide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 12-page guide includes a Day 1-3 emergency action plan, exact scripts for talking to your lender, California foreclosure laws and your legal rights, 5 strategies to keep your home equity, 7 costly mistakes to avoid, and a step-by-step success checklist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the foreclosure survival guide really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the guide is 100% free with no strings attached. Simply enter your name and email address to get instant access. We provide this guide as a resource to help California homeowners understand their options during foreclosure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How will I receive the free guide after signing up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You'll receive the guide instantly via email after submitting the form. Check your inbox (and spam folder if needed) for immediate access. The download link will be sent within seconds of signing up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to read the foreclosure guide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The guide takes approximately 15 minutes to read. It's designed to be concise and actionable so you can quickly understand your options and start taking steps to stop foreclosure right away."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my information be shared with third parties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, your information is 100% secure and will never be shared with third parties. We respect your privacy and only use your email to send you the free guide and optional helpful foreclosure resources. You can unsubscribe at any time."
+          }
+        }
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Fraunces:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/theme.css">
     <style>
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 2px var(--accent-200); }
+            50% { box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 4px var(--accent-300); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
         .guide-hero {
             padding: 60px 0 80px;
             background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            overflow: hidden;
         }
         .guide-grid {
             display: grid;
@@ -38,22 +115,51 @@
             gap: 60px;
             align-items: center;
         }
+
+        /* Hero Content Animation */
+        .guide-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
         .guide-content h1 {
             font-size: clamp(32px, 5vw, 48px);
             margin-bottom: 20px;
         }
         .guide-content h1 span {
             color: var(--accent-600);
+            position: relative;
+            display: inline-block;
+        }
+        .guide-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--accent-100);
+            z-index: -1;
+            border-radius: 4px;
         }
         .guide-badge {
-            display: inline-block;
-            background: var(--red-600);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--red-600), #b91c1c);
             color: var(--white);
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-weight: 600;
             font-size: 14px;
             margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out 0.1s backwards;
+        }
+        .guide-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
         .benefits-list {
             list-style: none;
@@ -65,53 +171,180 @@
             gap: 12px;
             margin-bottom: 12px;
             font-size: 17px;
+            animation: fadeInUp 0.6s ease-out backwards;
         }
+        .benefits-list li:nth-child(1) { animation-delay: 0.2s; }
+        .benefits-list li:nth-child(2) { animation-delay: 0.3s; }
+        .benefits-list li:nth-child(3) { animation-delay: 0.4s; }
+        .benefits-list li:nth-child(4) { animation-delay: 0.5s; }
+        .benefits-list li:nth-child(5) { animation-delay: 0.6s; }
         .benefits-list li::before {
-            content: "✓";
-            color: var(--green-600);
+            content: "\\2713";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--green-500), var(--green-600));
+            color: var(--white);
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
         }
-        .form-card {
+
+        /* ===== FORM CARD WITH GLOW ANIMATION ===== */
+        .guide-form-card {
             background: var(--white);
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 24px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border: 3px solid var(--accent-500);
+            border: 3px solid var(--accent-400);
             position: relative;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards, borderGlow 3s ease-in-out infinite;
         }
-        body.variant-b .form-card {
+        body.variant-b .guide-form-card {
             border-radius: 30px;
         }
-        .form-card::before {
+        .guide-form-card::before {
             content: "FREE GUIDE";
             position: absolute;
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--accent-600);
+            background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
             color: var(--white);
-            padding: 6px 20px;
+            padding: 8px 24px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 13px;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
         }
-        .form-card h2 {
+        .guide-form-card h2 {
             text-align: center;
             margin-bottom: 8px;
         }
-        .form-card .subtitle {
+        .guide-form-card .subtitle {
             text-align: center;
             color: var(--gray-500);
+            margin-bottom: 16px;
+        }
+
+        /* ===== SOCIAL PROOF STAT ===== */
+        .download-stat {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--accent-50), var(--accent-100));
+            border-radius: 14px;
+            margin-bottom: 24px;
+            border: 1px solid var(--accent-200);
+        }
+        .download-stat .stat-number {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-600), var(--accent-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .download-stat .stat-text {
+            font-size: 14px;
+            color: var(--gray-600);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* ===== FORM PROGRESS INDICATOR ===== */
+        .form-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
             margin-bottom: 24px;
         }
+        .progress-step {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .progress-step.active {
+            background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+        }
+        .progress-step.completed {
+            background: linear-gradient(135deg, var(--green-500), var(--green-600));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+        .progress-line {
+            width: 60px;
+            height: 3px;
+            background: var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-500), var(--accent-600));
+            transition: width 0.5s ease;
+        }
+        .progress-line.half::after {
+            width: 50%;
+        }
+        .progress-line.full::after {
+            width: 100%;
+        }
+
         .guide-form .form-group input {
             margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+        .guide-form .form-group input:focus {
+            border-color: var(--accent-500);
+            box-shadow: 0 0 0 4px var(--accent-100);
         }
         .guide-form .btn {
             width: 100%;
             font-size: 18px;
             padding: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .guide-form .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+        }
+        .guide-form .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .guide-form .btn:hover::before {
+            opacity: 1;
         }
         .privacy-note {
             text-align: center;
@@ -125,7 +358,7 @@
         }
         #success-message {
             display: none;
-            background: var(--green-600);
+            background: linear-gradient(135deg, var(--green-500), var(--green-600));
             color: var(--white);
             padding: 30px;
             border-radius: 15px;
@@ -136,29 +369,134 @@
             font-size: 24px;
             margin-bottom: 12px;
         }
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            padding: 80px 0;
+        }
+        .features-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 48px;
+        }
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
+
+        /* ===== FEATURE CARDS WITH ANIMATIONS ===== */
         .feature-card {
             text-align: center;
+            padding: 32px 24px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            opacity: 0;
+            transform: translateY(40px);
         }
-        .feature-card .icon {
-            font-size: 36px;
-            margin-bottom: 16px;
+        .feature-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
         }
+
+        /* Alternating backgrounds */
+        .feature-card:nth-child(odd) {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+        }
+        .feature-card:nth-child(even) {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream-dark, var(--cream)) 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: var(--accent-300);
+        }
+
+        /* ===== STYLED FEATURE ICONS ===== */
+        .feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent-50), var(--accent-100));
+            border-radius: 16px;
+            font-size: 28px;
+            margin: 0 auto 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(217, 119, 6, 0.25);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Numbered feature badges */
+        .feature-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-800), var(--primary-900));
+            border-radius: 16px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin: 0 auto 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+            font-family: 'DM Serif Display', Georgia, serif;
+        }
+        .feature-card:hover .feature-number {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.3);
+        }
+
         .feature-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-900);
         }
+        .feature-card p {
+            color: var(--gray-500);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .guide-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-            .form-card {
+            .guide-form-card {
                 padding: 30px 20px;
+            }
+            .download-stat {
+                flex-direction: column;
+                text-align: center;
+                gap: 6px;
+            }
+            .download-stat .stat-number {
+                font-size: 24px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -202,88 +540,102 @@
         <div class="container">
             <div class="guide-grid">
                 <div class="guide-content">
-                    <span class="guide-badge">Limited Time: FREE Download</span>
-                    <h1>Stop Your Foreclosure in <span>7 Days or Less</span></h1>
-                    <p style="font-size: 18px; color: var(--gray-500); margin-bottom: 24px;">Get our proven step-by-step guide that's helped 500+ California homeowners save their homes</p>
+                    <span class="guide-badge">100% FREE - No Credit Card Required</span>
+                    <h1>The 7-Day Foreclosure <span>Survival Guide</span></h1>
+                    <p style="font-size: 18px; color: var(--gray-500); margin-bottom: 24px;">A 12-page action plan with emergency strategies, lender scripts, and your California legal rights - created by licensed foreclosure specialists</p>
 
                     <ul class="benefits-list">
-                        <li>Emergency strategies that work in 24 hours</li>
-                        <li>Exact scripts for talking to your lender</li>
-                        <li>Legal loopholes banks don't want you to know</li>
-                        <li>How to keep your home equity (don't lose it!)</li>
-                        <li>Mistakes that could cost you everything</li>
+                        <li><strong>Day 1-3 Emergency Plan:</strong> Exact steps to take immediately</li>
+                        <li><strong>Lender Call Scripts:</strong> Word-for-word what to say to your bank</li>
+                        <li><strong>California Legal Rights:</strong> Protections under state foreclosure law</li>
+                        <li><strong>5 Equity Protection Strategies:</strong> How to preserve your home's value</li>
+                        <li><strong>7 Critical Mistakes:</strong> What NOT to do (with real examples)</li>
                     </ul>
 
                     <p style="font-size: 15px; color: var(--accent-600); font-weight: 600;">
-                        Reading time: 15 minutes | Value: Priceless | Pages: 12
+                        12 Pages | 15 Minute Read | Instant PDF Download
                     </p>
                 </div>
 
-                <div class="form-card">
-                    <h2>Get Instant Access</h2>
-                    <p class="subtitle">Enter your email below for immediate download</p>
+                <div class="guide-form-card">
+                    <h2>Download Your Free Guide</h2>
+                    <p class="subtitle">Instant access - delivered to your inbox in seconds</p>
+
+                    <div class="download-stat">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-text">Updated with the latest California foreclosure laws</span>
+                    </div>
+
+                    <div class="form-progress">
+                        <div class="progress-step active">1</div>
+                        <div class="progress-line" id="progress-line"></div>
+                        <div class="progress-step" id="step-2">2</div>
+                    </div>
 
                     <form id="lead-magnet-form" class="guide-form">
                         <div class="form-group">
-                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="text" name="name" placeholder="Your Name" required id="name-input">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email Address" required>
+                            <input type="email" name="email" placeholder="Email Address" required id="email-input">
                         </div>
                         <button type="submit" class="btn btn-accent">
-                            Download FREE Guide Now
+                            Send Me The Free Guide
                         </button>
                     </form>
 
                     <div id="success-message">
-                        <h3>Your Guide is Ready!</h3>
-                        <p>Click below to access your guide. Bookmark it or print it for future reference.</p>
-                        <a href="downloads/foreclosure-survival-guide.html" class="btn btn-accent" style="display: inline-block; margin-top: 16px; text-decoration: none;">Open My Guide Now</a>
-                        <p style="margin-top: 16px; font-size: 14px; color: var(--gray-500);">Need immediate help? Call (949) 565-5285</p>
+                        <div class="success-icon">&#10003;</div>
+                        <h3>Success! Check Your Email</h3>
+                        <p>Your guide has been sent to your inbox. Check spam if you don't see it in 2 minutes.</p>
+                        <p style="margin-top: 16px;">Need immediate help? Call (949) 565-5285</p>
                     </div>
 
                     <p class="privacy-note">
-                        <span>100% Secure</span> - No spam, ever - Instant download
+                        <span>100% Free</span> - No spam, ever - Your info stays confidential
+                    </p>
+                    <p class="privacy-note" style="margin-top: 8px; font-size: 12px;">
+                        Licensed: CA DRE #02076038 | NMLS #2033637
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section alt-bg">
+    <section class="content-section alt-bg features-section">
         <div class="container">
-            <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">What's Inside Your FREE Guide</h2>
+            <h2>What's Inside Your FREE Guide</h2>
 
             <div class="features-grid">
-                <div class="card feature-card">
-                    <div class="icon">&#128203;</div>
-                    <h3>Day 1-3 Action Plan</h3>
-                    <p style="color: var(--gray-500);">Critical first steps to stop the foreclosure process immediately</p>
+                <div class="card feature-card" data-delay="0">
+                    <div class="feature-icon">&#128203;</div>
+                    <h3>Day 1-3 Emergency Action Plan</h3>
+                    <p>Hour-by-hour breakdown of what to do first: who to call, what documents to gather, and how to halt the process</p>
                 </div>
-                <div class="card feature-card">
-                    <div class="icon">&#128222;</div>
-                    <h3>Lender Scripts</h3>
-                    <p style="color: var(--gray-500);">Exact words to say when calling your bank for best results</p>
+                <div class="card feature-card" data-delay="100">
+                    <div class="feature-icon">&#128222;</div>
+                    <h3>Word-for-Word Lender Scripts</h3>
+                    <p>Proven phone scripts for requesting loan modification, forbearance, or short sale - written by foreclosure specialists</p>
                 </div>
-                <div class="card feature-card">
-                    <div class="icon">&#9878;</div>
-                    <h3>Legal Rights</h3>
-                    <p style="color: var(--gray-500);">California laws that protect you (most people don't know these)</p>
+                <div class="card feature-card" data-delay="200">
+                    <div class="feature-icon">&#9878;</div>
+                    <h3>Your California Legal Rights</h3>
+                    <p>Key protections under CA Civil Code 2924 including required notice periods, right to cure, and mediation options</p>
                 </div>
-                <div class="card feature-card">
-                    <div class="icon">&#128176;</div>
-                    <h3>5 Ways to Keep Equity</h3>
-                    <p style="color: var(--gray-500);">Don't let the bank take everything - get what's yours</p>
+                <div class="card feature-card" data-delay="300">
+                    <div class="feature-icon">&#128176;</div>
+                    <h3>5 Equity Protection Strategies</h3>
+                    <p>Options to preserve your home's value: loan modification, refinancing, selling before auction, and more</p>
                 </div>
-                <div class="card feature-card">
-                    <div class="icon">&#10060;</div>
-                    <h3>Costly Mistakes</h3>
-                    <p style="color: var(--gray-500);">7 mistakes that guarantee foreclosure (avoid these!)</p>
+                <div class="card feature-card" data-delay="400">
+                    <div class="feature-icon">&#10060;</div>
+                    <h3>7 Costly Mistakes to Avoid</h3>
+                    <p>Common errors that accelerate foreclosure: ignoring mail, missing deadlines, falling for scams, and 4 more</p>
                 </div>
-                <div class="card feature-card">
-                    <div class="icon">&#9989;</div>
-                    <h3>Success Checklist</h3>
-                    <p style="color: var(--gray-500);">Step-by-step checklist to save your home</p>
+                <div class="card feature-card" data-delay="500">
+                    <div class="feature-icon">&#9989;</div>
+                    <h3>Complete Action Checklist</h3>
+                    <p>Printable step-by-step checklist to track your progress and ensure you don't miss critical deadlines</p>
                 </div>
             </div>
         </div>
@@ -291,10 +643,10 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2>Don't Wait - Every Day Counts!</h2>
-            <p>Your foreclosure clock is ticking. Get the information you need right now.</p>
+            <h2>California Foreclosure Timelines Are Strict</h2>
+            <p>Under CA law, you have limited time to respond after receiving a Notice of Default. The sooner you understand your options, the more choices you have.</p>
             <div class="cta-buttons">
-                <a href="#lead-magnet-form" class="btn btn-white" onclick="document.querySelector('.form-card').scrollIntoView({behavior: 'smooth'}); return false;">Get Your Free Guide Now</a>
+                <a href="#lead-magnet-form" class="btn btn-white" onclick="document.querySelector('.guide-form-card').scrollIntoView({behavior: 'smooth'}); return false;">Download the Free Guide</a>
                 <a href="tel:+19495655285" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">Or Call (949) 565-5285</a>
             </div>
         </div>
@@ -318,8 +670,6 @@
                     <h4>Resources</h4>
                     <a href="blog/">Blog</a>
                     <a href="emergency-checklist.html">Emergency Help</a>
-                    <a href="california-foreclosure-glossary.html">Glossary</a>
-                    <a href="california-foreclosure-resources.html">Free Help</a>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
@@ -342,49 +692,111 @@
 
     <script src="js/theme.js"></script>
     <script>
-        document.getElementById('lead-magnet-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const form = this;
-            const button = form.querySelector('.btn');
-            const originalText = button.textContent;
-
-            button.textContent = 'Processing...';
-            button.disabled = true;
-
-            const formData = new FormData(form);
-            const data = {
-                type: 'lead_magnet',
-                name: formData.get('name'),
-                email: formData.get('email'),
-                source: 'free-guide-landing-page',
-                timestamp: new Date().toISOString()
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
             };
 
-            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const delay = parseInt(card.dataset.delay) || 0;
+
+                        setTimeout(function() {
+                            card.classList.add('animate-in');
+                        }, delay);
+
+                        observer.unobserve(card);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all feature cards
+            document.querySelectorAll('.feature-card').forEach(function(card) {
+                observer.observe(card);
             });
 
-            setTimeout(function() {
-                form.style.display = 'none';
-                document.getElementById('success-message').style.display = 'block';
+            // ===== FORM PROGRESS INDICATOR =====
+            const nameInput = document.getElementById('name-input');
+            const emailInput = document.getElementById('email-input');
+            const progressLine = document.getElementById('progress-line');
+            const step2 = document.getElementById('step-2');
 
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'generate_lead', {
-                        'event_category': 'Lead Generation',
-                        'event_label': 'PDF Guide Download',
-                        'value': 1
-                    });
+            function updateProgress() {
+                const nameValid = nameInput && nameInput.value.trim().length > 0;
+                const emailValid = emailInput && emailInput.value.trim().length > 0 && emailInput.validity.valid;
+
+                if (nameValid && emailValid) {
+                    progressLine.classList.remove('half');
+                    progressLine.classList.add('full');
+                    step2.classList.add('active');
+                } else if (nameValid || emailValid) {
+                    progressLine.classList.add('half');
+                    progressLine.classList.remove('full');
+                    step2.classList.remove('active');
+                } else {
+                    progressLine.classList.remove('half', 'full');
+                    step2.classList.remove('active');
                 }
+            }
 
-                // Auto-open guide after 2 seconds
-                setTimeout(function() {
-                    window.open('downloads/foreclosure-survival-guide.html', '_blank');
-                }, 2000);
-            }, 1000);
+            if (nameInput) nameInput.addEventListener('input', updateProgress);
+            if (emailInput) emailInput.addEventListener('input', updateProgress);
+
+            // ===== FORM SUBMISSION =====
+            var form = document.getElementById('lead-magnet-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    var button = form.querySelector('.btn');
+                    var originalText = button.textContent;
+
+                    button.textContent = 'Processing...';
+                    button.disabled = true;
+
+                    // Mark progress as complete
+                    if (progressLine) {
+                        progressLine.classList.add('full');
+                        step2.classList.add('completed');
+                    }
+
+                    var formData = new FormData(form);
+                    var data = {
+                        type: 'lead_magnet',
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        source: 'free-guide-landing-page',
+                        timestamp: new Date().toISOString()
+                    };
+
+                    fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    setTimeout(function() {
+                        form.style.display = 'none';
+                        document.querySelector('.form-progress').style.display = 'none';
+                        document.querySelector('.download-stat').style.display = 'none';
+                        document.getElementById('success-message').style.display = 'block';
+
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'generate_lead', {
+                                'event_category': 'Lead Generation',
+                                'event_label': 'PDF Guide Download',
+                                'value': 1
+                            });
+                        }
+                    }, 1000);
+                });
+            }
         });
     </script>
 </body>
