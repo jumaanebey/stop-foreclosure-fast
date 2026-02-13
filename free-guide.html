@@ -105,9 +105,65 @@
         }
 
         .guide-hero {
-            padding: 60px 0 80px;
-            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            padding: 80px 0 100px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 50%, var(--cream) 100%);
             overflow: hidden;
+            position: relative;
+        }
+        .guide-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.08) 0%, transparent 60%);
+            animation: floatBg 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .guide-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.06) 0%, transparent 60%);
+            animation: floatBg 12s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -20px) rotate(2deg); }
+            66% { transform: translate(-20px, 30px) rotate(-2deg); }
+        }
+        .float-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(217, 119, 6, 0.08);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .float-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+        .float-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -2s;
+        }
+        .float-3 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -4s;
         }
         .guide-grid {
             display: grid;
@@ -119,10 +175,14 @@
         /* Hero Content Animation */
         .guide-content {
             animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
         .guide-content h1 {
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(36px, 5vw, 52px);
             margin-bottom: 20px;
+            color: var(--primary-900);
+            line-height: 1.1;
         }
         .guide-content h1 span {
             color: var(--accent-600);
@@ -140,23 +200,104 @@
             z-index: -1;
             border-radius: 4px;
         }
+        .guide-content > p {
+            color: var(--gray-600) !important;
+        }
+
+        /* PDF Mockup */
+        .pdf-preview {
+            position: relative;
+            margin-top: 30px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+        .pdf-mockup {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
+            max-width: 280px;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transition: transform 0.3s ease;
+        }
+        .pdf-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+        .pdf-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-500);
+        }
+        .pdf-icon {
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--red-500), var(--red-600));
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .pdf-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--slate-900);
+            line-height: 1.2;
+        }
+        .pdf-subtitle {
+            font-size: 11px;
+            color: var(--gray-500);
+        }
+        .pdf-pages {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .pdf-page-line {
+            height: 8px;
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+        .pdf-page-line:nth-child(1) { width: 100%; }
+        .pdf-page-line:nth-child(2) { width: 85%; }
+        .pdf-page-line:nth-child(3) { width: 92%; }
+        .pdf-page-line:nth-child(4) { width: 70%; }
+        .pdf-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, var(--green-500), var(--green-600));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            animation: pulse 2s infinite;
+        }
         .guide-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, var(--red-600), #b91c1c);
+            background: linear-gradient(135deg, var(--green-500), var(--green-600));
             color: var(--white);
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
             animation: fadeInUp 0.8s ease-out 0.1s backwards;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
         }
         .guide-badge::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: var(--white);
             border-radius: 50%;
             animation: pulse 2s infinite;
@@ -169,9 +310,13 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             font-size: 17px;
             animation: fadeInUp 0.6s ease-out backwards;
+            color: var(--gray-700);
+        }
+        .benefits-list li strong {
+            color: var(--primary-900);
         }
         .benefits-list li:nth-child(1) { animation-delay: 0.2s; }
         .benefits-list li:nth-child(2) { animation-delay: 0.3s; }
@@ -194,32 +339,37 @@
             box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
         }
 
-        /* ===== FORM CARD WITH GLOW ANIMATION ===== */
+        /* ===== FORM CARD WITH GLASS MORPHISM ===== */
         .guide-form-card {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border: 3px solid var(--accent-400);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
+            border: none;
+            border-top: 4px solid var(--accent-500);
             position: relative;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards, borderGlow 3s ease-in-out infinite;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
         body.variant-b .guide-form-card {
             border-radius: 30px;
         }
         .guide-form-card::before {
-            content: "FREE GUIDE";
+            content: "INSTANT DOWNLOAD";
             position: absolute;
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
             color: var(--white);
-            padding: 8px 24px;
-            border-radius: 20px;
+            padding: 10px 28px;
+            border-radius: 25px;
             font-weight: 700;
-            font-size: 13px;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4);
         }
         .guide-form-card h2 {
             text-align: center;
@@ -537,12 +687,17 @@
     </nav>
 
     <section class="guide-hero">
+        <!-- Floating Background Elements -->
+        <div class="float-element float-1"></div>
+        <div class="float-element float-2"></div>
+        <div class="float-element float-3"></div>
+
         <div class="container">
             <div class="guide-grid">
                 <div class="guide-content">
                     <span class="guide-badge">100% FREE - No Credit Card Required</span>
                     <h1>The 7-Day Foreclosure <span>Survival Guide</span></h1>
-                    <p style="font-size: 18px; color: var(--gray-500); margin-bottom: 24px;">A 12-page action plan with emergency strategies, lender scripts, and your California legal rights - created by licensed foreclosure specialists</p>
+                    <p style="font-size: 18px; margin-bottom: 24px;">A 12-page action plan with emergency strategies, lender scripts, and your California legal rights - created by licensed foreclosure specialists</p>
 
                     <ul class="benefits-list">
                         <li><strong>Day 1-3 Emergency Plan:</strong> Exact steps to take immediately</li>
@@ -552,9 +707,25 @@
                         <li><strong>7 Critical Mistakes:</strong> What NOT to do (with real examples)</li>
                     </ul>
 
-                    <p style="font-size: 15px; color: var(--accent-600); font-weight: 600;">
-                        12 Pages | 15 Minute Read | Instant PDF Download
-                    </p>
+                    <!-- PDF Preview Mockup -->
+                    <div class="pdf-preview">
+                        <div class="pdf-mockup">
+                            <div class="pdf-header">
+                                <div class="pdf-icon">PDF</div>
+                                <div>
+                                    <div class="pdf-title">7-Day Foreclosure<br>Survival Guide</div>
+                                    <div class="pdf-subtitle">12 Pages • California Edition</div>
+                                </div>
+                            </div>
+                            <div class="pdf-pages">
+                                <div class="pdf-page-line"></div>
+                                <div class="pdf-page-line"></div>
+                                <div class="pdf-page-line"></div>
+                                <div class="pdf-page-line"></div>
+                            </div>
+                        </div>
+                        <div class="pdf-badge">FREE</div>
+                    </div>
                 </div>
 
                 <div class="guide-form-card">
