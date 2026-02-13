@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop California Foreclosure | My Foreclosure Solution</title>
+    <meta name="description" content="Licensed California professionals helping homeowners stop foreclosure. Free consultation.">
+    <link rel="canonical" href="https://myforeclosuresolution.com/">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZC3FHFTPN2');
+    </script>
+
+    <style>
+        :root {
+            --gray-950: #0a0a0a;
+            --gray-900: #171717;
+            --gray-800: #262626;
+            --gray-700: #404040;
+            --gray-600: #525252;
+            --gray-500: #737373;
+            --gray-400: #a3a3a3;
+            --gray-300: #d4d4d4;
+            --gray-200: #e5e5e5;
+            --gray-100: #f5f5f5;
+            --gray-50: #fafafa;
+            --white: #ffffff;
+            --blue-600: #2563eb;
+            --blue-500: #3b82f6;
+            --blue-400: #60a5fa;
+            --blue-100: #dbeafe;
+            --green-500: #22c55e;
+            --red-500: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--gray-700);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 {
+            color: var(--gray-900);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Gradient mesh background */
+        .gradient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 800px;
+            background: linear-gradient(180deg, var(--blue-100) 0%, var(--white) 100%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--blue-400);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: #818cf8;
+            top: 200px;
+            left: -100px;
+            opacity: 0.3;
+        }
+
+        /* Emergency */
+        .emergency {
+            background: var(--gray-900);
+            color: var(--white);
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .emergency a {
+            color: var(--blue-400);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .emergency a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--gray-900);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--gray-900);
+            background: var(--gray-100);
+        }
+
+        nav a.nav-cta {
+            background: var(--gray-900);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        nav a.nav-cta:hover {
+            background: var(--gray-800);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green-500);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(44px, 6vw, 72px);
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--blue-600), #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--gray-500);
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 16px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--gray-800);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            color: var(--gray-700);
+            padding: 16px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gray-300);
+            background: var(--gray-50);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 100px 0;
+            background: var(--gray-50);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .form-content h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .form-content p {
+            font-size: 18px;
+            color: var(--gray-500);
+            margin-bottom: 32px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--blue-100);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .feature-text strong {
+            display: block;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .feature-text span {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.08);
+            border: 1px solid var(--gray-200);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-header h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--gray-500);
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--blue-500);
+            box-shadow: 0 0 0 3px var(--blue-100);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .form-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .form-badge {
+            font-size: 12px;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            color: var(--blue-600);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 44px);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-500);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .step-card {
+            padding: 40px 32px;
+            border-radius: 20px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            border-color: var(--gray-200);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--blue-100);
+            color: var(--blue-600);
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--gray-500);
+            font-size: 15px;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 100px 0;
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .benefits .section-header h2 {
+            color: var(--white);
+        }
+
+        .benefits .section-header p {
+            color: var(--gray-400);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .benefit-card {
+            background: var(--gray-800);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            gap: 20px;
+            transition: all 0.2s;
+            border: 1px solid var(--gray-700);
+        }
+
+        .benefit-card:hover {
+            border-color: var(--gray-600);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            color: var(--white);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .benefit-content p {
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+
+        /* Cities */
+        .cities {
+            padding: 80px 0;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .cities-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cities-header h2 {
+            font-size: 28px;
+        }
+
+        .cities-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .city-link {
+            padding: 12px 24px;
+            border-radius: 100px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .city-link:hover {
+            border-color: var(--blue-500);
+            color: var(--blue-600);
+            background: var(--blue-100);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--blue-600), #7c3aed);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .final-cta h2 {
+            color: var(--white);
+            font-size: clamp(36px, 5vw, 52px);
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            color: rgba(255,255,255,0.8);
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--gray-900);
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.2s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: var(--white);
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-outline-white:hover {
+            background: var(--white);
+            color: var(--gray-900);
+            border-color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-950);
+            color: var(--gray-400);
+            padding: 64px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-800);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        /* Success */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--green-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+            color: white;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 64px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .form-card {
+                padding: 32px 24px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        /* Mobile CTA */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 16px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .mobile-cta a {
+            display: block;
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            body {
+                padding-bottom: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency">
+        Sale within 7 days? <a href="tel:+19495655285">Call (949) 565-5285</a> for emergency help
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Resources</a>
+                    <a href="schedule.html" class="nav-cta">Get Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="gradient-bg"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Licensed California Professionals
+                </div>
+                <h1>Stop your <span class="gradient-text">foreclosure</span> before it's too late</h1>
+                <p class="hero-subtitle">We help California homeowners explore all options to keep their home or exit with their equity intact. Free, confidential consultations.</p>
+
+                <div class="hero-ctas">
+                    <a href="tel:+19495655285" class="btn-primary">
+                        Call (949) 565-5285
+                    </a>
+                    <a href="#form" class="btn-secondary">
+                        Get Free Consultation
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">30 min</div>
+                        <div class="stat-label">Response time</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Confidential</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">$0</div>
+                        <div class="stat-label">Upfront fees</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-grid">
+                <div class="form-content">
+                    <h2>Get expert help today</h2>
+                    <p>Every situation is unique. Tell us about yours and we'll explain all your options clearly.</p>
+
+                    <ul class="feature-list">
+                        <li>
+                            <div class="feature-icon">&#9203;</div>
+                            <div class="feature-text">
+                                <strong>Stop the auction</strong>
+                                <span>Legal methods to postpone or cancel your foreclosure sale</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">&#128176;</div>
+                            <div class="feature-text">
+                                <strong>Keep your equity</strong>
+                                <span>Don't let the bank take what you've built</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">&#128200;</div>
+                            <div class="feature-text">
+                                <strong>Loan modification</strong>
+                                <span>Negotiate new terms to make payments affordable</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">&#127968;</div>
+                            <div class="feature-text">
+                                <strong>Quick sale options</strong>
+                                <span>Fair cash offers if selling is the best choice</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Free Consultation</h3>
+                        <p>We'll call you within 30 minutes</p>
+                    </div>
+
+                    <form id="consultation-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="you@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>How urgent?</label>
+                            <select name="urgency" required>
+                                <option value="">Select timeline...</option>
+                                <option value="emergency">Sale within 7 days</option>
+                                <option value="urgent">Sale within 2-4 weeks</option>
+                                <option value="soon">Sale within 1-3 months</option>
+                                <option value="exploring">Just exploring</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-submit">Get My Free Consultation</button>
+                        <p class="form-footer">Your information is secure and confidential.</p>
+                    </form>
+
+                    <div class="form-success" id="form-success">
+                        <div class="success-icon">&#10003;</div>
+                        <h3 style="font-size: 20px; margin-bottom: 8px;">Thank you!</h3>
+                        <p style="color: var(--gray-500); font-size: 15px;">We'll call you within 30 minutes.</p>
+                    </div>
+
+                    <div class="form-badges">
+                        <span class="form-badge">NMLS #2033637</span>
+                        <span class="form-badge">CA DRE #02076038</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">How it works</span>
+                <h2>Three simple steps</h2>
+                <p>We make the process straightforward so you can focus on what matters.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">1</span>
+                    <h3>Free consultation</h3>
+                    <p>Tell us about your situation. We listen without judgment and answer all your questions.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">2</span>
+                    <h3>Custom plan</h3>
+                    <p>We analyze your unique case and present every option available to you.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">3</span>
+                    <h3>Take action</h3>
+                    <p>Choose the best path forward. We handle the details and guide you through.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow" style="color: var(--blue-400);">What we do</span>
+                <h2>Solutions for every situation</h2>
+                <p>Here's how we can help protect your interests.</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#9203;</div>
+                    <div class="benefit-content">
+                        <h3>Stop the sale</h3>
+                        <p>Legal methods to postpone or cancel your foreclosure auction immediately.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128176;</div>
+                    <div class="benefit-content">
+                        <h3>Protect your equity</h3>
+                        <p>We help you recover the value you've built in your home over the years.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128200;</div>
+                    <div class="benefit-content">
+                        <h3>Loan modification</h3>
+                        <p>Negotiate with your lender to reduce payments and keep your home.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#127968;</div>
+                    <div class="benefit-content">
+                        <h3>Quick sale</h3>
+                        <p>Fair cash offers from vetted buyers. Close fast and walk away clean.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cities">
+        <div class="container">
+            <div class="cities-header">
+                <h2>Serving all of California</h2>
+            </div>
+            <div class="cities-grid">
+                <a href="stop-foreclosure-los-angeles.html" class="city-link">Los Angeles</a>
+                <a href="stop-foreclosure-san-diego.html" class="city-link">San Diego</a>
+                <a href="stop-foreclosure-oakland.html" class="city-link">Oakland</a>
+                <a href="stop-foreclosure-sacramento.html" class="city-link">Sacramento</a>
+                <a href="stop-foreclosure-fresno.html" class="city-link">Fresno</a>
+                <a href="stop-foreclosure-riverside.html" class="city-link">Riverside</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to explore your options?</h2>
+            <p>Every day matters. The sooner you reach out, the more options you'll have available.</p>
+            <div class="cta-buttons">
+                <a href="tel:+19495655285" class="btn-white">
+                    Call (949) 565-5285
+                </a>
+                <a href="schedule.html" class="btn-outline-white">
+                    Schedule a call
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure and find real solutions.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="blog/">Blog</a>
+                    <a href="emergency-checklist.html">Emergency Help</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email</a>
+                    <a href="privacy-policy.html">Privacy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Consultation</a>
+    </div>
+
+    <script>
+        document.getElementById('consultation-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    type: 'consultation',
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    urgency: formData.get('urgency'),
+                    source: 'modern-tech-design',
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            setTimeout(() => {
+                this.style.display = 'none';
+                document.getElementById('form-success').classList.add('active');
+            }, 800);
+        });
+    </script>
+</body>
+</html>

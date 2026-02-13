@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Foreclosure Survival Guide | Version B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0f0f0f;
+            --dark: #1a1a1a;
+            --gray-dark: #2a2a2a;
+            --red: #dc2626;
+            --red-bright: #ef4444;
+            --yellow: #facc15;
+            --white: #ffffff;
+            --gray: #a1a1aa;
+            --gray-light: #f4f4f5;
+        }
+
+        @page { margin: 0.5in; size: letter; }
+
+        @media print {
+            body { font-size: 10pt; }
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 30px;
+            background: var(--white);
+        }
+
+        .print-bar {
+            background: var(--black);
+            color: white;
+            padding: 18px 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .print-bar button {
+            background: var(--red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Cover - Bold & Dark */
+        .cover {
+            background: var(--black);
+            color: white;
+            padding: 70px 50px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: "URGENT";
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: var(--red);
+            color: white;
+            padding: 8px 50px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            transform: rotate(45deg);
+        }
+
+        .cover .brand {
+            font-size: 11px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+        }
+
+        .cover h1 {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 60px;
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .cover h1 span { color: var(--red); }
+
+        .cover .subtitle {
+            font-size: 16px;
+            color: var(--gray);
+            max-width: 450px;
+            margin: 0 auto 25px;
+        }
+
+        .cover .warning-badge {
+            display: inline-block;
+            background: var(--red);
+            padding: 10px 25px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* Section Headers - Big & Bold */
+        h2 {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 42px;
+            color: var(--black);
+            margin: 50px 0 25px;
+            letter-spacing: 1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 .num {
+            background: var(--red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: var(--black);
+            margin: 35px 0 15px;
+            letter-spacing: 0.5px;
+        }
+
+        h4 {
+            font-size: 12px;
+            font-weight: 900;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 25px 0 12px;
+        }
+
+        p { margin-bottom: 16px; font-size: 15px; }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .alert.critical {
+            background: var(--black);
+            color: white;
+            border-left: 6px solid var(--red);
+        }
+
+        .alert.warning {
+            background: #fef2f2;
+            border-left: 6px solid var(--red);
+        }
+
+        .alert.power {
+            background: var(--yellow);
+            color: var(--black);
+            border-left: 6px solid var(--black);
+        }
+
+        .alert .tag {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .alert.critical .tag { color: var(--red); }
+        .alert.warning .tag { color: var(--red); }
+        .alert.power .tag { color: var(--black); }
+
+        .alert strong {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Timeline - Aggressive */
+        .timeline {
+            margin: 30px 0;
+            background: var(--dark);
+            padding: 30px;
+            color: white;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-item .days {
+            background: var(--red);
+            color: white;
+            padding: 8px 15px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-item h4 {
+            color: white;
+            margin: 0 0 5px;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Script Box - Bold */
+        .script-box {
+            background: var(--gray-light);
+            border: 3px solid var(--black);
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .script-box::before {
+            content: "SAY THIS";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--red);
+            color: white;
+            padding: 5px 15px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .script-box p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .script-box p:last-child { margin-bottom: 0; }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 2px solid var(--black);
+        }
+
+        th {
+            background: var(--black);
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) { background: var(--gray-light); }
+
+        /* Checklist - Action Oriented */
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 15px 20px;
+            background: var(--black);
+            color: white;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            font-size: 22px;
+            color: var(--red);
+            flex-shrink: 0;
+        }
+
+        /* Lists */
+        ul, ol { margin: 20px 0 25px 25px; }
+        li { margin-bottom: 10px; font-size: 15px; }
+
+        /* Mistake Cards */
+        .mistake-card {
+            background: var(--gray-light);
+            border-left: 6px solid var(--red);
+            padding: 20px 25px;
+            margin: 20px 0;
+        }
+
+        .mistake-card h4 {
+            margin-top: 0;
+            color: var(--black);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 18px;
+        }
+
+        .mistake-card p {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: #52525b;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: var(--black);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-cta h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: white;
+            font-size: 40px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .footer-cta p { color: var(--gray); margin-bottom: 20px; }
+
+        .footer-cta .phone {
+            display: inline-block;
+            background: var(--red);
+            padding: 15px 40px;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .footer-cta .license {
+            margin-top: 25px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--black);
+            color: white;
+            padding: 30px 35px;
+            margin: 30px 0;
+        }
+
+        .toc h3 {
+            color: var(--red);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .toc ol {
+            margin: 0;
+            color: white;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-bar no-print">
+        <span><strong>Version B:</strong> Bold & Urgent</span>
+        <button onclick="window.print()">PRINT / SAVE AS PDF</button>
+    </div>
+
+    <div class="cover">
+        <div class="brand">My Foreclosure Solution</div>
+        <h1>STOP YOUR<br><span>FORECLOSURE</span><br>IN 7 DAYS</h1>
+        <p class="subtitle">Emergency action guide for California homeowners facing the threat of losing their home</p>
+        <div class="warning-badge">TIME IS RUNNING OUT</div>
+    </div>
+
+    <div class="toc">
+        <h3>WHAT'S INSIDE</h3>
+        <ol>
+            <li>The Secret Banks Don't Want You to Know</li>
+            <li>72-Hour Emergency Action Plan</li>
+            <li>Word-for-Word Lender Scripts</li>
+            <li>Your Legal Rights (Use Them!)</li>
+            <li>5 Ways to Save Your Equity</li>
+            <li>7 Fatal Mistakes to Avoid</li>
+            <li>Action Checklist</li>
+        </ol>
+    </div>
+
+    <section>
+        <h2><span class="num">1</span>THE SECRET BANKS DON'T WANT YOU TO KNOW</h2>
+
+        <div class="alert critical">
+            <span class="tag">Critical Intel</span>
+            <strong>Banks LOSE $50,000-$100,000 on every foreclosure.</strong>
+            <p style="margin-bottom: 0; color: var(--gray);">Legal fees, maintenance, selling costs — it adds up. They'd rather negotiate with you than absorb these losses. This is your leverage. Use it.</p>
+        </div>
+
+        <p>The bank's Loss Mitigation department exists because foreclosure is expensive for them. When you call, you're not begging — you're offering them a way to lose less money.</p>
+
+        <h3>THE CALIFORNIA FORECLOSURE CLOCK</h3>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="days">Day 1-30</span>
+                <div>
+                    <h4>Missed Payment</h4>
+                    <p>Grace period. Late fees apply. Easiest time to fix things.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="days">Day 30-120</span>
+                <div>
+                    <h4>Pre-Foreclosure Contact</h4>
+                    <p>Lender must contact you. Cannot file Notice of Default yet.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="days">Day 120+</span>
+                <div>
+                    <h4>Notice of Default</h4>
+                    <p>Official start. You have 90 days to reinstate.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="days">Day 210+</span>
+                <div>
+                    <h4>Notice of Trustee Sale</h4>
+                    <p>Auction scheduled. Still stoppable until the day of sale.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="days">AUCTION</span>
+                <div>
+                    <h4>Point of No Return</h4>
+                    <p>Property sold. You lose everything.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert power">
+            <span class="tag">Your Advantage</span>
+            <strong>You have 200+ days from first missed payment to auction.</strong>
+            <p style="margin-bottom: 0;">More time than you think. But the clock is ticking. Every day you delay, you lose options.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">2</span>72-HOUR EMERGENCY ACTION PLAN</h2>
+
+        <h3>DAY 1: ASSESS THE SITUATION</h3>
+
+        <ul class="checklist">
+            <li>Open ALL mail from your lender — deadlines are inside</li>
+            <li>Find your loan number and servicer contact</li>
+            <li>Calculate missed payments and total owed</li>
+            <li>Check home value (Zillow/Redfin)</li>
+        </ul>
+
+        <div class="alert warning">
+            <span class="tag">Don't Do This</span>
+            <strong>Do NOT ignore notices hoping they'll disappear.</strong>
+            <p style="margin-bottom: 0;">The bank will proceed without you. Every day of inaction shrinks your options.</p>
+        </div>
+
+        <h3>DAY 2: MAKE CONTACT</h3>
+
+        <p>Call the Loss Mitigation department (NOT regular customer service):</p>
+
+        <ol>
+            <li>Request all hardship options in writing</li>
+            <li>Ask about forbearance (payment pause)</li>
+            <li>Ask about loan modification</li>
+            <li>Document EVERYTHING — names, dates, what was said</li>
+        </ol>
+
+        <h3>DAY 3: EXPLORE ALL OPTIONS</h3>
+
+        <ul class="checklist">
+            <li>Research California Mortgage Relief Program</li>
+            <li>Get professional home valuation</li>
+            <li>Contact HUD-approved counselor (free)</li>
+            <li>Evaluate quick sale to protect equity</li>
+        </ul>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">3</span>WORD-FOR-WORD LENDER SCRIPTS</h2>
+
+        <p>What you say determines what options you get. Use these exact scripts:</p>
+
+        <h3>SCRIPT 1: OPENING CALL</h3>
+
+        <div class="script-box">
+            <p>"Hi, my name is [NAME] and my loan number is [NUMBER]."</p>
+            <p>"I've fallen behind on my mortgage due to [job loss / medical issue / divorce]."</p>
+            <p>"I want to keep my home. Can you transfer me to Loss Mitigation to discuss my options?"</p>
+        </div>
+
+        <h3>SCRIPT 2: REQUESTING FORBEARANCE</h3>
+
+        <div class="script-box">
+            <p>"I'm experiencing a temporary hardship due to [reason]. I expect to recover within [timeframe]."</p>
+            <p>"I'm requesting forbearance to pause or reduce my payments for 3-6 months."</p>
+            <p>"I understand I'll still owe these payments. What documentation do you need?"</p>
+        </div>
+
+        <h3>SCRIPT 3: ASSERT YOUR RIGHTS</h3>
+
+        <div class="script-box">
+            <p>"Under the California Homeowner Bill of Rights, I have the right to a single point of contact and complete review before foreclosure proceeds."</p>
+            <p>"Can you confirm my application will be reviewed before any sale moves forward?"</p>
+            <p>"What is your direct contact information?"</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">4</span>YOUR LEGAL RIGHTS</h2>
+
+        <table>
+            <tr>
+                <th>RIGHT</th>
+                <th>WHAT IT MEANS</th>
+            </tr>
+            <tr>
+                <td><strong>Single Point of Contact</strong></td>
+                <td>One person handles your case. No runaround.</td>
+            </tr>
+            <tr>
+                <td><strong>Dual Tracking Ban</strong></td>
+                <td>Bank can't foreclose while reviewing your modification.</td>
+            </tr>
+            <tr>
+                <td><strong>120-Day Wait</strong></td>
+                <td>No Notice of Default until 120 days after first missed payment.</td>
+            </tr>
+            <tr>
+                <td><strong>Written Denial</strong></td>
+                <td>Must explain why in writing and how to appeal.</td>
+            </tr>
+        </table>
+
+        <div class="alert power">
+            <span class="tag">Free Money</span>
+            <strong>California Mortgage Relief: Up to $80,000</strong>
+            <p style="margin-bottom: 0;">No repayment required. Apply at CaMortgageRelief.org</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">5</span>5 WAYS TO SAVE YOUR EQUITY</h2>
+
+        <div class="alert critical">
+            <span class="tag">Example</span>
+            <strong>Home worth $600K. You owe $400K. That's $200K equity.</strong>
+            <p style="margin-bottom: 0; color: var(--gray);">If bank forecloses: you get $0. If you sell: you keep $175K+. Don't let them take what's yours.</p>
+        </div>
+
+        <h3>1. LOAN MODIFICATION</h3>
+        <p>Lower payments through reduced rate, extended term, or principal reduction.</p>
+
+        <h3>2. FORBEARANCE</h3>
+        <p>Pause payments, catch up later. Best for temporary hardship.</p>
+
+        <h3>3. SELL BEFORE AUCTION</h3>
+        <p>Keep your equity. Cash buyers can close in 7 days.</p>
+
+        <h3>4. REFINANCE</h3>
+        <p>New loan, new terms. Cash out equity to clear debts.</p>
+
+        <h3>5. REVERSE MORTGAGE (62+)</h3>
+        <p>Eliminate payments. Stay in home for life.</p>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">6</span>7 FATAL MISTAKES</h2>
+
+        <div class="mistake-card">
+            <h4>#1: Ignoring the Problem</h4>
+            <p>Those letters contain deadlines. The bank will proceed without you.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#2: Waiting for a Miracle</h4>
+            <p>Hope isn't a strategy. Act now with what you have.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#3: Not Opening Mail</h4>
+            <p>Legal deadlines are inside. Missing them = losing rights.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#4: Falling for Scammers</h4>
+            <p>Red flags: upfront fees, guaranteed results, "sign over your deed."</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#5: Not Knowing Your Timeline</h4>
+            <p>Each stage has different options. Know where you are.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#6: Giving Up Early</h4>
+            <p>Homes saved days before auction. Fight until the end.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h4>#7: Going It Alone</h4>
+            <p>Banks have lawyers. You need someone in your corner.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">7</span>ACTION CHECKLIST</h2>
+
+        <h3>THIS WEEK</h3>
+        <ul class="checklist">
+            <li>Open all lender mail, note deadlines</li>
+            <li>Find loan number and servicer contact</li>
+            <li>Calculate amount owed</li>
+            <li>Check home value</li>
+            <li>Call Loss Mitigation</li>
+            <li>Request all options in writing</li>
+            <li>Document every conversation</li>
+        </ul>
+
+        <h3>WITHIN 30 DAYS</h3>
+        <ul class="checklist">
+            <li>Submit loan modification application</li>
+            <li>Contact HUD counselor</li>
+            <li>Apply for California Mortgage Relief</li>
+            <li>Get professional valuation</li>
+            <li>Decide: modify, sell, or refinance</li>
+        </ul>
+    </section>
+
+    <div class="footer-cta">
+        <h3>ACT NOW</h3>
+        <p>Every day you wait, you lose options. Get professional help today.</p>
+        <div class="phone">(949) 565-5285</div>
+        <p style="color: var(--red); margin-top: 15px; font-weight: 700;">FREE CONSULTATION | NO UPFRONT FEES</p>
+        <div class="license">
+            My Foreclosure Solution | CA DRE #02076038 | NMLS #2033637<br>
+            myforeclosuresolution.com
+        </div>
+    </div>
+</body>
+</html>

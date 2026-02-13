@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Foreclosure Survival Guide | Version C</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal: #0d9488;
+            --teal-light: #14b8a6;
+            --teal-pale: #ccfbf1;
+            --sage: #84a98c;
+            --cream: #faf8f5;
+            --cream-dark: #f5f0e8;
+            --warm-gray: #78716c;
+            --charcoal: #44403c;
+            --white: #ffffff;
+            --peach: #fed7aa;
+        }
+
+        @page { margin: 0.75in; size: letter; }
+
+        @media print {
+            body { font-size: 10pt; }
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; }
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, sans-serif;
+            line-height: 1.8;
+            color: var(--charcoal);
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 40px;
+            background: var(--cream);
+        }
+
+        .print-bar {
+            background: var(--teal);
+            color: white;
+            padding: 18px 28px;
+            border-radius: 16px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .print-bar button {
+            background: white;
+            color: var(--teal);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Cover - Warm & Welcoming */
+        .cover {
+            background: linear-gradient(135deg, var(--teal-pale) 0%, var(--white) 50%, var(--peach) 100%);
+            padding: 70px 50px;
+            text-align: center;
+            border-radius: 24px;
+            margin-bottom: 40px;
+        }
+
+        .cover .heart {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cover .brand {
+            font-size: 12px;
+            color: var(--teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .cover h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 38px;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cover .subtitle {
+            font-size: 17px;
+            color: var(--warm-gray);
+            max-width: 480px;
+            margin: 0 auto 25px;
+        }
+
+        .cover .reassurance {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Section Headers */
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 26px;
+            color: var(--charcoal);
+            margin: 50px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 .num {
+            background: var(--teal);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 20px;
+            color: var(--charcoal);
+            margin: 35px 0 15px;
+        }
+
+        h4 {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 25px 0 12px;
+        }
+
+        p { margin-bottom: 16px; font-size: 15px; }
+
+        /* Gentle Callouts */
+        .message {
+            padding: 28px 32px;
+            margin: 28px 0;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .message.hope {
+            background: var(--teal-pale);
+            border: 2px solid var(--teal-light);
+        }
+
+        .message.gentle-warning {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+        }
+
+        .message.comfort {
+            background: var(--cream-dark);
+            border: 2px solid #d6d3d1;
+        }
+
+        .message .icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .message strong {
+            font-size: 17px;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .message p { margin-bottom: 0; color: var(--warm-gray); }
+
+        /* Timeline - Soft */
+        .timeline {
+            margin: 30px 0;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid #e7e5e4;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #d6d3d1;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-item .phase {
+            background: var(--teal);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-item h4 {
+            margin: 0 0 5px;
+            color: var(--charcoal);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .timeline-item p {
+            color: var(--warm-gray);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Conversation Box */
+        .talk-box {
+            background: var(--white);
+            border: 2px solid var(--teal-light);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .talk-box::before {
+            content: "What to Say";
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--teal);
+            color: white;
+            padding: 5px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+        }
+
+        .talk-box p {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+            padding-left: 20px;
+            border-left: 3px solid var(--teal-pale);
+        }
+
+        .talk-box p:last-child { margin-bottom: 0; }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 14px;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e7e5e4;
+        }
+
+        th {
+            background: var(--teal);
+            color: white;
+            font-weight: 700;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        /* Friendly Checklist */
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 16px 22px;
+            background: var(--white);
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border: 2px solid #e7e5e4;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s;
+        }
+
+        .checklist li::before {
+            content: "○";
+            font-size: 20px;
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+
+        /* Lists */
+        ul, ol { margin: 20px 0 25px 25px; }
+        li { margin-bottom: 10px; font-size: 15px; }
+
+        /* Option Cards */
+        .option-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 2px solid #e7e5e4;
+        }
+
+        .option-card h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--charcoal);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 17px;
+        }
+
+        .option-card h4 .emoji { font-size: 24px; }
+
+        .option-card p {
+            margin-bottom: 0;
+            color: var(--warm-gray);
+            font-size: 14px;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 24px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-cta .heart { font-size: 40px; margin-bottom: 15px; }
+
+        .footer-cta h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            color: white;
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+        .footer-cta p { color: rgba(255,255,255,0.85); margin-bottom: 20px; }
+
+        .footer-cta .phone {
+            display: inline-block;
+            background: white;
+            color: var(--teal);
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .footer-cta .license {
+            margin-top: 25px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--white);
+            padding: 30px 35px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 2px solid #e7e5e4;
+        }
+
+        .toc h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: var(--charcoal);
+        }
+
+        .toc ol { margin: 0; }
+        .toc li { margin-bottom: 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="print-bar no-print">
+        <span><strong>Version C:</strong> Warm & Reassuring</span>
+        <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="cover">
+        <div class="heart">🏠</div>
+        <div class="brand">My Foreclosure Solution</div>
+        <h1>You Have Options.<br>Let's Find Yours.</h1>
+        <p class="subtitle">A gentle, step-by-step guide to protecting your home and your peace of mind</p>
+        <div class="reassurance">You're Not Alone in This</div>
+    </div>
+
+    <div class="toc">
+        <h3>What We'll Cover Together</h3>
+        <ol>
+            <li>The Truth That Changes Everything</li>
+            <li>Your First 72 Hours: A Gentle Start</li>
+            <li>How to Talk to Your Lender (It's Easier Than You Think)</li>
+            <li>Your Rights as a California Homeowner</li>
+            <li>5 Paths to Protect Your Home & Equity</li>
+            <li>Common Pitfalls to Avoid</li>
+            <li>Your Personal Action Checklist</li>
+        </ol>
+    </div>
+
+    <section>
+        <h2><span class="num">1</span>The Truth That Changes Everything</h2>
+
+        <p>Before we begin, there's something important you need to know — something that might surprise you:</p>
+
+        <div class="message hope">
+            <span class="icon">💡</span>
+            <strong>Banks actually lose money on foreclosures.</strong>
+            <p>Legal fees, property maintenance, and selling costs add up to $50,000-$100,000 per foreclosure. Your lender would genuinely prefer to work something out with you. This gives you more power than you realize.</p>
+        </div>
+
+        <p>The bank has a whole department — called Loss Mitigation — whose job is to help homeowners like you avoid foreclosure. When you call them, you're not begging. You're offering a solution that works for both of you.</p>
+
+        <h3>Understanding the Timeline</h3>
+
+        <p>Knowing where you are helps you feel more in control:</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="phase">Days 1-30</span>
+                <div>
+                    <h4>Grace Period</h4>
+                    <p>Missed payment, late fees begin. This is the simplest time to resolve things.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="phase">Days 30-120</span>
+                <div>
+                    <h4>Outreach Period</h4>
+                    <p>Your lender must contact you about options. No foreclosure filing yet.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="phase">Days 120+</span>
+                <div>
+                    <h4>Notice of Default</h4>
+                    <p>Formal process begins. You have 90 days to catch up.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <span class="phase">Days 210+</span>
+                <div>
+                    <h4>Sale Notice</h4>
+                    <p>Auction scheduled. But there's still time to act.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="message comfort">
+            <span class="icon">🤍</span>
+            <strong>Take a breath. You have more time than you might think.</strong>
+            <p>From first missed payment to auction is typically 200+ days. The key is taking that first step, even a small one.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">2</span>Your First 72 Hours</h2>
+
+        <p>Let's break this down into manageable steps. You don't have to do everything at once.</p>
+
+        <h3>Day 1: Gather & Breathe</h3>
+
+        <ul class="checklist">
+            <li>Open the mail from your lender (we know it's hard, but it helps)</li>
+            <li>Find your loan number — it's on any statement</li>
+            <li>Jot down how many payments you've missed</li>
+            <li>Look up your home's approximate value online</li>
+        </ul>
+
+        <div class="message gentle-warning">
+            <span class="icon">🌟</span>
+            <strong>A gentle reminder</strong>
+            <p>Ignoring the situation won't make it go away, but facing it — even in small steps — starts to make things better. You're already doing that by reading this.</p>
+        </div>
+
+        <h3>Day 2: Make One Call</h3>
+
+        <p>Call your lender and ask for the Loss Mitigation department. That's it. Just one call. Here's what to ask:</p>
+
+        <ol>
+            <li>"What options do I have?" (forbearance, modification, etc.)</li>
+            <li>"Can you send me information in writing?"</li>
+            <li>"What documents do you need from me?"</li>
+        </ol>
+
+        <h3>Day 3: Explore Support</h3>
+
+        <ul class="checklist">
+            <li>Look into California Mortgage Relief Program</li>
+            <li>Consider calling a HUD-approved counselor (it's free)</li>
+            <li>Think about whether keeping or selling makes more sense for you</li>
+        </ul>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">3</span>Talking to Your Lender</h2>
+
+        <p>Phone calls with banks can feel intimidating. Here are some words that might help:</p>
+
+        <h3>Starting the Conversation</h3>
+
+        <div class="talk-box">
+            <p>"Hi, my name is [your name] and my loan number is [number]."</p>
+            <p>"I've been going through some difficulties — [briefly share: job loss, health issues, divorce, etc.]"</p>
+            <p>"I really want to find a solution. Could you tell me what options might be available?"</p>
+        </div>
+
+        <h3>Asking About Forbearance</h3>
+
+        <div class="talk-box">
+            <p>"I'm dealing with a temporary situation. I expect things to improve in [timeframe]."</p>
+            <p>"Would it be possible to pause or reduce my payments for a few months while I get back on my feet?"</p>
+            <p>"What would you need from me to consider this?"</p>
+        </div>
+
+        <div class="message hope">
+            <span class="icon">💚</span>
+            <strong>Remember: The person on the phone is just doing their job.</strong>
+            <p>Being calm and polite goes a long way. Write down their name and what they tell you. You're doing great.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">4</span>Your Rights in California</h2>
+
+        <p>California has strong protections for homeowners. You're entitled to:</p>
+
+        <table>
+            <tr>
+                <th>Your Right</th>
+                <th>What It Means for You</th>
+            </tr>
+            <tr>
+                <td><strong>One Point of Contact</strong></td>
+                <td>The bank must give you one person to work with — no more runaround.</td>
+            </tr>
+            <tr>
+                <td><strong>Fair Review</strong></td>
+                <td>They can't foreclose while reviewing your application for help.</td>
+            </tr>
+            <tr>
+                <td><strong>Time to Act</strong></td>
+                <td>They must wait 120 days after your first missed payment before filing.</td>
+            </tr>
+            <tr>
+                <td><strong>Clear Answers</strong></td>
+                <td>If they deny help, they must explain why in writing.</td>
+            </tr>
+        </table>
+
+        <div class="message hope">
+            <span class="icon">🎁</span>
+            <strong>California Mortgage Relief Program</strong>
+            <p>You may qualify for up to $80,000 in assistance — and you don't have to pay it back. Visit CaMortgageRelief.org to learn more.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">5</span>5 Paths Forward</h2>
+
+        <p>There's no one-size-fits-all answer. Here are your options:</p>
+
+        <div class="option-card">
+            <h4><span class="emoji">🔧</span> Loan Modification</h4>
+            <p>Adjust your loan terms to make payments more manageable. Good if you want to stay and have stable income.</p>
+        </div>
+
+        <div class="option-card">
+            <h4><span class="emoji">⏸️</span> Forbearance</h4>
+            <p>Temporarily pause or reduce payments while you recover. Best for short-term hardships.</p>
+        </div>
+
+        <div class="option-card">
+            <h4><span class="emoji">🏡</span> Sell on Your Terms</h4>
+            <p>If you have equity, selling lets you keep it. Much better than losing it to foreclosure.</p>
+        </div>
+
+        <div class="option-card">
+            <h4><span class="emoji">🔄</span> Refinance</h4>
+            <p>Get a new loan with better terms. Can use equity to clear debts.</p>
+        </div>
+
+        <div class="option-card">
+            <h4><span class="emoji">🌅</span> Reverse Mortgage (62+)</h4>
+            <p>For seniors: eliminate monthly payments and stay in your home.</p>
+        </div>
+
+        <div class="message comfort">
+            <span class="icon">💭</span>
+            <strong>Not sure which is right for you?</strong>
+            <p>That's completely okay. A free consultation can help you understand which path makes the most sense for your specific situation.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">6</span>Things to Watch Out For</h2>
+
+        <p>A few common pitfalls to avoid:</p>
+
+        <div class="option-card">
+            <h4>Waiting Too Long</h4>
+            <p>It's natural to hope things will work out on their own. But acting sooner gives you more options.</p>
+        </div>
+
+        <div class="option-card">
+            <h4>Leaving Mail Unopened</h4>
+            <p>We understand it's stressful. But important deadlines are inside those envelopes.</p>
+        </div>
+
+        <div class="option-card">
+            <h4>Falling for Scams</h4>
+            <p>Be cautious of anyone asking for large upfront fees or asking you to sign over your deed. Legitimate help doesn't work that way.</p>
+        </div>
+
+        <div class="option-card">
+            <h4>Giving Up Hope</h4>
+            <p>Homes have been saved even days before auction. It's not over until it's over.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2><span class="num">7</span>Your Personal Checklist</h2>
+
+        <h3>Small Steps for This Week</h3>
+        <ul class="checklist">
+            <li>Open mail and note any dates mentioned</li>
+            <li>Find your loan number</li>
+            <li>Look up your home's value online</li>
+            <li>Make one call to your lender's Loss Mitigation</li>
+            <li>Write down who you spoke with and what they said</li>
+        </ul>
+
+        <h3>Next Steps When You're Ready</h3>
+        <ul class="checklist">
+            <li>Submit any paperwork they request</li>
+            <li>Call a free HUD counselor for guidance</li>
+            <li>Check if you qualify for California assistance</li>
+            <li>Think about what outcome feels right for you</li>
+        </ul>
+    </section>
+
+    <div class="footer-cta">
+        <div class="heart">💚</div>
+        <h3>We're Here When You're Ready</h3>
+        <p>No judgment. No pressure. Just a conversation about your options.</p>
+        <div class="phone">(949) 565-5285</div>
+        <p style="margin-top: 15px;">Free Consultation | No Upfront Fees | Compassionate Support</p>
+        <div class="license">
+            My Foreclosure Solution<br>
+            CA DRE #02076038 | NMLS #2033637<br>
+            myforeclosuresolution.com
+        </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px; font-size: 11px; color: #a8a29e;">
+        © 2025 My Foreclosure Solution. This guide is for informational purposes. For advice specific to your situation, please consult with qualified professionals.
+    </p>
+</body>
+</html>

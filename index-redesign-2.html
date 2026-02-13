@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Foreclosure Now | My Foreclosure Solution</title>
+    <meta name="description" content="California foreclosure help. Licensed professionals. Free consultation. Act now.">
+    <link rel="canonical" href="https://myforeclosuresolution.com/">
+
+    <!-- Fonts: Space Mono + Archivo Black -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZC3FHFTPN2');
+    </script>
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-500: #737373;
+            --gray-800: #262626;
+            --yellow: #facc15;
+            --red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Brutalist Typography */
+        h1, h2, h3 {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+        }
+
+        /* Emergency Strip */
+        .emergency {
+            background: var(--red);
+            color: var(--white);
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .emergency a {
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 4px solid var(--black);
+            padding: 20px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 12px 16px;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            border-color: var(--black);
+        }
+
+        nav a.nav-cta {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        nav a.nav-cta:hover {
+            background: var(--yellow);
+            color: var(--black);
+            border-color: var(--black);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            border-bottom: 4px solid var(--black);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 120px);
+            margin-bottom: 32px;
+            line-height: 0.9;
+        }
+
+        .hero h1 .highlight {
+            color: var(--white);
+            background: var(--black);
+            padding: 0 12px;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            max-width: 500px;
+            margin-bottom: 40px;
+            color: var(--gray-800);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            padding-top: 40px;
+            border-top: 2px solid var(--black);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 48px;
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            letter-spacing: 1px;
+        }
+
+        /* Form Card - Brutalist */
+        .form-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 48px;
+            position: relative;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            border: 4px solid var(--black);
+            z-index: -1;
+        }
+
+        .form-card h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .form-card .form-subtitle {
+            color: var(--gray-500);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--gray-500);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px;
+            background: var(--gray-800);
+            border: 2px solid var(--gray-800);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .form-group input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--yellow);
+            color: var(--black);
+            border: none;
+            padding: 20px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+        }
+
+        .form-submit:hover {
+            background: var(--white);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            font-size: 11px;
+            color: var(--gray-500);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--gray-100);
+            border-bottom: 4px solid var(--black);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(36px, 5vw, 64px);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .step {
+            padding: 48px;
+            border: 2px solid var(--black);
+            margin-left: -2px;
+            position: relative;
+        }
+
+        .step:first-child {
+            margin-left: 0;
+        }
+
+        .step-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 100px;
+            line-height: 1;
+            color: var(--gray-200);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step p {
+            color: var(--gray-500);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 100px 0;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .benefits h2 {
+            color: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            background: var(--gray-800);
+        }
+
+        .benefit {
+            background: var(--black);
+            padding: 48px;
+        }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .benefit h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+
+        .benefit p {
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        /* Cities */
+        .cities {
+            padding: 80px 0;
+            border-bottom: 4px solid var(--black);
+        }
+
+        .cities-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .city-link {
+            padding: 16px 32px;
+            border: 2px solid var(--black);
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: all 0.15s;
+        }
+
+        .city-link:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 120px 0;
+            background: var(--yellow);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(40px, 6vw, 80px);
+            margin-bottom: 24px;
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            max-width: 500px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-black {
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 48px;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            border: 4px solid var(--black);
+        }
+
+        .btn-black:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            padding: 20px 48px;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            border: 4px solid var(--black);
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 60px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .footer-logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-col h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: var(--gray-500);
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-800);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                margin-left: 0;
+                margin-top: -2px;
+            }
+
+            .step:first-child {
+                margin-top: 0;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 48px 0;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .form-card {
+                padding: 32px;
+            }
+
+            .form-card::before {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* Mobile CTA */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--yellow);
+            padding: 16px;
+            z-index: 1000;
+        }
+
+        .mobile-cta a {
+            display: block;
+            background: var(--black);
+            color: var(--white);
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            body {
+                padding-bottom: 80px;
+            }
+        }
+
+        /* Success state */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .form-success h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--yellow);
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency">
+        URGENT: SALE WITHIN 7 DAYS? <a href="tel:+19495655285">CALL (949) 565-5285 NOW</a>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">My Foreclosure Solution</a>
+                <nav>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Guide</a>
+                    <a href="schedule.html" class="nav-cta">Get Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Stop Your <span class="highlight">Foreclosure</span> Today</h1>
+                    <p class="hero-subtitle">Licensed California professionals. Free consultation. No judgment. We help you keep your home or exit with your equity intact.</p>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">24h</span>
+                            <span class="stat-label">Response Time</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Confidential</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">$0</span>
+                            <span class="stat-label">Upfront Fees</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>Get Free Help</h2>
+                    <p class="form-subtitle">We call you within 30 minutes</p>
+
+                    <form id="consultation-form">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="you@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Urgency</label>
+                            <select name="urgency" required>
+                                <option value="">Select...</option>
+                                <option value="emergency">Sale within 7 days</option>
+                                <option value="urgent">Sale within 2-4 weeks</option>
+                                <option value="soon">Sale within 1-3 months</option>
+                                <option value="exploring">Exploring options</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-submit">Get My Consultation</button>
+                        <p class="form-footer">Your info stays private. Period.</p>
+                    </form>
+
+                    <div class="form-success" id="form-success">
+                        <h3>Received!</h3>
+                        <p>We'll call you within 30 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step">
+                    <span class="step-number">01</span>
+                    <h3>Free Call</h3>
+                    <p>Tell us your situation. No judgment, just solutions. We listen first.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">02</span>
+                    <h3>Get Options</h3>
+                    <p>We analyze your case and present every available path forward.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">03</span>
+                    <h3>Take Action</h3>
+                    <p>Keep your home or sell on your terms. We execute the plan together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Do</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <span class="benefit-icon">&#9200;</span>
+                    <h3>Stop The Sale</h3>
+                    <p>Legal methods to postpone or cancel your foreclosure auction immediately.</p>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">&#128176;</span>
+                    <h3>Keep Your Equity</h3>
+                    <p>Don't let the bank take what you've built. We protect your investment.</p>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">&#128200;</span>
+                    <h3>Loan Modification</h3>
+                    <p>Negotiate with lenders to reduce payments and keep your home.</p>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">&#127968;</span>
+                    <h3>Quick Sale</h3>
+                    <p>Cash buyers ready. Fair price. Close fast. Walk away clean.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cities">
+        <div class="container">
+            <div class="section-header">
+                <h2>California Coverage</h2>
+            </div>
+            <div class="cities-grid">
+                <a href="stop-foreclosure-los-angeles.html" class="city-link">Los Angeles</a>
+                <a href="stop-foreclosure-san-diego.html" class="city-link">San Diego</a>
+                <a href="stop-foreclosure-oakland.html" class="city-link">Oakland</a>
+                <a href="stop-foreclosure-sacramento.html" class="city-link">Sacramento</a>
+                <a href="stop-foreclosure-fresno.html" class="city-link">Fresno</a>
+                <a href="stop-foreclosure-riverside.html" class="city-link">Riverside</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>Act Now</h2>
+            <p>Every day counts. The sooner you call, the more options you have.</p>
+            <div class="cta-buttons">
+                <a href="tel:+19495655285" class="btn-black">Call (949) 565-5285</a>
+                <a href="schedule.html" class="btn-outline">Schedule Call</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners stop foreclosure and find real solutions.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="learn-more.html">How It Works</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="free-guide.html">Free Guide</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="blog/">Blog</a>
+                    <a href="emergency-checklist.html">Emergency</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 My Foreclosure Solution</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Help</a>
+    </div>
+
+    <script>
+        document.getElementById('consultation-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.textContent = 'SENDING...';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    type: 'consultation',
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    urgency: formData.get('urgency'),
+                    source: 'brutalist-design',
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            setTimeout(() => {
+                this.style.display = 'none';
+                document.getElementById('form-success').classList.add('active');
+            }, 800);
+        });
+    </script>
+</body>
+</html>

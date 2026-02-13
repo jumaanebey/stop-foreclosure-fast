@@ -46,6 +46,7 @@
                     <a href="learn-more.html">How It Works</a>
                     <a href="faq.html" style="color: var(--primary-900); font-weight: 600;">FAQ</a>
                     <a href="free-guide.html">Free Guide</a>
+                    <a href="blog/">Blog</a>
                     <a href="schedule.html" class="nav-cta">Free Consultation</a>
                 </nav>
                 <button class="menu-toggle" aria-label="Toggle menu">
@@ -270,6 +271,8 @@
                     <h4>Resources</h4>
                     <a href="blog/">Blog</a>
                     <a href="emergency-checklist.html">Emergency Help</a>
+                    <a href="california-foreclosure-glossary.html">Glossary</a>
+                    <a href="california-foreclosure-resources.html">Free Help</a>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
@@ -298,12 +301,6 @@
             document.querySelectorAll('.faq-category').forEach(c => c.classList.remove('active'));
             document.getElementById(category).classList.add('active');
         }
-
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', function() {
-                this.parentElement.classList.toggle('active');
-            });
-        });
     </script>
 </body>
 </html>

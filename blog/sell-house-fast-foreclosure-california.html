@@ -9,9 +9,9 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/theme.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC3FHFTPN2"></script>
@@ -43,18 +43,39 @@
     </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    <div class="emergency-bar">
+        Foreclosure sale soon? <a href="tel:+19495655285">Call now: (949) 565-5285</a> for emergency help
+    </div>
+
+    <header class="site-header">
         <div class="container">
-            <h1 class="logo"><a href="../index.html">My Foreclosure Solution</a></h1>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <a href="../index.html#how-it-works">How It Works</a>
-                <a href="../index.html#about">About Us</a>
-                <a href="../index.html#contact">Contact</a>
-            </nav>
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <span class="logo-mark">M</span>
+                    <span>My Foreclosure Solution</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="../learn-more.html">How It Works</a>
+                    <a href="../faq.html">FAQ</a>
+                    <a href="../free-guide.html">Free Guide</a>
+                    <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
+
+    <nav class="mobile-nav">
+        <a href="../learn-more.html">How It Works</a>
+        <a href="../faq.html">FAQ</a>
+        <a href="../free-guide.html">Free Guide</a>
+        <a href="./">Blog</a>
+        <a href="../schedule.html" class="nav-cta">Free Consultation</a>
+    </nav>
 
     <!-- Blog Content -->
     <article class="blog-article">
@@ -414,36 +435,44 @@
         </div>
     </article>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>My Foreclosure Solution</h3>
-                    <p>Helping homeowners since 2014</p>
-                    <p>📞 (949) 565-5285</p>
-                    <p>📧 help@myforeclosuresolution.com</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">My Foreclosure Solution</div>
+                    <p>Licensed California professionals helping homeowners navigate foreclosure with dignity.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Sell Fast Resources</h4>
-                    <a href="5-ways-to-stop-foreclosure-california.html">5 Ways to Stop Foreclosure</a>
-                    <a href="sell-house-fast-foreclosure-california.html">Sell House Fast Guide</a>
-                    <a href="../cash-offer-calculator.html">Cash Offer Calculator</a>
-                    <a href="../foreclosure-faq.html">Foreclosure FAQ</a>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="./">All Articles</a>
+                    <a href="california-foreclosure-laws.html">CA Foreclosure Laws</a>
+                    <a href="california-foreclosure-timeline.html">Timeline Guide</a>
+                    <a href="../emergency-checklist.html">Emergency Help</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Sale Help</h4>
-                    <a href="../stop-foreclosure-los-angeles.html">Los Angeles</a>
-                    <a href="../stop-foreclosure-san-diego.html">San Diego</a>
+                <div class="footer-col">
+                    <h4>Options</h4>
+                    <a href="loan-modification-california.html">Loan Modification</a>
+                    <a href="short-sale-california.html">Short Sale</a>
+                    <a href="can-i-sell-my-house-during-foreclosure-california.html">Sell During Foreclosure</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+19495655285">(949) 565-5285</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
                     <a href="../privacy-policy.html">Privacy Policy</a>
-                    <a href="../terms-of-service.html">Terms of Service</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 My Foreclosure Solution. All rights reserved.</p>
-                <p>Licensed Real Estate Professional DRE #02076038 | NMLS #2033637 | Equal Housing Opportunity</p>
+                <span>&copy; 2025 My Foreclosure Solution. All rights reserved.</span>
+                <span>NMLS #2033637 | CA DRE #02076038</span>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta">
+        <a href="tel:+19495655285">Call Now - Free Consultation</a>
+    </div>
+
+    <script src="../js/theme.js"></script>
 </body>
 </html>
