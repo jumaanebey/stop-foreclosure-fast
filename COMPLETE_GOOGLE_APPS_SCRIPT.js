@@ -7,7 +7,7 @@
 var CONVERTKIT_API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY');
 var CONVERTKIT_API_SECRET = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_SECRET');
 var GOOGLE_SHEET_ID = '1AaGUcBQczrOvlwD8sS6Rs5XH7R52X_wWfFwsrxfHbgU';
-var NOTIFICATION_EMAIL = 'jumaanebey@gmail.com';
+var NOTIFICATION_EMAIL = 'help@myforeclosuresolution.com';
 var CONVERTKIT_FORM_ID = '8430004';
 
 // ============ MAIN FORM HANDLER ============

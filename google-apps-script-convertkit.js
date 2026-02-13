@@ -373,7 +373,7 @@ function testConvertKitConnection() {
   const testData = {
     type: 'test',
     name: 'Test User',
-    email: 'jumaanebey@gmail.com', // Use your real email for testing
+    email: 'help@myforeclosuresolution.com', // Use your business email for testing
     phone: '555-123-4567',
     timeline: 'immediate'
   };
@@ -391,7 +391,7 @@ function testBasicConvertKitAPI() {
   
   const payload = {
     api_key: CONVERTKIT_API_KEY,
-    email: 'jumaanebey@gmail.com'
+    email: 'help@myforeclosuresolution.com'
   };
   
   const options = {
