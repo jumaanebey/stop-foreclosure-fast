@@ -102,27 +102,26 @@
 
         /* Emergency Bar - Pulsing */
         .emergency-bar {
-            background: linear-gradient(90deg, var(--red-600) 0%, #b91c1c 50%, var(--red-600) 100%);
-            background-size: 200% 100%;
-            animation: emergencyPulse 3s ease-in-out infinite;
+            background: var(--slate-900);
             color: white;
             text-align: center;
             padding: 14px 24px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 500;
         }
         @keyframes emergencyPulse {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
         .emergency-bar a {
-            color: white;
+            color: var(--amber-500);
             text-decoration: none;
-            border-bottom: 2px solid rgba(255,255,255,0.6);
+            font-weight: 700;
+            border-bottom: 1px solid rgba(217,119,6,0.4);
             transition: all 0.3s;
-            padding-bottom: 2px;
+            padding-bottom: 1px;
         }
-        .emergency-bar a:hover { border-color: white; }
+        .emergency-bar a:hover { border-color: var(--amber-500); }
 
         /* Header */
         header {
@@ -1218,7 +1217,7 @@
 <body>
     <!-- Emergency Bar -->
     <div class="emergency-bar">
-        Foreclosure sale soon? <a href="tel:+19495655285">Call now: (949) 565-5285</a> - We answer 24/7
+        Free guide: 7 ways to stop foreclosure in California &nbsp;<a href="free-guide.html">Download Now &rarr;</a>
     </div>
 
     <!-- Header -->
