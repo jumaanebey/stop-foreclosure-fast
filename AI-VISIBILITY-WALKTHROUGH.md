@@ -70,25 +70,11 @@ You are my business launch assistant. Walk me through each task below ONE AT A T
 - Get listed as a real estate professional
 
 ### PHASE 2: Press Releases
-
-**Task 9: Write Press Release #1**
-- Angle: "My Foreclosure Solution Launches Free Foreclosure Survival Guide for California Homeowners"
-- Write a professional press release I can copy-paste
-- Include quotes from the founder
-- Include a link to https://myforeclosuresolution.com/free-guide.html
-- Make it newsworthy — tie to California foreclosure statistics
-
-**Task 10: Submit to PRLog (free)**
-- URL: https://www.prlog.org
-- Walk me through creating an account and submitting the press release
-
-**Task 11: Submit to IssueWire (1 free PR)**
-- URL: https://www.issuewire.com
-- Walk me through submitting
-
-**Task 12: Write Press Release #2**
-- Angle: California foreclosure rates / market conditions angle
-- Position me as a local expert source for media
+> **NOTE:** All 3 press releases are already written! Use the separate walkthrough:
+> **File:** `PRESS-RELEASE-WALKTHROUGH.md` (in the same folder)
+> That walkthrough has the full text of all 3 PRs embedded + step-by-step submission for PRLog, IssueWire, and local media.
+>
+> Skip Tasks 9-12 here and use that walkthrough instead.
 
 ### PHASE 3: Additional SEO Submissions
 
