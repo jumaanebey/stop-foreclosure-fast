@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://myforeclosuresolution.com/</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,28 +11,42 @@
   <!-- Main Service Pages -->
   <url>
     <loc>https://myforeclosuresolution.com/cash-offer-calculator.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/cash-offer-request.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://myforeclosuresolution.com/virtual-consultation.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/schedule.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://myforeclosuresolution.com/california-foreclosure-help.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://myforeclosuresolution.com/california-foreclosure-glossary.html</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -60,22 +74,72 @@
 
   <url>
     <loc>https://myforeclosuresolution.com/learn-more.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Lead Magnets & Downloads -->
+  <url>
+    <loc>https://myforeclosuresolution.com/free-guide.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/checklist-download.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/emergency-checklist.html</loc>
+    <lastmod>2025-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Location-Specific Pages -->
   <url>
     <loc>https://myforeclosuresolution.com/stop-foreclosure-los-angeles.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://myforeclosuresolution.com/stop-foreclosure-san-diego.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-oakland.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-sacramento.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-fresno.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/stop-foreclosure-riverside.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -87,45 +151,46 @@
     <priority>0.8</priority>
   </url>
 
-  <url>
-    <loc>https://myforeclosuresolution.com/stop-foreclosure-oakland.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/stop-foreclosure-sacramento.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/stop-foreclosure-fresno.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/stop-foreclosure-riverside.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Blog Posts -->
+  <!-- Blog Index -->
   <url>
     <loc>https://myforeclosuresolution.com/blog/</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Posts - Core Content -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/how-to-stop-foreclosure-california-2025.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/how-to-stop-foreclosure-california-2024.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/5-ways-to-stop-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://myforeclosuresolution.com/blog/california-foreclosure-timeline.html</loc>
     <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-timeline-california-2025.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -138,81 +203,17 @@
   </url>
 
   <url>
-    <loc>https://myforeclosuresolution.com/blog/5-ways-to-stop-foreclosure-california.html</loc>
-    <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://myforeclosuresolution.com/blog/california-homeowner-bill-of-rights.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://myforeclosuresolution.com/blog/sell-house-fast-foreclosure-california.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-rights-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/how-to-stop-foreclosure-california-2024.html</loc>
-    <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/stop-foreclosure-los-angeles.html</loc>
-    <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/virtual-foreclosure-consultation-california.html</loc>
-    <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/what-happens-after-foreclosure-auction-california.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/can-i-sell-my-house-during-foreclosure-california.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/how-long-does-foreclosure-take-los-angeles.html</loc>
-    <lastmod>2025-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- New AI-Optimized Content 2025 -->
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/how-to-stop-foreclosure-california-2025.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://myforeclosuresolution.com/blog/california-foreclosure-statistics-2025.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
 
   <url>
@@ -222,11 +223,26 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Blog Posts - Options & Solutions -->
   <url>
     <loc>https://myforeclosuresolution.com/blog/foreclosure-options-comparison-california.html</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/sell-house-fast-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/sell-house-before-foreclosure.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
@@ -244,21 +260,176 @@
   </url>
 
   <url>
+    <loc>https://myforeclosuresolution.com/blog/loan-modification-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/short-sale-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/short-sale-vs-foreclosure.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/deed-in-lieu-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/bankruptcy-stop-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://myforeclosuresolution.com/blog/what-to-do-if-you-cant-pay-mortgage-california.html</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Bankruptcy Content -->
+  <!-- Blog Posts - NEW Comparison/Educational Content (Feb 2026) -->
   <url>
-    <loc>https://myforeclosuresolution.com/blog/bankruptcy-stop-foreclosure-california.html</loc>
-    <lastmod>2025-02-13</lastmod>
+    <loc>https://myforeclosuresolution.com/blog/california-foreclosure-auction-process.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
-  <!-- Life Event / Crisis Content -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/california-foreclosure-vs-other-states.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/california-vs-texas-foreclosure.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/cash-buyer-vs-realtor-foreclosure.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/cash-offer-vs-heloc-catch-up.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/chapter-7-vs-chapter-13-bankruptcy-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/fha-vs-va-vs-conventional-foreclosure.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/forbearance-vs-loan-modification.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-attorney-vs-diy-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-rates-2025-california-cities.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/how-long-stay-home-after-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/keep-home-vs-sell-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/loan-modification-vs-refinance-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/pre-foreclosure-vs-foreclosure-sale.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/trustee-sale-vs-reo-property.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts - Location-Specific -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/stop-foreclosure-los-angeles.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/how-long-does-foreclosure-take-los-angeles.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/stop-foreclosure-sale-24-hours.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts - Life Events & Crisis -->
   <url>
     <loc>https://myforeclosuresolution.com/blog/divorce-and-mortgage-california.html</loc>
     <lastmod>2026-01-20</lastmod>
@@ -282,12 +453,12 @@
 
   <url>
     <loc>https://myforeclosuresolution.com/blog/foreclosure-stress-anxiety-california.html</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Community-Specific Content -->
+  <!-- Blog Posts - Community-Specific -->
   <url>
     <loc>https://myforeclosuresolution.com/blog/va-loan-foreclosure-california.html</loc>
     <lastmod>2026-01-20</lastmod>
@@ -309,7 +480,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Property-Related Crisis Content -->
+  <!-- Blog Posts - Property-Related -->
   <url>
     <loc>https://myforeclosuresolution.com/blog/property-tax-lien-foreclosure-california.html</loc>
     <lastmod>2026-01-20</lastmod>
@@ -319,32 +490,55 @@
 
   <url>
     <loc>https://myforeclosuresolution.com/blog/hoa-foreclosure-california.html</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Lead Magnets & Downloads -->
+  <!-- Blog Posts - Scams & Safety -->
   <url>
-    <loc>https://myforeclosuresolution.com/checklist-download.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <loc>https://myforeclosuresolution.com/blog/foreclosure-scams-avoid.html</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
+  <!-- Blog Posts - Statistics & Data -->
   <url>
-    <loc>https://myforeclosuresolution.com/free-guide.html</loc>
-    <lastmod>2025-12-27</lastmod>
+    <loc>https://myforeclosuresolution.com/blog/california-foreclosure-statistics-2025.html</loc>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Emergency & Resources -->
+  <!-- Blog Posts - Virtual Services -->
   <url>
-    <loc>https://myforeclosuresolution.com/emergency-checklist.html</loc>
+    <loc>https://myforeclosuresolution.com/blog/virtual-foreclosure-consultation-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts - After Foreclosure -->
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/what-happens-after-foreclosure-auction-california.html</loc>
     <lastmod>2025-12-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/can-i-sell-my-house-during-foreclosure-california.html</loc>
+    <lastmod>2025-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://myforeclosuresolution.com/blog/after-foreclosure-california.html</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Legal Pages -->
