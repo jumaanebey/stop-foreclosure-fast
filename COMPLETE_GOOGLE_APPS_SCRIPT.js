@@ -41,8 +41,9 @@ function doPost(e) {
       
   } catch (error) {
     console.log('Error in doPost: ' + error.toString());
+    console.log('Error in doPost: ' + error.toString());
     return ContentService
-      .createTextOutput(JSON.stringify({success: false, error: error.toString()}))
+      .createTextOutput(JSON.stringify({success: false, error: 'Failed to process submission'}))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }

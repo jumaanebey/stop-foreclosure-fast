@@ -151,14 +151,22 @@ function validateLeadData(data) {
     return { valid: errors.length === 0, errors };
 }
 
-// Email configuration (use environment variables in production)
-const emailTransporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER || 'help@myforeclosuresolution.com',
-        pass: process.env.EMAIL_PASSWORD || 'your-app-password'
+// Email configuration - environment variables REQUIRED
+function createEmailTransporter() {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+        console.error('EMAIL_USER and EMAIL_PASSWORD environment variables are required');
+        return null;
     }
-});
+    return nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
+        },
+        secure: true,
+        tls: { rejectUnauthorized: true }
+    });
+}
 
 // Lead scoring function
 function calculateLeadScore(leadData) {
@@ -258,8 +266,13 @@ async function triggerEmailSequence(leadData, score) {
     const welcomeEmailTemplate = getWelcomeEmailTemplate(leadData, sequence);
 
     try {
-        await emailTransporter.sendMail({
-            from: '"My Foreclosure Solution" <help@myforeclosuresolution.com>',
+        const transporter = createEmailTransporter();
+        if (!transporter) {
+            console.error('Email transporter not configured, skipping email');
+            return;
+        }
+        await transporter.sendMail({
+            from: `"My Foreclosure Solution" <${process.env.EMAIL_USER}>`,
             to: sanitizeString(leadData.email, 254),
             subject: welcomeEmailTemplate.subject,
             html: welcomeEmailTemplate.html
@@ -493,7 +506,12 @@ async function sendImmediateNotification(leadData, score) {
         `
     };
 
-    await emailTransporter.sendMail(notificationEmail);
+    const transporter = createEmailTransporter();
+    if (!transporter) {
+        console.error('Email transporter not configured, skipping notification');
+        return;
+    }
+    await transporter.sendMail(notificationEmail);
 }
 
 function getNextSteps(priority) {

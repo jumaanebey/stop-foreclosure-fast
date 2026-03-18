@@ -94,8 +94,8 @@ class SmartEmailResponder {
         const prompt = `
         Analyze this foreclosure inquiry email and determine:
 
-        Subject: ${subject}
-        Message: ${message}
+        Subject: ${(subject || '').slice(0, 200).replace(/[`${}]/g, '')}
+        Message: ${(message || '').slice(0, 2000).replace(/[`${}]/g, '')}
 
         Provide analysis in JSON format:
         1. primaryIntent: (options: urgent_help, information_request, document_submission,
@@ -137,11 +137,11 @@ class SmartEmailResponder {
         Create a personalized, empathetic email response for a homeowner facing foreclosure.
 
         Context:
-        - Recipient Name: ${senderName}
-        - Their Concern: ${message}
-        - Urgency Level: ${urgencyLevel}/10
-        - Emotional Tone: ${intent.emotionalTone}
-        - Previous Interactions: ${previousInteractions}
+        - Recipient Name: ${(senderName || '').slice(0, 100).replace(/[`${}]/g, '')}
+        - Their Concern: ${(message || '').slice(0, 2000).replace(/[`${}]/g, '')}
+        - Urgency Level: ${parseInt(urgencyLevel) || 5}/10
+        - Emotional Tone: ${(intent.emotionalTone || '').slice(0, 50)}
+        - Previous Interactions: ${parseInt(previousInteractions) || 0}
         - Language: ${language === 'es' ? 'Spanish' : 'English'}
 
         Requirements:

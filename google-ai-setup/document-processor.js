@@ -350,8 +350,9 @@ app.post('/api/process-document', upload.single('document'), async (req, res) =>
             return res.status(400).json({ error: 'No document uploaded' });
         }
 
-        // Upload to Cloud Storage
-        const fileName = `${Date.now()}-${file.originalname}`;
+        // Upload to Cloud Storage - sanitize filename to prevent path traversal
+        const safeName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 100);
+        const fileName = `${Date.now()}-${safeName}`;
         const fileUpload = storage.bucket(bucketName).file(fileName);
         await fileUpload.save(file.buffer);
 

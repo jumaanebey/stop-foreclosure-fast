@@ -69,7 +69,7 @@ const limiter = rateLimit({
 });
 
 app.use('/api/', limiter);
-app.use(express.json({ limit: '10mb' })); // Reasonable limit
+app.use(express.json({ limit: '50kb' })); // Limit body size for lead capture forms
 
 // Input validation and sanitization middleware
 function validateAndSanitizeInput(req, res, next) {
@@ -257,15 +257,19 @@ async function sendToCRM(leadData, score, priority) {
             auto_assign: true
         };
         
+        const headers = {
+            'Content-Type': 'application/json',
+            'User-Agent': 'MyForeclosureSolution/1.0'
+        };
+        if (crmApiKey) {
+            headers['Authorization'] = `Bearer ${crmApiKey}`;
+        }
+
         const response = await fetch(crmWebhookUrl, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': crmApiKey ? `Bearer ${crmApiKey}` : undefined,
-                'User-Agent': 'MyForeclosureSolution/1.0'
-            },
+            headers,
             body: JSON.stringify(crmData),
-            timeout: 10000 // 10 second timeout
+            signal: AbortSignal.timeout(10000)
         });
         
         if (response.ok) {
@@ -302,7 +306,7 @@ async function triggerEmailSequence(leadData, score) {
         };
         
         await emailTransporter.sendMail(mailOptions);
-        console.log(`Welcome email sent successfully to ${leadData.email}`);
+        console.log(`Welcome email sent successfully for request ${leadData.request_id}`);
         return { success: true };
         
     } catch (error) {

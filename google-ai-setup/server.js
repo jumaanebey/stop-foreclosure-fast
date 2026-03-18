@@ -19,9 +19,28 @@ const twilioPhoneNumber = process.env.TWILIO_PHONE;
 const twilioClient = twilio(twilioAccountSid, twilioAuthToken);
 
 // Middleware
-app.use(cors());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = [
+    'https://myforeclosuresolution.com',
+    'https://www.myforeclosuresolution.com',
+    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : null
+].filter(Boolean);
+
+app.use(cors({
+    origin: function(origin, callback) {
+        if (!origin && process.env.NODE_ENV !== 'production') {
+            return callback(null, true);
+        }
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false
+}));
+app.use(express.json({ limit: '50kb' }));
+app.use(express.urlencoded({ extended: true, limit: '50kb' }));
 
 // Health check
 app.get('/', (req, res) => {
@@ -37,7 +56,7 @@ app.get('/', (req, res) => {
 app.post('/api/qualify-lead', (req, res) => {
     try {
         const leadData = req.body;
-        console.log('Processing lead:', leadData);
+        console.log('Processing lead qualification request');
 
         // Calculate urgency score
         let urgencyScore = 5;
@@ -122,7 +141,7 @@ app.post('/api/send-sms', async (req, res) => {
     try {
         const { phone, message, leadName, timeline } = req.body;
 
-        console.log('Sending SMS to:', phone);
+        console.log('Sending SMS to lead');
 
         // Send SMS via Twilio
         const smsResult = await twilioClient.messages.create({
@@ -145,7 +164,7 @@ app.post('/api/send-sms', async (req, res) => {
                         from: twilioPhoneNumber,
                         to: phone
                     });
-                    console.log('5-minute follow-up sent to:', phone);
+                    console.log('5-minute follow-up sent');
                 } catch (error) {
                     console.error('Follow-up SMS error:', error);
                 }
@@ -163,7 +182,7 @@ app.post('/api/send-sms', async (req, res) => {
         res.status(500).json({
             success: false,
             error: 'Failed to send SMS',
-            message: error.message
+            message: 'Please try again or call (949) 565-5285 directly'
         });
     }
 });
@@ -223,7 +242,7 @@ app.post('/api/process-email', (req, res) => {
         success: true,
         messageId,
         subject: `Re: Your foreclosure assistance inquiry`,
-        preview: `Hi ${senderName}, thank you for reaching out. We understand this is a stressful situation...`,
+        preview: `Hi ${(senderName || 'there').replace(/[<>"'&]/g, '')}, thank you for reaching out. We understand this is a stressful situation...`,
         response: 'Personalized email response generated and queued for sending'
     });
 });
