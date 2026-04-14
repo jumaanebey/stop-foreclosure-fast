@@ -56,3 +56,8 @@ tmp/
 *.tmp*.env
 python-enhancements/
 video-tools/CapCutAPI/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
