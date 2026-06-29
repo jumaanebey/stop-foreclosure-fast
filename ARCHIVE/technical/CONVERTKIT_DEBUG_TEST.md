@@ -45,8 +45,8 @@ function testConvertKitDirectly() {
 
 Double-check these are correct in your Google Apps Script:
 
-- API Key: `Hh9PtQFOyWkQN4SZ3w0iXA`
-- API Secret: `t1mpiB_IoR99DjTudHfQ25yF00U8uAAXepwbu0CsDn4`  
+- API Key: `<REDACTED — rotate in ConvertKit; store in env/script properties only>`
+- API Secret: `<REDACTED — rotate in ConvertKit; store in env/script properties only>`  
 - Form ID: `8430004`
 - Sequence ID: `2459120`
 

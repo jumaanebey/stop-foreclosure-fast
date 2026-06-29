@@ -74,7 +74,7 @@ Your current Google Apps Script needs to be updated to add tags based on lead ty
 // Add this function to your Google Apps Script
 function addToConvertKitWithTag(email, name, leadType) {
   var FORM_ID = '8430004';
-  var API_KEY = 'Hh9PtQFOyWkQN4SZ3w0iXA';
+  var API_KEY = PropertiesService.getScriptProperties().getProperty('CONVERTKIT_API_KEY'); // never hardcode
   var url = 'https://api.convertkit.com/v3/forms/' + FORM_ID + '/subscribe';
   
   // Determine tag based on lead type

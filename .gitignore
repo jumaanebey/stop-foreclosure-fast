@@ -56,3 +56,26 @@ tmp/
 *.tmp*.env
 python-enhancements/
 video-tools/CapCutAPI/
+
+# Dependencies (must never be deployed to GitHub Pages)
+node_modules/
+**/node_modules/
+
+# Operator tooling — must NOT be served on the public site.
+# After running cleanup-repo.sh these live in ../mfs-operator-tools/.
+# Listed here so they are never re-added to the published repo.
+scrapers/
+foreclosure-data-collector/
+n8n-workflows/
+outreach/
+email-sequences/
+email-templates/
+video-tools/
+youtube-scripts/
+google-ai-setup/
+social-media/
+leads-dashboard.html
+nod-dashboard.html
+call-tracking-template.html
+nod-lead-scraper.py
+*.backup

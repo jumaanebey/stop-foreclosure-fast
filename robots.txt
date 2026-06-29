@@ -1,50 +1,9 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/private/internal areas
-Disallow: /email-templates/
-Disallow: /email-sequences/
-Disallow: /social-media/
-Disallow: /ARCHIVE/
-Disallow: /scrapers/
-Disallow: /foreclosure-data-collector/
-Disallow: /google-ai-setup/
-Disallow: /n8n-workflows/
-Disallow: /outreach/
-Disallow: /video-tools/
-Disallow: /youtube-scripts/
-Disallow: /api/
-Disallow: /downloads/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /.git/
+# Internal operator tools and non-public pages are excluded from indexing
+# via per-page noindex meta tags (and should ideally not be deployed to the
+# public site at all). robots.txt is intentionally minimal so it does not
+# advertise internal paths.
 
-# Disallow internal/test pages
-Disallow: /leads-dashboard.html
-Disallow: /nod-dashboard.html
-Disallow: /call-tracking-template.html
-Disallow: /test-basic.html
-Disallow: /test-email-system.html
-Disallow: /ai-demo.html
-Disallow: /ai-chatbot.html
-Disallow: /create-pdf.html
-Disallow: /simple-form-fix.html
-Disallow: /contact-form.html
-Disallow: /index-backup-original.html
-Disallow: /index-original.html
-Disallow: /index-redesign.html
-Disallow: /index-redesign-2.html
-Disallow: /index-redesign-3.html
-Disallow: /index-redesign-4.html
-Disallow: /index-simple.html
-Disallow: /index-variant-b.html
-Disallow: /email-templates.html
-Disallow: /checklist-download.html
-
-# Allow CSS/JS/Images for rendering
-Allow: /css/
-Allow: /js/
-Allow: /images/
-
-# Sitemap location
 Sitemap: https://myforeclosuresolution.com/sitemap.xml
