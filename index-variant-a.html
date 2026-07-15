@@ -576,6 +576,35 @@
             box-shadow: 0 0 0 4px var(--amber-100);
         }
         .form-group input::placeholder { color: var(--slate-400); }
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: var(--red-500);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+        }
+        .field-error {
+            display: none;
+            color: var(--red-600);
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        .field-error.active { display: block; }
+
+        /* Form-level error banner */
+        .form-error {
+            display: none;
+            align-items: flex-start;
+            gap: 8px;
+            background: #fef2f2;
+            border: 1px solid var(--red-500);
+            color: var(--red-600);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+        .form-error.active { display: flex; }
 
         .form-submit {
             width: 100%;
@@ -777,6 +806,50 @@
             line-height: 1.6;
         }
 
+        /* About / Meet Your Advisor - NEW */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+        /* min-width:0 lets grid tracks shrink below content's intrinsic width
+           (prevents the placeholder image from forcing horizontal overflow) */
+        .about-photo,
+        .about-content { min-width: 0; }
+        .about-photo {
+            position: relative;
+        }
+        .about-photo img {
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+            display: block;
+            background: var(--slate-100);
+        }
+        .about-content .section-eyebrow { margin-bottom: 12px; }
+        .about-content h2 {
+            font-size: clamp(32px, 4vw, 44px);
+            margin-bottom: 20px;
+        }
+        .about-content .bio {
+            font-size: 18px;
+            color: var(--slate-600);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .about-content .bio-todo {
+            color: var(--amber-600);
+            font-style: italic;
+        }
+
         /* Why Us Section - NEW */
         .why-us {
             padding: 100px 0;
@@ -858,7 +931,7 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         .stat-card {
@@ -1022,6 +1095,49 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+        }
+
+        /* Testimonials - NEW (hidden until real reviews exist) */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: var(--cream);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--slate-100);
+            display: flex;
+            flex-direction: column;
+        }
+        .testimonial-card .quote-mark {
+            font-family: 'DM Serif Display', serif;
+            font-size: 48px;
+            line-height: 1;
+            color: var(--amber-400);
+            margin-bottom: 8px;
+        }
+        .testimonial-card .quote {
+            font-size: 17px;
+            color: var(--slate-700);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+        .testimonial-card .attribution {
+            font-weight: 700;
+            color: var(--slate-900);
+            font-size: 15px;
+        }
+        .testimonial-card .location {
+            color: var(--slate-500);
+            font-size: 13px;
+            margin-top: 2px;
         }
 
         /* Final CTA */
@@ -1250,7 +1366,10 @@
             .resources-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .why-grid { grid-template-columns: 1fr; gap: 40px; }
-            .stats-grid { grid-template-columns: repeat(4, 1fr); }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-photo { max-width: 420px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -1267,9 +1386,10 @@
             .footer-grid { grid-template-columns: 1fr; gap: 32px; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-credentials { flex-direction: column; gap: 8px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .credentials-mini { flex-direction: column; gap: 16px; }
             .float-element { display: none; }
+            .testimonials-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1364,32 +1484,39 @@
                 <div class="hero-form-card">
                     <div class="form-header">
                         <h2>Request Your Private Consultation</h2>
-                        <p>Tell us about your situation. No judgment, just honest guidance.</p>
+                        <p>Tell me about your situation. No judgment, just honest guidance.</p>
                         <span class="response-time">Personal response from a licensed professional</span>
                     </div>
 
-                    <form id="consultation-form">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" name="name" placeholder="Enter your name" required>
+                    <form id="consultation-form" novalidate>
+                        <div class="form-error" id="form-error" role="alert" aria-live="assertive">
+                            <span>Something went wrong sending your request. Please call or text (949) 565-5285 and I'll help you right away.</span>
                         </div>
                         <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phone" placeholder="(555) 123-4567" required>
+                            <label for="field-name">Your Name</label>
+                            <input type="text" id="field-name" name="name" placeholder="Enter your name" required autocomplete="name" aria-required="true" aria-describedby="error-name">
+                            <span class="field-error" id="error-name">Please enter your name.</span>
                         </div>
                         <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" name="email" placeholder="you@email.com" required>
+                            <label for="field-phone">Phone Number</label>
+                            <input type="tel" id="field-phone" name="phone" placeholder="(555) 123-4567" required autocomplete="tel" inputmode="tel" aria-required="true" aria-describedby="error-phone">
+                            <span class="field-error" id="error-phone">Please enter a valid phone number.</span>
                         </div>
                         <div class="form-group">
-                            <label>How soon is your sale date?</label>
-                            <select name="urgency" required>
+                            <label for="field-email">Email Address</label>
+                            <input type="email" id="field-email" name="email" placeholder="you@email.com" required autocomplete="email" inputmode="email" aria-required="true" aria-describedby="error-email">
+                            <span class="field-error" id="error-email">Please enter a valid email address.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="field-urgency">How soon is your sale date?</label>
+                            <select id="field-urgency" name="urgency" required aria-required="true" aria-describedby="error-urgency">
                                 <option value="">Select one...</option>
                                 <option value="emergency">Within 7 days - URGENT</option>
                                 <option value="urgent">2-4 weeks</option>
                                 <option value="soon">1-3 months</option>
                                 <option value="exploring">No date yet / exploring</option>
                             </select>
+                            <span class="field-error" id="error-urgency">Please choose an option.</span>
                         </div>
                         <button type="submit" class="form-submit">Get My Free Consultation</button>
                         <p class="form-footer">
@@ -1400,15 +1527,15 @@
 
                     <div class="form-success" id="form-success">
                         <div class="success-icon">&#10003;</div>
-                        <h3 style="font-size: 24px; margin-bottom: 12px;">We Got Your Message!</h3>
-                        <p style="color: var(--slate-600);">We'll call you within 30 minutes to discuss your options. Keep your phone nearby.</p>
+                        <h3 style="font-size: 24px; margin-bottom: 12px;">I Got Your Message!</h3>
+                        <p style="color: var(--slate-600);">I'll personally reach out to discuss your options. Keep your phone nearby.</p>
                     </div>
 
                     <div class="form-divider">or reach out directly</div>
 
                     <a href="sms:+19495655285" class="text-option">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                        Text us at (949) 565-5285
+                        Text me at (949) 565-5285
                     </a>
 
                     <div class="form-badges">
@@ -1432,7 +1559,7 @@
             <div class="section-header">
                 <span class="section-eyebrow">How It Works</span>
                 <h2>Three Steps to Peace of Mind</h2>
-                <p>We make a confusing process simple. Here's exactly what happens when you reach out.</p>
+                <p>I make a confusing process simple. Here's exactly what happens when you reach out.</p>
             </div>
 
             <div class="steps-grid">
@@ -1440,19 +1567,67 @@
                     <span class="step-number">1</span>
                     <div class="step-icon">&#128222;</div>
                     <h3>Free Consultation</h3>
-                    <p>Tell us about your situation. We listen without judgment and explain every option available to you in plain English.</p>
+                    <p>Tell me about your situation. I listen without judgment and explain every option available to you in plain English.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-number">2</span>
                     <div class="step-icon">&#128196;</div>
                     <h3>Custom Strategy</h3>
-                    <p>We analyze your specific situation - equity, timeline, goals - and create a personalized plan to protect your interests.</p>
+                    <p>I analyze your specific situation - equity, timeline, goals - and create a personalized plan to protect your interests.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-number">3</span>
                     <div class="step-icon">&#127968;</div>
                     <h3>Take Control</h3>
-                    <p>Whether you keep your home or exit on your terms, we guide you through every step until you're in a better place.</p>
+                    <p>Whether you keep your home or exit on your terms, I guide you through every step until you're in a better place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Meet Your Advisor -->
+    <!--
+        HIDDEN until real content exists. To enable: remove the `hidden` attribute on the
+        <section> below, then replace every TODO with real details:
+        - Add a real headshot at assets/advisor-photo.jpg
+        - Fill in the advisor's full name and personal bio (first person, "I")
+        Do not ship this section with placeholder text — it is the "reach a real person" proof point.
+    -->
+    <section class="about" id="about" hidden>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-photo">
+                    <img
+                        src="assets/advisor-photo.jpg"
+                        alt="Portrait of [Advisor Name], licensed California foreclosure advisor"
+                        loading="lazy"
+                        width="600" height="750"
+                    />
+                </div>
+                <div class="about-content">
+                    <span class="section-eyebrow">Meet Your Advisor</span>
+                    <!-- TODO: Advisor full name -->
+                    <h2>TODO: Advisor full name</h2>
+                    <!-- TODO: 2–3 sentence personal bio / why I started this -->
+                    <p class="bio bio-todo">TODO: Add a 2–3 sentence personal bio here — who you are, your California license background, and why you started helping homeowners facing foreclosure. Speak in the first person ("I").</p>
+
+                    <!-- TODO: License display (NMLS / CA DRE) — reuses existing badge styling -->
+                    <div class="credentials-mini">
+                        <div class="credential-mini">
+                            <div class="icon">&#128274;</div>
+                            <div>
+                                <strong>NMLS #2033637</strong>
+                                <span>Licensed Mortgage Pro</span>
+                            </div>
+                        </div>
+                        <div class="credential-mini">
+                            <div class="icon">&#127968;</div>
+                            <div>
+                                <strong>CA DRE #02076038</strong>
+                                <span>Licensed Real Estate</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1463,17 +1638,17 @@
         <div class="container">
             <div class="why-grid">
                 <div class="why-content">
-                    <h2>Why Families Trust Us With Their Biggest Asset</h2>
+                    <h2>Why Families Trust Me With Their Biggest Asset</h2>
                     <p>When you're facing foreclosure, the last thing you need is another person trying to take advantage of you. I started this company because I saw too many families lose everything when they didn't have to.</p>
 
                     <ul class="why-points">
                         <li>
                             <span class="check">&#10003;</span>
-                            <span><strong>We work for you, not the bank.</strong> Our job is to maximize YOUR outcome, whether that's keeping your home or walking away with the most cash possible.</span>
+                            <span><strong>I work for you, not the bank.</strong> My job is to maximize YOUR outcome, whether that's keeping your home or walking away with the most cash possible.</span>
                         </li>
                         <li>
                             <span class="check">&#10003;</span>
-                            <span><strong>No upfront fees, ever.</strong> We don't get paid unless we help you. That's our promise.</span>
+                            <span><strong>No upfront fees, ever.</strong> I don't get paid unless I help you. That's my promise.</span>
                         </li>
                         <li>
                             <span class="check">&#10003;</span>
@@ -1481,7 +1656,7 @@
                         </li>
                         <li>
                             <span class="check">&#10003;</span>
-                            <span><strong>We answer our phones.</strong> When you're stressed at 10pm wondering what to do, you can actually reach us.</span>
+                            <span><strong>I answer my phone.</strong> When you're stressed at 10pm wondering what to do, you can actually reach me.</span>
                         </li>
                     </ul>
 
@@ -1511,14 +1686,13 @@
                         style="width: 100%; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); object-fit: cover; display: block;"
                       />
                     </div>
+                    <!-- Every stat here is a factual descriptor (not a metric that needs substantiation).
+                         If a real, defensible number becomes available (e.g. families helped or years of
+                         experience), add a 4th card here and switch .stats-grid back to a 2x2 / 4-col layout. -->
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="number">1:1</div>
                             <div class="label">Personal Consultations</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="number">58</div>
-                            <div class="label">CA Counties Served</div>
                         </div>
                         <div class="stat-card">
                             <div class="number">$0</div>
@@ -1540,7 +1714,7 @@
             <div class="section-header">
                 <span class="section-eyebrow">Your Options</span>
                 <h2>More Paths Forward Than You Think</h2>
-                <p>Every situation is different. Here are some of the ways we can help.</p>
+                <p>Every situation is different. Here are some of the ways I can help.</p>
             </div>
 
             <div class="benefits-grid">
@@ -1555,21 +1729,21 @@
                     <div class="benefit-icon">&#128200;</div>
                     <div class="benefit-content">
                         <h3>Loan Modification</h3>
-                        <p>We negotiate with your lender to reduce payments, lower interest rates, or add missed payments to the end of your loan.</p>
+                        <p>I negotiate with your lender to reduce payments, lower interest rates, or add missed payments to the end of your loan.</p>
                     </div>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">&#128176;</div>
                     <div class="benefit-content">
                         <h3>Protect Your Equity</h3>
-                        <p>If you have equity in your home, don't let the bank take it. We help you capture that value for your family.</p>
+                        <p>If you have equity in your home, don't let the bank take it. I help you capture that value for your family.</p>
                     </div>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">&#127969;</div>
                     <div class="benefit-content">
                         <h3>Sell on Your Terms</h3>
-                        <p>If selling makes the most sense, we connect you with solutions for a fast, fair sale - often with cash to relocate.</p>
+                        <p>If selling makes the most sense, I connect you with solutions for a fast, fair sale - often with cash to relocate.</p>
                     </div>
                 </div>
             </div>
@@ -1580,7 +1754,7 @@
     <section class="cities">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow">Areas We Serve</span>
+                <span class="section-eyebrow">Areas I Serve</span>
                 <h2>Helping Families Across California</h2>
             </div>
 
@@ -1619,6 +1793,44 @@
                     <p>Yes! Learn your options for selling your home before the auction.</p>
                     <span class="resource-link">Read Guide &rarr;</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TODO: Enable this section once real, permission-approved testimonials exist. Do not use fabricated reviews.
+         To enable: remove the `hidden` attribute on the <section> below and replace each TODO with a real,
+         written-consent-approved quote. Delete any unused cards so the section never ships with placeholders. -->
+    <section class="testimonials" id="testimonials" hidden>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Homeowner Stories</span>
+                <h2>What Homeowners Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-mark">&ldquo;</div>
+                    <p class="quote">TODO: Real, permission-approved testimonial quote.</p>
+                    <div>
+                        <div class="attribution">TODO: First name + last initial</div>
+                        <div class="location">TODO: City / County (optional)</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-mark">&ldquo;</div>
+                    <p class="quote">TODO: Real, permission-approved testimonial quote.</p>
+                    <div>
+                        <div class="attribution">TODO: First name + last initial</div>
+                        <div class="location">TODO: City / County (optional)</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-mark">&ldquo;</div>
+                    <p class="quote">TODO: Real, permission-approved testimonial quote.</p>
+                    <div>
+                        <div class="attribution">TODO: First name + last initial</div>
+                        <div class="location">TODO: City / County (optional)</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1664,8 +1876,8 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <a href="tel:+19495655285">(949) 565-5285</a>
-                    <a href="sms:+19495655285">Text Us</a>
-                    <a href="mailto:help@myforeclosuresolution.com">Email Us</a>
+                    <a href="sms:+19495655285">Text Me</a>
+                    <a href="mailto:help@myforeclosuresolution.com">Email Me</a>
                     <a href="privacy-policy.html">Privacy Policy</a>
                 </div>
             </div>
@@ -1703,7 +1915,7 @@
                 <span>&#128222;</span> Call Now
             </a>
             <a href="sms:+19495655285" class="text-btn">
-                <span>&#128172;</span> Text Us
+                <span>&#128172;</span> Text Me
             </a>
         </div>
     </div>
@@ -1711,12 +1923,69 @@
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Form handling
+            // Form handling with client-side validation + explicit error state
             const form = document.getElementById('consultation-form');
             if (form) {
+                const formError = document.getElementById('form-error');
+                const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // Require at least 10 digits for a usable phone number
+                const phoneDigits = function(v) { return (v || '').replace(/\D/g, ''); };
+
+                function setFieldError(fieldId, errorId, show) {
+                    const field = document.getElementById(fieldId);
+                    const err = document.getElementById(errorId);
+                    if (!field || !err) return;
+                    field.classList.toggle('invalid', show);
+                    field.setAttribute('aria-invalid', show ? 'true' : 'false');
+                    err.classList.toggle('active', show);
+                }
+
+                function validate() {
+                    const name = form.name.value.trim();
+                    const phone = form.phone.value.trim();
+                    const email = form.email.value.trim();
+                    const urgency = form.urgency.value;
+
+                    const errors = {
+                        name: name.length < 2,
+                        phone: phoneDigits(phone).length < 10,
+                        email: !emailRe.test(email),
+                        urgency: urgency === ''
+                    };
+
+                    setFieldError('field-name', 'error-name', errors.name);
+                    setFieldError('field-phone', 'error-phone', errors.phone);
+                    setFieldError('field-email', 'error-email', errors.email);
+                    setFieldError('field-urgency', 'error-urgency', errors.urgency);
+
+                    const firstBad = ['name', 'phone', 'email', 'urgency'].find(function(k) { return errors[k]; });
+                    return firstBad || null;
+                }
+
+                // Clear a field's error as the user corrects it
+                ['field-name', 'field-phone', 'field-email', 'field-urgency'].forEach(function(id) {
+                    const el = document.getElementById(id);
+                    if (el) el.addEventListener('input', function() {
+                        el.classList.remove('invalid');
+                        el.setAttribute('aria-invalid', 'false');
+                        const err = document.getElementById('error-' + id.replace('field-', ''));
+                        if (err) err.classList.remove('active');
+                    });
+                });
+
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    formError.classList.remove('active');
+
+                    const firstBad = validate();
+                    if (firstBad) {
+                        const el = document.getElementById('field-' + firstBad);
+                        if (el) el.focus();
+                        return;
+                    }
+
                     const button = form.querySelector('button[type="submit"]');
+                    const originalLabel = button.textContent;
                     button.textContent = 'Sending...';
                     button.disabled = true;
 
@@ -1738,22 +2007,29 @@
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
-                    });
-
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'generate_lead', {
-                            'form_name': 'consultation_form',
-                            'form_location': 'homepage',
-                            'ab_variant': 'A'
-                        });
-                    }
-
-                    setTimeout(function() {
+                    })
+                    .then(function() {
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'generate_lead', {
+                                'form_name': 'consultation_form',
+                                'form_location': 'homepage',
+                                'ab_variant': 'A'
+                            });
+                        }
                         form.style.display = 'none';
-                        document.querySelector('.form-divider').style.display = 'none';
-                        document.querySelector('.text-option').style.display = 'none';
+                        const divider = document.querySelector('.form-divider');
+                        const textOption = document.querySelector('.text-option');
+                        if (divider) divider.style.display = 'none';
+                        if (textOption) textOption.style.display = 'none';
                         document.getElementById('form-success').classList.add('active');
-                    }, 800);
+                    })
+                    .catch(function() {
+                        // Network failure — never fail silently
+                        button.textContent = originalLabel;
+                        button.disabled = false;
+                        formError.classList.add('active');
+                        formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
                 });
             }
 
