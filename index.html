@@ -2012,14 +2012,16 @@
                     };
 
                     // IMPORTANT: this is a *readable* request (no `mode: 'no-cors'`).
-                    // no-cors returns an opaque response, so a 5xx/404 from a dead
-                    // endpoint is indistinguishable from success and the lead is lost
-                    // silently. Here, any non-2xx status, CORS block, dropped
-                    // connection, or timeout rejects and shows the error path.
-                    // NOTE: the lead endpoint must be same-origin OR send CORS headers
-                    // (Access-Control-Allow-Origin) for a successful save to be read
-                    // as success. If it can't, this errs toward the "call us" fallback
-                    // rather than ever showing a false success.
+                    // no-cors returns an opaque response, so a 5xx / error page would
+                    // be indistinguishable from success and the lead lost silently.
+                    // The Apps Script endpoint IS CORS-readable and returns
+                    // {"success":true} on a saved lead, so we read that flag and only
+                    // show success when it's present. Any non-2xx status, missing
+                    // success flag, CORS block, dropped connection, or 12s timeout
+                    // rejects and shows the error path with a call/text fallback.
+                    // If the endpoint URL is ever swapped, keep it CORS-readable and
+                    // returning {"success":true}, or this errs toward the "call us"
+                    // fallback rather than ever showing a false success.
                     const controller = new AbortController();
                     const timeoutId = setTimeout(function() { controller.abort(); }, 12000);
 
@@ -2034,6 +2036,18 @@
                         clearTimeout(timeoutId);
                         if (!response.ok) {
                             throw new Error('Lead endpoint returned HTTP ' + response.status);
+                        }
+                        return response.text();
+                    })
+                    .then(function(text) {
+                        // A 200 is not enough: Apps Script returns 200 for its error
+                        // pages too. Require the backend's explicit {"success":true}
+                        // signal before telling the visitor their request went through.
+                        var confirmed = false;
+                        try { confirmed = JSON.parse(text).success === true; }
+                        catch (e) { confirmed = /"success"\s*:\s*true/.test(text); }
+                        if (!confirmed) {
+                            throw new Error('Backend did not confirm success: ' + String(text).slice(0, 120));
                         }
                         if (typeof gtag !== 'undefined') {
                             gtag('event', 'generate_lead', {
