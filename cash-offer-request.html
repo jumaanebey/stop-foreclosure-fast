@@ -330,6 +330,21 @@
             margin-bottom: 24px;
         }
 
+        /* Form error banner */
+        .form-error {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+        .form-error.active { display: block; }
+        .form-error a { color: inherit; font-weight: 700; text-decoration: underline; }
+
         /* Process Section */
         .process-section {
             padding: 80px 0;
@@ -636,6 +651,10 @@
                         <textarea id="situation" name="situation" rows="3" placeholder="Are you facing foreclosure? Behind on payments? Any other details that would help us understand your situation..."></textarea>
                     </div>
 
+                    <div class="form-error" id="form-error" role="alert" aria-live="assertive">
+                        We couldn't confirm your request went through. Please call or text <a href="tel:+19495655285">(949)&nbsp;565-5285</a> and we'll help you right away.
+                    </div>
+
                     <button type="submit" class="form-submit">Get My Free Cash Offer</button>
 
                     <p class="form-footer">
@@ -829,6 +848,9 @@
                 e.preventDefault();
 
                 const button = form.querySelector('button[type="submit"]');
+                const originalLabel = button.textContent;
+                const formError = document.getElementById('form-error');
+                if (formError) formError.classList.remove('active');
                 button.textContent = 'Sending...';
                 button.disabled = true;
 
@@ -846,29 +868,56 @@
                     status: 'New - Cash Offer Request'
                 };
 
-                // Send to Google Sheets
+                // Send to Google Sheets — readable request so failures surface.
+                // Success requires the backend's explicit {"success":true}; anything
+                // else (HTTP error, error page, CORS block, network drop, 12s timeout)
+                // shows the error banner instead of a false success.
+                const controller = new AbortController();
+                const timeoutId = setTimeout(function() { controller.abort(); }, 12000);
+
                 fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
                     method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                // Track event
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'generate_lead', {
-                        'event_category': 'Form Submission',
-                        'event_label': 'Cash Offer Request',
-                        'form_name': 'cash_offer_form'
-                    });
-                }
-
-                // Show success
-                setTimeout(function() {
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(data),
+                    signal: controller.signal
+                })
+                .then(function(response) {
+                    clearTimeout(timeoutId);
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.text();
+                })
+                .then(function(text) {
+                    var confirmed = false;
+                    try { confirmed = JSON.parse(text).success === true; }
+                    catch (e) { confirmed = /"success"\s*:\s*true/.test(text); }
+                    if (!confirmed) throw new Error('Backend did not confirm success');
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'generate_lead', {
+                            'event_category': 'Form Submission',
+                            'event_label': 'Cash Offer Request',
+                            'form_name': 'cash_offer_form'
+                        });
+                    }
                     form.style.display = 'none';
                     formSuccess.classList.add('active');
                     formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 800);
+                })
+                .catch(function(err) {
+                    clearTimeout(timeoutId);
+                    console.error('Cash offer submission failed:', err);
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'lead_submit_failed', {
+                            'form_name': 'cash_offer_form',
+                            'reason': (err && err.name === 'AbortError') ? 'timeout' : ((err && err.message) || 'error')
+                        });
+                    }
+                    button.textContent = originalLabel;
+                    button.disabled = false;
+                    if (formError) {
+                        formError.classList.add('active');
+                        formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
             });
         });
     </script>

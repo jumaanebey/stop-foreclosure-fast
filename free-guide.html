@@ -369,6 +369,18 @@
             border-radius: 15px;
             text-align: center;
         }
+        #form-error {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-top: 16px;
+        }
+        #form-error a { color: inherit; font-weight: 700; text-decoration: underline; }
         #success-message h3 {
             color: var(--white);
             font-size: 24px;
@@ -589,6 +601,10 @@
                         </button>
                     </form>
 
+                    <div id="form-error" role="alert" aria-live="assertive">
+                        We couldn't confirm your signup went through. Please call or text <a href="tel:+19495655285">(949)&nbsp;565-5285</a> and we'll get your guide to you right away.
+                    </div>
+
                     <div id="success-message">
                         <div class="success-icon">&#10003;</div>
                         <h3>Success! Check Your Email</h3>
@@ -779,19 +795,35 @@
                         timestamp: new Date().toISOString()
                     };
 
+                    // Readable request so failures surface. Success requires the
+                    // backend's explicit {"success":true}; anything else (HTTP error,
+                    // error page, CORS block, network drop, 12s timeout) shows the
+                    // error banner instead of a false "check your email" message.
+                    var controller = new AbortController();
+                    var timeoutId = setTimeout(function() { controller.abort(); }, 12000);
+                    var formError = document.getElementById('form-error');
+                    if (formError) formError.style.display = 'none';
+
                     fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
                         method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-
-                    setTimeout(function() {
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(data),
+                        signal: controller.signal
+                    })
+                    .then(function(response) {
+                        clearTimeout(timeoutId);
+                        if (!response.ok) throw new Error('HTTP ' + response.status);
+                        return response.text();
+                    })
+                    .then(function(text) {
+                        var confirmed = false;
+                        try { confirmed = JSON.parse(text).success === true; }
+                        catch (e) { confirmed = /"success"\s*:\s*true/.test(text); }
+                        if (!confirmed) throw new Error('Backend did not confirm success');
                         form.style.display = 'none';
                         document.querySelector('.form-progress').style.display = 'none';
                         document.querySelector('.download-stat').style.display = 'none';
                         document.getElementById('success-message').style.display = 'block';
-
                         if (typeof gtag !== 'undefined') {
                             gtag('event', 'generate_lead', {
                                 'event_category': 'Lead Generation',
@@ -799,7 +831,26 @@
                                 'value': 1
                             });
                         }
-                    }, 1000);
+                    })
+                    .catch(function(err) {
+                        clearTimeout(timeoutId);
+                        console.error('Guide signup failed:', err);
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'lead_submit_failed', {
+                                'form_name': 'lead_magnet_form',
+                                'reason': (err && err.name === 'AbortError') ? 'timeout' : ((err && err.message) || 'error')
+                            });
+                        }
+                        // Re-enable the button and revert the "complete" progress UI
+                        button.textContent = originalText;
+                        button.disabled = false;
+                        if (progressLine) progressLine.classList.remove('full');
+                        if (step2) step2.classList.remove('completed');
+                        if (formError) {
+                            formError.style.display = 'block';
+                            formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
                 });
             }
         });
