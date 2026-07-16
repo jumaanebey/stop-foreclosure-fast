@@ -1792,7 +1792,7 @@
             // Send to Google Apps Script (handles sheet, SMS, and emails)
             var __ctl = new AbortController();
             var __to = setTimeout(function(){ __ctl.abort(); }, 12000);
-            fetch('https://script.google.com/macros/s/AKfycbyDfXcPynNdIaDhWHO3nprBBX2hmL7F0dHjiV4K9nvYW_8gQieUhhayOvlO5vS9YW-c/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbwDHfH0PghtMo62ueiv4dm6uM-fu3o_pCPCvELm1inNK20PTAG1afKnZvxnXljHRRf8/exec', {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(data),
