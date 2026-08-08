@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
 
-# Internal operator tools and non-public pages are excluded from indexing
-# via per-page noindex meta tags (and should ideally not be deployed to the
-# public site at all). robots.txt is intentionally minimal so it does not
-# advertise internal paths.
-
 Sitemap: https://myforeclosuresolution.com/sitemap.xml
