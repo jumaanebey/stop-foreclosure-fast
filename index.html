@@ -17,25 +17,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- ===== PASTE YOUR GOOGLE ANALYTICS 4 ID BELOW (replace G-XXXXXXX) ===== -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXX');
-</script>
-<!-- ===== PASTE YOUR META PIXEL ID BELOW (replace YOUR_PIXEL_ID) ===== -->
-<script>
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'YOUR_PIXEL_ID');
-  fbq('track', 'PageView');
-</script>
-
 <style>
 :root{
   --charcoal:#1C1C1A; --warm-white:#FDFCFA; --cream:#F7F4EF;
@@ -68,6 +49,7 @@ label span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppe
 .chip{border:1px solid var(--hair);padding:12px 20px;font-size:14px;min-height:44px;display:inline-flex;align-items:center}
 .chip:hover{border-color:var(--gold)}
 </style>
+<script src="/js/tracking.js"></script>
 </head>
 <body>
 
@@ -233,7 +215,7 @@ label span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppe
       <div><div class="eyebrow" style="margin-bottom:12px">Resources</div><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><a href="blog/">Guides &amp; Articles</a><a href="emergency-checklist.html">Emergency Checklist</a><a href="california-foreclosure-glossary.html">Glossary</a><a href="california-foreclosure-resources.html">Free &amp; Government Help</a></div></div>
       <div><div class="eyebrow" style="margin-bottom:12px">Contact</div><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><a href="tel:+19495655285">(949) 565-5285</a><a href="sms:+19495655285">Text Me</a><a href="mailto:help@myforeclosuresolution.com">Email Me</a><a href="privacy-policy.html">Privacy Policy</a></div></div>
     </div>
-    <p style="font-size:12.5px;line-height:1.7;color:var(--stone);margin-bottom:14px;max-width:100ch">My Foreclosure Solution is not a law firm, licensed real estate brokerage, or mortgage lender. Where your situation requires a licensed professional or attorney, we refer you to one. Information on this site is provided for general educational purposes only and is not legal, tax, or financial advice. No specific outcome is guaranteed; results depend on your individual circumstances. We do not charge upfront fees for foreclosure assistance. Contacting us does not create a client, agency, or fiduciary relationship until a written agreement is signed.</p>
+    <p style="font-size:12.5px;line-height:1.7;color:var(--stone);margin-bottom:14px;max-width:100ch">My Foreclosure Solution is not associated with the government, and our service is not approved by the government or your lender. My Foreclosure Solution is not a law firm, licensed real estate brokerage, or mortgage lender. Where your situation requires a licensed professional or attorney, we refer you to one. Information on this site is provided for general educational purposes only and is not legal, tax, or financial advice. No specific outcome is guaranteed; results depend on your individual circumstances. We do not charge upfront fees for foreclosure assistance. Contacting us does not create a client, agency, or fiduciary relationship until a written agreement is signed.</p>
     <div style="display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px;color:var(--stone)">
       <a href="disclaimer.html">Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a>
       <span style="margin-left:auto">© 2026 My Foreclosure Solution</span>
@@ -246,19 +228,11 @@ label span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppe
 </script>
 
 <script>
-document.addEventListener('click', function (e) {
-  var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="sms:"]');
-  if (!a) return;
-  var kind = a.getAttribute('href').indexOf('tel:') === 0 ? 'call' : 'text';
-  if (window.gtag) gtag('event', 'generate_lead', { method: kind });
-  if (window.fbq) fbq('track', 'Contact', { method: kind });
-});
 document.getElementById('lead-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = this, btn = form.querySelector('button[type="submit"]');
   btn.disabled = true; btn.textContent = 'Sending…';
-  if (window.gtag) gtag('event', 'generate_lead', { method: 'form' });
-  if (window.fbq) fbq('track', 'Contact', { method: 'form' });
+  if (window.trackLead) trackLead('index');
   fetch('https://formsubmit.co/ajax/8b8dfa68d9af5c17be1256a407c00383', {
     method: 'POST',
     headers: { 'Accept': 'application/json' },
