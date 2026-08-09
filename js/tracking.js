@@ -57,4 +57,34 @@ var META_PIXEL_ID = '';   // Meta (Facebook) Pixel, looks like '1234567890123456
     gtag('event', 'generate_lead', { method: 'form', source: source || location.pathname });
     fbq('track', 'Lead', { source: source || location.pathname });
   };
+
+  // ---- Lead delivery -----------------------------------------------------
+  // Primary path mails the lead from the owner's own Gmail to himself, which
+  // Gmail treats as Primary — the third-party form service was being filed as
+  // "Updates" and auto-archived unread. The old service stays wired as a
+  // fallback so a submission is never dropped if the endpoint is down.
+  var LEAD_ENDPOINT = 'https://mfs-leads-chi.vercel.app/api/lead';
+  var LEAD_FALLBACK = 'https://formsubmit.co/ajax/8b8dfa68d9af5c17be1256a407c00383';
+
+  window.submitLead = function (form, source) {
+    var fd = new FormData(form);
+    return fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Accept': 'application/json'
+      },
+      body: new URLSearchParams(fd).toString()
+    }).then(function (r) {
+      if (!r.ok) throw new Error('lead endpoint ' + r.status);
+    }).catch(function () {
+      return fetch(LEAD_FALLBACK, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      }).catch(function () {});
+    }).then(function () {
+      trackLead(source);
+    });
+  };
 })();

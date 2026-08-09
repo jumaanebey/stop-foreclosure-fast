@@ -93,7 +93,7 @@ input:focus{border-color:var(--gold)}
       <p class="eyebrow" style="color:var(--gold);margin-bottom:10px">Next step</p>
       <h2 style="font-size:clamp(26px,3vw,32px);line-height:1.2;margin-bottom:10px">Get a straight answer today</h2>
       <p style="font-size:15px;color:rgba(253,252,250,.7);margin-bottom:24px">Send me the basics and I'll call you back personally with what I'd do in your position. No fee, no obligation, nothing filed.</p>
-      <form id="lead-form" method="POST" action="https://formsubmit.co/8b8dfa68d9af5c17be1256a407c00383" style="display:flex;flex-direction:column;gap:12px">
+      <form id="lead-form" method="POST" action="https://mfs-leads-chi.vercel.app/api/lead" style="display:flex;flex-direction:column;gap:12px">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <input type="hidden" name="_subject" value="Callback request — myforeclosuresolution.com (help page)">
         <input type="hidden" name="page" value="help">
@@ -189,12 +189,7 @@ document.getElementById('lead-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = this, btn = form.querySelector('button[type="submit"]');
   btn.disabled = true; btn.textContent = 'Sending…';
-  if (window.trackLead) trackLead('help');
-  fetch('https://formsubmit.co/ajax/8b8dfa68d9af5c17be1256a407c00383', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: new FormData(form)
-  }).catch(function(){}).finally(function () {
+  submitLead(form, 'help').finally(function () {
     document.getElementById('cta-form').innerHTML =
       '<p class="eyebrow" style="color:var(--gold);margin-bottom:10px">Received</p>' +
       '<h2 style="font-size:clamp(26px,3vw,32px);line-height:1.2;margin-bottom:10px">I got your message.</h2>' +

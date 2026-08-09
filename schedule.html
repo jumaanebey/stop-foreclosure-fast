@@ -84,7 +84,7 @@ label span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppe
   <div style="border:1px solid var(--hair);background:var(--cream);padding:clamp(24px,3vw,34px)">
     <p class="eyebrow" style="margin-bottom:8px">Request a callback</p>
     <h2 style="font-size:clamp(24px,3vw,30px);line-height:1.15;margin-bottom:24px">When should I call?</h2>
-    <form id="lead-form" method="POST" action="https://formsubmit.co/8b8dfa68d9af5c17be1256a407c00383" style="display:flex;flex-direction:column;gap:14px">
+    <form id="lead-form" method="POST" action="https://mfs-leads-chi.vercel.app/api/lead" style="display:flex;flex-direction:column;gap:14px">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <input type="hidden" name="_subject" value="Callback request — myforeclosuresolution.com">
       <input type="hidden" name="page" value="schedule">
@@ -134,12 +134,7 @@ document.getElementById('lead-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = this, btn = form.querySelector('button[type="submit"]');
   btn.disabled = true; btn.textContent = 'Sending…';
-  if (window.trackLead) trackLead('schedule');
-  fetch('https://formsubmit.co/ajax/8b8dfa68d9af5c17be1256a407c00383', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: new FormData(form)
-  }).catch(function(){}).finally(function () {
+  submitLead(form, 'schedule').finally(function () {
     form.hidden = true;
     document.getElementById('lead-thanks').hidden = false;
   });

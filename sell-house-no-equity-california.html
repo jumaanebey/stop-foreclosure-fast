@@ -157,7 +157,7 @@ label span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppe
         <p class="eyebrow" style="margin-bottom:8px">No-pressure conversation</p>
         <h2 style="font-size:clamp(24px,3vw,30px);line-height:1.15;margin-bottom:8px">Let's look at your loan</h2>
         <p style="font-size:14.5px;color:var(--stone);margin-bottom:24px">Tell me the basics and I'll tell you honestly whether this fits — including when it doesn't.</p>
-        <form id="lead-form" method="POST" action="https://formsubmit.co/8b8dfa68d9af5c17be1256a407c00383" style="display:flex;flex-direction:column;gap:14px">
+        <form id="lead-form" method="POST" action="https://mfs-leads-chi.vercel.app/api/lead" style="display:flex;flex-direction:column;gap:14px">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" name="_subject" value="Assumption inquiry — myforeclosuresolution.com">
           <input type="hidden" name="page" value="no-equity">
@@ -221,12 +221,7 @@ document.getElementById('lead-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = this, btn = form.querySelector('button[type="submit"]');
   btn.disabled = true; btn.textContent = 'Sending…';
-  if (window.trackLead) trackLead('sell-house-no-equity-california');
-  fetch('https://formsubmit.co/ajax/8b8dfa68d9af5c17be1256a407c00383', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: new FormData(form)
-  }).catch(function(){}).finally(function () {
+  submitLead(form, 'sell-house-no-equity-california').finally(function () {
     document.getElementById('gate').hidden = true;
     document.getElementById('lead-thanks').hidden = false;
   });
